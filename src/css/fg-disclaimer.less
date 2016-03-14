@@ -1,0 +1,77 @@
+@disclaimer-background-color: transparent; 
+@disclaimer-background-image: theme_url('/assets/images/background-000000-opacity92.png');
+@disclaimer-color: #ffffff;
+@disclaimer-font-family: @body-font-family;
+@disclaimer-link-color: @disclaimer-color;
+@disclaimer-column-wrapper-padding: 12px 20px;
+
+
+@disclaimer-logo-max-width: 100px;
+@disclaimer-logo-min-height: 0;
+
+/*@disclaimer-text-l1-font-size: .font-size(@body-font-size, 0.9);
+@disclaimer-text-l2-font-size: .font-size(@body-font-size, 0.8);*/ 
+@disclaimer-navButtonUp-background-color:  transparent;
+@disclaimer-navButtonUp-background-color-hover: transparent;
+@disclaimer-navButtonUp-font-size: 38px;
+
+@disclaimer-navButtonUp-color: @disclaimer-color;
+@disclaimer-navButtonUp-color-hover: @disclaimer-color;
+
+      
+
+/** DISCLAIMER SECTION  @import fg-disclaimer.less ***/
+#disclaimer {
+	color: @disclaimer-color;
+	font-family: @disclaimer-font-family;
+	background-image: @disclaimer-background-image;
+	background-color: @disclaimer-background-color;
+	background-position: top center;
+	background-attachement: fixed;
+	background-size: auto;			
+	.font-size(1.3);
+	line-height: 1.3em;
+	.column-wrapper {
+		padding: @disclaimer-column-wrapper-padding
+	}
+	.disclaimer-text {
+		position: relative;
+		top:2px;
+	}
+	.disclaimer-logo {
+		padding-right: 20px;
+		img {
+			max-width: @disclaimer-logo-max-width;
+			min-height: @disclaimer-logo-min-height;
+			position: relative;
+			top: 2px;
+		}
+	}
+	a{
+
+		&.nav-button-up, &:focus, &:visited{
+			.opacity(0.8);
+			font-size: @disclaimer-navButtonUp-font-size;
+			text-align:right;
+			display: block;			
+			position:relative;			
+			padding: @disclaimer-column-wrapper-padding;
+			/*top:50%;				
+			-ms-transform: translate(0,50%); 
+			-webkit-transform: translate(0,50%); 
+			transform: translate(0,50%);			*/
+			color: @disclaimer-navButtonUp-color;			
+			background: @disclaimer-navButtonUp-background-color;		
+			&:hover {
+				.opacity(1);					
+				color: @disclaimer-navButtonUp-color-hover;
+				background: @disclaimer-navButtonUp-background-color-hover;
+				
+			}
+		}
+		
+			
+	}
+	.a(@disclaimer-link-color,none,@disclaimer-link-color, underline)
+
+}

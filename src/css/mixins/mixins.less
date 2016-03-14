@@ -1,0 +1,115 @@
+
+.development-helper () {
+	div[class^="col-"], div[class*=" col-"] {
+		min-height: 5px;
+		outline: 1px solid red !important;
+		position: relative;
+		-moz-box-sizing:border-box; /* keep box within size given */
+        box-sizing:border-box;
+		/*&:before {
+			content:"";
+			top:0px;
+			left:15px;
+			right:15px;
+			bottom:0px;
+			border: green 1px solid;
+			position: absolute;
+			
+		}*/
+
+
+			
+	}
+	.column-wrapper {
+		border: 2px #000 solid !important;
+		
+	}
+	div[id^="section-"] {border: 1px solid #000;}
+
+}
+
+.opacity(@opacity: 0.5) {
+	-moz-opacity: @opacity;
+	-khtml-opacity: @opacity;
+	-webkit-opacity: @opacity;
+	opacity: @opacity;
+	@opperc: @opacity * 100;
+	-ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+	filter: ~"alpha(opacity=@{opperc})";
+}
+
+.box-shadow(@attributes: 2px 2px 4px rgba(0, 0, 0, 0.35) ){
+    webkit-box-shadow:@attributes ;-moz-box-shadow:  @attributes;box-shadow: @attributes;
+}
+
+.transition-opacity(@duration:0.2s, @ease:linear) {
+	-webkit-transition: opacity @duration @ease;
+	-moz-transition: opacity @duration @ease;
+	-o-transition: opacity @duration @ease;
+	transition: opacity @duration @ease;
+}
+
+.font-size(@sizeValue, @percent: 1) { 
+  @remValue: @sizeValue * @percent;
+  @pxValue: (@sizeValue * 10 *@percent) ;
+  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{remValue}rem";
+}
+
+.resize-padding-top(@sizeValue, @percent: 1){
+	@pxValue: (@sizeValue * @percent) ;
+	padding-top: ~"@{pxValue}px";  
+}
+.resize-padding-bottom(@sizeValue, @percent: 1){
+	@pxValue: (@sizeValue * @percent) ;
+	padding-bottom: ~"@{pxValue}px";  
+}
+.font-size-resize(@sizeValue,@percent: 0.8) {
+  @remValue: @sizeValue * @percent;
+  @pxValue: (@sizeValue * 10 *@percent) ;
+  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{remValue}rem";
+}
+.transition(@duration:0.2s, @ease:ease-out) {
+	-webkit-transition: all @duration @ease;
+	-moz-transition: all @duration @ease;
+	-o-transition: all @duration @ease;
+	transition: all @duration @ease;
+}
+
+.btn-template(@color,@background,@padding,@radius,@boxshadow: none){
+  color: @color !important;  padding: @padding; background-color: @background;  *background-color: @background;   background-image: none;  background-repeat: repeat-x;  border-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26387f', endColorstr='#26387f', GradientType=0); filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  .radius(@radius);
+  .box-shadow(@boxshadow);
+  
+}
+.btn-template-hover(@background, @color ){
+    background-color: @background ;  *background-color: @background;  border-color: transparent; .transition-color(); text-decoration: none !important;
+	color: @color !important;
+}
+.radius(@radius: 0){
+     border-radius: @radius; -moz-border-radius: @radius; border-radius: @radius;
+}
+.transition-color(@color-time: .3s, @color-easing: linear,@background-time: .3s, @background-easing: linear){
+	-o-transition: color @color-time @color-easing, background @background-time @background-easing;	
+	-webkit-transition: color @color-time @color-easing,background @background-time @background-easing; 
+	-moz-transition: color @color-time @color-easing, background @background-time @background-easing;
+	transition: color @color-time @color-easing, background @background-time @background-easing;
+    
+}
+
+.a(@color, @text-decoration:none, @color-hover, @text-decoration-hover:none) {
+	a {
+		 &, &:visited &:focus {
+			color: @color;
+			text-decoration: @text-decoration;
+		}
+		&:hover {
+			color: @color-hover;
+			text-decoration: @text-decoration-hover;
+		}
+	}
+}
+
+

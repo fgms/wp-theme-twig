@@ -1,0 +1,19 @@
+{# base.twig #}
+<!DOCTYPE html>
+<html {{site.language_attributes()}}>
+    <head> 
+        {% include "header.twig" %}
+        {% block head %}
+            <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
+        {% endblock %}
+    </head>
+    <body class="{{body_class}}">
+        {% include 'navigation.twig' %}
+        {% block content %}
+            <!-- The template's main content will go here. -->
+        {% endblock %}
+        {% include "footer.twig" %}
+        <footer class="footer"></footer>
+        {{wp_footer}}
+    </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends base_template %}	
+	{% block content %}	
+		{# include 'partials/hero-snippet.html.twig' with { 'thisPage' : page , 'thisIndex' : page.find('/blog')} #}	
+		<div class="modular sidebar-right">    
+			<div class="modular-row "  >
+				<div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+				<div class="container">
+				{# if config.plugins.breadcrumbs.enabled %}{% include 'partials/breadcrumbs.html.twig' %}{% endif #}
+				
+					<div class="row">
+						<div class="col-md-8">
+							<div class="column-wrapper">
+								{# only show this if we are index page defined in partials/hero-snippet#}							
+								{% block container %}
+								{% endblock %}
+								
+							</div>
+						</div>
+						<div class="col-md-4">
+							{% include 'blog-sidebar.twig'  %}				
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	{% endblock %}
+	

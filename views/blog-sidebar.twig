@@ -1,0 +1,53 @@
+ 
+    
+<div class="sidebar">
+    <div class="column-wrapper">
+        <div class="script-sticky-traveler">        
+            <div class="panel-group" id="sidebar-accordion" role="tablist" aria-multiselectable="true">            
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">												
+                            <a   href="/blog">Blog Index</a>												
+                        </div>
+                    </div>	
+                    <div class="panel-heading">
+                        <div class="panel-title">												
+                            <a data-toggle="collapse" data-parent="#sidebar-accordion" class="{% if false %}active{%endif%}" href="#accordion-recent">Latest Posts</a>												
+                        </div>
+                    </div>		
+                    <div id="accordion-recent" class="panel-collapse collapse {% if not uri.params() %}in {%endif%}">
+                        <div class="panel-body">
+                            <ul class="indicator-list blog-latest-post" >	
+                            
+                            </ul>                        
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <div class="panel-title">												
+                            <a data-toggle="collapse" data-parent="#sidebar-accordion" class="{% if false %}active{% endif %}" href="#accordion-category">Categories</a>												
+                        </div>
+                    </div>										
+                    <div id="accordion-category" class="panel-collapse collapse {% if false %}in{% endif %} ">
+                        <div class="panel-body">
+                            
+                            <ul class="indicator-list" >
+                            
+                            </ul>
+                        </div>
+                    </div>			                    
+                    <div class="panel-heading">
+                        <div class="panel-title">												
+                            <a data-toggle="collapse" data-parent="#sidebar-accordion" class="{% if false %}active{%endif%}" href="#accordion-tag">Tag Cloud</a>												
+                        </div>
+                    </div>										
+                    <div id="accordion-tag" class="panel-collapse collapse {% if false %}in{%endif%}">
+                        <div class="panel-body">
+                          
+                        </div>
+                    </div>										
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

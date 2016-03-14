@@ -1,0 +1,18 @@
+{% embed  "container-sidebar.twig" %}
+{% block container %}
+
+    {% for article in posts%}
+    <article class="display-page" itemscope itemtype="http://schema.org/Article">  
+        <h1 class="article-title" itemscope="name">{{ article.title }}</h1>	
+        <div id="articleContent" itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->								
+        <div  class="article-footer" style="margin-bottom: 12px;">									
+            <div class="posted-by">Posted by <span>{{article.author | default(site.title)}}</span></div>
+            <meta itemprop="author" content="{{article.author | default(site.title)}}" />
+        </div>     
+    </article>
+    {% endfor %}    
+    
+
+
+{%endblock%}
+{%endembed%}
