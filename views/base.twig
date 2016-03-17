@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html {{site.language_attributes()}}>
     <head> 
-        {% include "header.twig" %}
+        {% include "wp/header.twig" %}
         {% block head %}
             <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
         {% endblock %}
@@ -14,6 +14,6 @@
         {% endblock %}
         {% include "footer.twig" %}
         <footer class="footer"></footer>
-        {{wp_footer}}
+		{% include "wp/footer.twig" %}
     </body>
 </html>

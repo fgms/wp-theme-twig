@@ -48,5 +48,5 @@
     $data['base_template'] = 'base.twig';
 	
 	// render using Twig template index.twig
-	Timber::render('views/' . $template . '.twig', $data );
+	Timber::render('views/wp/' . $template . '.twig', $data );
 ?>
