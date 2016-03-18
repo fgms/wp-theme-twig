@@ -9,6 +9,9 @@
     </head>
     <body class="{{body_class}}">
         {% include 'navigation.twig' %}
+		{% if slideshow_items is defined %}
+		{% include 'bootstrap-carousel.twig' with {'id':'fgms-wp-carousel','items':slideshow_items} only %}
+		{% endif %}
         {% block content %}
             <!-- The template's main content will go here. -->
         {% endblock %}

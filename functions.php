@@ -79,3 +79,24 @@ function add_to_context($data){
 }
 
 */
+
+add_filter('rwmb_meta_boxes','fgms_meta_boxes');
+function fgms_meta_boxes ($bs) {
+	
+	$prefix='fgms_';
+	
+	$bs[]=array(
+		'title' => 'Slideshow',
+		'post_types' => array('post','page'),
+		'fields' => array(
+			array(
+				'id' => $prefix.'slideshow_items',
+				'name' => __('Slides','fgms'),
+				'type' => 'image_advanced'
+			)
+		)
+	);
+	
+	return $bs;
+	
+}

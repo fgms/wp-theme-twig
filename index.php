@@ -5,6 +5,27 @@
 
 	// set up page data 
 	
+	$get_slideshow=function () {
+		
+		$meta=rwmb_meta('fgms_slideshow_items');
+		if (count($meta)===0) return null;
+		
+		$retr=array();
+		foreach ($meta as $m) {
+			
+			$retr[]=array(
+				'caption' => $m['caption'],
+				'url' => $m['full_url'],
+				'alt' => $m['alt'],
+				'title' => $m['title']
+			);
+			
+		}
+		
+		return $retr;
+		
+	};
+	
 	if ( is_singular() ) :
 		$data = Timber::get_context();
 		$data['post'] = new TimberPost();
@@ -18,10 +39,12 @@
 	if ( is_single() ) :
 		$data['page'] = 'single';	
 		$template = 'single';
+		$data['slideshow_items']=$get_slideshow();
 	
 	elseif ( is_page() ) :
 		$data['page'] = 'page';	
 		$template = 'page';
+		$data['slideshow_items']=$get_slideshow();
 
 	elseif ( is_home() ) :
 		$data['page'] = 'home';
