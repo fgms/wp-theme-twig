@@ -1,5 +1,5 @@
 <?php
-//include_once('includes/demo.php');
+include_once('includes/demo.php');
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
 function blankslate_setup() {
@@ -19,7 +19,7 @@ function blankslate_load_scripts(){
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
    wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' );
-   wp_enqueue_script('fg-script',get_stylesheet_directory_uri() . '/assets/js/wp-theme-fg.js');   
+   wp_enqueue_script('fg-script',get_stylesheet_directory_uri() . '/assets/js/wp-theme-fg.js');
    wp_enqueue_style('theme',get_stylesheet_directory_uri().'/assets/css/style.css');
 }
 
@@ -58,7 +58,7 @@ function blankslate_custom_pings( $comment ){
     $GLOBALS['comment'] = $comment;
     ?>
     <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>"><?php echo comment_author_link(); ?></li>
-    <?php 
+    <?php
 }
 
 add_filter( 'get_comments_number', 'blankslate_comments_number' );
@@ -79,6 +79,3 @@ function add_to_context($data){
 }
 
 */
-
-
-
