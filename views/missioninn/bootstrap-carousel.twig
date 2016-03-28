@@ -8,6 +8,11 @@
 {% set indicators=true %}
 {% endif %}
 
+{% if items|length==1 %}
+{% set indicators=false %}
+{% set controls=false %}
+{% endif %}
+
 <div id="{{id|e('html_attr')}}" class="carousel slide" data-ride="carousel">
 	
 	{% if indicators %}
