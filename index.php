@@ -5,6 +5,8 @@
 
 	// set up page data 
 	
+	$theme='missioninn';
+	
 	$get_slideshow=function () {
 		
 		$meta=rwmb_meta('fgms_slideshow_items');
@@ -71,5 +73,6 @@
     $data['base_template'] = 'base.twig';
 	
 	// render using Twig template index.twig
-	Timber::render('views/wp/' . $template . '.twig', $data );
+	Timber::$dirname='views/'.$theme;
+	Timber::render('wp/' . $template . '.twig', $data );
 ?>
