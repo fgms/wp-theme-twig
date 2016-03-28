@@ -9,7 +9,7 @@
     </head>
     <body class="{{body_class}}">
         {% include 'navigation.twig' %}
-		{% if slideshow_items is defined %}
+		{% if slideshow_items is defined and not slideshow_items is null %}
 		{% include 'bootstrap-carousel.twig' with {'id':'fgms-wp-carousel','items':slideshow_items} only %}
 		{% endif %}
         {% block content %}
