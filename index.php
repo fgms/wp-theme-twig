@@ -5,7 +5,14 @@
 
 	// set up page data 
 	
-	$theme='missioninn';
+	$autoloader=require_once('vendor/autoload.php');
+	$config_file=dirname(__FILE__).'/config/settings.yml';
+	$config=@file_get_contents($config_file);
+	if ($config===false) die('Could not read '.$config_file);
+	$config=\Symfony\Component\Yaml\Yaml::parse($config);
+	//	TODO: Check schema?
+	if (!isset($config['theme']) && is_string($config['theme'])) die('No theme');
+	$theme=$config['theme'];
 	
 	$get_slideshow=function () {
 		
@@ -37,6 +44,7 @@
 		$data['posts'] = Timber::get_posts();
 		
 	endif;
+	$data['config']=$config;
     $data['menu'] = new TimberMenu();
 	if ( is_single() ) :
 		$data['page'] = 'single';	
@@ -73,6 +81,6 @@
     $data['base_template'] = 'base.twig';
 	
 	// render using Twig template index.twig
-	Timber::$dirname='views/'.$theme;
+	Timber::$locations=dirname(__FILE__).'/views/'.$theme;
 	Timber::render('wp/' . $template . '.twig', $data );
 ?>

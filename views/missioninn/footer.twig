@@ -1,0 +1,105 @@
+<footer class="footer">
+	
+	<div class="container">
+		
+		<div class="row">
+			
+			<div class="col-md-7 col-lg-8">
+				
+				{% if config.logo is defined %}
+				<div class="footer-logo">
+					
+					<a href="{{config.logo.link|e('html_attr')}}"">
+						<img class="img-responsive" data-image="{{config.logo.url|e('html_attr')}}" alt="{{config.logo.alt|e('html_attr')}}" />
+					</a>
+					
+				</div>
+				{% endif %}
+				
+				<div class="footer-text-wrapper">
+					
+					{% if config.tollfree is defined %}
+					<div class="footer-tollfree">
+						Toll-free: <span class="footer-tollfree-number">{{config.tollfree|e}}</span>
+					</div>
+					{% endif %}
+					
+					<div class="footer-address">
+						
+						{% if config.address is defined %}
+						{{config.address|e}}
+						{% endif %}
+						|
+						{% if config.privacy_policy is defined %}
+						<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>
+						{% endif %}
+						
+					</div>
+					
+				</div>
+				
+				{% if config.social is defined %}
+				<div class="footer-social">
+					
+					<ul>
+						
+						{% if config.social.facebook is defined %}
+						<li><a href="{{config.social.facebook.url|e('html_attr')}}" target="_blank" class="social-facebook"></a></li>
+						{% endif %}
+						
+						{% if config.social.twitter is defined %}
+						<li><a href="{{config.social.twitter.url|e('html_attr')}}" target="_blank" class="social-twitter"></a></li>
+						{% endif %}
+						
+						{% if config.social.youtube is defined %}
+						<li><a href="{{config.social.youtube.url|e('html_attr')}}" target="_blank" class="social-youtube"></a></li>
+						{% endif %}
+						
+						{% if config.social.pinterest is defined %}
+						<li><a href="{{config.social.pinterest.url|e('html_attr')}}" target="_blank" class="social-pinterest"></a></li>
+						{% endif %}
+						
+						{% if config.social.flickr is defined %}
+						<li><a href="{{config.social.flickr.url|e('html_attr')}}" target="_blank" class="social-flickr"></a></li>
+						{% endif %}
+						
+						{% if config.social.instagram is defined %}
+						<li><a href="{{config.social.instagram.url|e('html_attr')}}" target="_blank" class="social-instagram"></a></li>
+						{% endif %}
+						
+						{% if config.social.rss is defined %}
+						<li><a href="{{config.social.rss.url|e('html_attr')}}" target="_blank" class="social-rss"></a></li>
+						{% endif %}
+						
+					</ul>
+					
+				</div>
+				{% endif %}
+				
+				<div class="footer-nav"></div>
+				
+				<div class="footer-copyright">
+					
+					{% if config.copyright is defined %}
+					{% set year="now"|date("Y","UTC") %}
+					&copy; Copyright
+					{{config.copyright.year|e}}{% if year!=config.copyright.year %}-{{year|e}}{% endif %}
+					|
+					{% endif %}
+					Site developed by Fifth Gear
+					
+				</div>
+				
+			</div>
+			
+			<div class="col-md-5 col-lg-4 visible-lg-block visible-md-block">
+				
+				
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</footer>
