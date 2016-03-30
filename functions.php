@@ -176,6 +176,10 @@ call_user_func(function () {
 	
 	add_shortcode('tab',function ($atts, $content) use (&$tabs) {
 		
+		//	Guard against invalid user input: Silently delete the content of
+		//	a [tab] if we're not currently parsing a [tabs]
+		if (is_null($tabs)) return '';
+		
 		$atts=shortcode_atts(array('title' => '', 'id' => null, 'active' => null),$atts);
 		
 		$tabs[]=(object)array(
