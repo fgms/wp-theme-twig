@@ -19,10 +19,10 @@
 		$meta=rwmb_meta('fgms_slideshow_items');
 		if (count($meta)===0) return null;
 		
-		$retr=array();
+		$items=array();
 		foreach ($meta as $m) {
 			
-			$retr[]=array(
+			$items[]=array(
 				'caption' => $m['caption'],
 				'url' => $m['full_url'],
 				'alt' => $m['alt'],
@@ -31,7 +31,17 @@
 			
 		}
 		
-		return $retr;
+		$filter=function ($str) {	return ($str==='') ? null : $str;	};
+		$id=$filter(rwmb_meta('fgms_slideshow_id'));
+		$outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
+		$inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
+		
+		return array(
+			'items' => $items,
+			'id' => $id,
+			'outer_class' => $outer_class,
+			'inner_class' => $inner_class
+		);
 		
 	};
 	
@@ -49,12 +59,12 @@
 	if ( is_single() ) :
 		$data['page'] = 'single';	
 		$template = 'single';
-		$data['slideshow_items']=$get_slideshow();
+		$data['slideshow']=$get_slideshow();
 	
 	elseif ( is_page() ) :
 		$data['page'] = 'page';	
 		$template = 'page';
-		$data['slideshow_items']=$get_slideshow();
+		$data['slideshow']=$get_slideshow();
 
 	elseif ( is_home() ) :
 		$data['page'] = 'home';

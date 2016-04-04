@@ -1,4 +1,6 @@
 {% set id=id|default('myCarousel') %}
+{% set inner_class=inner_class|default('') %}
+{% set outer_class=outer_class|default('') %}
 
 {% if not controls is defined %}
 {% set controls=true %}
@@ -13,7 +15,7 @@
 {% set controls=false %}
 {% endif %}
 
-<div id="{{id|e('html_attr')}}" class="carousel slide" data-ride="carousel">
+<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel">
 	
 	{% if indicators %}
 	<ol class="carousel-indicators">
@@ -25,7 +27,7 @@
 	</ol>
 	{% endif %}
 	
-	<div class="carousel-inner" role="listbox">
+	<div class="carousel-inner {{inner_class|e('html_attr')}}" role="listbox">
 		
 		{% for item in items %}
 		<div class="item{% if loop.index0==0 %} active{% endif %}">

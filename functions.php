@@ -93,6 +93,21 @@ function fgms_meta_boxes ($bs) {
 				'id' => $prefix.'slideshow_items',
 				'name' => __('Slides','fgms'),
 				'type' => 'image_advanced'
+			),
+			array(
+				'id' => $prefix.'slideshow_id',
+				'name' => __('Slideshow ID','fgms'),
+				'type' => 'text'
+			),
+			array(
+				'id' => $prefix.'slideshow_outerclass',
+				'name' => __('Slideshow Outer Class','fgms'),
+				'type' => 'text'
+			),
+			array(
+				'id' => $prefix.'slideshow_innerclass',
+				'name' => __('Slideshow Inner Class','fgms'),
+				'type' => 'text'
 			)
 		)
 	);
