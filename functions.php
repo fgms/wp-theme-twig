@@ -225,7 +225,7 @@ call_user_func(function () {
 	//		title:
 	//	}
 	
-	add_shortcode('carousel',function ($atts, $content) use (&$imgs) {
+	add_shortcode('carousel',function ($atts, $content) use (&$imgs, &$id) {
 		
 		$imgs=array();
 		
