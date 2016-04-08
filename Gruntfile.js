@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         build: {
             options: {
                 fontPath: 'assets/fonts',
-                cssFile: 'src/css/fonts/fonts.css',
+                cssFile: 'src/css/fonts.less',
                 httpPath: '/wp-content/themes/wp-theme-fg/assets/fonts/',
                 formats: {
                     eot: true,
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
                     woff: true,
                     woff2: true
                 },
-                fonts: [						
+                fonts: [
                     {
                         family: 'Roboto',
                         styles: [300,400,500,700]                 

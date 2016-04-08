@@ -4,3 +4,5 @@ includes/demo.php
 vendor/*
 composer.lock
 config/settings.yml
+*fonts.css
+*fonts.less
