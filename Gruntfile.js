@@ -98,7 +98,15 @@ module.exports = function(grunt) {
                     {
                         family: 'Titillium Web',
                         styles: [300,400,600]
-                    }
+                    },
+					{
+						family: 'Lora',
+						styles: [400]
+					},
+					{
+						family: 'Raleway',
+						styles: [300,400,800]
+					}
                 ]
             }
         }            
