@@ -45,8 +45,9 @@ jQuery(function($) {
 
   });
 
-  if ($('#articleContent img').length > 0) {
-    $('#articleContent img').smoothZoom({
+  var imgs=$('#articleContent img');
+  if ((imgs.length > 0) && imgs.smoothZoom) {
+    imgs.smoothZoom({
       navigationRight: '<i class=\"fa fa-angle-right\"></i>',
       navigationLeft: '<i class=\"fa fa-angle-left\"></i>'
     });
