@@ -89,6 +89,8 @@
 
 	endif;
     $data['base_template'] = 'base.twig';
+	//	TODO: Make this configurable/more elegant
+	$data['contact_form']=do_shortcode('[contact-form-7 id="88" title="Contact form 1"]');
 	
 	// render using Twig template index.twig
 	Timber::$locations=dirname(__FILE__).'/views/'.$theme;

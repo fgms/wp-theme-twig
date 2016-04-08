@@ -94,7 +94,9 @@
 			
 			<div class="col-md-5 col-lg-4 visible-lg-block visible-md-block">
 				
-				
+				{% if contact_form is defined %}
+				{{contact_form}}
+				{% endif %}
 				
 			</div>
 			
