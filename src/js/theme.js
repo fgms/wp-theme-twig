@@ -125,4 +125,10 @@ jQuery(function($) {
     });
   });
 
+  var hash = window.location.hash;
+  if ((hash.length>1) && ($('ul.nav a[href="' + hash + '"]').length > 0)) {
+	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+	$('html, body').animate({ scrollTop: $('ul.nav a[href="' + hash + '"]').offset().top -50   }, 2000);
+  }
+
 });
