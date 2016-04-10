@@ -9,31 +9,36 @@
 
 
 /*** BASE @body-color: {{bodyColor|default('#333')}};   ***/
-@body-color: #666;
-@body-font-size-px: 15px;
-@body-font-size: 1.5;
-@body-font-family: Roboto;
+@body-color: rgb(86, 86, 86);
+@body-font-size-px: 16px;
+@body-font-size: 1.6;
+@body-font-family: Raleway, sans-serif;
 @body-font-weight: 300;
+@body-color-inverse : rgb(201, 201, 201);
+@body-line-height: 1.6em;
 
-@body-color-inverse : #fff;
+
+@strong-color: black;
 
 
 /*** HEADINGS ***/
-@heading-font-family: 'Titillium Web';
-@heading-font-weight: 300;	
-@heading-color: #222;
-@heading-inverse-color: #fff;
-@heading-text-transform: uppercase;
+@heading-font-family: @body-font-family;
+@heading-font-weight: normal;
+@heading-color: rgb(0, 86, 118);
+@heading-inverse-color: rgb(255, 169, 137);
+@heading-text-transform: capitalize;
 
-@h1-font-size: 6;
+@h1-font-size: 4;
 @h1-color: @heading-color;
-@h1-padding: 0 0 6px;
-@h1-text-transform: none;
+@h1-padding: 0;
+@h1-text-transform: inherit;
+@h1-margin: 0 0 24px;
 
-@h2-font-size: 5;
+@h2-font-size: 2.4;
 @h2-color:  @heading-color;
-@h2-padding: 12px 0 0;
-@h2-text-transform: uppercase;
+@h2-padding: 24px 0 0;
+@h2-text-transform: inherit;
+@h2-margin: 0 0 18px;
 
 @h3-font-size: 4;
 @h3-color:  @heading-color;
@@ -50,11 +55,12 @@
 /*** GENERAL ***/
 @p-margin-bottom: 12px;
 
-@blockquote-font-style : normal;
-@blockquote-font-weight: 300;
-@blockquote-font-family: 'Titillium Web';  
+@blockquote-font-style : italic;
+@blockquote-font-weight: normal;
+@blockquote-font-family: Lora, serif;
 @blockquote-font-size: 2.3;
-@blockquote-line-height: 1.3em;
+@blockquote-line-height: normal;
+@blockquote-margin: 0 0 28px;
 	
 
 
@@ -93,10 +99,9 @@
 body {
     color: @body-color;
     font-family: @body-font-family;
-    line-height: 1.5em;
+    line-height: @body-line-height;
     font-size: 16px;
 	font-weight: @body-font-weight;
-	
 	
 }
 
@@ -104,7 +109,7 @@ body {
 
 h1, h2, h3, h4, h5, p, ul, ol{
 	margin: 0;
-	padding: 0;;
+	padding: 0;
 	
 } 
 
@@ -137,7 +142,7 @@ h1, h2, h3, h4, h5,.h1,.h2,.h3,.h4,.h5 {
 h1, .h1  {
 	.font-size(@h1-font-size);
 	line-height: 1em;
-	margin: 0 0 32px;;
+	margin: @h1-margin;
 	padding: @h1-padding;
 	color: @h1-color;
 }
@@ -154,13 +159,13 @@ h1, .h1  {
 	.font-size(@h1-font-size, 0.6);
 }
 
-h2,.h2 { 
-	.font-size(@h2-font-size); 
+h2,.h2 {
+	.font-size(@h2-font-size);
 	padding: @h2-padding;
 	color: @h2-color;
     text-transform: @h2-text-transform;
     font-weight: 100;
-	margin-bottom: 24px;
+	margin: @h2-margin;
 	
 }
 
@@ -209,7 +214,10 @@ ol {margin-bottom: 24px; padding: 12px 0 0 24px; line-height: 1.6em;
 p {
 	margin-bottom: @p-margin-bottom;
 }
-b, strong { font-weight: 400;}
+b, strong {
+	color: @strong-color;
+	font-weight: 500;
+}
 
 
 blockquote ,h1.blockquote, h2.blockquote {
@@ -221,6 +229,7 @@ blockquote ,h1.blockquote, h2.blockquote {
 	border: 0; 
 	padding: 0; 
 	text-transform: none;
+	margin: @blockquote-margin;
     
 }
 *:focus,a:focus,.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{outline: none; text-decoration: none;}
@@ -280,7 +289,7 @@ blockquote ,h1.blockquote, h2.blockquote {
 				content: @selector-active-indicator-content;
 				font-family: FontAwesome;
 				position: relative;
-				left: -2px;;
+				left: -2px;
 				top: 1px;
 				position: absolute;
 				

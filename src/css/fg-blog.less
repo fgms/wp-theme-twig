@@ -54,13 +54,26 @@
 	
 }
 article {
-	h1 {
-		.font-size(4);
-		background: none;
-		margin-bottom: 32px;
-        line-height: 1.1em;
-	}
 	#commentsTitle {margin-top: -18px;}
+	
+	a, a:focus, a:visited, a:active, .panel-default > .panel-heading a, .panel-default > .panel-heading a:visited, .panel-default > .panel-heading a:active {
+		color: #df6619;
+		text-decoration: none;
+	}
+	a:hover, .panel-default > .panel-heading a {
+		color: #f38946;
+		text-decoration: none;
+	}
+	
+	ul {
+		margin: 24px 12px;
+		li {
+			list-style-image: url("../images/bullet.png");
+			margin-bottom: 10px;
+			margin-left: 28px;
+			padding-left: 6px;
+		}
+	}
 	
 	.subtitle {
 		font-family: @heading-font-family;
