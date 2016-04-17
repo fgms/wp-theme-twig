@@ -135,5 +135,10 @@ jQuery(function($) {
 	e=$(e);
 	e.click(e.toggleClass.bind(e,'active'));
   });
+  
+  $('.footer .form-group > label.sr-only ~ * > input[type="text"], .footer .form-group > label.sr-only ~ * > input[type="email"], .footer .form-group > label.sr-only ~ * > textarea').each(function (i, e) {
+    var label=$(e.parentElement.parentElement).children('label.sr-only')[0];
+    e.setAttribute('placeholder',label.innerHTML);
+  });
 
 });

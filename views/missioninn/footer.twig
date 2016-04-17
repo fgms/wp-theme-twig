@@ -4,7 +4,7 @@
 		
 		<div class="row">
 			
-			<div class="col-md-7 col-lg-8">
+			<div class="col-md-8">
 				
 				{% if config.logo is defined %}
 				<div class="footer-logo">
@@ -78,8 +78,9 @@
 				
 				<div class="footer-nav"></div>
 				
-				<div class="footer-copyright">
-					
+				<div class="footer-copyright hidden-xs hidden-sm">
+				
+					{% block copyright %}
 					{% if config.copyright is defined %}
 					{% set year="now"|date("Y","UTC") %}
 					&copy; Copyright
@@ -87,19 +88,25 @@
 					|
 					{% endif %}
 					Site developed by Fifth Gear
+					{% endblock %}
 					
 				</div>
 				
 			</div>
 			
-			<div class="col-md-5 col-lg-4 visible-lg-block visible-md-block">
+			<div class="col-md-4">
 				
 				{% if contact_form is defined %}
+				<h3>Quick Message</h3>
 				{{contact_form}}
 				{% endif %}
 				
 			</div>
 			
+		</div>
+		
+		<div class="row footer-copyright visible-xs visible-sm">
+			<div class="col-md-12">{{block('copyright')}}</div>
 		</div>
 		
 	</div>
