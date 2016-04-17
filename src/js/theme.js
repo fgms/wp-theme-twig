@@ -130,5 +130,10 @@ jQuery(function($) {
 	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 	$('html, body').animate({ scrollTop: $('ul.nav a[href="' + hash + '"]').offset().top -50   }, 2000);
   }
+  
+  $('header ul li:first-child').each(function (i, e) {
+	e=$(e);
+	e.click(e.toggleClass.bind(e,'active'));
+  });
 
 });
