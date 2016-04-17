@@ -1,21 +1,36 @@
-@carousel-height: 500px;
-
-
 .carousel {
 	
-	height: @carousel-height;
-	margin-bottom: 60px;
-	
-	.carousel-inner {
+	img {
 		
-		img {
+		width: 100%;
+		
+	}
+	
+	.carousel-indicators {
+		
+		li {
 			
-			margin-left: auto;
-			margin-right: auto;
-			max-height: @carousel-height;
+			height: 12px;
+			position: relative;
+			top: 1px;
+			
+			&.active {
+				
+				top: 0;
+				
+			}
 			
 		}
 		
 	}
+	
+}
+
+
+article .carousel {
+	
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 644px;
 	
 }
