@@ -444,25 +444,37 @@ blockquote ,h1.blockquote, h2.blockquote {
 
 
 
-.sidebar-right .column-wrapper {
-    padding-right: 32px;
+.sidebar-right .column-wrapper, .sidebar-left .column-wrapper {
 	padding-bottom: 62px;
 	@media screen and (max-width: @screen-md-max) {
+		padding-left: 0;
 		padding-right: 0;
 	}
 }
-
-.sidebar-right.modular {
-	background-image: theme_url('/assets/images/background-sidebar-right.gif');
-	background-position: center;
-	background-attachment: scroll;
+.sidebar-right.modular, .sidebar-left.modular {
 	padding-top: 100px;
-	
 }
-.sidebar-left.modular{
-	background-image: theme_url('/assets/images/background-sidebar-left.gif');
-	background-position: center;
-	background-attachment: scroll;	
+.sidebar-right.modular {
+	@media (min-width: 1200px) {
+		background: url('http://www.missioninnresort.com/assets/images/template/background-pagecontent-home.gif') repeat-y center 0px #fff;
+	}
+}
+.sidebar-left.modular {
+	@media (min-width: 1200px) {
+		background: url('http://www.missioninnresort.com/assets/images/template/background-pagecontent-secondary.gif') repeat-y center 0px #fff;
+	}
+}
+.sidebar-left.modular > .modular-row > .container > .row > .col-sm-9 {
+	float:right;
+	> .column-wrapper {
+		padding-left: 32px;
+	}
+}
+.sidebar-left.modular > .modular-row > .container > .row > .col-sm-3 {
+	float: left;
+}
+.sidebar-right.modular > .modular-row > .container > .row > .col-sm-9 > .column_wrapper {
+	padding-right: 32px;
 }
 
 
