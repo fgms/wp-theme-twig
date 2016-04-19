@@ -38,6 +38,20 @@ The [slide] shortcode accepts the following attributes:
 
 All content of a [slide] shortcode is ignored.
 
+### [custom-template] & [custom-item]
+
+Allows a specified Twig template to be rendered.
+
+The [custom-template] shortcode accepts one attribute explicitly:
+
+-	template: Specifies the file name of the template which shall be rendered
+
+Any other attributes of the shortcode have their values passed through as variables in the template.
+
+Note that if you specify the "data" attribute it will be overwritten and its value will therefore be inaccessible (see below).
+
+The [custom-item] shortcode creates an entry in the array passed through to the rendered template as the "data" variable.  The entry shall have a property corresponding to each attribute of the [custom-item] shortcode in addition to a "content" property which contains a string containing the contents of the shortcode.  Note that because of this if you use the "content" attribute of a [custom-item] shortcode it will be overwritten and therefore its value will be inaccessible.
+
 ### [tabs] & [tab]
 
 Creates [Bootstrap tabs](http://getbootstrap.com/javascript/#tabs).
