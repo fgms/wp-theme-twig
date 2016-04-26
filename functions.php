@@ -147,7 +147,7 @@ $get_config=function() {
 $get_slideshow=function () {
     
     $meta=rwmb_meta('fgms_slideshow_items');
-    if (count($meta)===0) return null;
+    if (!is_array($meta) || (count($meta)===0)) return null;
     
     $items=array();
     foreach ($meta as $m) {
