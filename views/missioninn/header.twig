@@ -11,13 +11,13 @@
 					<li>Menu<div><em></em><em></em><em></em><em></em></div></li>
 					{% for item in menu.get_items %}
 					<li>
-						<a href="{{item.get_link|e('html_attr')}}">{{item.title}}{% if item.get_children %}<!--<div></div>-->{% endif %}</a>
+						<a href="{{item.get_link|e('html_attr')}}">{{item.title}}{% if item.get_children %}<div></div>{% endif %}</a>
 						{% if item.get_children %}
-						<!--<ul>
+						<ul>
 							{% for child in item.get_children %}
-							<li><a href="{{child.get_link|e('html_attr')}}">{{child.title|e}}</a></li>
+							<li><a href="{{child.get_link|e('html_attr')}}">{{child.title}}</a></li>
 							{% endfor %}
-						</ul>-->
+						</ul>
 						{% endif %}
 					</li>
 					{% endfor %}

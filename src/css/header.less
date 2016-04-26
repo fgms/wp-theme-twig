@@ -55,10 +55,15 @@ header {
 		
 	}
 	
+	.col-sm-12 ul {
+		
+		list-style-type: none;
+		
+	}
+	
 	.col-sm-12 > ul {
 		
 		.font-size(1.2);
-		list-style-type: none;
 		text-transform: uppercase;
 		
 		@media (min-width: 768px) {
@@ -77,12 +82,15 @@ header {
 		
 		> li {
 			
+			position: relative;
+			
 			a div {
 				
 				float: right;
 				border-left: rgba(0,0,0,0) solid 3px;
 				border-right: rgba(0,0,0,0) solid 3px;
 				border-top: white solid 3px;
+				margin-left: 5px;
 				margin-top: 10px;
 				
 			}
@@ -90,6 +98,41 @@ header {
 			ul {
 				
 				display: none;
+				padding-left: 22px;
+				padding-right: 22px;
+				text-transform: capitalize;
+				
+				@media (min-width: 768px) {
+					
+					background-color: white;
+					box-shadow: rgba(0, 0, 0, 0.14902) 2px 2px 4px 0px;
+					left: -10px;
+					position: absolute;
+					top: 42px;
+					width: 180px;
+					z-index: 999;
+					
+					li {
+						
+						padding-top: 6px;
+						padding-bottom: 6px;
+						
+					}
+					
+					a {
+						
+						color: rgb(14, 121, 160);
+						padding: 0;
+						
+						&:hover {
+							
+							text-decoration: underline;
+							
+						}
+						
+					}
+					
+				}
 				
 			}
 			
@@ -159,7 +202,7 @@ header {
 			
 		}
 		
-		a, a:hover, a:active, a:visited, a:focus {
+		a {
 			
 			color: inherit;
 			display: block;
