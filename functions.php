@@ -118,7 +118,22 @@ function fgms_meta_boxes ($bs) {
 				'id' => $prefix.'slideshow_innerclass',
 				'name' => __('Slideshow Inner Class','fgms'),
 				'type' => 'text'
-			)
+			),
+            array(
+                'id' => $prefix.'slideshow_hide_captions',
+                'name' => __('Hide Captions'),
+                'type' => 'checkbox'
+            ),
+            array(
+                'id' => $prefix.'slideshow_hide_navigation',
+                'name' => __('Hide Navigation'),
+                'type' => 'checkbox'
+            ),
+            array(
+                'id' => $prefix.'slideshow_hide_indicators',
+                'name' => __('Hide Indicators'),
+                'type' => 'checkbox'
+            )
 		)
 	);
 	
@@ -165,12 +180,19 @@ $get_slideshow=function () {
     $id=$filter(rwmb_meta('fgms_slideshow_id'));
     $outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
     $inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
+    $captions=rwmb_meta('fgms_slideshow_hide_captions')!=='1';
+    $indicators=rwmb_meta('fgms_slideshow_hide_indicators')!=='1';
+    $navigation=rwmb_meta('fgms_slideshow_hide_navigation')!=='1';
     
     return array(
         'items' => $items,
         'id' => $id,
         'outer_class' => $outer_class,
-        'inner_class' => $inner_class
+        'inner_class' => $inner_class,
+        'captions' => $captions,
+        'titles' => $captions,
+        'indicators' => $indicators,
+        'controls' => $navigation
     );
     
 };   
