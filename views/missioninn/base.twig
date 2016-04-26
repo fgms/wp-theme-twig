@@ -8,7 +8,8 @@
         {% endblock %}
     </head>
     <body class="{{body_class}}">
-        {% include 'header.twig' %}
+        {#{% include 'header.twig' %}#}
+		{% include 'navigation.twig' %}
 		{% if slideshow is defined and not slideshow is null %}
 		{% include 'bootstrap-carousel.twig' with slideshow only %}
 		{% endif %}

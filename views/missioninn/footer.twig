@@ -6,11 +6,11 @@
 			
 			<div class="col-md-8">
 				
-				{% if config.logo is defined %}
+				{% if config.settings.footer.logo is defined %}
 				<div class="footer-logo">
 					
-					<a href="{{config.logo.link|e('html_attr')}}"">
-						<img class="img-responsive" data-image="{{config.logo.url|e('html_attr')}}" alt="{{config.logo.alt|e('html_attr')}}" />
+					<a href="{{site.url|e('html_attr')}}">
+						<img class="img-responsive" data-image="{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
 					</a>
 					
 				</div>
@@ -20,17 +20,18 @@
 					
 					{% if config.tollfree is defined %}
 					<div class="footer-tollfree">
-						Toll-free: <span class="footer-tollfree-number">{{config.tollfree|e}}</span>
+						Toll-free: <span class="footer-tollfree-number">{{config.phone.toll|e}}</span>
 					</div>
 					{% endif %}
 					
 					<div class="footer-address">
 						
 						{% if config.address is defined %}
-						{{config.address|e}}
+						{{config.address.street}}, {{config.address.city}}, {{config.address.province}}, {{config.address.country}} {{config.address.postal}}
 						{% endif %}
-						|
+						
 						{% if config.privacy_policy is defined %}
+						|	
 						<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>
 						{% endif %}
 						
@@ -81,10 +82,10 @@
 				<div class="footer-copyright hidden-xs hidden-sm">
 				
 					{% block copyright %}
-					{% if config.copyright is defined %}
+					{% if config.settings.copyright is defined %}
 					{% set year="now"|date("Y","UTC") %}
 					&copy; Copyright
-					{{config.copyright.year|e}}{% if year!=config.copyright.year %}-{{year|e}}{% endif %}
+					{{config.settings.copyright.year|e}}{% if year!=config.settings.copyright.year %}-{{year|e}}{% endif %}
 					|
 					{% endif %}
 					Site developed by Fifth Gear
@@ -96,9 +97,9 @@
 			
 			<div class="col-md-4">
 				
-				{% if contact_form is defined %}
-				<h3>Quick Message</h3>
-				{{contact_form}}
+				{% if config.forms.footer.id is defined %}
+				<h3>Quick Message</h3>				
+				{{function('do_shortcode','[contact-form-7 id="'~config.forms.footer.id~'"]')}}
 				{% endif %}
 				
 			</div>
@@ -112,3 +113,4 @@
 	</div>
 	
 </footer>
+

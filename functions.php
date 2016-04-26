@@ -1,5 +1,5 @@
 <?php
-include_once('includes/demo.php');
+//include_once('includes/demo.php');
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
 function blankslate_setup() {
@@ -12,6 +12,10 @@ function blankslate_setup() {
     register_nav_menus(
     array( 'main-menu' => __( 'Main Menu', 'blankslate' ) )
     );
+    
+    
+
+    
 }
 
 add_action( 'wp_enqueue_scripts', 'blankslate_load_scripts' );
@@ -80,6 +84,12 @@ function add_to_context($data){
 
 */
 
+/* remove admin bar for development */
+add_action('after_setup_theme', 'remove_admin_bar');
+function remove_admin_bar() {    
+    show_admin_bar(false);
+}
+
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
 function fgms_meta_boxes ($bs) {
 	
@@ -116,5 +126,52 @@ function fgms_meta_boxes ($bs) {
 	
 }
 
+$get_config=function() {
+    $autoloader=require_once('vendor/autoload.php');
+	$config_file=dirname(__FILE__).'/config/settings.yml';
+	$config=@file_get_contents($config_file);
+	if ($config===false) die('Could not read '.$config_file);
+	$config=\Symfony\Component\Yaml\Yaml::parse($config);
+	//	TODO: Check schema?
+	if (!isset($config['theme']) && is_string($config['theme'])) die('No theme');
+	$theme=$config['theme'];
+    
+     //setting up timber twig file locations
+    Timber::$locations=array(dirname(__FILE__).'/views/'.$config['theme'],
+                             dirname(__FILE__).'/views/'.$config['theme'].'/wp',
+                             dirname(__FILE__).'/views/'.$config['theme'].'/partials',
+                             dirname(__FILE__).'/views/'.$config['theme'].'/custom');   
+    return $config;
+};
 
+$get_slideshow=function () {
+    
+    $meta=rwmb_meta('fgms_slideshow_items');
+    if (count($meta)===0) return null;
+    
+    $items=array();
+    foreach ($meta as $m) {
+        
+        $items[]=array(
+            'caption' => $m['caption'],
+            'url' => $m['full_url'],
+            'alt' => $m['alt'],
+            'title' => $m['title']
+        );
+        
+    }
+    
+    $filter=function ($str) {	return ($str==='') ? null : $str;	};
+    $id=$filter(rwmb_meta('fgms_slideshow_id'));
+    $outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
+    $inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
+    
+    return array(
+        'items' => $items,
+        'id' => $id,
+        'outer_class' => $outer_class,
+        'inner_class' => $inner_class
+    );
+    
+};   
 require_once(__DIR__.'/include/shortcodes.php');

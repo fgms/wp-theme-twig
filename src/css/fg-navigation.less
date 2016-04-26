@@ -15,13 +15,15 @@
 /*Down Arrow Nav */
 @moduleNav-content: '\f107';
 @moduleNav-font-size: 34px;
-@moduleNav-color: @link-color;
+@moduleNav-color: #fff;
 
 /*Up Arrow Nav */
 @moduleNavStart-content: '\f0aa';
 @moduleNavStart-font-size: 34px;
-@moduleNavStart-color: @link-color;
-@nav-background-color: #161616;
+@moduleNavStart-color: #fff;
+
+/*navigation*/
+@nav-background-color: #06446B;
 @nav-link-color: #fff;
 @nav-link-color-hover: @link-color-hover;
 @nav-text-shadow: 3px 1px 2px @nav-background-color;
@@ -50,6 +52,7 @@
 
 .navbar {
 	.radius(0);
+	z-index: 999;
 	.navbar-header {
 		float: none;
 		position: absolute;

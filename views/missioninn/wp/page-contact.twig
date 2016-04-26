@@ -16,7 +16,8 @@
             
                 <div class="row">
                     <div class="col-sm-{{width}}">
-                        <div class="column-wrapper">                   
+                        <div class="column-wrapper">
+                            
                         {% for article in posts%}
                             {% include "article.twig" with { "article" : article, "loop" : loop } %}
                         {% endfor %}
@@ -24,7 +25,7 @@
                         </div>
                     </div>
                     <div class="col-sm-{{12-width}}">                       
-                            {% include 'blog-sidebar.twig'  %}                            
+                            {% include 'contact-sidebar.twig'  %}                            
                     </div>
                 </div>
             </div>

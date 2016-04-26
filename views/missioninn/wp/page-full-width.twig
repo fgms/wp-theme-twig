@@ -1,0 +1,21 @@
+{% extends 'base.twig' %}	
+	{% block content %}	
+		{# include 'partials/hero-snippet.html.twig' with { 'thisPage' : page , 'thisIndex' : page.find('/blog')} #}	
+		<div class="modular">
+			<div class="modular-row "  >
+				<div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+				<div class="container">
+				{# if config.plugins.breadcrumbs.enabled %}{% include 'partials/breadcrumbs.html.twig' %}{% endif #}				
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="column-wrapper">														
+								{% for article in posts%}
+                                    {% include "article.twig" with { "article" : article, "loop" : loop } %}
+                                {% endfor %} 								
+							</div>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>	
+	{% endblock %}
