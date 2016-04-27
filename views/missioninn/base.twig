@@ -2,21 +2,30 @@
 <!DOCTYPE html>
 <html {{site.language_attributes()}}>
     <head> 
-        {% include "wp/header.twig" %}
+        {{wp_head}}
         {% block head %}
             <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
         {% endblock %}
     </head>
     <body class="{{body_class}}">
-        {#{% include 'header.twig' %}#}
-		{% include 'navigation.twig' %}
-		{% if slideshow is defined and not slideshow is null %}
-		{% include 'bootstrap-carousel.twig' with slideshow only %}
-		{% endif %}
-        {% block content %}
-            <!-- The template's main content will go here. -->
-        {% endblock %}
-        {% include "footer.twig" %}
-		{% include "wp/footer.twig" %}
+		<div id="outer-container">
+			{#{% include 'header.twig' %}#}
+			{% include 'navigation.twig' %}
+			{% if slideshow is defined and not slideshow is null %}
+			{% include 'bootstrap-carousel.twig' with slideshow only %}
+			{% endif %}
+			{% block content %}
+				<!-- The template's main content will go here. -->
+			{% endblock %}
+			{% include "footer.twig" %}					
+		</div>
+		<div id="map-parallax">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="footer-map-wrapper" style="height: 530px;"><div class="map-loading-icon"><i class=" fa fa-spinner fa-spin fa-5x"></i></div></div>
+				</div>
+			</div>
+		</div> 
+		{{wp_footer}}
     </body>
 </html>

@@ -1,14 +1,14 @@
 @btn-primary-color: #fff;
 @btn-primary-color-hover: #fff;
-@btn-primary-background: transparent ;
-@btn-primary-background-hover: #507bcd;
+@btn-primary-background: #c45e20 ;
+@btn-primary-background-hover: #ed7019;
 @btn-primary-padding: 8px 40px;
 @btn-primary-padding-lg: @btn-primary-padding;
 @btn-primary-padding-md: 8px 24px;
 @btn-primary-padding-sm: @btn-primary-padding;
 @btn-primary-font-size-md : 1.2;
 @btn-primary-radius : 0px;
-@btn-primary-border: 1px solid #fff;
+@btn-primary-border: none;
 @btn-primary-text-transform: capitalize;
 
 
@@ -104,7 +104,10 @@
 
 
 
-.btn-primary {
+.btn-primary, input[type="submit"] {
+	font-family: 'Lora', sans-serif;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	.box-shadow(2px 2px 4px rgba(0, 0, 0, 0.15));
 	.btn-template(@btn-primary-color,@btn-primary-background, @btn-primary-padding,@btn-primary-radius);
 	border: @btn-primary-border;
 	text-transform: @btn-primary-text-transform;

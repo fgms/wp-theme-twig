@@ -6,3 +6,5 @@ composer.lock
 config/settings.yml
 *fonts.css
 *fonts.less
+src/js/StickyComponent/
+src/js/scripts.js

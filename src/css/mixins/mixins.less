@@ -99,13 +99,22 @@
     
 }
 
+.background(@image, @color:#ffffff, @position:center top, @size:auto, @repeat:no-repeat, @attachment: scroll ){
+	background-image: @image;
+	background-color: @color;
+	background-position: @position;
+	background-size: @size;
+	background-repeat: @repeat;
+	background-attachment: @attachment;
+}
+
 .a(@color, @text-decoration:none, @color-hover, @text-decoration-hover:none) {
 	a {
 		 &, &:visited &:focus {
 			color: @color;
 			text-decoration: @text-decoration;
 		}
-		&:hover {
+		&:hover, &:active {
 			color: @color-hover;
 			text-decoration: @text-decoration-hover;
 		}

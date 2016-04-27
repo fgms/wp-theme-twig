@@ -12,12 +12,12 @@
  * 
  **/
 
-/*Down Arrow Nav */
+/*Down Arrow Nav for modules */
 @moduleNav-content: '\f107';
 @moduleNav-font-size: 34px;
 @moduleNav-color: #fff;
 
-/*Up Arrow Nav */
+/*Up Arrow Nav for modules */
 @moduleNavStart-content: '\f0aa';
 @moduleNavStart-font-size: 34px;
 @moduleNavStart-color: #fff;
@@ -25,25 +25,144 @@
 /*navigation*/
 @nav-background-color: #06446B;
 @nav-link-color: #fff;
-@nav-link-color-hover: @link-color-hover;
+@nav-link-color-hover: #fff;
 @nav-text-shadow: 3px 1px 2px @nav-background-color;
 @nav-text-transform: uppercase;
 @nav-font-family: @heading-font-family;
-@nav-letter-spacing: 1.5px;
-
+@nav-letter-spacing: 0px;
 @nav-font-size: 1.5;
 @nav-line-height: 3em;
+
+@nav-secondary-link-color: @link-color-hover;
+@nav-secondary-link-color-hover: @link-color-hover;
+@nav-secondary-background: #fff;
+
+@nav-brand-color: #fff;
+@nav-brand-background: #5D4A20;
 
 
 /*** HEADER ***/
 @header-border-bottom: none;;
+
+
+
+.navbar {
+	.radius(0);
+	z-index: 999;	
+	background-color: @nav-background-color;	
+	height: auto;
+	margin-bottom: 0;
+	font-family: @nav-font-family ;
+	.font-size(@nav-font-size);	
+	.transition(0.5s);
+
+	.navbar-brand {
+		position: absolute;
+		color: @nav-brand-color;
+		background-image: url('/wp-content/themes/wp-theme-fg/assets/images/template/background-logobadge.jpg');
+		background-color: @nav-brand-background;
+		background-position: bottom left;
+		background-attachment: scroll;
+		background-repeat: repeat-x;
+		background-size: auto;
+		height: auto;
+		font-size: 0.9em;
+		text-align: center;
+		.box-shadow();
+		img {
+			width: auto;
+			margin: 0 auto 12px;;
+			text-align: center;			
+		}
+	}
+	
+
+	.nav {
+		// position center
+		position: relative;
+		left: 0;
+		&.navbar-center{				
+				left: 50%;
+				float: left;
+								
+		}
+		// navbar right
+		&.navbar-right{
+			float: right;
+		}
+		// navbar left
+		&.navbar-left {
+			float: left;
+		}
+		>li{			
+			>a {
+				   line-height: @nav-line-height;
+				   text-transform: @nav-text-transform;
+				   letter-spacing: @nav-letter-spacing;
+				   text-shadow: @nav-text-shadow;				   
+				   &:focus, &:hover,&:active{background-color: transparent;	}
+			   }
+		   .a(@nav-link-color,none,@nav-link-color-hover,none);
+			&.active {
+				font-weight: bold;
+			}		   
+			ul {
+				.box-shadow();
+				background-color: @nav-secondary-background;
+				> li {
+					a {
+						text-shadow: none;
+						&:focus, &:hover,&:active{background-color: transparent;	}
+					}
+					.a(@nav-secondary-link-color,none,@nav-secondary-link-color-hover,underline);
+					
+				}
+			}
+		}
+	}
+	// fixed header with scroll css
+	
+	&.script-fixed-header-with-scroll{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		.opacity(0.98);
+		
+		&:hover { .opacity(1);}						
+		&.navbar-static-top {
+			.transition(0.5s);	
+			top: -5em;				
+		}		
+		&.show {			
+			.navbar-brand {
+				
+				img {
+					overflow: hidden;
+										
+				}
+			}
+			&.nav-in-hero {
+				.navbar-brand {
+
+				}
+				background-color: @nav-background-color;
+				
+			}
+			.nav>li>a {
+				background-color: transparent;				
+			
+			}				
+			top: 0;
+			position: fixed;
+			background-color: @nav-background-color;			
+		}		
+	}	
+	
+}
+
+/*
 .navbar-collapse {
-	float: right;
-	left:-50%;
-	position: relative;
-	padding-left: 0;
-	padding-right: 0;
-	@media screen and (max-width: @screen-md-max) {
+	@media screen and (min-width: @screen-md-max) {
 		float: none;
 		left: 0;
 	}
@@ -63,7 +182,6 @@
 		position: relative;
 		left: 50%;
 		float: left;
-		
 		
 	}
 	.navbar-toggle {
@@ -141,7 +259,7 @@
 			background-color: @nav-background-color;			
 		}		
 	}
-	@media screen and (max-width: @screen-lg-max) {
+	@media screen and (min-width: @screen-lg-max) {
 		.navbar-header {			
 			position: relative;
 			left: 0px;
@@ -149,7 +267,7 @@
 			
 		}			
 	}
-	@media screen and (max-width: @screen-md-max) {
+	@media screen and (min-width: @screen-md-max) {
 		.navbar-brand { dispaly : block;}
 		background-color: @nav-background-color;
 		position: relative !important;;
@@ -162,9 +280,8 @@
 	}
 	@media screen and (max-width: @screen-sm-max) {
 		.nav {padding: 0 24px;	}
-	}
-	
-	@media screen and (max-width: @screen-xs-max) {	}
+	}	
+
 }
 
 .is-home {
@@ -179,6 +296,7 @@
 		}
 	}
 }
+*/
 /** navigation **/
 .navigation-top {
 	display: block;

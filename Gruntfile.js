@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 
     },
     jshint : {
-      all: ['src/js/**/*']
+      all: ['src/js/theme.js','src/js/script.js']
     },
     prettify : {
       
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/js/**/*.js','src/css/**/*.less'],
-        tasks: ['concat','uglify', 'jsbeautifier','less'],
+        tasks: ['jshint','concat','uglify', 'jsbeautifier','less'],
         options: {
           spawn: false,
         },
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/theme.js'],
+          src: ['src/js/theme.js','src/js/script','src/js/StickyComponent/stickycomponent.min.js'],
           dest: 'assets/js/<%= pkg.name %>.js',
         },
       },    
