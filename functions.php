@@ -154,10 +154,10 @@ $get_config=function() {
     
      //setting up timber twig file locations
 	 // it will look in theme first, if it doesn't find it it will look in master
-    Timber::$locations=array(dirname(__FILE__).'/views/theme/template/'.$config['theme'],
-                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/wp',
-                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/partials',
-                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/custom',
+    Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$config['theme']. '/template',
+                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/wp',
+                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/partials',
+                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/custom',
 							 dirname(__FILE__).'/views/template',
                              dirname(__FILE__).'/views/template/wp',
                              dirname(__FILE__).'/views/template/partials',
