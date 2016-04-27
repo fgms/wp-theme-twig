@@ -1,0 +1,34 @@
+{% extends 'base.twig' %}
+{% if right|default(false) %}
+    {% set class="right" %}
+    {% set width=8 %}
+{% else %}
+    {% set class="left" %}
+    {% set width=9 %}
+{% endif %}
+
+{% block content %}	
+    <div class="modular sidebar-{{class}}">
+        <div class="modular-row "  >
+            <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+            <div class="container">
+            {# if config.plugins.breadcrumbs.enabled %}{% include 'partials/breadcrumbs.html.twig' %}{% endif #}
+            
+                <div class="row">
+                    <div class="col-sm-{{width}}">
+                        <div class="column-wrapper">
+                            
+                        {% for article in posts%}
+                            {% include "article.twig" with { "article" : article, "loop" : loop } %}
+                        {% endfor %}
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-{{12-width}}">                       
+                            {% include 'contact-sidebar.twig'  %}                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+{% endblock %}

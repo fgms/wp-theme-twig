@@ -1,27 +1,48 @@
 social:
     facebook:
-        url:
+        url: https://www.facebook.com/
     twitter:
-        url:
+        url: https://twitter.com/
     youtube:
-        url:
+        url: https://www.youtube.com/user/
     pinterest:
-        url:
+        url: https://www.pinterest.com/
     flickr:
-        url:
+        url: https://www.flickr.com/photos/
     instagram:
-        url:
+        url: https://instagram.com/
     rss:
-        url:
+        url: 
+        
+
 address:
-privacy_policy:
-    url:
-tollfree:
-logo:
-    url:
-    alt:
-    link:
-copyright:
-    name:
-    year:
-theme: missioninn
+    street: Dallas Road
+    city: 'Victoria'
+    province: BC
+    postal: V8Y 4X4
+    country: Canada
+phone:
+    toll: 800.000.0000
+    office: 250.000.0000
+    fax: 250.111.1111
+    
+settings:
+    
+    header:
+        logo:
+            url: 
+            alt: Logo
+            
+    footer:
+        logo:
+            url: 
+            alt: 
+            
+    copyright:
+        name: Fifth Gear Marketing
+        year: 2016
+        
+forms:
+    footer:
+        id: 88
+theme: master

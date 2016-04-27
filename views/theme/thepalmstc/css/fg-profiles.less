@@ -1,0 +1,45 @@
+@signature-font-family: 'Kaushan Script';
+@team-member-font-size: 1.5;
+
+.callout {
+    background: #f0f0f0;
+    color: #666666;
+    padding: 15px 15px;
+    .align-left {float: left;  margin-right: 15px; }
+    .align-right { float: right;  margin-left: 15px; }
+    img {border-radius: 3px; }
+}
+
+.signature { font-family: @signature-font-family;}
+/****** Modules ******/
+.team-member-profile {
+    .column-wrapper {
+        .font-size(@team-member-font-size);
+    }
+    
+    img, h2,blockquote {text-align: center; }
+    blockquote {font-weight: 200; margin: 35px 100px; }
+    img {margin: 0 auto 32px; }
+    h2 {
+        .font-size(2);
+        text-transform: uppercase;
+        font-weight: 400;
+        letter-spacing: 1.5px;
+    }
+    .member-title {
+        font-style: italic;
+        text-align: center;
+        
+    }
+    .column-left { margin-right: 12px;}
+    .column-right {margin-left: 12px;}
+    .member-signature{
+        padding-top: 12px;
+        .signature {.font-size(1.8);}
+        > div {text-transform: uppercase; padding-top: 4px; }
+    }
+    @media screen and (max-width: @screen-sm-max) {
+        .column-left, .column-right{ margin: 0;}        
+         blockquote {margin: 12px 48px; }
+    }
+}

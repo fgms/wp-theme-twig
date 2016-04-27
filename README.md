@@ -1,5 +1,17 @@
 # FG Wordpress Template With Twig
 
+## Installation
+* Install wordpress
+* Install Timber  plugin (twig)
+* Install Metabox plugin (http://metabox.io)
+* run ```composer update``` on the root of the theme (this install symfony yaml parser for reading settings)
+* Select theme.
+* On local machine run npm install to install grunt task runner.
+* Select google fonts, update Gruntifile.js,  and run ```grunt googlefonts```
+* Run grunt watch and update css or js to upload assets.
+
+
+
 ## Shortcodes
 
 ### [accordion] & [panel]

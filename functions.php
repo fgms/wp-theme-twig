@@ -153,48 +153,60 @@ $get_config=function() {
 	$theme=$config['theme'];
     
      //setting up timber twig file locations
-    Timber::$locations=array(dirname(__FILE__).'/views/'.$config['theme'],
-                             dirname(__FILE__).'/views/'.$config['theme'].'/wp',
-                             dirname(__FILE__).'/views/'.$config['theme'].'/partials',
-                             dirname(__FILE__).'/views/'.$config['theme'].'/custom');   
+	 // it will look in theme first, if it doesn't find it it will look in master
+    Timber::$locations=array(dirname(__FILE__).'/views/theme/template/'.$config['theme'],
+                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/wp',
+                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/partials',
+                             dirname(__FILE__).'/views/theme/template/'.$config['theme'].'/custom',
+							 dirname(__FILE__).'/views/template',
+                             dirname(__FILE__).'/views/template/wp',
+                             dirname(__FILE__).'/views/template/partials',
+                             dirname(__FILE__).'/views/template/custom',
+							 
+							
+							);   
     return $config;
 };
 
 $get_slideshow=function () {
+	
+	if (function_exists('rwmb_meta')){
+		$meta=rwmb_meta('fgms_slideshow_items');
+		if (!is_array($meta) || (count($meta)===0)) return null;
+		
+		$items=array();
+		foreach ($meta as $m) {
+			
+			$items[]=array(
+				'caption' => $m['caption'],
+				'url' => $m['full_url'],
+				'alt' => $m['alt'],
+				'title' => $m['title']
+			);
+			
+		}
+		
+		$filter=function ($str) {	return ($str==='') ? null : $str;	};
+		$id=$filter(rwmb_meta('fgms_slideshow_id'));
+		$outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
+		$inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
+		$captions=rwmb_meta('fgms_slideshow_hide_captions')!=='1';
+		$indicators=rwmb_meta('fgms_slideshow_hide_indicators')!=='1';
+		$navigation=rwmb_meta('fgms_slideshow_hide_navigation')!=='1';
+		
+		return array(
+			'items' => $items,
+			'id' => $id,
+			'outer_class' => $outer_class,
+			'inner_class' => $inner_class,
+			'captions' => $captions,
+			'titles' => $captions,
+			'indicators' => $indicators,
+			'controls' => $navigation
+		);		
+	}
     
-    $meta=rwmb_meta('fgms_slideshow_items');
-    if (!is_array($meta) || (count($meta)===0)) return null;
-    
-    $items=array();
-    foreach ($meta as $m) {
-        
-        $items[]=array(
-            'caption' => $m['caption'],
-            'url' => $m['full_url'],
-            'alt' => $m['alt'],
-            'title' => $m['title']
-        );
-        
-    }
-    
-    $filter=function ($str) {	return ($str==='') ? null : $str;	};
-    $id=$filter(rwmb_meta('fgms_slideshow_id'));
-    $outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
-    $inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
-    $captions=rwmb_meta('fgms_slideshow_hide_captions')!=='1';
-    $indicators=rwmb_meta('fgms_slideshow_hide_indicators')!=='1';
-    $navigation=rwmb_meta('fgms_slideshow_hide_navigation')!=='1';
-    
-    return array(
-        'items' => $items,
-        'id' => $id,
-        'outer_class' => $outer_class,
-        'inner_class' => $inner_class,
-        'captions' => $captions,
-        'titles' => $captions,
-        'indicators' => $indicators,
-        'controls' => $navigation
-    );
+
     
 };   
 require_once(__DIR__.'/include/shortcodes.php');

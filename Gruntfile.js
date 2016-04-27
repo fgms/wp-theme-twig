@@ -58,14 +58,14 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/theme.js','src/js/script','src/js/StickyComponent/stickycomponent.min.js'],
+          src: ['src/js/theme.js','src/js/script', 'views/theme/thepalmstc/js','src/js/StickyComponent/stickycomponent.min.js'],
           dest: 'assets/js/<%= pkg.name %>.js',
         },
       },    
     less: {
       development: {
         options: {
-            paths: ['src/css/mixins','src/css/']  ,
+            paths: ['src/css/mixins','src/css/', 'views/theme/thepalmstc/css/']  ,
           compress: false,
           yuicompress: false,
           syncImport: true,
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
           
         },
         files: {
-          "assets/css/style.css": "src/css/style.less" // destination file and source file
+          "assets/css/style.css": "views/theme/thepalmstc/css/style.less" // destination file and source file
         }
       }
     },
@@ -92,21 +92,14 @@ module.exports = function(grunt) {
                 },
                 fonts: [
                     {
-                        family: 'Roboto',
-                        styles: [300,400,500,700]                 
+                        family: 'Nunito',
+                        styles: [300,400,700]                 
                     },
                     {
-                        family: 'Titillium Web',
-                        styles: [300,400,600]
-                    },
-					{
-						family: 'Lora',
-						styles: [400]
-					},
-					{
-						family: 'Raleway',
-						styles: [300,400,800]
-					}
+                        family: 'Parisienne',
+                        styles: [400]
+                    }
+					
                 ]
             }
         }            

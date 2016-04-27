@@ -1,0 +1,29 @@
+{# base.twig #}
+<!DOCTYPE html>
+<html {{site.language_attributes()}}>
+    <head> 
+        {{wp_head}}
+        {% block head %}
+            <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
+        {% endblock %}
+		{% block styles %}{% endblock %}
+    </head>
+    <body class="{{body_class}}">
+
+	
+	
+	{% if slideshow is defined and not slideshow is null %}
+		{% include 'bootstrap-carousel.twig' with slideshow only %}
+	{% endif %}
+	{% include 'navigation.twig' %}
+	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
+	{% block footer%}
+		
+	{% endblock %}
+	
+	{% include "footer.twig" %}					
+		
+	{% block scripts %}{% endblock %}
+	{{wp_footer}}
+    </body>
+</html>

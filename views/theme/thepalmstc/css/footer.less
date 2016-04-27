@@ -1,0 +1,127 @@
+@footer-background-color: #17191b;
+@footer-padding-top-and-bottom: 36px;
+@footer-padding-left-and-right: 24px;
+@footer-social-background-image: url("/wp-content/themes/wp-theme-fg/assets/images/template/sprite-social-media-icons.png");
+@map-background-image: url('/wp-content/themes/wp-theme-fg/assets/images/template/map-static.png');
+
+.footer {
+	background-color: @footer-background-color;
+	color: white;	
+	h3 {		
+		.font-size(2.3);
+		color: white;
+		margin-bottom: 24px;		
+	}
+	
+	.container {		
+		padding-bottom: @footer-padding-top-and-bottom;
+		padding-left: @footer-padding-left-and-right;
+		padding-right: @footer-padding-left-and-right;
+		padding-top: @footer-padding-top-and-bottom;		
+	}
+	
+	a {		
+		color: inherit;		
+	}
+	
+	a:hover {		
+		text-decoration: underline;		
+	}
+	
+	input[type="submit"] {		
+		background-color: #c45e20;
+		border: none;
+		color: white;
+		font-family: Lora, sans-serif;
+		font-weight: bold;
+		padding: 8px 24px;		
+	}
+	
+	input[type="text"], textarea, input[type="email"] {		
+		.font-size(1.4);
+		color: black;
+		padding: 6px;
+		width: 100%;		
+	}
+	
+	textarea {		
+		height: 54px;		
+	}
+
+}
+
+
+.footer-logo {	
+	margin-bottom: 24px;
+	max-width: 297px;	
+}
+
+.footer-text-wrapper {	
+	margin-bottom: 40px;	
+}
+
+.footer-tollfree {	
+	font-size: 18px;
+	font-size: 1.8rem;
+	margin-bottom: 8px;	
+}
+
+.footer-tollfree-number {	
+	font-weight: bold;	
+}
+
+
+.footer-address {	
+	font-size: 13px;
+	font-size: 1.3rem;	
+	a {		
+		font-style: italic;		
+	}	
+}
+
+
+.footer-copyright {	
+	font-size: 10px;
+	font-size: 1rem;	
+}
+
+
+.footer-social {	
+	.clearfix();	
+	li {		
+		display: block;
+		float: left;
+		height: 36px;
+		margin-bottom: 8px;
+		margin-right: 8px;		
+	}	
+	a {		
+		background-image: @footer-social-background-image;
+		background-repeat: no-repeat;
+		display: block;
+		height: 36px;
+		width: 36px;		
+	}
+	
+	a:hover {	background-position-y: -36px;	}	
+	.social-twitter 	{	background-position-x: -72px; }	
+	.social-youtube 	{	background-position-x: -108px; }	
+	.social-pinterest 	{	background-position-x: -144px;	}	
+	.social-rss 		{	background-position-x: -180px;	}	
+	.social-flickr 		{	background-position-x: -216px;	}
+	.social-instagram 	{	background-position-x: -252px;	}	
+}
+
+#footer-map-wrapper {
+	.background(@map-background-image, #f8f8f8 ,center top, cover );
+	.opacity(0.6);
+}
+
+#map-parallax {
+	background-color: #f8f8f8;
+	color: #fff;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	z-index: 1;
+}

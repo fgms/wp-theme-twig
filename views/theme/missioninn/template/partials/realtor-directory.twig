@@ -1,0 +1,21 @@
+<div class="realtor-wrapper">
+	<div class="realtor-header">
+		{% if image is defined %}
+		<img data-image="{{image|e('html_attr')}}">
+		{% endif %}
+		<div class="realtor-name-and-title">
+			<div class="realtor-name">{{name|e}}</div>
+			<div class="realtor-title">{{title|e}}</div>
+		</div>
+	</div>
+	<table class="realtor-contact">
+		<tbody>
+			{% for item in data %}
+			<tr>
+				<td>{{item.type|e}}</td>
+				<td>{{item.content}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

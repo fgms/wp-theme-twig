@@ -1,0 +1,7 @@
+<div class="sidebar">
+    <ul>
+        {% for child in post.get_children if not child.post_mime_type %}
+        <li><a href="{{child.link|e('html_attr')}}">{{child.title|e}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
