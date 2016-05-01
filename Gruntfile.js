@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['src/js/**/*.js','src/css/**/*.less'],
+        files: ['src/js/**/*.js','src/css/**/*.less','views/theme/thepalmstc/js/**/*','views/theme/thepalmstc/css/**/*.less'],
         tasks: ['jshint','concat','uglify', 'jsbeautifier','less'],
         options: {
           spawn: false,
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/theme.js','src/js/script', 'views/theme/thepalmstc/js','src/js/StickyComponent/stickycomponent.min.js'],
+          src: ['src/js/script.js', 'views/theme/thepalmstc/js/theme.js','views/theme/thepalmstc/js/StickyComponent/stickycomponent.min.js'],
           dest: 'assets/js/<%= pkg.name %>.js',
         },
       },    

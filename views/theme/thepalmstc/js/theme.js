@@ -1,37 +1,22 @@
- /*!
- ***************** script.js ***********************
- * specific script for this install
- */
-jQuery(function($) {
- 	$('#footer-map-wrapper').click(function(){
-	    var $mapIcon = $(this).parent().find('.map-loading-icon')
-	    $mapIcon.toggle();
-    	google.load('maps','3', {other_params : 'sensor=false', callback : function(){
+/****** theme.js *****/
 
-    	  if ($('#footer-map-wrapper').length > 0 ) {
-    		set_google_map(
-				{
-					lat_offset : 0.00,
-					lng_offset : 0,
-					map_id : 'footer-map-wrapper',
-					lat : 28.725378,
-					lng : -81.7817200,
-					zoom : 9,
-					map_type : 'TERRAIN',
-					info_window : '<img src="{{"logo.png" | asset_url }}" style="text-align: center; width: 100%; max-width: 130px; "  alt="{{ shop.name }}"><div style="line-height: 1.3em;">2740 Rock Bay Avenue<br/>Victoria, British Columbia,<br/>Canada, V8T 4R9</div><div style="padding-bottom: 3px;"><a href="https://www.google.ca/maps/dir/%27%27/2740+Rock+Bay+Ave,+Victoria,+BC+V8T+4R9/@48.4382674,-123.3745929,16z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x548f737ec0420d09:0xacf8768d073af68!2m2!1d-123.3703014!2d48.4382675" target="blank">Get  Directions</a></div><div>Local: <strong>250.383.5342</strong></div><div>Toll Free: <strong>800.883.0221</strong></div>'
-					});
-    	  }
+/* install specific ****/
 
-
-    	  $('#footer-map-wrapper').addClass('google-active').css({'background-image': 'none'});
-    	  $mapIcon.toggle(1500)
-
-    	}});
-	})
-     // if ($('html').hasClass('no-touch')){
-      	$('.has-footer-map').css('margin-bottom', ($('#map-parallax').innerHeight() -2) + 'px');
-      	$('#map-parallax').css('position','fixed');
+jQuery(function($) {    
+    imagesLoaded($('.feature-carousel img'),
+        function(e, msg) {
+            if (msg.length > 0 ) {
+                console.log('Error loading images.', msg);
+            }
+            $('.script-navigation').fgStickyComponent({
+                topoffset: 0,
+                triggertop: $('.feature-carousel').offset().top + $('.feature-carousel').outerHeight()
+            })            
+        }
+    ); 
+    
 });
+
 
 /*Google maps function*/
 function set_google_map(map_object){

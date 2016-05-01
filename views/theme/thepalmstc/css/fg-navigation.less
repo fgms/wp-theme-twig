@@ -23,7 +23,7 @@
 @moduleNavStart-color: #fff;
 
 /*navigation*/
-@nav-background-color: #06446B;
+@nav-background-color: #7399C6;
 @nav-link-color: #fff;
 @nav-link-color-hover: #fff;
 @nav-text-shadow: 3px 1px 2px @nav-background-color;
@@ -38,13 +38,16 @@
 @nav-secondary-background: #fff;
 
 @nav-brand-color: #fff;
-@nav-brand-background: #5D4A20;
+@nav-brand-background: transparent;
 
 
 /*** HEADER ***/
 @header-border-bottom: none;;
 
-
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+	right: 50%;
+	position: relative;
+}
 
 .navbar {
 	.radius(0);
@@ -55,20 +58,12 @@
 	font-family: @nav-font-family ;
 	.font-size(@nav-font-size);	
 	.transition(0.5s);
-
 	.navbar-brand {
 		position: absolute;
-		color: @nav-brand-color;
-		background-image: url('/wp-content/themes/wp-theme-fg/assets/images/template/background-logobadge.jpg');
-		background-color: @nav-brand-background;
-		background-position: bottom left;
-		background-attachment: scroll;
-		background-repeat: repeat-x;
-		background-size: auto;
+		color: @nav-brand-color;		
 		height: auto;
 		font-size: 0.9em;
-		text-align: center;
-		.box-shadow();
+		text-align: center;		
 		img {
 			width: auto;
 			margin: 0 auto 12px;;
@@ -82,8 +77,8 @@
 		position: relative;
 		left: 0;
 		&.navbar-center{				
-				left: 50%;
-				float: left;
+			left: 50%;
+			float: left;
 								
 		}
 		// navbar right
@@ -134,8 +129,7 @@
 			top: -5em;				
 		}		
 		&.show {			
-			.navbar-brand {
-				
+			.navbar-brand {				
 				img {
 					overflow: hidden;
 										

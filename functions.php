@@ -7,6 +7,8 @@ function blankslate_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
+	// don't want this annoying p tag wrap and br tag.
+	remove_filter( 'the_content', 'wpautop' );
     global $content_width;
     if ( ! isset( $content_width ) ) $content_width = 640;
     register_nav_menus(
@@ -23,6 +25,7 @@ function blankslate_load_scripts(){
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
    wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' );
+   wp_enqueue_style('fontawesome','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
    wp_enqueue_script('google-api','http://www.google.com/jsapi');
    wp_enqueue_script('fg-script',get_stylesheet_directory_uri() . '/assets/js/wp-theme-fg.js');
    wp_enqueue_style('theme',get_stylesheet_directory_uri().'/assets/css/style.css');
@@ -88,7 +91,7 @@ function add_to_context($data){
 /* remove admin bar for development */
 add_action('after_setup_theme', 'remove_admin_bar');
 function remove_admin_bar() {    
-    show_admin_bar(false);
+   // show_admin_bar(false);
 }
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');

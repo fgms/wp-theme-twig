@@ -1,86 +1,60 @@
-<footer class="footer">
-	
-	<div class="container">
-		
-		<div class="row">
-			
-			<div class="col-md-8">
+<footer class="footer">	
+	<div class="container">		
+		<div class="row">			
+			<div class="{{config.settings.footer.grid.left | default('col-sm-6')}}">
 				
 				{% if config.settings.footer.logo is defined %}
-				<div class="footer-logo">
-					
+				<div class="footer-logo">					
 					<a href="{{site.url|e('html_attr')}}">
 						<img class="img-responsive" data-image="{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
-					</a>
-					
+					</a>					
 				</div>
 				{% endif %}
 				
 				<div class="footer-text-wrapper">
 					
-					{% if config.tollfree is defined %}
-					<div class="footer-tollfree">
-						Toll-free: <span class="footer-tollfree-number">{{config.phone.toll|e}}</span>
-					</div>
-					{% endif %}
+					{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }} | <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
+					{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }} | <span>{{config.phone.resort|e}}</span></div>				{% endif %}
+					{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }} | <span>{{config.phone.fax|e}}</span></div>					{% endif %}			
 					
-					<div class="footer-address">
-						
+					{% if config.email.info is defined %}			<div>{{__('Email', 'fgms' ) }} | <span>{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
+					
+					{# 
+					<div class="footer-address">						
 						{% if config.address is defined %}
 						{{config.address.street}}, {{config.address.city}}, {{config.address.province}}, {{config.address.country}} {{config.address.postal}}
-						{% endif %}
-						
-						{% if config.privacy_policy is defined %}
-						|	
-						<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>
-						{% endif %}
-						
+						{% endif %}						
+						{% if config.privacy_policy is defined %} |	<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>{% endif %}						
 					</div>
+					#}
 					
 				</div>
 				
-				{% if config.social is defined %}
-				<div class="footer-social">
-					
-					<ul>
-						
-						{% if config.social.facebook is defined %}
-						<li><a href="{{config.social.facebook.url|e('html_attr')}}" target="_blank" class="social-facebook"></a></li>
-						{% endif %}
-						
-						{% if config.social.twitter is defined %}
-						<li><a href="{{config.social.twitter.url|e('html_attr')}}" target="_blank" class="social-twitter"></a></li>
-						{% endif %}
-						
-						{% if config.social.youtube is defined %}
-						<li><a href="{{config.social.youtube.url|e('html_attr')}}" target="_blank" class="social-youtube"></a></li>
-						{% endif %}
-						
-						{% if config.social.pinterest is defined %}
-						<li><a href="{{config.social.pinterest.url|e('html_attr')}}" target="_blank" class="social-pinterest"></a></li>
-						{% endif %}
-						
-						{% if config.social.flickr is defined %}
-						<li><a href="{{config.social.flickr.url|e('html_attr')}}" target="_blank" class="social-flickr"></a></li>
-						{% endif %}
-						
-						{% if config.social.instagram is defined %}
-						<li><a href="{{config.social.instagram.url|e('html_attr')}}" target="_blank" class="social-instagram"></a></li>
-						{% endif %}
-						
-						{% if config.social.rss is defined %}
-						<li><a href="{{config.social.rss.url|e('html_attr')}}" target="_blank" class="social-rss"></a></li>
-						{% endif %}
-						
-					</ul>
-					
-				</div>
+				{# this is defined by settings.yaml file, and loops through all social #}
+				{% if config.social is defined  %}
+					{% if config.settings.footer.social.enable %}
+					<div class="social-icons">							
+							{% for social in config.social %}								
+								{% if social.url is defined and social.url %}								
+									<a href="{{social.url|e('html_attr')}}" target="_blank">
+										{% if social.icon.outer is defined  %}
+										<span class="fa-stack fa-lg ">
+											<i class="fa {{social.icon.outer | default('fa-square-o')}} fa-stack-2x icon-outer"></i>
+											<i class="fa {{social.icon.inner | default('fa-question-circle') }} fa-stack-1x icon-inner"></i>
+										</span>
+										{% else %}
+											<i class="fa {{social.icon.inner | default('fa-question-circle') }} icon-inner" aria-hidden="true"></i>
+										{% endif %}									
+									</a>															
+								{% endif %}							
+							{% endfor %}						
+					</div>
+					{% endif %}
 				{% endif %}
 				
 				<div class="footer-nav"></div>
 				
-				<div class="footer-copyright hidden-xs hidden-sm">
-				
+				<div class="footer-copyright">				
 					{% block copyright %}
 					{% if config.settings.copyright is defined %}
 					{% set year="now"|date("Y","UTC") %}
@@ -89,13 +63,11 @@
 					|
 					{% endif %}
 					Site developed by Fifth Gear
-					{% endblock %}
-					
-				</div>
-				
+					{% endblock %}					
+				</div>				
 			</div>
 			
-			<div class="col-md-4">
+			<div class="{{config.settings.footer.grid.right | default('col-sm-6')}}">
 				
 				{% if config.forms.footer.id is defined %}
 				<h3>Quick Message</h3>				

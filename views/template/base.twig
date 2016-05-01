@@ -14,6 +14,8 @@
 	
 	{% if slideshow is defined and not slideshow is null %}
 		{% include 'bootstrap-carousel.twig' with slideshow only %}
+	{% else %}
+		{% include 'custom-slideshow.twig' ignore missing only %}
 	{% endif %}
 	{% include 'navigation.twig' %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
@@ -25,5 +27,6 @@
 		
 	{% block scripts %}{% endblock %}
 	{{wp_footer}}
+	
     </body>
 </html>

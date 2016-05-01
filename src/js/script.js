@@ -1,8 +1,9 @@
-/*!
- ***************** theme.js ***********************
+ /*!
+ ***************** script.js ***********************
+ * generic scripts
  */
-
-var sizePostfix = 'lg';
+ 
+ var sizePostfix = 'lg';
 if (window.innerWidth <= 1200) {
   sizePostfix = 'md';
 }
@@ -124,9 +125,7 @@ jQuery(function($) {
 	$('.script-sidebar-sticky').on('fg.stickycomponent.normal', function(e, globals, wtop){
 		$(this).css({'left': 'inherit'});				
 	});
-  }
-
-    
+  }    
 
   $(window).scroll(function() {
     didScroll = true;
@@ -173,3 +172,17 @@ jQuery(function($) {
   });
 
 });
+function imagesLoaded($, fn) {
+    var c = $.length;
+    var msg = [];   
+    $.on('load',action);
+    $.on('error',action);   
+    function action(e){
+        --c;
+        if (e.type === 'error') {          
+            msg.push('Error Loading.. ' + e.target.src);
+        }
+        if (c === 0) { fn(e,msg); }        
+    }    
+}
+ 

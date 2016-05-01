@@ -1,0 +1,19 @@
+{% set slideshow = {
+    'id' : 'homepage-slideshow',
+    'controls' : true,
+    'indicators' : true,
+    'outer_class' : 'feature-carousel carousel-fade',
+    'items' : [
+        {
+            'title' : 'title1',
+            'url' : '/wp-content/themes/wp-theme-fg/assets/images/slideshow/home/turks-and-caicos-01.jpg'
+        },
+        {
+            'title' : 'title2',
+            'url' : '/wp-content/themes/wp-theme-fg/assets/images/slideshow/home/turks-and-caicos-02.jpg'
+        }
+    ]
+}
+%}
+{% include 'bootstrap-carousel.twig' with slideshow only %}   
+    

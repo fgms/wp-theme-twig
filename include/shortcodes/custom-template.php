@@ -19,10 +19,16 @@
 			$atts['data']=$data;
 			$data=null;
 			
-			ob_start();
-			Timber::render($t,$atts);
-			$retr=ob_get_contents();
-			ob_end_clean();
+			try {
+				ob_start();
+				Timber::render($t,$atts);
+				$retr=ob_get_contents();
+				ob_end_clean();				
+			} catch (Twig_Error_Loader $e){
+				return '<script>console.error("Error Loading twig template '. $t .'")</script>';
+			}
+			
+
 			
 			return $retr;
 			
