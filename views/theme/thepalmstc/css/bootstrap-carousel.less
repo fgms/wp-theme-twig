@@ -1,21 +1,33 @@
-.carousel {
-	
-	img {
-		
-		width: 100%;
-		
-	}
-	
+@indicator-active-color: @heading-color;
+
+.carousel-control{
+	//this removes shadding on nav
+	background-image: none !important;
+}
+
+.carousel {	
+	img {		
+		width: 100%;		
+	}	
 	.carousel-indicators {		
-		li {
-			
-			height: 12px;
-			position: relative;
-			top: 1px;			
+		li {			
+			height: 20px;
+			width: 20px;
+		
 			&.active {				
-				top: 0;				
+				background-color: @indicator-active-color;
+				border-color: @indicator-active-color;
 			}			
-		}		
+		}
+		display: none;
+		visibility: hidden;
+
+	}
+	@media screen and (min-width: @screen-lg-max){
+		.carousel-indicators {
+			display: block;
+			visibility: visible;
+		}
 	}
 	
 }
@@ -49,11 +61,11 @@
     .carousel-control {
         z-index: 2;
     }
+	
 }
 
 
-article .carousel {
-	
+article .carousel {	
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 644px;

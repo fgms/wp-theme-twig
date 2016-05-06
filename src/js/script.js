@@ -3,13 +3,12 @@
  * generic scripts
  */
  
- var sizePostfix = 'lg';
-if (window.innerWidth <= 1200) {
-  sizePostfix = 'md';
-}
-if (window.innerWidth <= 768) {
-  sizePostfix = 'sm';
-}
+var sizePostfix = 'xl';
+if (window.innerWidth < 1920) { sizePostfix = 'lg'; }
+if (window.innerWidth < 1200) { sizePostfix = 'md'; }
+if (window.innerWidth < 993)  { sizePostfix = 'sm'; }
+if (window.innerWidth <= 768)  { sizePostfix = 'xs'; }
+if (window.innerWidth <= 480)  { sizePostfix = 'xxs'; }
 
 jQuery(function($) {
   /*** Email cloaking ***/
@@ -27,6 +26,11 @@ jQuery(function($) {
       'background-image': 'url(' + $(this).data('background-' + sizePostfix) + ')'
     });
   });
+  $('*[data-background]').each(function() {
+    $(this).css({
+      'background-image': 'url(' + $(this).data('background')+')'
+    });
+  });  
 
   /*** Updates all  images according to screen size;  */
   //$('img[data-image-'+sizePostfix+']')
@@ -153,6 +157,26 @@ jQuery(function($) {
     });
   });
   
+  
+	/* script-parallax
+  *  Adds parallaxing background 
+  *  data-offset="0" data-ratio="2.5"
+  */
+  $('.script-parallax').each(function(){
+	  var offset = parseInt($(this).data('offset'));
+	  var backgroundX  = '50%';
+	  if ($(this).hasClass('background-image-pull-right')) {
+		  backgroundX = 'right';
+	  }
+	  if ($(this).hasClass('background-image-pull-left')) {
+		  backgroundX = 'left';
+	  }
+	  $(this).css({            
+		  'background-transparent' : 'transparent',		  		
+		  'background-position' : backgroundX+ ' ' + offset	+'px',
+		  'background-size': '100% auto'
+	  });		
+  });
   // this animates to hash
   var hash = window.location.hash;
   if ((hash.length>1) && ($('ul.nav a[href="' + hash + '"]').length > 0)) {
@@ -172,9 +196,14 @@ jQuery(function($) {
   });
 
 });
+
 function imagesLoaded($, fn) {
     var c = $.length;
-    var msg = [];   
+    var msg = [];
+	/*
+    $.addEventListener('onload',action);
+    $.addEventListener('onerror',action); */
+	
     $.on('load',action);
     $.on('error',action);   
     function action(e){
@@ -185,4 +214,72 @@ function imagesLoaded($, fn) {
         if (c === 0) { fn(e,msg); }        
     }    
 }
- 
+function fitScreen($resizeSelector, $arrayOfSelectors, callback) {
+    var height = 0;    
+    jQuery.each($arrayOfSelectors, function(){
+        height +=jQuery(this).outerHeight();
+    });    
+    callback((jQuery(window).outerHeight() - height), height);    
+}
+
+// logic to check if parallax is going to go out of region, to do a fix   
+function updateParallax($obj){
+	var $ = jQuery;
+	var pageBottom = (parseInt($(window).scrollTop()) + parseInt($(window).height()));
+	
+	
+	if (pageBottom > $obj.offset().top) {
+		
+		var offset = $obj.data('offset');
+		offset = (offset !== undefined) ? offset : 0;
+		var ratio = $obj.data('ratio') ;
+		ratio = (ratio !== undefined) ? ratio : 3;			
+		var parallaxDiff = pageBottom - parseInt($obj.offset().top);
+		var parallaxAdj = -(parallaxDiff / ratio)  + offset;
+		$obj.data('imagePositionY',parallaxAdj);
+		var backgroundX  = '50%';
+		if ($obj.hasClass('background-image-pull-right')) {
+			backgroundX = 'right';
+		}
+		if ($obj.hasClass('background-image-pull-left')) {
+			backgroundX = 'left';
+		}
+		
+		$obj.css('background-position',backgroundX+ ' ' + parallaxAdj +'px' );		
+		
+		
+		// THIS IS first time
+		if ($obj.data('image') === undefined) {
+			var image_url = $obj.css('background-image');
+			image_url = image_url.match(/^url\("?(.+?)"?\)$/);			
+			if (image_url === null) {return false;}
+			if (image_url[1]) {
+				image_url = image_url[1];
+				image = new Image();
+				// just in case it gets called while loading image
+				$obj.data('image',[]);
+				$(image).load(function () {
+					$obj.data('image',this);
+					$obj.data('imageHeight', this.naturalHeight);
+					$obj.data('imageUrl',image_url);
+					var backgroundPos = parseInt($obj.css('background-position-y'),10);
+					var checkImageFit = this.naturalHeight + backgroundPos;						
+					//console.log('first --self', $self.outerHeight(),'img ',this.naturalHeight, 'bckpos ',backgroundPos, 'check', checkImageFit );
+					
+				});			
+				image.src = image_url;			
+			}
+	
+		}
+		// this means i have already created image it is stored in data-image
+		else {
+			var imageHeight = ($obj.data('imageHeight') !== undefined) ? $obj.data('imageHeight'): 200;
+			var backgroundPos = $obj.data('imagePositionY');
+			var checkImageFit = imageHeight + backgroundPos;
+			$obj.data('imagePositionY',parallaxAdj);
+			$obj.css('background-position',backgroundX + parallaxAdj +'px' );						
+		}
+		return true;
+	}		
+	
+}

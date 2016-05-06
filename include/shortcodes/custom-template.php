@@ -1,16 +1,13 @@
 <?php
-
-
 	call_user_func(function () {
 		
 		$data=null;
 		
-		add_shortcode('custom-template',function ($atts, $content) use (&$data) {
-			
+		add_shortcode('custom-template',function ($atts, $content) use (&$data) {			
 			$data=array();
 			
 			//	Content is ignored
-			do_shortcode($content);
+			$atts['content'] = do_shortcode($content);
 			
 			if (!isset($atts['template'])) throw new \LogicException('[custom-template] with no "template" attribute');
 			$t=$atts['template'];
@@ -28,8 +25,6 @@
 				return '<script>console.error("Error Loading twig template '. $t .'")</script>';
 			}
 			
-
-			
 			return $retr;
 			
 		});
@@ -43,9 +38,7 @@
 			
 			return '';
 			
-		});
-		
+		});		
 	});
-
 
 ?>

@@ -1,7 +1,85 @@
-<div style="height: 600; background-color: #ddd;">
-     <div class="modular-row "  >
-        <div class="modular-anchor" id="" data-scroll>
-            <div style="text-align: center; padding: 250px 0;"><h2>Specials</h2></div>
+{% set specials = [
+    {
+        'active' : true,
+        'title': 'Enjoy a Fourth Night Free',
+        'details' : '',
+        'valid' : 'May 1 - December 23',
+        'link' : '',
+        'img' : '/wp-content/themes/wp-theme-fg/assets/images/templates/special-fourth-night-free.jpg', 
+        'animation' : 'data-wow-offset="10"',
+        'class' : 'fg-wow slideInLeft  li-sm-50',
+        'style' : ''
+    },
+    {
+        'active' : true,
+        'title': 'Our Sensational, All-Inclusive Promoation is Back',
+        'details' : 'Three meals a day plus afternoon tea and alcoholic beverages by the glass can be inclued in the price of suite. ',
+        'valid' : '',
+        'link' : '',
+        'img' : '/wp-content/themes/wp-theme-fg/assets/images/templates/special-all-inclusive.jpg',
+        'animation' : 'data-wow-offset="10"',
+        'class' : 'fg-wow slideInRight center li-sm-50',
+        'style' : ''
+        
+    }    
+]
+%}
+
+
+{% set awards = [
+    {   'title' : '2015 Gold List',
+        'award' : 'Conde Nast Travel'  
+    },
+    {   'title' : 'Number 6 Top Resort Spa 2015:  The Caribbean',
+        'award' : "Conde Nast Traveler Readers' Poll Awards"  
+    },
+    {   'title' : 'Number 1 in Turks & Caicos 2013',
+        'award' : "Travel + Leisure World's Best Awards"  
+    },
+    {   'title' : "World's Leading Spa Resort 2012",
+        'award' : 'World Travel Awards'  
+    },
+    {   'title' : 'Caribbean Leading Spa Resort 2012',
+        'award' : 'World Travel Awards'  
+    }
+    
+]
+%}
+
+
+
+<div class="script-parallax modular-home-specials-awards" data-offset="0" data-ratio="5" data-background="/wp-content/themes/wp-theme-fg/assets/images/templates/background-palm-trees-turks-and-caicos.jpg" >
+    <div class="modular-row modular-home-specials" >
+        <div class="modular-anchor" id="" data-scroll></div>
+        <div class="section-container">
+            <h2 class="script-text">Sensational featured offers.</h2>
+            <ul>
+                {% for special in specials if special.active %}
+                <li class="{{class}} {{special.class}}" {{special.animation}}  "  >
+                    {% if special.img %}<img data-image="{{special.img}}" class="img-responsive" style="width: 100%" alt="Special: {{special.title}}" />{% endif %}
+                    {#
+                    <div class="h3">{{special.title}}</div>
+                    {% if special.details %}<p>{{special.details}}</p> {% endif %}
+                    #}
+                </li>
+                {% endfor %}                    
+            </ul>
+            <div class="slideInUp fg-wow special-more-offer-button"><a class="" >Additional Offers</a></div>
         </div>
-     </div>
+    </div>
+    
+    <div class="modular-row modular-home-awards"  >
+        <div class="modular-anchor" id="" data-scroll> </div>          
+        <div style="text-align: center;">
+           <h2 class="script-text">We're flattered.  We're honored. We're tickled pink!</h2>
+           <ul class="awards-ticker">
+                {% for award in awards %}
+                    <li>
+                        <div class="h3">{{award.title}}</div>
+                        <div class="note">{{award.award}}</div>
+                    </li>
+                {% endfor %}                  
+           </ul>
+       </div>       
+    </div>
 </div>

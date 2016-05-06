@@ -24,11 +24,10 @@
 {% set titles=true %}
 {% endif %}
 
-<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel">
+<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel" data-interval="{{interval|default('8000')}}" data-pause="none" >
 	
 	{% if indicators %}
-	<ol class="carousel-indicators">
-		
+	<ol class="carousel-indicators">		
 		{% for i in 0..items|length-1 %}
 		<li data-target="#{{id|e('html_attr')}}" data-slide-to="{{i|e('html_attr')}}"{% if i==0 %} class="active"{% endif %}></li>
 		{% endfor %}
@@ -59,19 +58,13 @@
 	</div>
 	
 	{% if controls %}
-	<a class="left carousel-control" href="#{{id|e('html_attr')}}" role="button" data-slide="prev">
-		
-		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		
-		<span class="sr-only">Previous</span>
-		
+	<a class="left carousel-control" href="#{{id|e('html_attr')}}" role="button" data-slide="prev">		
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>		
+		<span class="sr-only">Previous</span>		
 	</a>
-	<a class="right carousel-control" href="#{{id|e('html_attr')}}" role="button" data-slide="next">
-		
-		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		
-		<span class="sr-only">Next</span>
-		
+	<a class="right carousel-control" href="#{{id|e('html_attr')}}" role="button" data-slide="next">		
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>		
+		<span class="sr-only">Next</span>		
 	</a>
 	{% endif %}
 	

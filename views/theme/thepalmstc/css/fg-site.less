@@ -2,23 +2,24 @@
 /******* @Media Variables ********/
 @screen-xs-max: 480px;
 @screen-sm-max: 768px;
-@screen-md-max: 990px;
-@screen-lg-max: 1199px;
+@screen-md-max: 993px;
+@screen-lg-max: 1200px;
 
 
 
 
 /*** BASE @body-color: {{bodyColor|default('#333')}};   ***/
-@body-color: rgb(86, 86, 86);
-@body-font-size-px: 16px;
-@body-font-size: 1.6;
-@body-font-family: Nunito,Helvetica, arial, sans-serif ;
-@body-font-weight: 300;
+@body-color: #360d00;
+@body-font-size-px: 20px;
+@body-font-size: 2;
+@body-font-family: 'Futura',Helvetica, arial, sans-serif ;
+@body-font-weight: 500;
 @body-color-inverse : rgb(201, 201, 201);
-@body-line-height: 1.6em;
+@body-line-height: 2.1em;
 
 
-@script-font-family: Parisienne, cursive, sans-serif;
+@script-font-family: 'MonteCarloPro-Regular', cursive, sans-serif;
+@script-color: @heading-color;
 
 @strong-color: black;
 
@@ -26,15 +27,15 @@
 /*** HEADINGS ***/
 @heading-font-family: @body-font-family;
 @heading-font-weight: normal;
-@heading-color: rgb(0, 86, 118);
+@heading-color: #D40444;
 @heading-inverse-color: rgb(255, 169, 137);
 @heading-text-transform: capitalize;
 
-@h1-font-size: 4;
+@h1-font-size: 4.4;
 @h1-color: @heading-color;
 @h1-padding: 0;
-@h1-text-transform: inherit;
-@h1-margin: 0 0 24px;
+@h1-text-transform: uppercase;
+@h1-margin: 0 0 32px;
 
 @h2-font-size: 2.4;
 @h2-color:  @heading-color;
@@ -71,7 +72,7 @@
 
 
 /*** LINKS &  ***/
-@link-color: #4d92d9;
+@link-color: #D40444;;
 @link-color-hover: #6eacec;
 
 
@@ -102,8 +103,12 @@ body {
     color: @body-color;
     font-family: @body-font-family;
     line-height: @body-line-height;
-    font-size: 16px;
+	font-size: @body-font-size-px;
+
 	font-weight: @body-font-weight;
+	letter-spacing: .1em;
+
+
 	
 }
 
@@ -147,6 +152,8 @@ h1, .h1  {
 	margin: @h1-margin;
 	padding: @h1-padding;
 	color: @h1-color;
+	text-transform: @h1-text-transform;
+	letter-spacing: 8px;
 }
 
 .h1-pre, .h1-sub {
@@ -200,6 +207,22 @@ h5,.h5 {
 		color: @body-color-inverse ;
 	}
 }
+
+
+.flex-center-xy {
+	.flex-center-xy();
+}
+.script-text {
+	font-family: @script-font-family;
+	color: @script-color;
+}
+
+.text-shadow-light {
+	text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.6);
+}
+.text-shadow-dark {
+	text-shadow: 2px 2px 2px rgba(40, 40, 40, 0.6);
+}
 .section-heading-ornate {padding: 0; margin: 0 ; }
 .a(@link-color,none,@link-color-hover, none);
 ol {margin-bottom: 24px; padding: 12px 0 0 24px; line-height: 1.6em;
@@ -215,6 +238,8 @@ ol {margin-bottom: 24px; padding: 12px 0 0 24px; line-height: 1.6em;
 
 p {
 	margin-bottom: @p-margin-bottom;
+
+	
 }
 b, strong {
 	color: @strong-color;

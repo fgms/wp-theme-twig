@@ -6,18 +6,18 @@
 				{% if config.settings.footer.logo is defined %}
 				<div class="footer-logo">					
 					<a href="{{site.url|e('html_attr')}}">
-						<img class="img-responsive" data-image="{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
+						<img class="" data-image="{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
 					</a>					
 				</div>
 				{% endif %}
 				
 				<div class="footer-text-wrapper">
 					
-					{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }} | <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
-					{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }} | <span>{{config.phone.resort|e}}</span></div>				{% endif %}
-					{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }} | <span>{{config.phone.fax|e}}</span></div>					{% endif %}			
+					{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }}: <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
+					{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }}: <span>{{config.phone.resort|e}}</span></div>				{% endif %}
+					{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }}: <span>{{config.phone.fax|e}}</span></div>					{% endif %}			
 					
-					{% if config.email.info is defined %}			<div>{{__('Email', 'fgms' ) }} | <span>{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
+					{% if config.email.info is defined %}			<div>{{__('Email', 'fgms' ) }}: <span>{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
 					
 					{# 
 					<div class="footer-address">						
@@ -73,6 +73,16 @@
 				<h3>Quick Message</h3>				
 				{{function('do_shortcode','[contact-form-7 id="'~config.forms.footer.id~'"]')}}
 				{% endif %}
+				{# this is where footer widgets should go #}
+				<div class="footer-sidebar-right">
+					<div class="footer-navigation">
+						<a href="" class="script-text">Check availability.</a>
+						<a href="" class="script-text">Send us a message.</a>
+					</div>
+					<div class="footer-terms">
+						<a href="" >Terms of Use </a> | <a href="" >Privacy Statement</a>
+					</div>
+				</div>
 				
 			</div>
 			

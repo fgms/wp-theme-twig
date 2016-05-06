@@ -1,16 +1,21 @@
-<nav class="navbar   script-navigation" role="navigation">
-    <div class="container ">
+<nav class="navbar  script-navigation" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+			
+            <a type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<div class="pull-left">Menu</div>
+				<div class="pull-right" style="margin-top: 2px;">
+					<span class="sr-only">Toggle Menu</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>					
+				</div>
+				<div class="clearfix"></div>
+
+            </a>
 			{% if config.settings.header.logo is defined %}<a href="{{site.url|e('html_attr')}}" class="navbar-brand"><img data-image="{{config.settings.header.logo.url}}"></a>{% endif %}		
         </div>
-        <div class="navbar-collapse collapse">			
-            <ul class="nav navbar-nav navbar-center">
+        <div class="navbar-collapse collapse ">			
+            <ul class="nav navbar-nav   ">
                 {% for item in  menu.get_items  %}                   
                     {% if item.get_children %}
                         <li class="dropdown {{item.classes | join(' ')}}">
@@ -27,7 +32,7 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+
 </nav>    
 
 

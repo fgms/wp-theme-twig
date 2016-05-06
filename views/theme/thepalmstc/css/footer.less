@@ -1,4 +1,7 @@
 .footer {
+	border-top: 3px solid #fff;
+	padding: 58px 0;
+	text-align: center;
 	background-color: @footer-background-color;	
 	color: @footer-color;	
 	h3 {		
@@ -6,15 +9,49 @@
 		color: white;
 		margin-bottom: 24px;		
 	}
+	.footer-logo {
+		margin-bottom: 36px;
+	}
 	.branding {	}
 	.a(@footer-link-color,none,@footer-link-color-hover,underline);
 	.social-icons {
-		.a(@footer-social-icon-inner-color,none,@footer-social-icon-inner-color-hover,none);
+		.a(@footer-social-icon-inner-color,none,@heading-color,none);
 		.fa-stack.fa-lg {
-			font-size: 2em;
+			font-size: 1.5em;
+			
 		}
 		i.icon-outer {			
 			color: @footer-social-icon-outer-color;
 		}
+	}
+	
+	.footer-text-wrapper {
+		
+		div {
+			font-size: 1.2em;
+		}
+		margin-bottom: 36px;
+	}
+	
+	.social-icons {
+		margin-bottom: 36px;
+	}
+	
+	.footer-copyright {
+		font-size: 0.8em;
+	}
+	
+	.footer-navigation {
+		padding-top: 138px;
+		.script-text {
+			display: block;
+			color: @heading-color;
+			font-size: 4em;
+			padding: 32px 0;
+		}
+	}
+	.footer-terms {
+		padding-top: 110px;
+		font-size: 0.8em;
 	}
 }

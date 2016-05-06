@@ -58,7 +58,7 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/script.js', 'views/theme/thepalmstc/js/theme.js','views/theme/thepalmstc/js/StickyComponent/stickycomponent.min.js'],
+          src: ['src/js/script.js', 'views/theme/thepalmstc/js/**/*.js'],
           dest: 'assets/js/<%= pkg.name %>.js',
         },
       },    
