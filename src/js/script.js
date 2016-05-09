@@ -32,6 +32,7 @@ jQuery(function($) {
     });
   });  
 
+  
   /*** Updates all  images according to screen size;  */
   //$('img[data-image-'+sizePostfix+']')
 
@@ -70,6 +71,13 @@ jQuery(function($) {
     }, function() {
       $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
   });*/
+	/*removes data in generalmodal*/
+	$('#general-modal').on('hidden.bs.modal', function() {
+	    $(this).removeData('bs.modal');
+	});		
+	$('#general-modal').on('loaded.bs.modal', function() {
+		
+	});	
   
   
   if (($('.script-grid-gallery').length > 0) && ($().fgGallery) && $().isotope && $().imagesLoaded) {

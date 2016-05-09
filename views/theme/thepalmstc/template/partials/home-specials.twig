@@ -1,9 +1,9 @@
 {% set specials = [
     {
         'active' : true,
-        'title': 'Enjoy a Fourth Night Free',
+        'title': 'Enjoy a Fourth <br/>Night Free',
         'details' : '',
-        'valid' : 'May 1 - December 23',
+        'valid' : 'May 1 - December 23 ',
         'link' : '',
         'img' : '/wp-content/themes/wp-theme-fg/assets/images/templates/special-fourth-night-free.jpg', 
         'animation' : 'data-wow-offset="10"',
@@ -12,7 +12,7 @@
     },
     {
         'active' : true,
-        'title': 'Our Sensational, All-Inclusive Promoation is Back',
+        'title': 'Our Sensational, <br/>All-Inclusive <br/>Promotion is Back',
         'details' : 'Three meals a day plus afternoon tea and alcoholic beverages by the glass can be inclued in the price of suite. ',
         'valid' : '',
         'link' : '',
@@ -53,18 +53,21 @@
         <div class="modular-anchor" id="" data-scroll></div>
         <div class="section-container">
             <h2 class="script-text">Sensational featured offers.</h2>
-            <ul>
-                {% for special in specials if special.active %}
-                <li class="{{class}} {{special.class}}" {{special.animation}}  "  >
-                    {% if special.img %}<img data-image="{{special.img}}" class="img-responsive" style="width: 100%" alt="Special: {{special.title}}" />{% endif %}
-                    {#
-                    <div class="h3">{{special.title}}</div>
-                    {% if special.details %}<p>{{special.details}}</p> {% endif %}
-                    #}
-                </li>
-                {% endfor %}                    
-            </ul>
-            <div class="slideInUp fg-wow special-more-offer-button"><a class="" >Additional Offers</a></div>
+            <div style="position:relative;z-index:1;">
+                <ul>
+                    {% for special in specials if special.active %}
+                    <li class="{{class}} {{special.class}}" {{special.animation}}  "  >
+                        {% if special.img %}<img data-image="{{special.img}}" class="img-responsive" style="width: 100%" alt="Special: {{special.title}}" />{% endif %}
+                        
+                        <div class="h3">{{special.title|raw}}{% if special.valid %}<br/>{{special.valid}}{% endif %}</div>
+                        {% if special.details %}<p>{{special.details}}</p> {% endif %}
+                        
+                    </li>
+                    {% endfor %}                    
+                </ul>
+                <div class="slideInUp fg-wow special-more-offer-button"><a class="" href="/" >Additional Offers</a></div>                
+            </div>
+
         </div>
     </div>
     

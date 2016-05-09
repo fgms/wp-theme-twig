@@ -120,10 +120,12 @@
 		 &, &:visited &:focus {
 			color: @color;
 			text-decoration: @text-decoration;
+			.transition-color(0.25s);
 		}
 		&:hover, &:active {
 			color: @color-hover;
 			text-decoration: @text-decoration-hover;
+			.transition-color(0.75s);
 		}
 	}
 }
@@ -266,21 +268,47 @@
 }
 
 
-@keyframes offerPullOut {
-  from {
-    
-	right: 0;
-  }
-  95% {
-	right: 28px	
-	
-  }
-  98% {
-	right: 32px;
-  }
+@-webkit-keyframes offerPullOut {
+  from { right: 0;}
+  to   { right: 16px;}
+}
 
-  to {
-	.transform-scale(1.05,1.05);
-    right: 30px;
-  }
+
+@keyframes offerPullOut {
+  from { right: 0;}
+  to   { right: 16px;}
+}
+
+
+@-webkit-keyframes offerPullIn {
+  from { right: 16px;}
+  to   { right: 0;}
+}
+
+
+@keyframes offerPullIn {
+  from { right: 16px;}
+  to   { right: 0;}
+}
+
+@-webkit-keyframes offerPullUp {
+  from { padding: 24px;}
+  to   { padding: 24px 24px 36px;}
+}
+
+
+@keyframes offerPullUp {
+  from { padding: 24px;}
+  to   { padding: 24px 24px 36px;}
+}
+
+@-webkit-keyframes offerPullUpBack {
+  from { padding: 24px 24px 36px;}
+  to   { padding: 24px;}
+}
+
+
+@keyframes offerPullUpBack{
+  from { padding: 24px 24px 36px;}
+  to   { padding: 24px;}
 }

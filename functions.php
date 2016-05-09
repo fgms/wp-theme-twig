@@ -1,5 +1,9 @@
 <?php
-//include_once('includes/demo.php');
+
+
+
+
+
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
 function blankslate_setup() {
@@ -91,7 +95,7 @@ function add_to_context($data){
 /* remove admin bar for development */
 add_action('after_setup_theme', 'remove_admin_bar');
 function remove_admin_bar() {    
-   // show_admin_bar(false);
+    show_admin_bar(false);
 }
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
@@ -145,29 +149,33 @@ function fgms_meta_boxes ($bs) {
 	
 }
 
+
 $get_config=function() {
     $autoloader=require_once('vendor/autoload.php');
-	$config_file=dirname(__FILE__).'/config/settings.yml';
+	$theme = get_option('theme_directory','default');
+	$config_file = get_template_directory().'/views/theme/' . $theme .'/config/settings.yml';
+	//$config_file=dirname(__FILE__).'/config/settings.yml';
 	$config=@file_get_contents($config_file);
 	if ($config===false) die('Could not read '.$config_file);
 	$config=\Symfony\Component\Yaml\Yaml::parse($config);
-	//	TODO: Check schema?
-	if (!isset($config['theme']) && is_string($config['theme'])) die('No theme');
-	$theme=$config['theme'];
+
     
      //setting up timber twig file locations
 	 // it will look in theme first, if it doesn't find it it will look in master
-    Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$config['theme']. '/template',
-                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/wp',
-                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/partials',
-                             dirname(__FILE__).'/views/theme/'.$config['theme'].'/template/custom',
+    Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$theme. '/template',
+                             dirname(__FILE__).'/views/theme/'.$theme.'/template/wp',
+                             dirname(__FILE__).'/views/theme/'.$theme.'/template/partials',
+                             dirname(__FILE__).'/views/theme/'.$theme.'/template/custom',
 							 dirname(__FILE__).'/views/template',
                              dirname(__FILE__).'/views/template/wp',
                              dirname(__FILE__).'/views/template/partials',
                              dirname(__FILE__).'/views/template/custom',
 							 
 							
-							);   
+							);
+	
+
+	
     return $config;
 };
 
@@ -213,3 +221,4 @@ $get_slideshow=function () {
     
 };   
 require_once(__DIR__.'/include/shortcodes.php');
+require_once(__DIR__.'/include/theme-settings.php');

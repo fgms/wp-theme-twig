@@ -20,7 +20,18 @@
 	{% block footer%}
 		
 	{% endblock %}	
-	{% include "footer.twig" %}	
+	{% include "footer.twig" %}
+	<!-- Modal -->
+	<div id="general-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				{% include 'modal-inner.twig' with {title: '' , content : '' } %}
+			</div>
+		</div>
+	</div>
+
+	</div>	
+	
 	{% block scripts %}{% endblock %}
 	{{wp_footer}}
 	

@@ -3,8 +3,15 @@
 /* install specific ****/
 
 jQuery(function($) {
+    //simply resizes screen on load
+    fitScreen($('#header-container'), [ $('.script-navigation')], function(resize, height){        
+        var NAV_LOCATION = 100;
+        
+        $('#header-container').css({'height': resize+'px','overflow' : 'hidden'});
+        $('#header-container').find('.carousel-indicators').css({ bottom : 'inherit', top : (resize - NAV_LOCATION)+'px'});
+    });
     
-    $(window).resize(function(e){
+    $(window).resize(function(e){        
         fitScreen($('#header-container'), [ $('.script-navigation')], function(resize, height){        
             var NAV_LOCATION = 100;
             
@@ -32,7 +39,9 @@ jQuery(function($) {
                 console.log('Error loading images.', msg);
             }
             // this updates the window and menu location after images have been loaded.
+            $('.carousel').animate({opacity: 1});
             $(window).trigger('resize');
+            
             $('.script-navigation').fgStickyComponent({
                 topoffset: 0,
                 triggertop: $('#header-container').offset().top + $('#header-container').outerHeight()

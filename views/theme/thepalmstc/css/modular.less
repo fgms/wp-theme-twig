@@ -7,10 +7,10 @@
 }
 /** Home page intro **/
 .modular-home-intro{
-    .background(none,#CAEFF7,left top, 100% auto, repeat-y, scroll);
-    > .flex-center-xy  {   min-height: 890px;  }  
+    .background(none,#cbe7f3,left top, 100% auto, repeat-y, scroll);
+    > .flex-center-xy  {     }  
     .section-container {
-        .background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-menu.png'),transparent, left top, auto, repeat, scroll );
+        .background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-white-opaque.png'),transparent, left top, auto, repeat, scroll );
         padding: 72px;
         margin: 7em 0 0;
         width: @section-container;
@@ -42,19 +42,23 @@
 }
 /** homepage navbuttons **/
 .modular-home-buttons {
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+   /* border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;*/
+    background-color: #7399c6;
     .nav-grid-button {
+        
         > .nav-grid-image {
             .background();
             background-size: cover !important;
             height: 250px;
             .transition(0.25s);           
-            &:hover {
-                .transform-scale(1.1,1.1);
-                .transition(0.75s);
-            }
         }
+        &:hover .nav-grid-image {
+            .transform-scale(1.1,1.1);
+            .transition(0.75s);           
+        }
+        
+        
         
 
         overflow: hidden;  
@@ -62,7 +66,7 @@
         text-transform: uppercase;
         position: relative;
         float: left;        
-        border: 1px solid #fff;
+       // border: 1px solid #fff;
     }
     
     
@@ -71,6 +75,7 @@
         padding: 18px;
         width: 100%;
         z-index: 1;
+        line-height: 1.4em;
     }
     
     .nav-grid-color-normal {
@@ -85,12 +90,12 @@
     @media screen and (min-width: @screen-md-max){
         .grid-3sm-2big-small, .grid-3sm-2big-large, .grid-2sm-3big-small, .grid-2sm-3big-large {width: 20%;}
         .nav-grid-button {
-            font-size: 24px;
+            font-size: 21px;
         }
     }
     @media screen and (min-width: @screen-lg-max){
         .nav-grid-button {
-            font-size: 28px;
+            font-size: 22px;
         }
         .grid-3sm-2big-small {width: 16%;}
         .grid-3sm-2big-large { width: 26%;}
@@ -100,7 +105,7 @@
 }
 
 .modular-home-specials-awards{
-    .background(none,#CAEFF7,left top, 100% auto, repeat-y, scroll);
+    .background(none,#cbe7f3,left top, 100% auto, repeat-y, scroll);
 }
 .modular-home-specials {
     h2.script-text {
@@ -110,7 +115,7 @@
         font-weight: 400;
     }
     .h3 {
-        font-size: 1.7em;
+        font-size: 1.5em;
         padding-top: 0;
         position: absolute;
         text-transform: uppercase;
@@ -120,11 +125,11 @@
         
     }
     p {
-        font-size: 1.4em;
+        font-size: 1.2em;
         position: absolute;
         width: 100%;
-        top: 25%;
-        line-height: 1.4em;
+        top: 29%;
+        line-height: 1.2em;
     }
     .section-container {
         margin: 0 auto;
@@ -135,14 +140,20 @@
         position: absolute;;
         bottom: 0;;
         width: 100%;
+      
         a {
             display: block;
             width: 250px;
             margin: 0 auto;
-            .background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-menu.png'),transparent, left top, auto, repeat, scroll );
+            .background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-white-opaque.png'),transparent, left top, auto, repeat, scroll );
             padding: 24px;
             font-size: 1.4em;
             text-transform: uppercase;
+            .animation(offerPullUpBack 0.25s   ease-in-out both);
+            &:hover {
+                .animation(offerPullUp 0.75s   ease-in-out both);
+            }
+            
         }
          
         
@@ -153,6 +164,7 @@
         margin: 0;
         padding: 0;
         list-style:none;
+       
         
         li {
             > p, > .h3 { padding: 0 32px; }
@@ -160,6 +172,14 @@
             &.li-sm-50 {
                 width: 50%;
                 float: left;
+            }
+            overflow: hidden;
+            img {
+                .transition(0.25s);    
+            }
+            &:hover img {
+                .transform-scale(1.1,1.1);
+                .transition(0.75s);                 
             }
         }
         &:after, *:before {

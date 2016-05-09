@@ -23,7 +23,7 @@
 		top: 80%;
 	}
 	.offers-button {
-		.background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-menu.png'),transparent, left top, auto, repeat, scroll );
+		.background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-white-opaque.png'),transparent, left top, auto, repeat, scroll );
 		.a(@heading-color,none, @heading-color,none);
 		text-transform: uppercase;
 		padding: 18px;
@@ -51,10 +51,11 @@
 			}
 		}
 		.offers-container {
+			
 			position: absolute;
 			z-index: 9999999;
 			width: inherit;
-			right: -32px;
+			right: -16px;
 			top: 40%;
 			
 		}
@@ -62,25 +63,17 @@
 			display: block;
 			margin: 0;
 			position: relative;
-			padding: 4px;
+			padding: 4px 16px 4px 4px;
 			width: 200px;
+			.animation(offerPullIn  0.25s  ease-in-out both);
 		
-			&:hover {
-				-webkit-animation: offerPullOut .25s 1; /* Safari 4+ */
-				-moz-animation:    offerPullOut .25s 1; /* Fx 5+ */
-				-o-animation:      offerPullOut .25s 1; /* Opera 12+ */
-				animation:         offerPullOut .25s 1;
-				right: 30px;			
-				.transform-scale(1.05,1.05);
-				.box-shadow(-2px 12px 24px rgba(0, 0, 0, 0.75));
-				z-index: 100;
-				border: 1px solid #fff;
-
-				
+			&:hover {				     
+				.animation(offerPullOut 0.75s   ease-in-out both);
+				right: 16px;	
 			}
 			
-			/*&.book-now { padding-bottom: 9px;}
-			&.offers { padding-top: 9px;}*/
+			&.book-now { margin-bottom: 1px;}
+			
 			
 		}
 	}
@@ -90,6 +83,7 @@
 
 
 #header-container {
+	.background(url('/wp-content/themes/wp-theme-fg/assets/images/templates/background-slideshow.jpg'),#ffffff, center top, cover, no-repeat, scroll );
 	position: relative;
 	.logo {}
 

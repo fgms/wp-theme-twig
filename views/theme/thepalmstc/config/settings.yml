@@ -1,0 +1,85 @@
+social:        
+    facebook:
+        url: https://www.facebook.com/ThePalmsTC
+        icon:
+            inner: fa-facebook-f
+            outer: fa-circle
+    twitter:
+        url: https://twitter.com/ThePalmsTC
+        icon:
+            inner: fa-twitter
+            outer: fa-circle
+    googleplus:
+        url: https://plus.google.com/115561186154121807923
+        icon:
+            inner: fa-google-plus
+            outer: fa-circle
+    youtube:
+        url: https://www.youtube.com/user/
+        icon:
+            inner: fa-youtube
+            outer: fa-circle        
+    pinterest:
+        url: https://www.pinterest.com/thepalmstci/
+        icon:
+            inner: fa-pinterest-p
+            outer: fa-circle       
+   
+    instagram:
+        url: https://www.instagram.com/ThePalmsTC/
+        icon:
+            inner: fa-instagram
+            outer: fa-circle       
+
+                   
+        
+
+address:
+    street: Dallas Road
+    city: 'Victoria'
+    province: BC
+    postal: V8Y 4X4
+    country: Canada
+phone:
+    reservations: 866.877.7256
+    toll: 866.877.7256
+    fax: 649.946.5502
+    resort: 649.946.8666
+    office: 649.946.8666   
+    
+    
+email:
+    info: info@thepalmstc.com
+    
+    
+settings:
+    slideshow:
+        home:
+            template: 'slideshow-home'
+        logo:
+            url: /wp-content/themes/wp-theme-fg/assets/images/templates/logo-the-palms-turks-and-caicos-white.png
+            alt: Logo
+            
+    footer:
+        grid:
+            left:  col-lg-6 col-lg-push-6 
+            right: col-lg-6 col-lg-pull-6
+        logo:
+            url: /wp-content/themes/wp-theme-fg/assets/images/templates/logo-the-palms-turks-and-caicos-white.png
+            alt:
+        social:
+            enable: true
+            
+    copyright:
+        grid:
+            left:  col-lg-6 col-lg-push-6 
+            right: col-lg-6 col-lg-pull-6
+        text: ', The Palms Turks and Caicos'
+        year: 2016
+    modal:
+        logo: /wp-content/themes/wp-theme-fg/assets/images/templates/logo-the-palms-turks-and-caicos-white.png
+        
+forms:
+    footer:
+        
+theme: thepalmstc

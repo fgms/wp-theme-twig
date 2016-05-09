@@ -1,8 +1,11 @@
+
+
 .footer {
 	border-top: 3px solid #fff;
 	padding: 58px 0;
 	text-align: center;
-	background-color: @footer-background-color;	
+	background-color: @footer-background-color;
+	letter-spacing: 0.05em;
 	color: @footer-color;	
 	h3 {		
 		.font-size(2.3);
@@ -11,6 +14,8 @@
 	}
 	.footer-logo {
 		margin-bottom: 36px;
+		max-width: 500px;
+		width: 100%;
 	}
 	.branding {	}
 	.a(@footer-link-color,none,@footer-link-color-hover,underline);
@@ -42,16 +47,45 @@
 	}
 	
 	.footer-navigation {
-		padding-top: 138px;
+		padding: 0 0 32px;
 		.script-text {
+			
 			display: block;
 			color: @heading-color;
-			font-size: 4em;
+			font-size: 3.6em;
 			padding: 32px 0;
+			.transition(0.5s);
+			border: 1px solid transparent;
+			margin-bottom: 12px;
+			&:hover {
+				.transition(0.75s);
+				border: 1px solid #fff;
+				text-decoration: none !important;
+			}
 		}
 	}
 	.footer-terms {
-		padding-top: 110px;
 		font-size: 0.8em;
+	}
+	
+	.footer-content-wrapper {
+		width: 80%;
+		// since using pull and push the left becomes the right
+		&.left {
+			float: right;
+			&:after {
+				content: " ";
+				clear: both;
+				display: table;
+				margin: 0;
+			}
+		}
+	}
+	
+	@media screen and (min-width: @screen-lg-max){
+		.footer-navigation {
+			padding: 48px 0 0;
+		}
+		
 	}
 }

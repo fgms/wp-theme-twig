@@ -15,7 +15,7 @@
         {% else %}
             {% include 'custom-slideshow.twig' ignore missing only %}
         {% endif %}
-        <div class="logo"><a href=""><img data-image="/wp-content/themes/wp-theme-fg/assets/images/templates/logo-the-palms-turks-and-caicos-white.png" alt="{{site.name}} Header Logo" class="fg-wow fadeIn"/></a></div>
+        <div class="logo"><a href="/" style="color: transparent"><img data-image="{{config.settings.slideshow.logo.url}}" alt="{{site.name}}" class="fg-wow fadeIn"/></a></div>
         <div class="offers-container">
             <div class="offers-button book-now"><a href="" >Book Now</a></div>
             <div class="offers-button offers "><a href="" >&nbsp;&nbsp;Offers&nbsp;&nbsp;</a></div>
@@ -28,8 +28,15 @@
 	{% block footer%}
 		
 	{% endblock %}	
-	{% include "footer.twig" %}	
-	{% block scripts %}{% endblock %}
+	{% include "footer.twig" %}
+	<!-- Modal -->
+	<div id="general-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				{% include 'modal-inner.twig' with {title: '' , content : '' } %}
+			</div>
+		</div>
+	</div>	{% block scripts %}{% endblock %}
 	{{wp_footer}}
 	
     </body>

@@ -1,0 +1,78 @@
+social:        
+    facebook:
+        url: https://www.facebook.com/
+        icon:
+            inner: fa-facebook-f
+            outer: fa-circle
+    twitter:
+        url: https://twitter.com/
+        icon:
+            inner: fa-twitter
+            outer: fa-circle
+    googleplus:
+        url: https://plus.google.com/
+        icon:
+            inner: fa-google-plus
+            outer: fa-circle
+    youtube:
+        url: https://www.youtube.com/user/
+        icon:
+            inner: fa-youtube
+            outer: fa-circle        
+    pinterest:
+        url: https://www.pinterest.com/
+        icon:
+            inner: fa-pinterest-p
+            outer: fa-circle       
+   
+    instagram:
+        url: https://www.instagram.com/
+        icon:
+            inner: fa-instagram
+            outer: fa-circle       
+
+                   
+        
+
+address:
+    street: Dallas Road
+    city: 'Victoria'
+    province: BC
+    postal: V8Y 4X4
+    country: Canada
+phone:
+    reservations: 866.000.0000
+    toll: 866.000.0000
+    resort: 000.000.0000
+    office: 000.000.0000   
+    
+    
+email:
+    info: webmaster@fifthgeardev.com.com
+    
+    
+settings:
+    slideshow:
+        home:
+            template: 'slideshow-home'
+    slideshow:
+        logo:
+            url: 
+            alt: Logo
+            
+    footer:
+        grid:
+            left: col-lg-5
+            right: col-lg-offset-1 col-lg-6
+        logo:
+            url: 
+            alt:
+        social:
+            enable: true
+            
+    copyright:
+        text: Fifth Gear | Fifth Gear Marketing
+        year: 2016
+        
+forms:
+    footer:        
