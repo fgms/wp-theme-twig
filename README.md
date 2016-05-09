@@ -22,8 +22,10 @@ The [accordion] shortcode does not accept any attributes.  All content of an [ac
 
 The [panel] shortcode accepts the following attributes:
 
--	id: An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied)
--	title: A title for the panel
+| Attribute | Description |
+| --------- | ----------- |
+| id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
+| title     | A title for the pane l|
 
 The content of the [panel] shortcode shall be used as the content of the panel in the accordion.
 
@@ -33,20 +35,24 @@ Creates [Bootstrap carousels](http://getbootstrap.com/javascript/#carousel).
 
 The [carousel] shortcode accepts the following attributes:
 
--	controls: If "false" then the carousel shall not have controls for moving between the slides
--	id: An HTML ID which shall be used for the carousel (one will be automatically generated if this is not supplied)
--	indicators: If "false" then the carousel shall not have indicators indicating which slide is currently active (and how many slides there are)
--	innerclass: An HTML class (or list of classes) which shall be applied to the inner container of the generated Bootstrap carousel
--	outerclass: An HTML class (or list of classes) which shall be applied to the outer container of the generated Bootstrap carousel
+| Attribute | Default | Description |
+| --------- | ------- | ----------- |
+| controls  | true    | If "false" then the carousel shall not have controls for moving between the slides |
+| id        | myCarousel | An HTML ID which shall be used for the carousel (one will be automatically generated if this is not supplied) |
+| indicators | true   | If "false" then the carousel shall not have indicators indicating which slide is currently active (and how many slides there are) |
+| innerclass | | An HTML class (or list of classes) which shall be applied to the inner container of the generated Bootstrap carousel|
+| outerclass | | An HTML class (or list of classes) which shall be applied to the outer container of the generated Bootstrap carousel |
 
 All content of a [carousel] shortcode which is not a [slide] shortcode is ignored.
 
 The [slide] shortcode accepts the following attributes:
 
--	alt: The alt text for the image which appears on the slide
--	caption: A caption which shall appear on the slide (defaults to no caption)
--	title: The title of the slide (defaults to no title)
--	url: The URL of the image which shall appear on the slide
+| Attribute | Description |
+| --------- | ----------- |
+| alt       | The alt text for the image which appears on the slide |
+| caption   | A caption which shall appear on the slide (defaults to no caption) |
+| title     | The title of the slide (defaults to no title) |
+| url       | The URL of the image which shall appear on the slide |
 
 All content of a [slide] shortcode is ignored.
 
@@ -56,7 +62,9 @@ Allows a specified Twig template to be rendered.
 
 The [custom-template] shortcode accepts one attribute explicitly:
 
--	template: Specifies the file name of the template which shall be rendered
+| Attribute | Description |
+| --------- | ----------- |
+| template  | Specifies the file name of the template which shall be rendered |
 
 Any other attributes of the shortcode have their values passed through as variables in the template.
 
@@ -72,8 +80,20 @@ The [tabs] shortcode does not accept any attributes.  All content of a [tabs] sh
 
 The [tab] shortcode accepts the following attirbutes:
 
--	active: If "true" then the tab-in-question shall be the default active tab, if no tab is marked as active the first tab shall be active by default
--	id: An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied)
--	title: A title for the tab
+| Attribute | Description |
+| --------- | ----------- |
+| active    | If "true" then the tab-in-question shall be the default active tab, if no tab is marked as active the first tab shall be active by default |
+| id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
+| title: A title for the tab |
 
 The content of the [tab] shortcode shall be used as the content of the tab.
+
+
+### [ajax]
+
+The [ajax] shortcode is used to load page content via ajax.  The page that the ajax code is on requires you to use No Template or the blank template.
+The [ajax] shortcode accepts the following attribute.
+
+| Attribute | Description |
+| --------- | ----------- |
+| template  | is used to load the twig template it is going to wrap the content around |
