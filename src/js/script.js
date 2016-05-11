@@ -13,12 +13,8 @@ if (window.innerWidth <= 480)  { sizePostfix = 'xxs'; }
 jQuery(function($) {
   /*** Email cloaking ***/
   var lastWindowTopLocation = $(window).scrollTop();
-  $('.mailto, a[data-domain]').each(function() {
-    $(this).attr('href', 'mailto:' + $(this).attr('data-prefix') + '@' + $(this).attr('data-domain'));
-    if ($(this).text().length < 2) {
-      $(this).text($(this).attr('data-prefix') + '@' + $(this).attr('data-domain'));
-    }
-  });
+  
+  emailCloak();
 
   /*** Updates all background images according to screen size; */
   $('*[data-background-' + sizePostfix + ']').each(function() {
@@ -32,27 +28,11 @@ jQuery(function($) {
     });
   });  
 
-  function getImageSize($img) {
-	  var sizeArray = ['xxs','xs','sm','md','lg','xl'];	  
-	  var src;
-	  for (index = sizeArray.indexOf(sizePostfix); index < sizeArray.length; ++index) {	  
-		var attr = $img.attr('data-image-'+sizeArray[index]);
-		if ( attr !== undefined) {
-		  if (attr.length > 5) {
-			$img.attr('src', attr);			
-			console.log('img ', attr);
-			break;
-		  }
-		  
-		}
-	  }
-	  
-	 
-  }
+
   
   /*** Updates all  images according to screen size;  */
   //$('img[data-image-'+sizePostfix+']')
-  console.log('data-image-'+ sizePostfix);
+
   $('img').each(function() {
 	getImageSize($(this));
     
@@ -94,7 +74,7 @@ jQuery(function($) {
 	    $(this).removeData('bs.modal');
 	});		
 	$('#general-modal').on('loaded.bs.modal', function() {
-		
+	  emailCloak();
 	});
 	
 	
@@ -204,6 +184,30 @@ jQuery(function($) {
   });
 
 });
+
+function getImageSize($img) {
+  var sizeArray = ['xxs','xs','sm','md','lg','xl'];	  
+  var src;
+  for (index = sizeArray.indexOf(sizePostfix); index < sizeArray.length; ++index) {	  
+	var attr = $img.attr('data-image-'+sizeArray[index]);
+	if ( attr !== undefined) {
+	  if (attr.length > 5) {
+		$img.attr('src', attr);			
+		break;
+	  }
+	  
+	}
+  }
+}
+  
+function emailCloak() {
+  jQuery('.mailto, a[data-domain]').each(function() {
+	jQuery(this).attr('href', 'mailto:' + jQuery(this).attr('data-prefix') + '@' + jQuery(this).attr('data-domain'));
+	if (jQuery(this).text().length < 2) {
+	  jQuery(this).text(jQuery(this).attr('data-prefix') + '@' + jQuery(this).attr('data-domain'));
+	}
+  });
+}
 
 function imagesLoaded($, fn) {
     var c = $.length;

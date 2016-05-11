@@ -12,10 +12,11 @@
 		color: white;
 		margin-bottom: 24px;		
 	}
-	.footer-logo {
-		margin-bottom: 36px;
+	.footer-logo {		
 		max-width: 500px;
 		width: 100%;
+		margin: 0 auto 36px;
+		text-align: center;
 	}
 	.branding {	}
 	.a(@footer-link-color,none,@footer-link-color-hover,underline);
@@ -68,24 +69,26 @@
 		font-size: 0.8em;
 	}
 	
-	.footer-content-wrapper {
-		width: 80%;
-		// since using pull and push the left becomes the right
-		&.left {
-			float: right;
-			&:after {
-				content: " ";
-				clear: both;
-				display: table;
-				margin: 0;
-			}
-		}
-	}
+
 	
 	@media screen and (min-width: @screen-lg-max){
 		.footer-navigation {
 			padding: 48px 0 0;
 		}
+		
+		.footer-content-wrapper {
+			width: 80%;
+			// since using pull and push the left becomes the right
+			&.left {
+				float: right;
+				&:after {
+					content: " ";
+					clear: both;
+					display: table;
+					margin: 0;
+				}
+			}
+		}		
 		
 	}
 }
