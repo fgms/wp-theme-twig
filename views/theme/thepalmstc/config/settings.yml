@@ -34,12 +34,14 @@ social:
                    
         
 
-address:
-    street: Dallas Road
-    city: 'Victoria'
-    province: BC
-    postal: V8Y 4X4
-    country: Canada
+company:
+    name: The Palms Turks & Caicos
+    address:
+        street: Grace Bay Beach
+        city: Princess Drive
+        province: Providenciales
+        postal: TKCA 1ZZ
+        country: Turks and Caicos
 phone:
     reservations: 866.877.7256
     toll: 866.877.7256
@@ -81,5 +83,4 @@ settings:
         
 forms:
     footer:
-        
-theme: thepalmstc
+       

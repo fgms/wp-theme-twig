@@ -33,13 +33,14 @@ social:
 
                    
         
-
-address:
-    street: Dallas Road
-    city: 'Victoria'
-    province: BC
-    postal: V8Y 4X4
-    country: Canada
+company:
+    name:
+    address:
+        street: Dallas Road
+        city: 'Victoria'
+        province: BC
+        postal: V8Y 4X4
+        country: Canada
 phone:
     reservations: 866.000.0000
     toll: 866.000.0000
@@ -50,20 +51,18 @@ phone:
 email:
     info: webmaster@fifthgeardev.com.com
     
-    
 settings:
     slideshow:
         home:
             template: 'slideshow-home'
-    slideshow:
         logo:
             url: 
             alt: Logo
             
     footer:
         grid:
-            left: col-lg-5
-            right: col-lg-offset-1 col-lg-6
+            left:  col-lg-6 col-lg-push-6 
+            right: col-lg-6 col-lg-pull-6
         logo:
             url: 
             alt:
@@ -71,8 +70,13 @@ settings:
             enable: true
             
     copyright:
-        text: Fifth Gear | Fifth Gear Marketing
+        grid:
+            left:  col-lg-6 col-lg-push-6 
+            right: col-lg-6 col-lg-pull-6
+        text: ', Fifth Gear Marketing'
         year: 2016
+    modal:
+        logo: 
         
 forms:
-    footer:        
+    footer:
