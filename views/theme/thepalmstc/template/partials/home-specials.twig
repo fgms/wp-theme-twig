@@ -13,7 +13,7 @@
     {
         'active' : true,
         'title': 'Our Sensational, <br/>All-Inclusive <br/>Promotion is Back',
-        'details' : 'Three meals a day plus afternoon tea and alcoholic beverages by the glass can be inclued in the price of suite. ',
+        'details' : 'Three meals a day plus afternoon tea and alcoholic beverages by the glass can be included in the price of your suite. ',
         'valid' : '',
         'link' : '',
         'img' : '/wp-content/themes/wp-theme-fg/assets/images/templates/special-all-inclusive.jpg',
@@ -60,7 +60,7 @@
                         {% if special.img %}<img data-image="{{special.img}}" class="img-responsive" style="width: 100%" alt="Special: {{special.title}}" />{% endif %}
                         
                         <div class="h3">{{special.title|raw}}{% if special.valid %}<br/>{{special.valid}}{% endif %}</div>
-                        {% if special.details %}<p>{{special.details}}</p> {% endif %}
+                        {% if special.details %}<p class="text-shadow-light">{{special.details}}</p> {% endif %}
                         
                     </li>
                     {% endfor %}                    

@@ -1,0 +1,220 @@
+{% macro linkattributes(gallery, image)%}
+    href="{% if image.youtubeid %}http://www.youtube.com/watch?v={{image.youtubeid}}{%else%}{{gallery.directory.root}}{{gallery.directory.large}}{{image.src}}{%endif%}"
+    title="{{image.title}}" data-caption="{{image.caption}}"
+    {# *** LIGHTBOX Options *** #}
+    {% if gallery.options.lightbox and not gallery.options.feature %}
+        data-toggle="lightbox"
+        {% if image.youtubeid %} data-width="{{image.width}}" data-type="youtube" {%endif%}
+        data-gallery={{gallery.options.group|default("gridgallery")}}
+    {%endif%}
+    {% if gallery.options.feature %}
+        {% if image.youtubeid %}
+            data-youtube="https://www.youtube.com/embed/{{image.youtubeid}}?autoplay=1&rel=0"           
+        {% else %}
+            data-image="{{gallery.directory.root}}{{gallery.directory.medium}}{{image.src}}" 
+        {% endif %}        
+    {% endif %}
+{% endmacro %}
+{% import _self as gmacro %}
+
+
+{% set gallery =
+{
+
+    'directory' : {
+        'root' : '/wp-content/themes/wp-theme-fg/assets/images/templates/',
+        'thumbs' : '',
+        'medium' : '',
+        'large' : ''        
+    },
+    'class' : 'script-grid-gallery gallery-grid-20',
+    'filter' : {
+        enable : false
+    },
+    filters : [
+        {
+            'title' : 'Videos',
+            'slug' : 'video'
+        },
+        {
+            'title' : 'Test',
+            'slug' : 'test'
+        
+        }
+    ],
+    options : {
+        'group' : 'homepage',
+        'hover' : true,
+        'thubsperrow' : 5,
+        'thumbpadding' : 0,
+        'random' : true
+    },
+    images : [
+        {
+            'title' : 'Title a',
+            'caption' : 'Caption a',
+            'filters' : 'test',
+            'youtubeid' : '',
+            'src' : 'dining-providenciales-turks-and-caicos.jpg'
+        },
+        {
+            'title' : 'title b',
+            'caption' : 'caption b',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'turks-and-caicos-honeymoon.jpg'
+        },
+        {
+            'title' : 'This is a video',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '4ZF7BjqeuPY',
+            'src' : 'grace-bay-beach-fun.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'couples-escapes-turks-and-caicos.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'shopping-providenciales-turks-caicos.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'watersports-the-palms-turks-and-caicos.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'weddings-the-palms-turks-and-caicos.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'the-spa-at-the-palms.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'events-the-palms-turks-and-caicos.jpg'
+        },
+        {
+            'title' : '',
+            'caption' : '',
+            'filters' : '',
+            'youtubeid' : '',
+            'src' : 'the-palms-turks-and-caicos-amenities.jpg'
+        }
+        
+    ]
+}
+%}
+{# *** Random *** #}
+{% if gallery.random %}{%set images = random(gallery.images) %}{%else%}{%set images = gallery.images %}{%endif%}
+{# *** Limit *** #}            
+{% set limit = gallery.limit|default(500)%}
+
+
+
+
+<div class="modular-row modular-home-gallery" >
+   <div class="modular-anchor"  data-scroll></div>
+   <div class=""  >
+        <div class="section-container">
+            
+           
+            {# ----------- FILTERS -----------#}
+            {% if gallery.filter.enable and gallery.filters %}
+            <div class="gallery-filters">
+                <button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
+                {% for f in gallery.filters %}
+                <button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{f.slug}}">{{f.title}}</button>
+                {% endfor %}
+            </div>
+            {% endif %}        
+        
+            {# ---------- CREATING GALLERY ------- #}
+            <div class="__st_gallery {{gallery.class}}" data-thumbpadding="{{gallery.thumpadding|default("0")}}" data-thumbsperrow="{{gallery.thumbsperrow|default("5")}}">
+                {# *** Checking if is feature image ***#}
+                
+                {% if gallery.options.feature %}
+                    {% set image = images |first%}
+                    <div  class="__st_gallery_feature_wrapper script-feature ">                
+                        <div class="__st_gallery_feature_content script-feature-content" >                   
+                            <img src="{{gallery.directory.root}}{{gallery.directory.large}}{{image.src}}" data-loaded="false" style="width: 100%; display: none;"/>
+                        </div>
+                        <div class="__st_gallery_title_caption">
+                            {% if image.title %}<div class="__st_gallery_title">{{image.title}}</div>{% endif %}
+                            {% if image.caption %}<div class="__st_gallery_caption">{{image.caption}}</div>{% endif %}                        
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {# *** Creating Thumbs *** #}
+                
+                <ul  class="__st_gallery_thumb_wrapper" style="position: relative;">
+                {# *** Loop through images *** #}
+                {% for image in images |slice(0,limit) %}
+                    {# *** Getting link attributes *** #}              
+                    
+                    <li class="__st_gallery_thumb_item fg-wow zoomIn   {{image.filters| split(",") |join(" ")}}" data-wow-offset="20" style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
+                        {# *** Checking if hover option enabled *** #}
+                       
+                        {% if not gallery.options.hover  %} <a {{gmacro.linkattributes(gallery, image)}} class="script-gallery-action">{% endif %}
+                        {% if gallery.options.hover %}
+                            <a {{gmacro.linkattributes(gallery, image)}} class="script-gallery-action" data-smoothzoom="gallery">
+                                <img data-image="{{gallery.directory.root}}{{gallery.directory.thumbs}}{{image.src}}"  alt="{{image.alt|default(image.title|default("gallery image"))}}" style="width:100%;"  data-loaded="false" />    
+                            
+                                {% if image.youtubeid %}<i class="fa fa-film gallery-video-notification"></i>{% endif %}
+                                <div class="__st_gallery_overlay" style="position: absolute;top: 0;">
+                                    <div class="gallery-overlay-content">
+                                    
+                                        <div class="gallery-expander"><i class="fa {% if image.youtubeid %}fa-youtube-play{%else%}fa-search{%endif%}"></i></div>
+                                        {% if gallery.options.social %}
+                                            
+                                        {% endif %}
+                                        {% if image.title %}<div class="gallery-title">{{image.title}}</div>{%endif%}
+                                        {% if image.caption%}<div class="gallery-caption">{{image.caption}}</div>{%endif%}
+                                    </div>
+                                </div>                                                        
+                            </a>
+                        {% endif %}
+                        {# *** Checking if hover option enabled *** #}
+                        {% if not gallery.options.hover  %}</a>{%endif%}
+                    </li>
+                {% endfor %}
+                    <li class="clearfix"></li>
+                </ul>
+            </div>        
+            
+        </div>    
+   </div>   
+</div>
+
+
+
+
+
+
+   
+
+    
+
+    
+
+

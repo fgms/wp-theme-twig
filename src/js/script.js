@@ -2,7 +2,7 @@
  ***************** script.js ***********************
  * generic scripts
  */
- 
+
 var sizePostfix = 'xl';
 if (window.innerWidth < 1920) { sizePostfix = 'lg'; }
 if (window.innerWidth < 1200) { sizePostfix = 'md'; }
@@ -32,13 +32,31 @@ jQuery(function($) {
     });
   });  
 
+  function getImageSize($img) {
+	  var sizeArray = ['xxs','xs','sm','md','lg','xl'];	  
+	  var src;
+	  for (index = sizeArray.indexOf(sizePostfix); index < sizeArray.length; ++index) {	  
+		var attr = $img.attr('data-image-'+sizeArray[index]);
+		if ( attr !== undefined) {
+		  if (attr.length > 5) {
+			$img.attr('src', attr);			
+			console.log('img ', attr);
+			break;
+		  }
+		  
+		}
+	  }
+	  
+	 
+  }
   
   /*** Updates all  images according to screen size;  */
   //$('img[data-image-'+sizePostfix+']')
-
+  console.log('data-image-'+ sizePostfix);
   $('img').each(function() {
-    $(this).attr('src', $(this).attr('data-image-' + sizePostfix));
-    $(this).attr('alt', $(this).attr('data-image-' + sizePostfix));
+	getImageSize($(this));
+    
+   
 
   });
   $.each(document.getElementsByTagName("img"), function(index, value) {
@@ -77,40 +95,22 @@ jQuery(function($) {
 	});		
 	$('#general-modal').on('loaded.bs.modal', function() {
 		
-	});	
+	});
+	
+	
+  if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){	
+	$('.script-gallery-action img').smoothZoom({ navigationRight: '<i class=\"fa fa-angle-right\"></i>', navigationLeft: '<i class=\"fa fa-angle-left\"></i>'});
+  }
   
   
-  if (($('.script-grid-gallery').length > 0) && ($().fgGallery) && $().isotope && $().imagesLoaded) {
-    $('.script-grid-gallery').fgGallery({
-      thumbpadding: $(this).data('thumbpadding'),
-      thumbsperrow: $(this).data('thumbsperrow'),
-      options: {
-        feature: false
-      },
-      debug: false,
-      onInit: function($element) {
-        var $grid = $element.find('ul').isotope({
-          itemSelector: 'li',
-          layoutMode: 'fitRows'
-        });
-        $grid.imagesLoaded().progress(function() {
-          $grid.isotope('layout');
-          $element.find('.script-feature img').fadeIn();
-        });
-        $('.gallery-filters').on('click', 'button', function() {
-          var filterValue = $(this).data('filter');
-          $grid.isotope({
-            filter: filterValue
-          });
-          $('.gallery-filters button').removeClass('active');
+  if (($('.script-grid-gallery').length > 0) && $().isotope ) {	
+	  var $element = $('.script-grid-gallery');
+	  var $grid = $element.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
+	  imagesLoaded($element.find('img'), function(e,msg){
+		$grid.isotope('layout');		
+	  });
 
-          $(this).addClass('active');
-        });
-      },
-      onClickThumb: function(plugin, $thumb, event) {
-        return true;
-      }
-    });
+
   }
   
   //this is the code for stickycomponent

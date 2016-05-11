@@ -20,12 +20,12 @@ Creates [Bootstrap accordions](http://getbootstrap.com/javascript/#collapse).
 
 The [accordion] shortcode does not accept any attributes.  All content of an [accordion] shortcode which is not a [panel] shortcode (or content nested therein) is ignored.
 
-The [panel] shortcode accepts the following attributes:
+The **[panel]** shortcode accepts the following attributes:
 
 | Attribute | Description |
 | --------- | ----------- |
 | id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
-| title     | A title for the pane l|
+| title     | A title for the panel |
 
 The content of the [panel] shortcode shall be used as the content of the panel in the accordion.
 
@@ -33,7 +33,7 @@ The content of the [panel] shortcode shall be used as the content of the panel i
 
 Creates [Bootstrap carousels](http://getbootstrap.com/javascript/#carousel).
 
-The [carousel] shortcode accepts the following attributes:
+The **[carousel]** shortcode accepts the following attributes:
 
 | Attribute | Default | Description |
 | --------- | ------- | ----------- |
@@ -45,7 +45,7 @@ The [carousel] shortcode accepts the following attributes:
 
 All content of a [carousel] shortcode which is not a [slide] shortcode is ignored.
 
-The [slide] shortcode accepts the following attributes:
+The **[slide]** shortcode accepts the following attributes:
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -60,7 +60,7 @@ All content of a [slide] shortcode is ignored.
 
 Allows a specified Twig template to be rendered.
 
-The [custom-template] shortcode accepts one attribute explicitly:
+The **[custom-template]** shortcode accepts one attribute explicitly:
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -78,13 +78,13 @@ Creates [Bootstrap tabs](http://getbootstrap.com/javascript/#tabs).
 
 The [tabs] shortcode does not accept any attributes.  All content of a [tabs] shortcode which is not a [tab] shortcode (or content nested therein) is ignored.
 
-The [tab] shortcode accepts the following attirbutes:
+The **[tab]** shortcode accepts the following attirbutes:
 
 | Attribute | Description |
 | --------- | ----------- |
 | active    | If "true" then the tab-in-question shall be the default active tab, if no tab is marked as active the first tab shall be active by default |
 | id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
-| title: A title for the tab |
+| title     |A title for the tab |
 
 The content of the [tab] shortcode shall be used as the content of the tab.
 
@@ -92,7 +92,8 @@ The content of the [tab] shortcode shall be used as the content of the tab.
 ### [ajax]
 
 The [ajax] shortcode is used to load page content via ajax.  The page that the ajax code is on requires you to use No Template or the blank template.
-The [ajax] shortcode accepts the following attribute.
+
+The **[ajax]** shortcode accepts the following attribute.
 
 | Attribute | Description |
 | --------- | ----------- |

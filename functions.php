@@ -219,6 +219,12 @@ $get_slideshow=function () {
     
 
     
-};   
+};
+
+
+
+
+
+
 require_once(__DIR__.'/include/shortcodes.php');
 require_once(__DIR__.'/include/theme-settings.php');

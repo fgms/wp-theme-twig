@@ -4,34 +4,40 @@
 
 jQuery(function($) {
     //simply resizes screen on load
+    if (window.innerWidth >= 1200) {    
     fitScreen($('#header-container'), [ $('.script-navigation')], function(resize, height){        
         var NAV_LOCATION = 100;
         
         $('#header-container').css({'height': resize+'px','overflow' : 'hidden'});
         $('#header-container').find('.carousel-indicators').css({ bottom : 'inherit', top : (resize - NAV_LOCATION)+'px'});
     });
+    }
     
-    $(window).resize(function(e){        
-        fitScreen($('#header-container'), [ $('.script-navigation')], function(resize, height){        
-            var NAV_LOCATION = 100;
-            
-            $('#header-container').css({'height': resize+'px','overflow' : 'hidden'});
-            $('#header-container').find('.carousel-indicators').css({ bottom : 'inherit', top : (resize - NAV_LOCATION)+'px'});
-            
-            var testimage = $('.carousel .item img').first()[0];
-            var galleryAspect = testimage.naturalWidth/testimage.naturalHeight;
-            var windowAspect = $(window).outerWidth()/ resize
-            
-            //image is not heigh enough
-            if (galleryAspect >= windowAspect){               
-                var ciwidth = galleryAspect * resize;
-                $('.carousel-inner').css({width: ciwidth+'px'})
-            }
-            else {               
-                $('.carousel-inner').css({width: '100%'})
-            }
-        });        
-    });    
+    $(window).resize(function(e){
+        if (window.innerWidth >= 1200) {
+            fitScreen($('#header-container'), [ $('.script-navigation')], function(resize, height){        
+                var NAV_LOCATION = 100;
+                
+                $('#header-container').css({'height': resize+'px','overflow' : 'hidden'});
+                $('#header-container').find('.carousel-indicators').css({ bottom : 'inherit', top : (resize - NAV_LOCATION)+'px'});
+                
+                var testimage = $('.carousel .item img').first()[0];
+                var galleryAspect = testimage.naturalWidth/testimage.naturalHeight;
+                var windowAspect = $(window).outerWidth()/ resize
+                
+                //image is not heigh enough
+                if (galleryAspect >= windowAspect){               
+                    var ciwidth = galleryAspect * resize;
+                    $('.carousel-inner').css({width: ciwidth+'px'})
+                }
+                else {               
+                    $('.carousel-inner').css({width: '100%'})
+                }
+            });                    
+        }
+        
+    });
+    
     imagesLoaded($('.feature-carousel img'),
         function(e, msg) {
             var navpos = 0;
@@ -69,7 +75,7 @@ jQuery(function($) {
     
     if ( ($('.awards-ticker').length > 0) && ( typeof $().newsTicker === 'function' ) ){
         $('.awards-ticker').newsTicker({
-            row_height: 114,
+            row_height: 120,
             max_rows: 3,
             speed: 1000,
             direction: 'up',

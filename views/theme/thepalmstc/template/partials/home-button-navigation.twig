@@ -78,13 +78,12 @@
    <div class="modular-anchor" id="" data-scroll>            
        {% for button in navbuttons %}
            <a href="{{button.href}}">                
-                    <div class="{{cycle(['odd','even'], loop.index0)}} nav-grid-button {{button.class}} fg-wow zoomIn " data-wow-offset="20" >
-                        <div class="nav-grid-button-title " style="{{button.style}}">{{button.title}}</div>
-                        <div class="nav-grid-image" data-background="{{button.img}}">           
-                            
-                        </div>
-                    </div>
-                
+               <div class="{{cycle(['odd','even'], loop.index0)}} nav-grid-button {{button.class}} fg-wow zoomIn " data-wow-offset="20" >
+                   <div class="nav-grid-button-title " style="{{button.style}}">{{button.title}}</div>
+                   <div class="nav-grid-image" data-background="{{button.img}}">           
+                       
+                   </div>
+               </div>                
            </a>
        {% endfor %}
        <div class="clearfix" style="clear: both;"></div>
