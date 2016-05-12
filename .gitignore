@@ -1,10 +1,10 @@
 assets/*
 node_modules
-includes/demo.php
 vendor/*
 composer.lock
 config/settings.yml
 *fonts.css
 *fonts.less
-src/js/StickyComponent/
 src/js/scripts.js
+views/theme/*
+!views/theme/default

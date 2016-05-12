@@ -235,63 +235,69 @@ function fitScreen($resizeSelector, $arrayOfSelectors, callback) {
 }
 
 // logic to check if parallax is going to go out of region, to do a fix   
-function updateParallax($obj){
+function updateParallax($obj, minheight){
+	minheight = minheight || 1200;	
 	var $ = jQuery;
 	var pageBottom = (parseInt($(window).scrollTop()) + parseInt($(window).height()));
 	
+	if (window.innerWidth >= minheight) {
+	  if (pageBottom > $obj.offset().top) {		
+		  var offset = $obj.data('offset');
+		  offset = (offset !== undefined) ? offset : 0;
+		  var ratio = $obj.data('ratio') ;
+		  ratio = (ratio !== undefined) ? ratio : 3;			
+		  var parallaxDiff = pageBottom - parseInt($obj.offset().top);
+		  var parallaxAdj = -(parallaxDiff / ratio)  + offset;
+		  $obj.data('imagePositionY',parallaxAdj);
+		  var backgroundX  = '50%';
+		  if ($obj.hasClass('background-image-pull-right')) {
+			  backgroundX = 'right';
+		  }
+		  if ($obj.hasClass('background-image-pull-left')) {
+			  backgroundX = 'left';
+		  }
+		  
+		  $obj.css('background-position',backgroundX+ ' ' + parallaxAdj +'px' );		
+		  
+		  
+		  // THIS IS first time
+		  if ($obj.data('image') === undefined) {
+			  var image_url = $obj.css('background-image');
+			  image_url = image_url.match(/^url\("?(.+?)"?\)$/);			
+			  if (image_url === null) {return false;}
+			  if (image_url[1]) {
+				  image_url = image_url[1];
+				  image = new Image();
+				  // just in case it gets called while loading image
+				  $obj.data('image',[]);
+				  $(image).load(function () {
+					  $obj.data('image',this);
+					  $obj.data('imageHeight', this.naturalHeight);
+					  $obj.data('imageUrl',image_url);
+					  var backgroundPos = parseInt($obj.css('background-position-y'),10);
+					  var checkImageFit = this.naturalHeight + backgroundPos;						
+					  //console.log('first --self', $self.outerHeight(),'img ',this.naturalHeight, 'bckpos ',backgroundPos, 'check', checkImageFit );
+					  
+				  });			
+				  image.src = image_url;			
+			  }
+	  
+		  }
+		  // this means i have already created image it is stored in data-image
+		  else {
+			  var imageHeight = ($obj.data('imageHeight') !== undefined) ? $obj.data('imageHeight'): 200;
+			  var backgroundPos = $obj.data('imagePositionY');
+			  var checkImageFit = imageHeight + backgroundPos;
+			  $obj.data('imagePositionY',parallaxAdj);
+			  $obj.css('background-position',backgroundX + parallaxAdj +'px' );						
+		  }
+		  return true;
+	  }
+	}
+	else {
+	  $obj.css({'background-position' : '0 0', 'background-size' : 'cover'});
+	}	
 	
-	if (pageBottom > $obj.offset().top) {
-		
-		var offset = $obj.data('offset');
-		offset = (offset !== undefined) ? offset : 0;
-		var ratio = $obj.data('ratio') ;
-		ratio = (ratio !== undefined) ? ratio : 3;			
-		var parallaxDiff = pageBottom - parseInt($obj.offset().top);
-		var parallaxAdj = -(parallaxDiff / ratio)  + offset;
-		$obj.data('imagePositionY',parallaxAdj);
-		var backgroundX  = '50%';
-		if ($obj.hasClass('background-image-pull-right')) {
-			backgroundX = 'right';
-		}
-		if ($obj.hasClass('background-image-pull-left')) {
-			backgroundX = 'left';
-		}
-		
-		$obj.css('background-position',backgroundX+ ' ' + parallaxAdj +'px' );		
-		
-		
-		// THIS IS first time
-		if ($obj.data('image') === undefined) {
-			var image_url = $obj.css('background-image');
-			image_url = image_url.match(/^url\("?(.+?)"?\)$/);			
-			if (image_url === null) {return false;}
-			if (image_url[1]) {
-				image_url = image_url[1];
-				image = new Image();
-				// just in case it gets called while loading image
-				$obj.data('image',[]);
-				$(image).load(function () {
-					$obj.data('image',this);
-					$obj.data('imageHeight', this.naturalHeight);
-					$obj.data('imageUrl',image_url);
-					var backgroundPos = parseInt($obj.css('background-position-y'),10);
-					var checkImageFit = this.naturalHeight + backgroundPos;						
-					//console.log('first --self', $self.outerHeight(),'img ',this.naturalHeight, 'bckpos ',backgroundPos, 'check', checkImageFit );
-					
-				});			
-				image.src = image_url;			
-			}
 	
-		}
-		// this means i have already created image it is stored in data-image
-		else {
-			var imageHeight = ($obj.data('imageHeight') !== undefined) ? $obj.data('imageHeight'): 200;
-			var backgroundPos = $obj.data('imagePositionY');
-			var checkImageFit = imageHeight + backgroundPos;
-			$obj.data('imagePositionY',parallaxAdj);
-			$obj.css('background-position',backgroundX + parallaxAdj +'px' );						
-		}
-		return true;
-	}		
 	
 }

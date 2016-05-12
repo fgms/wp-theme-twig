@@ -1,0 +1,10 @@
+<ul>
+    {% for special in specials if special.active %}
+    <li class="{{class}} {{special.class}}" {{special.animation}}  "  >
+        {% if special.img %}<img data-image="{{special.img}}" class="img-responsive" style="width: 100%" alt="Special: {{special.title}}" />{% endif %}        
+        <div class="h3">{{special.title|raw}}{% if special.valid %}<br/>{{special.valid}}{% endif %}</div>
+        {% if special.details and false %}<p class="text-shadow-light">{{special.details}}</p> {% endif %}
+        
+    </li>
+    {% endfor %}                    
+</ul>

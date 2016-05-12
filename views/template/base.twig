@@ -13,7 +13,7 @@
 	{% if slideshow is defined and not slideshow is null %}
 		{% include 'bootstrap-carousel.twig' with slideshow only %}
 	{% else %}
-		{% include 'custom-slideshow.twig' ignore missing only %}
+		{% include 'custom-slideshow.twig' ignore missing  %}
 	{% endif %}
 	{% include 'navigation.twig' %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}

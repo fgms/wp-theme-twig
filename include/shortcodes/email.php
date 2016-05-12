@@ -8,10 +8,7 @@
 				return '<a href="" data-prefix="' . $match[1] .'" data-domain="'. $match[2] .'.'.$match[3] .'">' . $label .'</a>';
 			}
             return 'Email was invalid -- '. $content;
-		});
-		
-		
-		
+		});		
 	});
-	
+?>
 	

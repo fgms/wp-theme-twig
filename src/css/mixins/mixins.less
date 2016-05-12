@@ -119,17 +119,35 @@
 	a {
 		 &, &:visited &:focus {
 			color: @color;
-			text-decoration: @text-decoration;
-			.transition-color(0.25s);
+			text-decoration: @text-decoration;			
+			.transition(0.25s);
+			border-bottom: none;
 		}
 		&:hover, &:active {
 			color: @color-hover;
-			text-decoration: @text-decoration-hover;
-			.transition-color(0.75s);
+			text-decoration: @text-decoration-hover;			
+			.transition(0.75s);
+			border-bottom: none;
+			
 		}
 	}
 }
-
+.a-border(@color,@color-border, @color-hover, @color-hover-border) {
+	a {
+		 &, &:visited &:focus {
+			color: @color;
+			text-decoration: none;
+			border-bottom: 1px solid @color-border;
+			.transition(0.25s);
+		}
+		&:hover, &:active {
+			color: @color-hover;
+			text-decoration: none;
+			border-bottom: 1px solid @color-hover-border;
+			.transition(0.75s);
+		}
+	}
+}
 
 .flex-center-xy() {
 	display: -webkit-flex !important;

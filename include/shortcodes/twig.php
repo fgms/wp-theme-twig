@@ -12,5 +12,5 @@
             } catch (Twig_Error_Loader $e){	return '<script>console.error("Error Loading twig string '. $content .'")</script>';}  
             return $retr;
 		});		
-	},$get_config());
+	},array('config'=>$get_config()));
 ?>

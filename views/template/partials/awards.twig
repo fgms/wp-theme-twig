@@ -1,0 +1,8 @@
+<ul class="awards-ticker">            
+     {% for award in awards %}
+         <li>
+             <div class="h3">{{award.title}}</div>
+             <div class="note">{{award.award}}</div>
+         </li>
+     {% endfor %}                  
+</ul>

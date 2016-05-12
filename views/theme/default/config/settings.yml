@@ -80,3 +80,45 @@ settings:
         
 forms:
     footer:
+        
+awards:
+    -
+        title : 'Sample Award'
+        award : 'Award Company'
+    -
+        title : 'Sample Award Two'
+        award : 'Award Company Two'
+        
+        
+specials:
+    -
+        active : false
+        title: 
+        details : 
+        valid : 
+        link : 
+        img : 
+        animation : data-wow-offset="10"
+        class : fg-wow slideInLeft  li-sm-50
+        style :        
+
+slideshow:
+    home:
+        id : homepage-slideshow
+        controls : false
+        indicators : true
+        captions : false
+        titles : false
+        interval: 6000
+        outer_class : feature-carousel carousel-fade
+        items:
+            -
+                title : 
+                url : 
+                images: 
+                    xl : 
+                    md : 
+                    sm : 
+                    xxs : 
+                
+     

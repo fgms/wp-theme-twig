@@ -1,10 +1,8 @@
 <?php
-	call_user_func(function (){
+	
+	call_user_func(function ($data) {		
 		
-		$data=null;
-		
-		add_shortcode('custom-template',function ($atts, $content) use (&$data) {			
-			$data=array();
+		add_shortcode('custom-template',function ($atts, $content) use (&$data) {		
 			
 			//	Content is ignored
 
@@ -13,29 +11,19 @@
 			$retr = '<script>console.error("[custom-template] shortcode Template was not defined");</script>';
 			if (isset($atts['template'])) {
 				$t=$atts['template'];
-				unset($atts['template']);
-				
-				$atts['data']=$data;
-				$data=null;
+				unset($atts['template']);				
+
 				
 				try {
 					ob_start();
-					Timber::render($t,$atts);
+					Timber::render($t,array_merge($atts,$data));
 					$retr=ob_get_contents();
 					ob_end_clean();				
 				} catch (Twig_Error_Loader $e){
 					$retr = '<script>console.error("Error Loading twig template '. $t .'")</script>';
-				}
-				
+				}				
 			}
-			
-
-
 			return $retr;
-
-			
-			
-			
 		});
 		
 		add_shortcode('custom-item',function ($atts, $content) use (&$data) {
@@ -49,6 +37,6 @@
 			
 		});
 		
-	});
+	},array('config'=>$get_config()));
 
 ?>
