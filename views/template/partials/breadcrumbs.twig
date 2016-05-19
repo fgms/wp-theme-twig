@@ -1,0 +1,4 @@
+{% if function('function_exists','yoast_breadcrumb')  %}
+    {% set breadcrumbs = function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false) %}
+    {% if breadcrumbs|striptags != 'Home' %}{{breadcrumbs}}{% endif %}    
+{% endif %}  

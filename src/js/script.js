@@ -167,9 +167,12 @@ jQuery(function($) {
   });
   // this animates to hash
   var hash = window.location.hash;
-  if ((hash.length>1) && ($('ul.nav a[href="' + hash + '"]').length > 0)) {
-	hash = hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-	$('html, body').animate({ scrollTop: $('ul.nav a[href="' + hash + '"]').offset().top -50   }, 2000);
+  if ((hash.length>1) && ($('a[href="' + hash + '"]').length > 0)) {
+	hash = hash && $('a[href="' + hash + '"]').tab('show');
+	if ($('a[href="' + hash + '"]').length > 0) {
+	  $('html, body').animate({ scrollTop: $('a[href="' + hash + '"]').offset().top -50   }, 2000);
+	}
+	
   }
   
   $('header ul li:first-child').each(function (i, e) {

@@ -1,5 +1,6 @@
 {% embed  "container-sidebar.twig" %}
 {% block container %}
+{% if function('function_exists','yoast_breadcrumb')  %}{{function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false)}}{% endif %}
 <h1>Blog</h1>
 <ul id="blog-articles">    
     {% for article in posts %}  

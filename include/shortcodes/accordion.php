@@ -1,8 +1,5 @@
-<?php
-	
-	
-	call_user_func(function () {
-		
+<?php	
+	call_user_func(function () {		
 		$panels=null;
 		$id=0;
 		$aid=0;
@@ -17,6 +14,7 @@
 		add_shortcode('accordion',function ($atts, $content) use (&$panels, &$aid) {
 			
 			$panels=array();
+			$retr ='';
 			
 			do_shortcode($content);
 			
@@ -31,12 +29,12 @@
 					'<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="false" aria-controls="%2$s">
+								<a class="%5$s" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
 									%3$s
 								</a>
 							</h4>
 						</div>
-						<div id="%2$s" class="panel-collapse collapse">
+						<div id="%2$s" class="panel-collapse %6$s ">
 							<div class="panel-body">
 								%4$s
 							</div>
@@ -45,7 +43,10 @@
 					$id,
 					$p->id,
 					$p->title,
-					$p->content
+					$p->content,
+					$p->titleactive,
+					$p->panelactive,
+					$p->ariaexpanded
 				);
 				
 			}
@@ -61,12 +62,15 @@
 			
 			if (is_null($panels)) return '';
 			
-			$atts=shortcode_atts(array('title' => '', 'id' => null),$atts);
+			$atts=shortcode_atts(array('title' => '', 'id' => null,'active'=>null),$atts);
 			if (!isset($atts['id'])) $atts['id']='panel'.(++$id);
 			
 			$panels[]=(object)array(
 				'title' => $atts['title'],
 				'id' => $atts['id'],
+				'titleactive' => $atts['active'] == 'true' ? 'in active' : 'collapsed',
+				'panelactive' => $atts['active'] == 'true' ? 'in collapsed' : 'collapsed collapse',
+				'ariaexpanded' => $atts['active'] == 'true' ? 'true' : 'false',
 				'content' => do_shortcode($content)
 			);
 			
@@ -74,7 +78,5 @@
 			
 		});
 		
-	});
-	
-	
+	});	
 ?>

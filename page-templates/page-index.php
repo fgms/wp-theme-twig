@@ -1,23 +1,20 @@
 <?php
 /**
- * Template Name: Full Width Page
+ * Template Name: Page Index
  *
  * @package WordPress
  *  
- */
-    
+ */   
     $data = Timber::get_context();
     $data['posts'] = Timber::get_posts();
-    $data['post'] = new TimberPost();
+    $data['post'] = new TimberPost();	
     $data['page'] = 'page';	
   
     $data['slideshow']=$get_slideshow();
 	$data['config']=$get_config();
     $data['menu'] = new TimberMenu();
 
-	// render using Twig template index.twig 
-	Timber::render('page-full-width.twig', $data );
-
- 
+    // render using Twig template index.twig	  
+	Timber::render('page-index.twig', $data ); 
  
 ?>

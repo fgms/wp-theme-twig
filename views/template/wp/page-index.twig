@@ -17,10 +17,15 @@
                     <div class="col-sm-{{width}}">
                         <div class="column-wrapper">
                         {% include 'breadcrumbs.twig' ignore missing only %}
-                        {% for article in posts%}
-                            {% include "article.twig" with { "article" : article, "loop" : loop } %}
-                        {% endfor %}
-                            
+                       
+                        {% include "article.twig" with { "article" : post, "loop" : loop } %}
+                        {% if post.children is defined %}
+                        <ul style="list-style: none;" >
+                            {% for child in post.children %}
+                                {% include 'article-list-element.twig' with {'article' : child }   %}
+                            {% endfor %}                            
+                        </ul>
+                        {% endif %}                        
                         </div>
                     </div>
                     <div class="col-sm-{{12-width}}">                       

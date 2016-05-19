@@ -6,7 +6,8 @@
  *  
  */   
     $data = Timber::get_context();
-    $data['posts'] = Timber::get_posts();	
+    $data['posts'] = Timber::get_posts();
+    $data['post'] = new TimberPost();
     $data['page'] = 'page';	
   
     $data['slideshow']=$get_slideshow();

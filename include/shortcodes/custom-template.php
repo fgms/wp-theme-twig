@@ -1,9 +1,11 @@
 <?php
 	
-	call_user_func(function ($data) {		
+	call_user_func(function ($config) {		
 		
-		add_shortcode('custom-template',function ($atts, $content) use (&$data) {		
-			
+		$data=null;
+		
+		add_shortcode('custom-template',function ($atts, $content) use (&$data,$config) {		
+			$data=array();	
 			//	Content is ignored
 
 			$atts['content'] = do_shortcode($content);
@@ -12,11 +14,12 @@
 			if (isset($atts['template'])) {
 				$t=$atts['template'];
 				unset($atts['template']);				
-
+				$atts['data']=$data;
+				$data=null;
 				
 				try {
 					ob_start();
-					Timber::render($t,array_merge($atts,$data));
+					Timber::render($t,array_merge($atts,$config));
 					$retr=ob_get_contents();
 					ob_end_clean();				
 				} catch (Twig_Error_Loader $e){

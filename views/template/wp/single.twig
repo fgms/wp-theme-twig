@@ -1,7 +1,7 @@
 {% embed  "container-sidebar.twig" %}
 {% block container %}
 {{post.get_field('your_prefix_oembed')}}
-
+    {% if function('function_exists','yoast_breadcrumb')  %}{{function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false)}}{% endif %}
     <article class="display-page" itemscope itemtype="http://schema.org/Article">
         <div class="article-blog-post-heading">
             <div ><span class="article-date" itemprop="datePublished">{{ post.date | date("F d, Y") }}</div>

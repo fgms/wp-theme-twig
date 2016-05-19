@@ -51,7 +51,7 @@
 
 	endif;
 
-	$data['right']=is_front_page();
+	
 
 	// render using Twig template index.twig	
 	Timber::render( $template . '.twig', $data );
