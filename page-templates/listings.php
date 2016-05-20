@@ -1,9 +1,10 @@
 <?php
 /**
- * Template Name: Contact Page
+ * Template Name: Page Listings (Index)
  *
  * @package WordPress
  *  
- */
+ */   
 require_once(__DIR__.'/../index.php'); 
+ 
 ?>

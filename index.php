@@ -6,10 +6,10 @@
 	// set up page data 
 	
 
-	
+	$start = TimberHelper::start_timer();
 	if ( is_singular() ) :
 		$data = Timber::get_context();
-		$data['post'] = new TimberPost();
+		$data['post'] = new TimberPost();       
 	
 	else : 
 		$data = Timber::get_context();
@@ -25,7 +25,13 @@
 	
 	elseif ( is_page() ) :
 		$data['page'] = 'page';	
-		$template = 'page';
+        $matches = null;
+        $template = 'page';
+        // for custom templates
+        $returnValue = preg_match('/.*\\/(.*?)\\./', get_page_template(), $matches);
+        if ($returnValue){
+            $template = 'page-' . $matches[1];
+        }
 		$data['slideshow']=$get_slideshow();
 
 	elseif ( is_home() ) :
@@ -50,9 +56,24 @@
 		$template = 'archive';		
 
 	endif;
-
+   
 	
-
-	// render using Twig template index.twig	
-	Timber::render( $template . '.twig', $data );
+   
+	// render using Twig template index.twig
+    
+    $cache_type_array = array('CACHE_NONE'=>TimberLoader::CACHE_NONE,
+									   'CACHE_OBJECT'=>TimberLoader::CACHE_OBJECT,
+									   'CACHE_TRANSIENT'=>TimberLoader::CACHE_TRANSIENT,
+									   'CACHE_SITE_TRANSIENT'=>TimberLoader::CACHE_SITE_TRANSIENT,
+									   'CACHE_USE_DEFAULT'=>TimberLoader::CACHE_USE_DEFAULT);
+	Timber::render( $template . '.twig',
+                   $data,
+                   get_option('theme_twig_cache_expire','0'),
+                   $cache_type_array[get_option('theme_twig_cache','CACHE_NONE')]
+                   
+                   );
+    if (get_option('theme_twig_cache_performance', 'true') == 'true'){
+        echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
+    }
+    
 ?>

@@ -27,6 +27,7 @@ function blankslate_setup() {
 
 add_action( 'init', function(){
 	add_post_type_support( 'page', 'excerpt' );
+
 });
 
 
@@ -101,11 +102,16 @@ function add_to_context($data){
 
 */
 
+
+
+
+
 /* remove admin bar for development */
 add_action('after_setup_theme', 'remove_admin_bar');
 function remove_admin_bar() {    
     show_admin_bar(false);
 }
+
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
 function fgms_meta_boxes ($bs) {
@@ -159,34 +165,69 @@ function fgms_meta_boxes ($bs) {
 }
 
 
-$get_config=function() {
-    $autoloader=require_once('vendor/autoload.php');
-	$theme = get_option('theme_directory','default');
-	$config_file = get_template_directory().'/views/theme/' . $theme .'/config/settings.yml';
-	//$config_file=dirname(__FILE__).'/config/settings.yml';
-	$config=@file_get_contents($config_file);
-	if ($config===false) die('Could not read '.$config_file);
-	$config=\Symfony\Component\Yaml\Yaml::parse($config);
-
-    
-     //setting up timber twig file locations
-	 // it will look in theme first, if it doesn't find it it will look in master
-    Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$theme. '/template',
-                             dirname(__FILE__).'/views/theme/'.$theme.'/template/wp',
-                             dirname(__FILE__).'/views/theme/'.$theme.'/template/partials',
-                             dirname(__FILE__).'/views/theme/'.$theme.'/template/custom',
-							 dirname(__FILE__).'/views/template',
-                             dirname(__FILE__).'/views/template/wp',
-                             dirname(__FILE__).'/views/template/partials',
-                             dirname(__FILE__).'/views/template/custom',
-							 
-							
-							);
+$get_config=call_user_func(function() {
 	
-
+	return function() use (&$config) {
+		// lets see if we have a cached version
+		if (!is_null($config)) return $config;
+		$cache = array('config_ts'=> get_transient('fg_config_timestamp'),
+					   'config'=>get_transient('fg_config')
+				);
+		$errors = array();
+		$theme = get_option('theme_directory','default');
+		$config_file = get_template_directory().'/views/theme/' . $theme .'/config/settings.yml';
+		$filetime = filemtime($config_file);
+		
+		// checking if settings.yml has changed if so lets update, but only if is valid
+		if ($cache['config_ts'] != $filetime) {		
+			$autoloader=require_once('vendor/autoload.php');	
+			$config=@file_get_contents($config_file);
+			if ($config===false) die('Could not read '.$config_file);
+			try {
+				$config=\Symfony\Component\Yaml\Yaml::parse($config);
+			}
+			catch(\Symfony\Component\Yaml\Exception\ParseException $e){
+				$errors[] = 'ParseException in function.php Line '. __LINE__ . ' '. $e;
+			}
+			// have a good config, lets update tranient values
+			if (is_array($config) && (count($errors) === 0)){
+				set_transient('fg_config',$config,0);
+				set_transient('fg_config_timestamp',$filetime,0);			
+			}
+			else {
+				//means an error in yaml settings. -- need a way to notify user it failed			
+				$config = $cache['config'];			
+			}
+		}
+		// no changes, so load transients.
+		else {
+			$config = $cache['config'];
+			
+		}
+		//adding errors
+		$config['ERRORS'] = $errors;
+	 
+		
+		
+		 //setting up timber twig file locations
+		 // it will look in theme first, if it doesn't find it it will look in master
+		Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$theme. '/template',
+								 dirname(__FILE__).'/views/theme/'.$theme.'/template/wp',
+								 dirname(__FILE__).'/views/theme/'.$theme.'/template/partials',
+								 dirname(__FILE__).'/views/theme/'.$theme.'/template/custom',
+								 dirname(__FILE__).'/views/template',
+								 dirname(__FILE__).'/views/template/wp',
+								 dirname(__FILE__).'/views/template/partials',
+								 dirname(__FILE__).'/views/template/custom',
+								 
+								
+								);
+		
 	
-    return $config;
-};
+		
+		return $config;
+	};
+});
 
 $get_slideshow=function () {
 	

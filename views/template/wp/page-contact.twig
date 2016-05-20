@@ -1,30 +1,22 @@
 {% extends 'base.twig' %}
-{% if right|default(false) %}
-    {% set class="right" %}
-    {% set width=8 %}
-{% else %}
-    {% set class="left" %}
-    {% set width=9 %}
-{% endif %}
 
 {% block content %}	
-    <div class="modular sidebar-{{class}}">
+    <div class="modular sidebar-left">
         <div class="modular-row "  >
             <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
             <div class="container">    
             
                 <div class="row">
-                    <div class="col-sm-{{width}}">
-                        <div class="column-wrapper">
-                            {% include 'breadcrumbs.twig' ignore missing only %}
-                         
+                    <div class="col-md-9 col-md-push-3">
+                        <div class="main-col-wrapper">
+                            {% include 'breadcrumbs.twig' ignore missing only %}                       
                        
                             {% include "article.twig" with { "article" : post, "loop" : loop } %}
                       
                             
                         </div>
                     </div>
-                    <div class="col-sm-{{12-width}}">
+                    <div class="col-md-3 col-md-pull-9">
                         <div id="sidebar">
                             <div id="sidebar-wrapper">
                                 <div class="sidebar nav hidden-xs" >                                
