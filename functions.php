@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
 function blankslate_setup() {
@@ -18,8 +14,6 @@ function blankslate_setup() {
     register_nav_menus(
     array( 'main-menu' => __( 'Main Menu', 'blankslate' ) )
     );
-    
-    
 
     
 }
@@ -29,8 +23,6 @@ add_action( 'init', function(){
 	add_post_type_support( 'page', 'excerpt' );
 
 });
-
-
 
 
 add_action( 'wp_enqueue_scripts', 'blankslate_load_scripts' );
@@ -272,10 +264,8 @@ $get_slideshow=function () {
     
 };
 
+if (!is_admin()){
+	require_once(__DIR__.'/include/shortcodes.php');
+}
 
-
-
-
-
-require_once(__DIR__.'/include/shortcodes.php');
 require_once(__DIR__.'/include/theme-settings.php');
