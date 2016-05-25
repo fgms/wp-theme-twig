@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['src/js/**/*.js','src/css/**/*.less','views/theme/fg-theme-missioninnrealestate/js/**/*','views/theme/fg-theme-missioninnrealestate/css/**/*.less'],
+        files: ['src/js/**/*.js','src/css/**/*.less','views/theme/fg-theme-shoreclubtc/js/**/*','views/theme/fg-theme-shoreclubtc/css/**/*.less'],
         tasks: ['jshint','concat','uglify', 'jsbeautifier','less'],
         options: {
           spawn: false,
@@ -58,14 +58,14 @@ module.exports = function(grunt) {
           separator: ';',
         },
         dist: {
-          src: ['src/js/script.js', 'views/theme/fg-theme-missioninnrealestate/js/**/*.js'],
+          src: ['src/js/script.js', 'views/theme/fg-theme-shoreclubtc/js/**/*.js'],
           dest: 'assets/js/<%= pkg.name %>.js',
         },
       },    
     less: {
       development: {
         options: {
-            paths: ['src/css/mixins','src/css/', 'views/theme/fg-theme-missioninnrealestate/css/']  ,
+            paths: ['src/css/mixins','src/css/', 'views/theme/fg-theme-shoreclubtc/css/']  ,
           compress: false,
           yuicompress: false,
           syncImport: true,
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
           
         },
         files: {
-          "assets/css/style.css": "views/theme/fg-theme-missioninnrealestate/css/style.less" // destination file and source file
+          "assets/css/style.css": "views/theme/fg-theme-shoreclubtc/css/style.less" // destination file and source file
         }
       }
     },
@@ -92,12 +92,8 @@ module.exports = function(grunt) {
                 },
                 fonts: [
                     {
-                        family: 'Nunito',
-                        styles: [300,400,700]                 
-                    },
-                    {
-                        family: 'Parisienne',
-                        styles: [400]
+                        family: 'Dancing Script',
+                        styles: [400,700]                 
                     }
 					
                 ]
