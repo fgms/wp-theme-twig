@@ -107,11 +107,12 @@ function add_to_context($data){
 
 
 /* remove admin bar for development */
+/*
 add_action('after_setup_theme', 'remove_admin_bar');
 function remove_admin_bar() {    
     show_admin_bar(false);
 }
-
+*/
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
 function fgms_meta_boxes ($bs) {
