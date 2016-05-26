@@ -33,8 +33,7 @@ function blankslate_load_scripts(){
    wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' );
    wp_enqueue_style('fontawesome','https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
    wp_enqueue_script('google-api','http://www.google.com/jsapi');
-   wp_enqueue_script('fg-script',get_stylesheet_directory_uri() . '/assets/js/wp-theme-fg.js');
-   wp_enqueue_style('theme',get_stylesheet_directory_uri().'/assets/css/style.css');
+
 }
 
 add_action( 'comment_form_before', 'blankslate_enqueue_comment_reply_script' );
@@ -168,7 +167,7 @@ $get_config=call_user_func(function() {
 				);
 		$errors = array();
 		$theme = get_option('theme_directory','default');
-		$config_file = get_template_directory().'/views/theme/' . $theme .'/config/settings.yml';
+		$config_file = get_stylesheet_directory().'/config/settings.yml';
 		$filetime = filemtime($config_file);
 		
 		// checking if settings.yml has changed if so lets update, but only if is valid
@@ -200,18 +199,21 @@ $get_config=call_user_func(function() {
 		//adding errors
 		$config['ERRORS'] = $errors;
 	 
-		$dirnameMaster = dirname(__FILE__).'/twig-templates';
-		$dirnameTheme = dirname(__FILE__).'/themes/'. $theme . '/twig-templates';
-		Timber::$dirname=array($dirnameMaster,$dirnameTheme );
+		$dirnameChildTheme = get_stylesheet_directory(). '/twig-templates';
+		$dirnameTheme = get_template_directory(). '/twig-templates';
+		
+		
+		Timber::$dirname=array('twig-templates');
 		
 		 //setting up timber twig file locations
 		 // it will look in theme first, if it doesn't find it it will look in master
-		Timber::$locations=array($dirnameTheme,
+		Timber::$locations=array($dirnameChildTheme,
+								 $dirnameChildTheme.'/wp',
+								 $dirnameChildTheme.'/partials',
+								 $dirnameTheme,
 								 $dirnameTheme.'/wp',
 								 $dirnameTheme.'/partials',
-								 $dirnameMaster,
-								 $dirnameMaster.'/wp',
-								 $dirnameMaster.'/partials'	
+								 
 								);
 		
 	
