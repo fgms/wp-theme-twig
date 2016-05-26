@@ -10,7 +10,128 @@
 * Select google fonts, update Gruntifile.js,  and run ```grunt googlefonts```
 * Run grunt watch and update css or js to upload assets.
 
-
+## File Structure
+```
+├── 404.php
+├── assets
+│   ├── css
+│   │   └── style.css
+│   ├── fonts
+│   ├── images
+│   │   ├── gallery
+│   │   ├── slideshows
+│   │   └── templates
+│   └── js
+│       ├── wp-theme-fg.js
+│       └── wp-theme-fg.min.js
+├── composer.json
+├── functions.php
+├── Gruntfile.js
+├── include
+│   ├── shortcodes
+│   │   ├── accordion.php
+│   │   ├── ajax.php
+│   │   ├── carousel.php
+│   │   ├── custom-template.php
+│   │   ├── email.php
+│   │   ├── tabs.php
+│   │   └── twig.php
+│   ├── shortcodes.php
+│   └── theme-settings.php
+├── index.php
+├── package.json
+├── page-templates
+│   ├── blank.php
+│   ├── contact.php
+│   ├── full-width.php
+│   ├── landingpage.php
+│   ├── listings.php
+│   └── modular.php
+├── README.md
+├── screenshot.png
+├── style.css
+├── themes
+│   ├── default
+│   │   └── config
+│   │       └── settings.yml
+│   └── fg-theme-shoreclubtc
+│       ├── config
+│       │   └── settings.yml
+│       ├── README.md
+│       ├── src
+│       │   ├── css
+│       │   │   ├── awesome-bootstrap-checkbox.less
+│       │   │   ├── bootstrap-carousel.less
+│       │   │   ├── bootstrap.less
+│       │   │   ├── fg-blog.less
+│       │   │   ├── fg-disclaimer.less
+│       │   │   ├── fg-gallery.less
+│       │   │   ├── fg-gravplugins.less
+│       │   │   ├── fg-navigation.less
+│       │   │   ├── fg-profiles.less
+│       │   │   ├── fg-site.less
+│       │   │   ├── fonts.less
+│       │   │   ├── footer.less
+│       │   │   ├── header.less
+│       │   │   ├── ie.less
+│       │   │   ├── mixins
+│       │   │   │   ├── 3l.less
+│       │   │   │   └── mixins.less
+│       │   │   ├── modular.less
+│       │   │   ├── sections.less
+│       │   │   ├── sidebar.less
+│       │   │   ├── style.less
+│       │   │   ├── sz.less
+│       │   │   ├── variables.less
+│       │   │   └── vendor
+│       │   │       └── animate
+│       │   │           └── animate.min.less
+│       │   └── js
+│       │       ├── theme.js│       │       
+│       └── twig-templates
+│           ├── base.twig
+│           └── partials
+│               ├── custom-slideshow.twig
+│               ├── home-awards.twig
+│               ├── home-button-navigation.twig
+│               ├── home-gallery.twig
+│               ├── home-intro.twig
+│               └── home-specials.twig
+└── twig-templates
+    ├── base.twig
+    ├── footer.twig
+    ├── header.twig
+    ├── partials
+    │   ├── article-list-element.twig
+    │   ├── article.twig
+    │   ├── awards.twig
+    │   ├── blog-sidebar.twig
+    │   ├── blog-tags-cats.twig
+    │   ├── bootstrap-carousel.twig
+    │   ├── breadcrumbs.twig
+    │   ├── contact-sidebar.twig
+    │   ├── gallery.twig
+    │   ├── modal-inner.twig
+    │   ├── navigation.twig
+    │   ├── realtor-directory.twig
+    │   ├── responsive-list.twig
+    │   ├── social-sharing.twig
+    │   └── specials.twig
+    └── wp
+        ├── archive.twig
+        ├── index.twig
+        ├── page-404.twig
+        ├── page-blank.twig
+        ├── page-contact.twig
+        ├── page-full-width.twig
+        ├── page-landing-twig
+        ├── page-listings.twig
+        ├── page-modular.twig
+        ├── page.twig
+        └── single.twig
+                    
+```           
+            
 
 ## Shortcodes
 

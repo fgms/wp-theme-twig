@@ -10,14 +10,14 @@
 					{# this is where footer widgets should go #}
 					<div class="footer-sidebar-right">
 						<div class="footer-navigation">
-							<a href="" class="script-text">Check availability</a>
-							<a href="" class="script-text">Send us a message</a>
+							<a href="" id="check-availability" class="script-text">Check availability</a>
+							{% if config.postid.contactmodal is defined %}
+								<a id="contact-us" class="script-text" href="javascript:void(0);" data-toggle="modal" data-target="#contact-modal" >Send us a message</a>
+							{% endif%}
+							
 						</div>
 					</div>					
-				</div>
-				
-
-				
+				</div>				
 			</div>			
 			<div class="{{config.settings.footer.grid.right | default('col-sm-6')}}">
 				<div class="footer-content-wrapper right">
@@ -30,10 +30,12 @@
 					{% endif %}
 					
 					<div class="footer-text-wrapper">
-						
+						{% if config.phone.toll is defined %}			<div>{{__('Toll free', 'fgms' ) }}: <span>{{config.phone.toll|e}}</span></div>				{% endif %}
 						{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }}: <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
-						{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }}: <span>{{config.phone.resort|e}}</span></div>				{% endif %}
-						{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }}: <span>{{config.phone.fax|e}}</span></div>					{% endif %}			
+						{% if config.phone.reception is defined %}		<div>{{__('Reception:', 'fgms' ) }}: <span>{{config.phone.reception|e}}</span></div>		{% endif %}	
+						{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }}: <span>{{config.phone.resort|e}}</span></div>				{% endif %}						
+						{% if config.phone.office is defined %}			<div>{{__('Office', 'fgms' ) }}: <span>{{config.phone.office|e}}</span></div>				{% endif %}
+						{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }}: <span>{{config.phone.fax|e}}</span></div>						{% endif %}			
 						
 						{% if config.email.info is defined %}			<div>{{__('Email', 'fgms' ) }}: <span>{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
 						
@@ -69,19 +71,18 @@
 						</div>
 						{% endif %}
 					{% endif %}
-				</div>
-				
-			</div>
-			
-
-			
+				</div>				
+			</div>			
 		</div>
-		<a href="/ajax/?postid=13" data-toggle="modal" data-target="#general-modal" >Terms of Use</a> | <a href="/ajax/?postid=16" data-toggle="modal" data-target="#general-modal" >Privacy Statement</a>
+		
 		<div class="row">
 			<div class="{{config.settings.copyright.grid.left | default('col-sm-6')}}">
 				<div class="footer-content-wrapper left">
 					<div class="footer-terms">
-						
+						{% if config.postid.terms is defined %}<a href="/ajax/?postid={{config.postid.terms}}" data-toggle="modal" data-target="#general-modal" >Terms of Use</a>{% endif%}
+						{% if config.postid.terms is defined and config.postid.privacy %} | {% endif%}
+						{% if config.postid.privacy is defined %}<a href="/ajax/?postid={{config.postid.privacy}}" data-toggle="modal" data-target="#general-modal" >Privacy Statement</a>{% endif%}
+						  
 					</div>
 				</div>
 			</div>
@@ -93,13 +94,8 @@
 						&copy; Copyright
 						{{config.settings.copyright.year|e}}{% if year!=config.settings.copyright.year %}-{{year|e}}{% endif %}{% endif %}{{config.settings.copyright.text|e}}
 					</div>
-				</div>
-
-				
+				</div>				
 			</div>
-		</div>
-		
-	</div>
-	
+		</div>		
+	</div>	
 </footer>
-

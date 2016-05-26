@@ -18,9 +18,9 @@
 {% import _self as gmacro %}
 
 {# *** Random *** #}
-{% if gallery.random %}{%set images = random(gallery.images) %}{%else%}{%set images = gallery.images %}{%endif%}
+{% if gallery.options.random %}{%set images = random(gallery.images) %}{%else%}{%set images = gallery.images %}{%endif%}
 {# *** Limit *** #}            
-{% set limit = gallery.limit|default(500)%}
+{% set limit = gallery.options.limit|default(500)%}
 
 
 <div class="modular-row modular-home-gallery" >
@@ -40,7 +40,7 @@
             {% endif %}        
         
             {# ---------- CREATING GALLERY ------- #}
-            <div class="__st_gallery {{gallery.class}}" data-thumbpadding="{{gallery.thumpadding|default("0")}}" data-thumbsperrow="{{gallery.thumbsperrow|default("5")}}">
+            <div class="__st_gallery {{gallery.class}}" data-thumbpadding="{{gallery.options.thumpadding|default("0")}}" data-thumbsperrow="{{gallery.options.thumbsperrow|default("5")}}">
                 {# *** Checking if is feature image ***#}
                 
                 {% if gallery.options.feature %}
@@ -49,10 +49,12 @@
                         <div class="__st_gallery_feature_content script-feature-content" >                   
                             <img src="{{gallery.directory.root}}{{gallery.directory.large}}{{image.src}}" data-loaded="false" style="width: 100%; display: none;"/>
                         </div>
+                        
                         <div class="__st_gallery_title_caption">
                             {% if image.title %}<div class="__st_gallery_title">{{image.title}}</div>{% endif %}
                             {% if image.caption %}<div class="__st_gallery_caption">{{image.caption}}</div>{% endif %}                        
                         </div>
+                        
                     </div>
                 {% endif %}
                 
@@ -79,8 +81,10 @@
                                         {% if gallery.options.social %}
                                             
                                         {% endif %}
-                                        {% if image.title %}<div class="gallery-title">{{image.title}}</div>{%endif%}
-                                        {% if image.caption%}<div class="gallery-caption">{{image.caption}}</div>{%endif%}
+                                        {% if gallery.options.enable.thumbtext %}
+                                            {% if image.title %}<div class="gallery-title">{{image.title}}</div>{%endif%}
+                                            {% if image.caption%}<div class="gallery-caption">{{image.caption}}</div>{%endif%}
+                                        {% endif %}
                                     </div>
                                 </div>                                                        
                             </a>

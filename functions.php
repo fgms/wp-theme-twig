@@ -200,20 +200,18 @@ $get_config=call_user_func(function() {
 		//adding errors
 		$config['ERRORS'] = $errors;
 	 
-		
+		$dirnameMaster = dirname(__FILE__).'/twig-templates';
+		$dirnameTheme = dirname(__FILE__).'/themes/'. $theme . '/twig-templates';
+		Timber::$dirname=array($dirnameMaster,$dirnameTheme );
 		
 		 //setting up timber twig file locations
 		 // it will look in theme first, if it doesn't find it it will look in master
-		Timber::$locations=array(dirname(__FILE__).'/views/theme/'.$theme. '/template',
-								 dirname(__FILE__).'/views/theme/'.$theme.'/template/wp',
-								 dirname(__FILE__).'/views/theme/'.$theme.'/template/partials',
-								 dirname(__FILE__).'/views/theme/'.$theme.'/template/custom',
-								 dirname(__FILE__).'/views/template',
-								 dirname(__FILE__).'/views/template/wp',
-								 dirname(__FILE__).'/views/template/partials',
-								 dirname(__FILE__).'/views/template/custom',
-								 
-								
+		Timber::$locations=array($dirnameTheme,
+								 $dirnameTheme.'/wp',
+								 $dirnameTheme.'/partials',
+								 $dirnameMaster,
+								 $dirnameMaster.'/wp',
+								 $dirnameMaster.'/partials'	
 								);
 		
 	

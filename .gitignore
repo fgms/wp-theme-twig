@@ -8,3 +8,6 @@ config/settings.yml
 src/js/scripts.js
 views/theme/*
 !views/theme/default
+themes/*
+!themes/default
+directory-tree.txt
