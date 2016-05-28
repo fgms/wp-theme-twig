@@ -13,20 +13,8 @@
 ## File Structure
 ```
 ├── 404.php
-├── assets
-│   ├── css
-│   │   └── style.css
-│   ├── fonts
-│   ├── images
-│   │   ├── gallery
-│   │   ├── slideshows
-│   │   └── templates
-│   └── js
-│       ├── wp-theme-fg.js
-│       └── wp-theme-fg.min.js
 ├── composer.json
 ├── functions.php
-├── Gruntfile.js
 ├── include
 │   ├── shortcodes
 │   │   ├── accordion.php
@@ -39,7 +27,6 @@
 │   ├── shortcodes.php
 │   └── theme-settings.php
 ├── index.php
-├── package.json
 ├── page-templates
 │   ├── blank.php
 │   ├── contact.php
@@ -50,53 +37,6 @@
 ├── README.md
 ├── screenshot.png
 ├── style.css
-├── themes
-│   ├── default
-│   │   └── config
-│   │       └── settings.yml
-│   └── fg-theme-shoreclubtc
-│       ├── config
-│       │   └── settings.yml
-│       ├── README.md
-│       ├── src
-│       │   ├── css
-│       │   │   ├── awesome-bootstrap-checkbox.less
-│       │   │   ├── bootstrap-carousel.less
-│       │   │   ├── bootstrap.less
-│       │   │   ├── fg-blog.less
-│       │   │   ├── fg-disclaimer.less
-│       │   │   ├── fg-gallery.less
-│       │   │   ├── fg-gravplugins.less
-│       │   │   ├── fg-navigation.less
-│       │   │   ├── fg-profiles.less
-│       │   │   ├── fg-site.less
-│       │   │   ├── fonts.less
-│       │   │   ├── footer.less
-│       │   │   ├── header.less
-│       │   │   ├── ie.less
-│       │   │   ├── mixins
-│       │   │   │   ├── 3l.less
-│       │   │   │   └── mixins.less
-│       │   │   ├── modular.less
-│       │   │   ├── sections.less
-│       │   │   ├── sidebar.less
-│       │   │   ├── style.less
-│       │   │   ├── sz.less
-│       │   │   ├── variables.less
-│       │   │   └── vendor
-│       │   │       └── animate
-│       │   │           └── animate.min.less
-│       │   └── js
-│       │       ├── theme.js│       │       
-│       └── twig-templates
-│           ├── base.twig
-│           └── partials
-│               ├── custom-slideshow.twig
-│               ├── home-awards.twig
-│               ├── home-button-navigation.twig
-│               ├── home-gallery.twig
-│               ├── home-intro.twig
-│               └── home-specials.twig
 └── twig-templates
     ├── base.twig
     ├── footer.twig
@@ -129,6 +69,7 @@
         ├── page-modular.twig
         ├── page.twig
         └── single.twig
+
                     
 ```           
             

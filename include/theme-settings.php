@@ -24,22 +24,8 @@
     
     
         add_action("admin_init", function(){
-            add_settings_section("section", "All Settings", null, "theme-options");
-            
-			// this is the directory to get config
-            add_settings_field("theme_directory", "Theme", function(){
-                $select = '<select  name="theme_directory" id="theme_directory"  >';
-                $path = get_template_directory().'/views/theme/';
-                $dirs = array_filter(glob($path . '*'), 'is_dir');
-                foreach ( $dirs as $dir){
-                    $theme = str_replace($path, '', $dir);
-                    $select .= '<option ' . ((get_option('theme_directory') === $theme ) ? 'SELECTED' : '') .'>' . $theme .'</option>';
-                }
-                $select .= '</select>';
-                echo $select;
-                
-            }, "theme-options", "section");
-			register_setting("section", "theme_directory");
+            add_settings_section("section", "All Settings", null, "theme-options");          
+     
 			
 			// Sets the twig cache type
             add_settings_field("theme_twig_cache", "Twig Cache", function(){

@@ -12,5 +12,5 @@
             } catch (Twig_Error_Loader $e){	return '<script>console.error("Error Loading twig string '. $content .'")</script>';}  
             return $retr;
 		});		
-	},array('config'=>$get_config()));
+	},array_merge(Timber::get_context(),array('config'=>$get_config())) );
 ?>

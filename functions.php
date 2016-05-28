@@ -267,5 +267,6 @@ $get_slideshow=function () {
 if (!is_admin()){
 	require_once(__DIR__.'/include/shortcodes.php');
 }
-
-require_once(__DIR__.'/include/theme-settings.php');
+else {
+	require_once(__DIR__.'/include/theme-settings.php');
+}

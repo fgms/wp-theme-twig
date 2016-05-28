@@ -1,4 +1,9 @@
-<article class="display-page" itemscope itemtype="http://schema.org/Article">  
-    <h1 class="article-title" itemscope="name">{{ article.title }}</h1>	
-    <div id="articleContent" itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->
+<article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
+{% if loop.length == 1 %}
+    <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
+    {% else %}
+    <h2 class="article-title" itemscope="name">{{article.title}}</h2>    
+{% endif %}
+
+    <div  itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->
 </article>

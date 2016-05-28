@@ -1,33 +1,26 @@
 {% extends 'base.twig' %}
-{% if right|default(false) %}
-    {% set class="right" %}
-    {% set width=8 %}
-{% else %}
-    {% set class="left" %}
-    {% set width=9 %}
-{% endif %}
-
 {% block content %}	
-    <div class="modular sidebar-{{class}}">
-        <div class="modular-row "  >
-            <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-            <div class="container">         
-            
-                <div class="row">
-                    <div class="col-sm-{{width}}">
-                        <div class="column-wrapper">
-                        {% include 'breadcrumbs.twig' ignore missing only %}
-                        {% for article in posts%}
-                            {% include "article.twig" with { "article" : article, "loop" : loop } %}
-                        {% endfor %}
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-{{12-width}}">                       
-                            {% include 'blog-sidebar.twig'  %}                            
+<div class="modular sidebar">
+    <div class="modular-row "  >
+        <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+        <div class="container">
+            <div class="row">
+                <div class="{{config.settings.page.grid.left | default('col-sm-8')}}">
+                    <div class="column-wrapper">
+                    {% include 'breadcrumbs.twig' ignore missing only %}
+                    {% for article in posts%}
+                        {% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-page-default" } only %}
+                    {% endfor %}
+                    
                     </div>
                 </div>
+                {% if config.settings.page.grid.right is defined%}
+                <div class="{{config.settings.page.grid.right}}">                       
+                        {% include 'blog-sidebar.twig'  %}                            
+                </div>
+                {% endif %}
             </div>
         </div>
-    </div>	
+    </div>
+</div>	
 {% endblock %}
