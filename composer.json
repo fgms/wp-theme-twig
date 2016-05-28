@@ -1,6 +1,6 @@
 {
     "name" : "sturple/fg-wp-theme-twig",
-    "version" : "0.0.1",
+    "version" : "0.0.2",
     "description" : "Basic Twig template theme",
     "type" : "wordpress-theme",
     "require": {
