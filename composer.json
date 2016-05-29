@@ -3,6 +3,7 @@
     "version" : "0.0.2",
     "description" : "Basic Twig template theme",
     "type" : "wordpress-theme",
+    "minimum-stability" : "dev",
     "require": {
         "php" : ">=5.4",
         "symfony/yaml": "^3.0",
