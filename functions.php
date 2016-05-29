@@ -1,4 +1,5 @@
 <?php
+$autoloader = require_once(get_home_path() .'vendor/autoload.php');
 
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
