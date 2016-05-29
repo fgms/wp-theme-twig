@@ -1,5 +1,5 @@
 <?php
-$autoloader = require_once(get_home_path() .'vendor/autoload.php');
+$autoloader = require_once( str_replace('/wp-content/themes', '', get_theme_root()) .'/vendor/autoload.php');
 
 add_action( 'after_setup_theme', 'blankslate_setup' );
 
@@ -15,10 +15,8 @@ function blankslate_setup() {
     register_nav_menus(
     array( 'main-menu' => __( 'Main Menu', 'blankslate' ) )
     );
-
     
 }
-
 
 add_action( 'init', function(){
 	add_post_type_support( 'page', 'excerpt' );
@@ -85,18 +83,6 @@ function blankslate_comments_number( $count ){
     return $count;
     }
 }
-/*
-add_filter('timber/context', 'add_to_context');
-function add_to_context($data){
-    $data['menu'] = new TimberMenu(); // This is where you can also send a WordPress menu slug or ID
-    return $data;
-}
-
-*/
-
-
-
-
 
 /* remove admin bar for development */
 /*

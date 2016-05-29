@@ -1,42 +1,26 @@
-{% embed  "container-sidebar.twig" %}
-{% block container %}
-{{post.get_field('your_prefix_oembed')}}
-    {% if function('function_exists','yoast_breadcrumb')  %}{{function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false)}}{% endif %}
-    <article class="display-page" itemscope itemtype="http://schema.org/Article">
-        <div class="article-blog-post-heading">
-            <div ><span class="article-date" itemprop="datePublished">{{ post.date | date("F d, Y") }}</div>
-        </div>    
-        <h1 class="article-title" itemscope="name">{{ post.title }}</h1>	
-        <div id="articleContent" itemprop="articleBody">{{  post.content }}</div><!-- articleContent -->								
-        <div  class="article-footer" style="margin-bottom: 12px;">									
-            <div class="posted-by">Posted by <span>{{post.author | default(site.title)}}</span></div>
-            <div class="social-sharing">{% include 'social-sharing.twig' %}</div>
-            {% include 'blog-tags-cats.twig' %}       
-            <meta itemprop="author" content="{{post.author | default(site.title)}}" />
-        </div>    
-        
-        
-        {% if useDisqus %}
-        <section id="comments">
-            <h2 id="commentsTitle">{{settings.commentsText}}</h2>
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-              var disqus_shortname = '{{ settings.disqusUsername }}';
-              var disqus_identifier = '{{ article.id }}';						  
-              /* * * DON'T EDIT BELOW THIS LINE * * */
-              (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-              })();
-            </script>
-        </section><!-- disqusWrapper -->
-        {% endif %}
-    
-    </article>
-   
-    
-
-
-{%endblock%}
-{%endembed%}
+{% extends 'base.twig' %}
+{% block content %}	
+<div class="modular sidebar">
+    <div class="modular-row "  >
+        <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+        <div class="container">
+            <div class="row">
+                <div class="{{config.settings.article.grid.left | default('col-sm-8')}}">
+                    <div class="column-wrapper">
+                    {% include 'breadcrumbs.twig' ignore missing only %}
+                    {% for article in posts%}
+                        {% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-single-default" } only %}
+                    {% endfor %}
+                    
+                    </div>
+                </div>
+                {% if config.settings.page.article.right is defined%}
+                <div class="{{config.settings.article.grid.right}}">                       
+                        {% include 'blog-sidebar.twig'  %}                            
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>	
+{% endblock %}

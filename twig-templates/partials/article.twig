@@ -2,8 +2,42 @@
 {% if loop.length == 1 %}
     <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
     {% else %}
-    <h2 class="article-title" itemscope="name">{{article.title}}</h2>    
+     <a href="{{ article.permalink }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>    
 {% endif %}
-
+    <meta itemprop="author" content="{{ article.author }}" />
     <div  itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->
+    {# post meta data #}
+    {% if article.post_type == 'post' %}
+    <div  class="article-footer" style="margin-bottom: 12px;">									
+        <div class="posted-by">Posted by <span>{{post.author | default(site.title)}}</span></div>
+        <div class="social-sharing">{% include 'social-sharing.twig' %}</div>
+        {% include 'blog-tags-cats.twig' %}       
+        <meta itemprop="author" content="{{post.author | default(site.title)}}" />
+    </div>            
+    {% endif %}
+    
+    {# comments #}
+    {% if loop.length == 1%}
+        {% if article.comments is defined %}
+            
+        {% endif %}
+        
+        {# using disqus #}
+        {% if config.disqus is define %}
+        <section id="comments">
+            <h3 id="commentsTitle">{{config.comments.title| default('Comments')}}</h3>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+              var disqus_shortname = '{{ config.disqus.username }}';
+              var disqus_identifier = '{{ article.id }}';						  
+              /* * * DON'T EDIT BELOW THIS LINE * * */
+              (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+        </section><!-- disqusWrapper -->
+        {% endif %}
+    {% endif %}
 </article>
