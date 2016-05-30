@@ -60,19 +60,21 @@ function blankslate_widgets_init()
 	register_sidebar(array(
 		'name' => 		'Footer - Left',
 		'id'=> 			'widget_footer_sidebar_left',
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'before_widget' => '<li id="%1$s" class="widget-container  %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',		
+		'after_title' => '</h3>',
+		'class' => 'widget_footer_sidebar_left',
 		
 	));
 	register_sidebar(array(
 		'name' => 		'Footer - Right',
 		'id'=> 			'widget_footer_sidebar_right',
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'before_widget' => '<li id="%1$s" class="widget-container widget_footer_sidebar_right %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',				
+		'after_title' => '</h3>',
+		'class' => 'widget_footer_sidebar_right',
 	));
 	register_sidebar(array(
 		'name' => 		'Sidebar (Home)',
@@ -80,7 +82,8 @@ function blankslate_widgets_init()
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',				
+		'after_title' => '</h3>',
+		'class' => 'widget_home_sidebar',
 		
 	));		
 	register_sidebar(array(
@@ -89,7 +92,8 @@ function blankslate_widgets_init()
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',				
+		'after_title' => '</h3>',
+		'class' => 'widget_page_sidebar',
 		
 	));	
 	register_sidebar(array(
@@ -98,7 +102,8 @@ function blankslate_widgets_init()
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',				
+		'after_title' => '</h3>',
+		'class' => 'widget_blog_sidebar',
 		
 	));
 	register_sidebar(array(
@@ -107,7 +112,8 @@ function blankslate_widgets_init()
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',				
+		'after_title' => '</h3>',
+		'class' => 'widget_contact_sidebar ',
 		
 	));		
 }

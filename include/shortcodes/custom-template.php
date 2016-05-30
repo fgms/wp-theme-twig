@@ -40,6 +40,6 @@
 			
 		});
 		
-	},array('config'=>$get_config()));
+	},array_merge(Timber::get_context(),array('config'=>$get_config())) );
 
 ?>

@@ -42,12 +42,11 @@
 	</div>
 	
 	{# modal form #}
-	{% if config.forms.modal is defined %}
+	{% if config.forms.modal.id is defined %}
 	<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="{{config.forms.modal}}" ]{% endfilter %}{% endset %}
-				
+				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="{{config.forms.modal.id}}" ]{% endfilter %}{% endset %}				
 				{% include 'modal-inner.twig' with {title: 'Contact Us' , content :  contactform } %}
 			</div>
 		</div>

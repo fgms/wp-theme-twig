@@ -1,5 +1,5 @@
 <article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
-{% if loop.length == 1 %}
+{% if post is defined %}
     <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
     {% else %}
      <a href="{{ article.permalink }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>    
