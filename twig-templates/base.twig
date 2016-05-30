@@ -31,10 +31,32 @@
 		</div>
 	</div>
 
-	</div>	
+	<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="4" ]{% endfilter %}{% endset %}
+				
+				{% include 'modal-inner.twig' with {title: 'Contact Us' , content :  contactform } %}
+			</div>
+		</div>
+	</div>
+	
+	{# modal form #}
+	{% if config.forms.modal is defined %}
+	<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="{{config.forms.modal}}" ]{% endfilter %}{% endset %}
+				
+				{% include 'modal-inner.twig' with {title: 'Contact Us' , content :  contactform } %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
 	
 	{% block scripts %}
 		<script type="text/javascript">
+			{# debug scripts #}
 			{% if config.ERRORS is defined %}
 				{% for error in config.ERRORS %}
 				console.error('SETTINGS.yml ERROR', '{{error|e('js')}}');

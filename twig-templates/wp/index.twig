@@ -5,7 +5,7 @@
         <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
         <div class="container">
             <div class="row">
-                <div class="{{config.settings.article.grid.left | default('col-sm-8')}}">
+                <div class="{{config.settings.article.grid.class.left | default('col-sm-8')}}">
                     <div class="column-wrapper">
                     {% include 'breadcrumbs.twig' ignore missing only %}
 					<h1>Blog</h1>
@@ -18,8 +18,10 @@
                     </div>
                 </div>
                 {% if config.settings.page.article.right is defined%}
-                <div class="{{config.settings.article.grid.right}}">                       
-                        {% include 'blog-sidebar.twig'  %}                            
+                <div class="{{config.settings.article.grid.class.right}}">                       
+                    <ul class="widget-section">
+						{{widget_blog_sidebar}}
+					</ul>                          
                 </div>
                 {% endif %}
             </div>

@@ -1,25 +1,15 @@
 <footer class="footer">	
 	<div class="container">		
 		<div class="row">
-			<div class="{{config.settings.footer.grid.left | default('col-sm-6')}}">
+			<div class="{{config.settings.footer.grid.left.class | default('col-sm-6')}}">
 				<div class="footer-content-wrapper left">
-					{% if config.forms.footer.id is defined %}
-					<h3>Quick Message</h3>				
-					{{function('do_shortcode','[contact-form-7 id="'~config.forms.footer.id~'"]')}}
-					{% endif %}
-					{# this is where footer widgets should go #}
-					<div class="footer-sidebar-right">
-						<div class="footer-navigation">
-							<a href="" id="check-availability" class="script-text">Check availability</a>
-							{% if config.postid.contactmodal is defined %}
-								<a id="contact-us" class="script-text" href="javascript:void(0);" data-toggle="modal" data-target="#contact-modal" >Send us a message</a>
-							{% endif%}
-							
-						</div>
-					</div>					
+					<ul class="widget-section">
+						{{widget_footer_sidebar_left}}
+					</ul>
+					
 				</div>				
 			</div>			
-			<div class="{{config.settings.footer.grid.right | default('col-sm-6')}}">
+			<div class="{{config.settings.footer.grid.right.class | default('col-sm-6')}}">
 				<div class="footer-content-wrapper right">
 					{% if config.settings.footer.logo is defined %}
 					<div class="footer-logo">					
@@ -28,7 +18,9 @@
 						</a>					
 					</div>
 					{% endif %}
-					
+					<ul class="widget-section">
+						{{widget_footer_sidebar_right}}
+					</ul>
 					<div class="footer-text-wrapper">
 						{% if config.phone.toll is defined %}			<div>{{__('Toll free', 'fgms' ) }}: <span>{{config.phone.toll|e}}</span></div>				{% endif %}
 						{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }}: <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
@@ -76,7 +68,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="{{config.settings.copyright.grid.left | default('col-sm-6')}}">
+			<div class="{{config.settings.copyright.grid.left.class | default('col-sm-6')}}">
 				<div class="footer-content-wrapper left">
 					<div class="footer-terms">
 						{% if config.postid.terms is defined %}<a href="/ajax/?postid={{config.postid.terms}}" data-toggle="modal" data-target="#general-modal" >Terms of Use</a>{% endif%}
@@ -86,7 +78,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="{{config.settings.copyright.grid.right | default('col-sm-6')}}">
+			<div class="{{config.settings.copyright.grid.right.class | default('col-sm-6')}}">
 				<div class="footer-content-wrapper right" >
 					<div class="footer-copyright">
 						{% if config.settings.copyright is defined %}

@@ -4,154 +4,31 @@
     <div class="modular sidebar-left">
         <div class="modular-row "  >
             <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-            <div class="container">    
+            <div class="container">   
             
                 <div class="row">
-                    <div class="col-md-9 col-md-push-3">
+                    <div class="{{config.settings.contact.grid.left.class | default('col-sm-12') }}>
                         <div class="main-col-wrapper">
-                            {% include 'breadcrumbs.twig' ignore missing only %}                       
-                       
-                            {% include "article.twig" with { "article" : post, "loop" : loop } %}
-                      
+                            {% include 'breadcrumbs.twig' ignore missing only %} 
+                            {% include "article.twig" with { "article" : post, "loop" : loop } %}                      
                             
                         </div>
                     </div>
-                    <div class="col-md-3 col-md-pull-9">
+                    {% if config.settings.contact.grid.right.class is defined %}
+                    <div class="{{config.settings.contact.grid.right.class}}">
                         <div id="sidebar">
                             <div id="sidebar-wrapper">
-                                <div class="sidebar nav hidden-xs" >                                
-                                    {% filter shortcodes %}
-                                        [accordion ]
-                                        [panel  title="Mission Inn Real Estate" active="true" ]
-                                            <div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization"> 
-                                                <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="{{config.company.name}}" /> 
-                                                <div style=" " class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                                    <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0">
-                                                        <tbody >                 
-                                                        
-                                                        {% if config.phone.toll is defined %}
-                                                        <tr>
-                                                            <td style="width: 30%">TF.</td>
-                                                            <td itemprop="telephone">{{config.phone.toll}}</td>
-                                                        </tr>          
-                                                        {% endif %}
-                                                         
-                                                        {% if config.phone.office is defined %}
-                                                        <tr>
-                                                            <td>F.</td>
-                                                            <td itemprop="telephone">{{config.phone.office}}</td>
-                                                        </tr>        
-                                                        {% endif %}
-                                                    
-                                                        {% if config.phone.fax is defined %}
-                                                        <tr>
-                                                            <td>T.</td>
-                                                            <td itemprop="telephone">{{config.phone.fax}}</td>
-                                                        </tr>        
-                                                        {% endif %}                                     
-                                                       
-                                                        {% if config.email.info is defined %}
-                                                        <tr>
-                                                            <td>E.</td>
-                                                            <td itemprop="email">[email label="Send Email"]{{config.email.info}}[/email]</td>                                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2" style="font-size: 0.85em;">
-                                                                <div itemprop="streetAddress">{{config.company.address.street}}</div> 
-                                                                <div>
-                                                                    <span  itemprop="addressLocality">{{config.company.address.city}}</span>
-                                                                    <span itemprop="addressRegion">{{config.company.address.province}}</span>
-                                                                    <span style="padding-left: 6px;" itemprop="postalCode">{{config.company.address.postal}}</span>
-                                                                </div>
-                                                                <div style="" itemprop="addressCountry">{{config.company.address.country}}</div>                                                                 
-                                                            </td>
-                                                        </tr>
-                                                        {% endif %}  
-                                                        
-                                                        </tbody>
-                                                    </table>
-                                                  
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        [/panel]
-                                        [panel title="Mission Inn Resort" ]
-                                            <div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization"> 
-                                                <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="Mission Inn Resort" /> 
-                                                <div style=" " class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                                                    <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
-                                                        <tbody >                 
-                                                        
-                                                        {% if config.phone.resort.toll is defined %}
-                                                        <tr>
-                                                            <td style="width: 30%">TF.</td>
-                                                            <td itemprop="telephone">{{config.phone.resort.toll}}</td>
-                                                        </tr>          
-                                                        {% endif %}
-                                                         
-                                                        {% if config.phone.resort.office is defined %}
-                                                        <tr>
-                                                            <td>F.</td>
-                                                            <td itemprop="telephone">{{config.phone.resort.office}}</td>
-                                                        </tr>        
-                                                        {% endif %}
-                                                    
-                                                        {% if config.phone.resort.fax is defined %}
-                                                        <tr>
-                                                            <td>T.</td>
-                                                            <td itemprop="telephone">{{config.phone.resort.fax}}</td>
-                                                        </tr>        
-                                                        {% endif %}                                     
-                                                       
-                                                        {% if config.email.missioninnresort is defined %}
-                                                        <tr>
-                                                            <td>E.</td>
-                                                            <td itemprop="email">[email label="Send Email"]{{config.email.missioninnresort}}[/email]</td>                                                    
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2" style="font-size: 0.85em;">
-                                                                <div itemprop="streetAddress">{{config.company.address.street}}</div> 
-                                                                <div>
-                                                                    <span  itemprop="addressLocality">{{config.company.address.city}}</span>
-                                                                    <span itemprop="addressRegion">{{config.company.address.province}}</span>
-                                                                    <span style="padding-left: 6px;" itemprop="postalCode">{{config.company.address.postal}}</span>
-                                                                </div>
-                                                                <div style="" itemprop="addressCountry">{{config.company.address.country}}</div>                                                                 
-                                                            </td>
-                                                        </tr>
-                                                        {% endif %}  
-                                                        
-                                                        </tbody>
-                                                    </table>
-                                                  
-                                                </div>
-                                            </div>                                        
-                                        [/panel]
-                                        [/accordion]                            
-                                    {% endfilter %}
+                                <div class="sidebar nav hidden-xs" >
+                                    <ul class="widget-section">
+                                        {{widget_contact_sidebar}}
+                                    </ul>                                    
                                 </div>
-                                    <a href="/current-listings/">
-                                        <img src="/wp-content/themes/wp-theme-fg/assets/images/banners/current-listings.jpg" class="img-responsive" alt="current listings banner"  style="margin-bottom: 64px; width: 100%; max-width: 350px;"/> 
-                                    </a>
-                                     
-                                    
-                            </div>
-                        </div>
-                         
+                            </div>                                    
+                        </div>                         
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>	
 {% endblock %}
-
-
-
-{#
-    city: 'Howey-in-the-Hills'
-    province: FL
-    postal: 34737
-    country: USA
-
-#}

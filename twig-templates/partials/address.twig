@@ -1,0 +1,50 @@
+<div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization"> 
+    <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="{{config.company.name}}" /> 
+    <div style=" " class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0">
+            <tbody >                 
+            
+            {% if config.phone.toll is defined %}
+            <tr>
+                <td style="width: 30%">TF.</td>
+                <td itemprop="telephone">{{config.phone.toll}}</td>
+            </tr>          
+            {% endif %}
+             
+            {% if config.phone.office is defined %}
+            <tr>
+                <td>F.</td>
+                <td itemprop="telephone">{{config.phone.office}}</td>
+            </tr>        
+            {% endif %}
+        
+            {% if config.phone.fax is defined %}
+            <tr>
+                <td>T.</td>
+                <td itemprop="telephone">{{config.phone.fax}}</td>
+            </tr>        
+            {% endif %}                                     
+           
+            {% if config.email.info is defined %}
+            <tr>
+                <td>E.</td>
+                <td itemprop="email">[email label="Send Email"]{{config.email.info}}[/email]</td>                                                    
+            </tr>
+            <tr>
+                <td colspan="2" style="font-size: 0.85em;">
+                    <div itemprop="streetAddress">{{config.company.address.street}}</div> 
+                    <div>
+                        <span  itemprop="addressLocality">{{config.company.address.city}}</span>
+                        <span itemprop="addressRegion">{{config.company.address.province}}</span>
+                        <span style="padding-left: 6px;" itemprop="postalCode">{{config.company.address.postal}}</span>
+                    </div>
+                    <div style="" itemprop="addressCountry">{{config.company.address.country}}</div>                                                                 
+                </td>
+            </tr>
+            {% endif %}  
+            
+            </tbody>
+        </table>
+      
+    </div>
+</div>

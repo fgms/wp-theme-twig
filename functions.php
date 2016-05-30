@@ -56,15 +56,69 @@ function blankslate_filter_wp_title( $title ){
 add_action( 'widgets_init', 'blankslate_widgets_init' );
 function blankslate_widgets_init()
 {
-    register_sidebar( array (
-    'name' => __( 'Sidebar Widget Area', 'blankslate' ),
-    'id' => 'primary-widget-area',
-    'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-    'after_widget' => "</li>",
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>',
-    ) );
+	
+	register_sidebar(array(
+		'name' => 		'Footer - Left',
+		'id'=> 			'widget_footer_sidebar_left',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',		
+		
+	));
+	register_sidebar(array(
+		'name' => 		'Footer - Right',
+		'id'=> 			'widget_footer_sidebar_right',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',				
+	));
+	register_sidebar(array(
+		'name' => 		'Sidebar (Home)',
+		'id'=> 			'widget_home_sidebar',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',				
+		
+	));		
+	register_sidebar(array(
+		'name' => 		'Sidebar (Page)',
+		'id'=> 			'widget_page_sidebar',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',				
+		
+	));	
+	register_sidebar(array(
+		'name' => 		'Sidebar (Blog)',
+		'id'=> 			'widget_blog_sidebar',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',				
+		
+	));
+	register_sidebar(array(
+		'name' => 		'Sidebar (Contact)',
+		'id'=> 			'widget_contact_sidebar',
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',				
+		
+	));		
 }
+
+
+// adding shortcode / or twig render.
+add_filter('widget_text', function($text) {
+	$text = do_shortcode($text);
+	return $text;
+});
+
 
 function blankslate_custom_pings( $comment ){
     $GLOBALS['comment'] = $comment;
@@ -91,6 +145,9 @@ function remove_admin_bar() {
     show_admin_bar(false);
 }
 */
+
+
+
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
 function fgms_meta_boxes ($bs) {

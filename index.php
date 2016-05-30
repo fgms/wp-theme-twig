@@ -8,6 +8,17 @@
 
 	$start = TimberHelper::start_timer();
 	$data = Timber::get_context();
+	// adding footer widgets
+	$data['widget_footer_sidebar_left'] = Timber::get_widgets('widget_footer_sidebar_left');
+	$data['widget_footer_sidebar_right'] = Timber::get_widgets('widget_footer_sidebar_right');
+	
+	// adding page widgets
+	$data['widget_home_sidebar'] = Timber::get_widgets('widget_home_sidebar');
+	$data['widget_page_sidebar'] = Timber::get_widgets('widget_page_sidebar');
+	$data['widget_contact_sidebar'] = Timber::get_widgets('widget_page_sidebar');
+	$data['widget_blog_sidebar'] = Timber::get_widgets('widget_blog_sidebar');
+	
+		
 	if ( is_singular() ) :		
 		$data['post'] = new TimberPost();       
 	
