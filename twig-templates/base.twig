@@ -33,8 +33,16 @@
 
 	</div>	
 	
-	{% block scripts %}{% endblock %}
+	{% block scripts %}
+		<script type="text/javascript">
+			{% if config.ERRORS is defined %}
+				{% for error in config.ERRORS %}
+				console.error('SETTINGS.yml ERROR', '{{error|e('js')}}');
+				{% endfor %}
+			{% endif %}
+		</script>
 	
+	{% endblock %}	
 	{{wp_footer}}
 	
     </body>

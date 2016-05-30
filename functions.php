@@ -158,8 +158,7 @@ $get_config=call_user_func(function() {
 		$filetime = filemtime($config_file);
 		
 		// checking if settings.yml has changed if so lets update, but only if is valid
-		if ($cache['config_ts'] != $filetime) {		
-			$autoloader=require_once('vendor/autoload.php');	
+		if ($cache['config_ts'] != $filetime) {					
 			$config=@file_get_contents($config_file);
 			if ($config===false) die('Could not read '.$config_file);
 			try {

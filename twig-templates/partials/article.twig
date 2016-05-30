@@ -23,7 +23,7 @@
         {% endif %}
         
         {# using disqus #}
-        {% if config.disqus is define %}
+        {% if config.disqus is defined %}
         <section id="comments">
             <h3 id="commentsTitle">{{config.comments.title| default('Comments')}}</h3>
             <div id="disqus_thread"></div>
