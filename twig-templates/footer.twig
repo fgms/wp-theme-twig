@@ -14,7 +14,7 @@
 					{% if config.settings.footer.logo is defined %}
 					<div class="footer-logo">					
 						<a href="{{site.url|e('html_attr')}}">
-							<img class="img-responsive" data-image="{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
+							<img class="img-responsive" data-image="{{theme.link}}{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
 						</a>					
 					</div>
 					{% endif %}

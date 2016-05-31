@@ -12,17 +12,17 @@
 				<div class="clearfix"></div>
 
             </a>
-			{% if config.settings.header.logo is defined %}<a href="{{site.url|e('html_attr')}}" class="navbar-brand"><img data-image="{{config.settings.header.logo.url}}"></a>{% endif %}		
+			{% if config.settings.header.logo is defined %}<a href="{{site.url|e('html_attr')}}" class="navbar-brand"><img data-image="{{theme.link}}{{config.settings.header.logo.url}}"></a>{% endif %}		
         </div>
         <div class="navbar-collapse collapse ">			
-            <ul class="nav navbar-nav   test">
+            <ul class="nav navbar-nav">
                 {% for item in  menu.get_items  %}                   
                     {% if item.get_children %}
                         <li class="dropdown {{item.classes | join(' ')}}">
                             <a href="{{item.get_link|e('html_attr')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{item.title|e}} <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">                                                            
                                 {% for child in item.get_children %}                                   
-                                    <li class="{{ current_child }} "><a data-scroll href="{{ child.get_link }}">{{ child.title }}</a></li>
+                                    <li class="{{ current_child }} "><a href="{{ child.get_link }}">{{ child.title }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
@@ -32,7 +32,6 @@
                 {% endfor %}
             </ul>
         </div>
-
 </nav>    
 
 

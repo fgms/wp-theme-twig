@@ -2,7 +2,8 @@
 {% if post is defined %}
     <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
     {% else %}
-     <a href="{{ article.permalink }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>    
+     <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
+    
 {% endif %}
     <meta itemprop="author" content="{{ article.author }}" />
     <div  itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->
