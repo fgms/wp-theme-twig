@@ -2,27 +2,12 @@
 {% set inner_class=inner_class|default('') %}
 {% set outer_class=outer_class|default('') %}
 
-{% if not controls is defined %}
-{% set controls=true %}
-{% endif %}
-
-{% if not indicators is defined %}
-{% set indicators=true %}
-{% endif %}
-
-{% if items|length==1 %}
-{% set indicators=false %}
-{% set controls=false %}
-{% endif %}
-
-
-{% if not captions is defined %}
-{% set captions=true %}
-{% endif %}
-
-{% if not titles is defined %}
-{% set titles=true %}
-{% endif %}
+{% if not controls is defined %}{% set controls=true %}{% endif %}
+{% if not indicators is defined %}{% set indicators=true %}{% endif %}
+{% if items|length==1 %}{% set indicators=false %}{% set controls=false %}{% endif %}
+{% if not captions is defined %} {% set captions=true %}{% endif %}
+{% if not root is defined %}{% set root = "" %}{% endif %}
+{% if not titles is defined %}{% set titles=true %}{% endif %}
 
 <div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel" data-interval="{{interval|default('8000')}}" data-pause="none" >
 	
@@ -42,9 +27,9 @@
 			<img
 				
 				{% for key, img in item.images%}
-					data-image-{{key}}="{{img}}"
+					data-image-{{key}}="{{root}}{{img}}"
 				{% else %}
-					data-image="{{item.url|e('html_attr')}}"
+					data-image="{{root}}{{item.url|e('html_attr')}}"
 				{% endfor %}
 				alt="{{item.alt|e('html_attr')}}" />
 			{% if captions or titles %}
