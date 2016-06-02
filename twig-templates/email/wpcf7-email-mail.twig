@@ -1,0 +1,12 @@
+{% extends 'base-email.twig' %}
+{% block content %}
+This is my MAIL twig template
+Start Dump >>>
+
+{% for key, post in posted  %}
+    {% if '_' not in key %}
+    {{key}}:{{post}}
+    {% endif %}
+{% endfor %}
+<<< End Dump 
+{% endblock %}

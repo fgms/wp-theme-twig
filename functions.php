@@ -152,7 +152,11 @@ function remove_admin_bar() {
 }
 */
 
-
+add_filter('wpcf7_fg_email_data','wpcf7_fg_email_data');
+function wpcf7_fg_email_data($data){
+	global $get_config;
+	return array_merge($data,Timber::get_context(),array('config'=>$get_config()));
+}
 
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
@@ -259,10 +263,11 @@ $get_config=call_user_func(function() {
 		Timber::$locations=array($dirnameChildTheme,
 								 $dirnameChildTheme.'/wp',
 								 $dirnameChildTheme.'/partials',
+								 $dirnameChildTheme.'/email',
 								 $dirnameTheme,
 								 $dirnameTheme.'/wp',
 								 $dirnameTheme.'/partials',
-								 
+								 $dirnameTheme.'/email',
 								);
 		
 	

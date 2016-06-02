@@ -1,19 +1,26 @@
 <article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
-{% if post is defined %}
+{% set articleContent = article.content %}
+{% if function('is_single') or function('is_page') %}
+    
+    {% if article.post_type == 'post' %}
+    <div><span class="article-date" itemprop="datePublished">{{article.post_date|date}}</span></div>
+    {% endif %}
     <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
-    {% else %}
-     <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
+{% else %}
+    <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
+    {% set articleContent %}{% if article.post_excerpt|length > 10 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(100) }} <a href="">Full Story <i class="fa  fa-angle-double-right"></i></a>{% endif %}{% endset %}
     
 {% endif %}
+
     <meta itemprop="author" content="{{ article.author }}" />
-    <div  itemprop="articleBody">{{  article.content }}</div><!-- articleContent -->
+    <div  itemprop="articleBody">{{articleContent}}</div><!-- articleContent -->
     {# post meta data #}
     {% if article.post_type == 'post' %}
     <div  class="article-footer" style="margin-bottom: 12px;">									
-        <div class="posted-by">Posted by <span>{{post.author | default(site.title)}}</span></div>
+        <div class="posted-by">Posted by <span>{{article.author | default(site.title)}}</span></div>
         <div class="social-sharing">{% include 'social-sharing.twig' %}</div>
         {% include 'blog-tags-cats.twig' %}       
-        <meta itemprop="author" content="{{post.author | default(site.title)}}" />
+        <meta itemprop="author" content="{{article.author | default(site.title)}}" />
     </div>            
     {% endif %}
     
