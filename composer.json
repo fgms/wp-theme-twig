@@ -5,7 +5,7 @@
     "type" : "wordpress-theme",
     "keywords" : ["wordpress", "twig", "FGMS","theme"],
     "homepage" : "https://github.com/sturple/fg-theme-master",
-    "license" : 'GPL-3.0',   
+    "license" : "GPL-3.0",   
     "authors" : [
         {
             "name" : "Shawn Turple",
