@@ -264,10 +264,12 @@ $get_config=call_user_func(function() {
 								 $dirnameChildTheme.'/wp',
 								 $dirnameChildTheme.'/partials',
 								 $dirnameChildTheme.'/email',
+								 $dirnameChildTheme.'/form',
 								 $dirnameTheme,
 								 $dirnameTheme.'/wp',
 								 $dirnameTheme.'/partials',
 								 $dirnameTheme.'/email',
+								 $dirnameTheme.'/form',
 								);
 		
 	
@@ -320,6 +322,7 @@ $get_slideshow=function () {
 
 if (!is_admin()){
 	require_once(__DIR__.'/include/shortcodes.php');
+	require_once(__DIR__.'/include/twig-filter-functions.php');
 }
 else {
 	require_once(__DIR__.'/include/theme-settings.php');

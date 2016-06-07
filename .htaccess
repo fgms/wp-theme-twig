@@ -1,0 +1,7 @@
+## Begin - Security
+# Block all direct access for these folders
+RewriteRule ^(.git|include|page-templates|twig-templates|src|config)/(.*) error [F]
+# Block access to specific file types for these system folders
+RewriteRule (.*)\.(txt|xml|md|html|yml|php|pl|py|cgi|twig|sh|bat|json)$ error [F]
+
+RewriteRule ^(LICENSE.txt|composer.lock|composer.json|\.htaccess)$ error [F]

@@ -78,7 +78,7 @@
                    
                    );
     if (get_option('theme_twig_cache_performance', 'true') == 'true'){
-        echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
+        //echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
     }
     
 ?>

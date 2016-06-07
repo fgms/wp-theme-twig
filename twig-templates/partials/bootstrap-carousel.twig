@@ -8,9 +8,12 @@
 {% if not captions is defined %} {% set captions=true %}{% endif %}
 {% if not root is defined %}{% set root = "" %}{% endif %}
 {% if not titles is defined %}{% set titles=true %}{% endif %}
+{% if not lazyload is defined %}{% set lazyload = false %}{% endif %}
 
-<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel" data-interval="{{interval|default('8000')}}" data-pause="none" >
-	
+<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel" data-interval="{{interval|default('8000')}}" data-pause="none" data-background-lg="{{background}}">
+	<div class="carousel-overlay">
+		{{overlay}}
+	</div>
 	{% if indicators %}
 	<ol class="carousel-indicators">		
 		{% for i in 0..items|length-1 %}
@@ -23,14 +26,33 @@
 	<div class="carousel-inner {{inner_class|e('html_attr')}}" role="listbox">
 		
 		{% for item in items %}
-		<div class="item{% if loop.index0==0 %} active{% endif %}">
+		<div class="item{% if loop.index0==0 %} active{% endif %}">			
+			{% if item.youtube.id is defined %}
+				{% set youtubeProp = 'autoPlay:true,startAt:0,mute:true' %}
+				<div id="ytcarousel" data-property="{videoURL:'{{item.youtube.id}}',containment:'#{{item.youtube.containmentId}}',{{youtubeProp}}}" ></div>
+				<div id="{{item.youtube.containmentId}}"  style="height: {{item.youtube.height | default('450px')}}; width: 100% ;"  class="ytplayer">
+					<div >
+						<div style="text-align: center;position: relative; top: 270px; font-size: 48px;"  >
+							{{overlay}}
+							<div class="youtube-hero-play" style=""><a class="script-youtube-hero-play" href="javascript:void(0)"><i class="fa fa-youtube-play fa-2x"></i></a></div>
+						</div>
+					</div>					
+					
+				</div>
+
+				
+			{% else %}
 			<img
 				
+				{% if lazyload %}
 				{% for key, img in item.images%}
 					data-image-{{key}}="{{root}}{{img}}"
 				{% else %}
 					data-image="{{root}}{{item.url|e('html_attr')}}"
 				{% endfor %}
+				{% else %}
+					src="{{root}}{{item.url|e('html_attr')}}"
+				{% endif%}
 				alt="{{item.alt|e('html_attr')}}" />
 			{% if captions or titles %}
 			<div class="container">
@@ -43,6 +65,7 @@
 					{% endif %}
 				</div>
 			</div>
+			{% endif %}
 			{% endif %}
 		</div>
 		{% endfor %}
