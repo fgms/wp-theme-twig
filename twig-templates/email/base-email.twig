@@ -32,7 +32,7 @@
 {# email content #}
 {% set email = {
         company : config.company.name,
-        title : 'Website Inquiry',
+        title : form.title,
         message : body_message,
         phone : {
             office : config.phone.office,
@@ -60,6 +60,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
+      
     <style type="text/css">
 /**********************************************
 * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
@@ -613,7 +614,7 @@ body.outlook p {
                   <td class="wrapper last" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0px 20px 0px 0px;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;position: relative;padding-right: 0px;border-collapse: collapse !important;">
                     <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                       <tr style="padding: 0;vertical-align: top;text-align: left;">
-                        <td class="logo" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;">
+                        <td class="logo" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0;vertical-align: top;text-align: center;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;">
 							<a href="{{site.url}}" style="color: {{link_color}};text-decoration: none;">
                                 <img src="{{image.header.src}}" alt="{{image.header.alt}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: auto;max-width: 100%;float: left;clear: both;display: block;border: none;">
                             </a>
@@ -634,7 +635,7 @@ body.outlook p {
                   <td class="wrapper last" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 10px 20px 0px 0px;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;position: relative;padding-right: 0px;border-collapse: collapse !important;">
                     <table class="twelve columns" style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;margin: 0 auto;width: 532px;">
                       <tr style="padding: 0;vertical-align: top;text-align: left;">
-                        <td class="center title" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0px 0px 16px;vertical-align: top;text-align: center;color: {{heading_color}};font-family: {{heading_font_family}};font-weight: normal;margin: 0;line-height: 26px;font-size: 26px;border-collapse: collapse !important;">
+                        <td class=" title" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0px 0px 16px;vertical-align: top;text-align: left;color: {{heading_color}};font-family: {{heading_font_family}};font-weight: normal;margin: 0;line-height: 26px;font-size: 26px;border-collapse: collapse !important;">
 							{{email.title}}
                          </td>
                         <td class="expander" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0 !important;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;"></td>
@@ -693,7 +694,7 @@ body.outlook p {
                       <tr style="padding: 0;vertical-align: top;text-align: left;">
                         <td class="center body-text footer-text" style="padding: 0px 0px 2px;word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;vertical-align: top;text-align: center;color: {{body_color}};font-family: 'Open Sans',arial,helvetica,sans-serif;font-weight: normal;margin: 0;line-height: 16px;font-size: 11px;border-collapse: collapse !important;">
                         	<center style="width: 100%;">
-								{{email.address.street}}, {{email.address.city}}, {{email.address.province}}, {{email.address.country}}.
+								{% if email.address.street %}{{email.address.street}},{% endif %} {% if email.address.city %}{{email.address.city}},{% endif %} {% if email.address.province %}{{email.address.province}},{% endif %} {{email.address.country}}
                             </center>    
                          </td>
                         <td class="expander" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0 !important;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;"></td>
@@ -703,7 +704,7 @@ body.outlook p {
                       <tr style="padding: 0;vertical-align: top;text-align: left;">
                         <td class="center body-text footer-text" style="padding: 0px 0px 10px;word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;vertical-align: top;text-align: center;color: {{body_color}};font-family: 'Open Sans',arial,helvetica,sans-serif;font-weight: normal;margin: 0;line-height: 16px;font-size: 11px;border-collapse: collapse !important;">
                         	<center style="width: 100%;">
-                                {{email.phone.office}}&nbsp;&nbsp;|&nbsp;&nbsp;TF: {{email.phone.toll}}&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:{{email.email}}" style="color: {{link_color}};text-decoration: none;">Email</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{site.url}}" style="color: {{link_color}};text-decoration: none;"><font color="{{link_color}}">Website</font></a>
+                                {{email.phone.office}}&nbsp;&nbsp;|{% if email.phone.toll | length > 4 %}&nbsp;&nbsp;TF: {{email.phone.toll}}&nbsp;&nbsp;|{% endif %}&nbsp;&nbsp;<a href="mailto:{{email.email}}" style="color: {{link_color}};text-decoration: none;">Email</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{site.url}}" style="color: {{link_color}};text-decoration: none;"><font color="{{link_color}}">Website</font></a>
                          	</center>
                          </td>
                         <td class="expander" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0 !important;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;"></td>
@@ -722,7 +723,7 @@ body.outlook p {
                   <td class="wrapper last" style="padding-top: 0px;word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 10px 20px 0px 0px;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;position: relative;padding-right: 0px;border-collapse: collapse !important;">
                     <table style="border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;">
                       <tr style="padding: 0;vertical-align: top;text-align: left;">
-                        <td class="logo" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;">
+                        <td class="logo" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0;vertical-align: top;text-align: center;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;">
 							<img src="{{image.footer.src}}" alt="{{image.footer.alt}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: auto;max-width: 100%;float: left;clear: both;display: block;">
                         </td>
                         <td class="expander" style="word-break: break-word;-webkit-hyphens: none;-moz-hyphens: none;hyphens: none;padding: 0 !important;vertical-align: top;text-align: left;color: {{body_color}};font-family: {{body_font_family}};font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;"></td>

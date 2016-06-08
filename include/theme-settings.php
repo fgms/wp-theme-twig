@@ -1,9 +1,9 @@
 <?php
-	call_user_func(function () {
+	call_user_func(function ($data) {
 
-        add_action("admin_menu", function(){
+        add_action("admin_menu", function() use ($data){
             
-            add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", function(){
+            add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", function() use ($data){
                 
                 ?>
                     <div class="wrap">
@@ -16,6 +16,25 @@
                         ?>          
                     </form>
                     </div>
+					<div>
+						<h2>Email Template</h2>
+						
+						
+						<?php
+						    if (class_exists('Timber') ) {
+								$data = array_merge($data,array('posted'=>array('first_name'=>'John',
+																				'last_name'=>'Smith',
+																				'company'=>'Acme Incorporated',
+																				'email'=>'john.smith@acme.com',
+																				'message'=>'Lorem ipsum dolor sit amet, sociis at dictumst cras, curabitur quis adipiscing egestas inceptos eiusmod in, sed pretium feugiat vitae tristique mus sit, mi qui vel mi hymenaeos nisl. Nam nullam, velit tellus.'),
+																'body_message'=>'This text can be added to the email body in contactform7 default email area',
+																'form'=>array('title'=>'Form Title')));
+								
+								Timber::render('wpcf7-email-mail.twig',$data);
+							}
+						?>
+						
+					</div>
                 <?php        
             
             }, null, 99);
@@ -70,6 +89,6 @@
                 
         });
     
-    });
+    },array_merge(Timber::get_context(),array('config'=>$get_config())));
 
 ?>

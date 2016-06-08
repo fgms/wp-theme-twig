@@ -1,7 +1,7 @@
 {% extends 'base-email.twig' %}
 {% block content %}
 {% for key, post in posted  %}
-    {% if '_' not in key %}    
+    {% if key matches '/^[a-zA-Z]+/'  %}    
     <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
         <td class="panel four sub-columns grid-text" style="text-align: center; word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; min-width: 0px; width: 33%; color: {{body-color}}; font-family: {{heading_font_family}}; font-weight: normal; line-height: 16px; font-size: 11px; background:{{container_background_color}} ; margin: 0; padding: 10px; border: 1px solid #efefef;"     align="center" bgcolor="{{container_background_color}}" valign="top">
                 {{key|replace({'-':' ','_': ' '})| capitalize }}
