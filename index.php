@@ -3,20 +3,11 @@
  * The main template file.
  */
 
-	// set up page data 
-	
+	// set up page data 	
 
+	$template = false;
 	$start = TimberHelper::start_timer();
 	$data = Timber::get_context();
-	// adding footer widgets
-	$data['widget_footer_sidebar_left'] = Timber::get_widgets('widget_footer_sidebar_left');
-	$data['widget_footer_sidebar_right'] = Timber::get_widgets('widget_footer_sidebar_right');
-	
-	// adding page widgets
-	$data['widget_home_sidebar'] = Timber::get_widgets('widget_home_sidebar');
-	$data['widget_page_sidebar'] = Timber::get_widgets('widget_page_sidebar');
-	$data['widget_contact_sidebar'] = Timber::get_widgets('widget_page_sidebar');
-	$data['widget_blog_sidebar'] = Timber::get_widgets('widget_blog_sidebar');
 	
 		
 	if ( is_singular() ) :		
@@ -26,6 +17,7 @@
 		$data['posts'] = Timber::get_posts();
 		
 	endif;
+	
 	$data['config']=$get_config();
     $data['menu'] = new TimberMenu();
 	if ( is_single() ) :
@@ -64,21 +56,35 @@
 	
    
 	// render using Twig template index.twig
-    
-    $cache_type_array = array('CACHE_NONE'=>TimberLoader::CACHE_NONE,
-									   'CACHE_OBJECT'=>TimberLoader::CACHE_OBJECT,
-									   'CACHE_TRANSIENT'=>TimberLoader::CACHE_TRANSIENT,
-									   'CACHE_SITE_TRANSIENT'=>TimberLoader::CACHE_SITE_TRANSIENT,
-									   'CACHE_USE_DEFAULT'=>TimberLoader::CACHE_USE_DEFAULT);
-
-	Timber::render( $template . '.twig',
-                   $data,
-                   get_option('theme_twig_cache_expire','0'),
-                   $cache_type_array[get_option('theme_twig_cache','CACHE_NONE')]
-                   
-                   );
-    if (get_option('theme_twig_cache_performance', 'true') == 'true'){
-        //echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
-    }
-    
+    if ($template !== false ){
+		
+		require_once(__DIR__.'/include/shortcodes.php');
+		require_once(__DIR__.'/include/twig-filter-functions.php');
+			
+		// adding footer widgets
+		$data['widget_footer_sidebar_left'] = Timber::get_widgets('widget_footer_sidebar_left');
+		$data['widget_footer_sidebar_right'] = Timber::get_widgets('widget_footer_sidebar_right');
+		
+		// adding page widgets
+		$data['widget_home_sidebar'] = Timber::get_widgets('widget_home_sidebar');
+		$data['widget_page_sidebar'] = Timber::get_widgets('widget_page_sidebar');
+		$data['widget_contact_sidebar'] = Timber::get_widgets('widget_page_sidebar');
+		$data['widget_blog_sidebar'] = Timber::get_widgets('widget_blog_sidebar');
+		
+		$cache_type_array = array('CACHE_NONE'=>TimberLoader::CACHE_NONE,
+										   'CACHE_OBJECT'=>TimberLoader::CACHE_OBJECT,
+										   'CACHE_TRANSIENT'=>TimberLoader::CACHE_TRANSIENT,
+										   'CACHE_SITE_TRANSIENT'=>TimberLoader::CACHE_SITE_TRANSIENT,
+										   'CACHE_USE_DEFAULT'=>TimberLoader::CACHE_USE_DEFAULT);
+		
+		Timber::render( $template . '.twig',
+					   $data,
+					   get_option('theme_twig_cache_expire','0'),
+					   $cache_type_array[get_option('theme_twig_cache','CACHE_NONE')]                   
+					   );
+		
+		if (get_option('theme_twig_cache_performance', 'true') == 'true'){
+			//echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
+		}		
+	}    
 ?>

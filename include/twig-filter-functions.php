@@ -1,7 +1,6 @@
 <?php
   
 add_filter('timber/twig', function($twig){
-
     $twig->addFilter(new \Twig_SimpleFilter('randomize',function($original, $offset = 0){        
         if (!is_array($original)) {
             return $original;
@@ -9,7 +8,7 @@ add_filter('timber/twig', function($twig){
         if ($original instanceof \Traversable) {
             $original = iterator_to_array($original, false);
         }
-        $sorted = [];
+        $sorted = array();
         $random = array_slice($original, $offset);
         shuffle($random);
         $sizeOf = sizeof($original);
@@ -24,7 +23,7 @@ add_filter('timber/twig', function($twig){
     }));
     
     $twig->addFilter(new \Twig_SimpleFilter('sort_by_key',function(array $input, $filter, $direction = SORT_ASC){
-        $output = [];
+        $output = array();
         if (!$input) {
             return $output;
         }
@@ -37,7 +36,7 @@ add_filter('timber/twig', function($twig){
     
     $twig->addFilter(new \Twig_SimpleFilter('ksort',function($array){
         if (is_null($array)) {
-            $array = [];
+            $array = array();
         }
         ksort($array);
         return $array;       
@@ -45,12 +44,8 @@ add_filter('timber/twig', function($twig){
     
     $twig->addFilter(new \Twig_SimpleFilter('regex_replace',function($subject, $pattern, $replace, $limit = -1){
         return preg_replace($pattern, $replace, $subject, $limit);
-    }));    
-    
-    return $twig;
-
-   
-});
-  
+    }));        
+    return $twig;   
+}); 
 
 ?>

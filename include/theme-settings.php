@@ -1,8 +1,6 @@
 <?php
 	call_user_func(function ($data) {
-
-        add_action("admin_menu", function() use ($data){
-            
+        add_action("admin_menu", function() use ($data){            
             add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", function() use ($data){
                 
                 ?>
@@ -18,7 +16,6 @@
                     </div>
 					<div>
 						<h2>Email Template</h2>
-						
 						
 						<?php
 						    if (class_exists('Timber') ) {

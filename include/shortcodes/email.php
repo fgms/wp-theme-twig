@@ -1,4 +1,4 @@
-<?php	
+<?php 
 	call_user_func(function () {
 		add_shortcode('email',function ($atts, $content)  {
 			// 0 is string, 1 is prefix, 2 is domain, and 3 is the .{com | ca | info ...}
@@ -10,5 +10,4 @@
             return 'Email was invalid -- '. $content;
 		});		
 	});
-?>
-	
+?> 
