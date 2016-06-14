@@ -6,7 +6,7 @@
     "keywords" : ["wordpress", "twig", "FGMS","theme"],
     "homepage" : "https://github.com/sturple/fg-theme-master",
     "license" : "GPL-3.0",   
-    "minimum-stability" : "dev"
+    "minimum-stability" : "dev",
     "authors" : [
         {
             "name" : "Shawn Turple",
