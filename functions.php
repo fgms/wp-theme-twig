@@ -17,9 +17,12 @@ add_action( 'wp_enqueue_scripts', function(){
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script('modernizr', get_template_directory_uri() .'/assets/js/modernizr.js');
    wp_enqueue_script('bootstrap', get_template_directory_uri() .'/assets/js/bootstrap.min.js');
+   wp_enqueue_script('theme-script', get_template_directory_uri() .'/assets/js/script.js');
    wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
    wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
-   wp_enqueue_script('google-api','http://www.google.com/jsapi');	
+   wp_enqueue_script('google-api','http://www.google.com/jsapi');
+   
+   
 });
 
 
@@ -90,7 +93,12 @@ add_action( 'widgets_init', function() {
 		
 	));		
 });
-
+// adding config and context data into templates
+add_filter('wpcf7_fg_email_data','wpcf7_fg_email_data');
+function wpcf7_fg_email_data($data){
+	global $get_config;
+	return array_merge($data,Timber::get_context(),array('config'=>$get_config()));
+}
 
 // adding shortcode / or twig render.
 add_filter('widget_text', function($text) {
@@ -165,6 +173,9 @@ $get_config=call_user_func(function() {
 		$errors = array();
 		$theme = get_option('theme_directory','default');
 		$config_file = get_stylesheet_directory().'/config/settings.yml';
+		if (!file_exists ( $config_file ) ) {
+			return;
+		}
 		$filetime = filemtime($config_file);
 		
 		// checking if settings.yml has changed if so lets update, but only if is valid

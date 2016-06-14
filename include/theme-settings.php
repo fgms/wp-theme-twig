@@ -2,7 +2,7 @@
 	call_user_func(function ($data) {
         add_action("admin_menu", function() use ($data){            
             add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", function() use ($data){
-                
+				
                 ?>
                     <div class="wrap">
                     <h1>Fifth Gear Theme Panel</h1>
