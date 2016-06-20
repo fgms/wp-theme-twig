@@ -33,6 +33,10 @@
 				}
 
 			}
+			else {
+				$retr .=  '<script>console.error("Error Resource not whitelisted in allowed attr  for postid'. $postid .'"';
+				
+			}
 
             // template has to be present and valid to output content inside template.
             if (isset($atts['template'])){
@@ -43,7 +47,7 @@
                     Timber::render($t,array('content'=>$retr,'title'=>$title));
                     $retr=ob_get_contents();
                     ob_end_clean();				
-                } catch (Twig_Error_Loader $e){	return '<script>console.error("Error Loading twig template '. $t .'")</script>';}                
+                } catch (Twig_Error_Loader $e){	$retr .=  '<script>console.error("Error Loading twig template '. $t .'")</script>';}                
                 
             }
             return $retr;
