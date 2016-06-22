@@ -27,7 +27,7 @@
                             </ul>
                         </li>
                     {% else %}
-                        <li><a data-scroll href="{{ item.get_link }}">{{ item.title }}</a></li>
+                        <li {% if item.classes %}class="{{item.classes | join(' ')}}" {% endif %}><a data-menu-scroll href="{{ item.get_link }}">{{ item.title }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

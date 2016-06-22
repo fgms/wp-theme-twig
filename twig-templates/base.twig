@@ -7,7 +7,9 @@
         {% block head %}
             <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
         {% endblock %}
-		{% block styles %}{% endblock %}
+		{% block styles %}
+			{% if config.css is defined %}{% include 'style.twig' ignore missing with config.css  %}{% endif %}
+		{% endblock %}
     </head>
     <body class="{{body_class}}">
 	

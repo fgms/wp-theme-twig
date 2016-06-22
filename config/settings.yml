@@ -1,0 +1,8 @@
+css:
+    body:
+        color: '#555'
+    a:
+        color: '#67c5f1'
+        hover:
+            color: '#1e7495'
+    

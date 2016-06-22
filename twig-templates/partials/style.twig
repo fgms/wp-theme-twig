@@ -1,0 +1,20 @@
+
+<style>
+{% if body is defined %}
+body {
+    color: {{body.color | default('#666')}}    
+}
+
+{% endif %}
+{% if link is defined %}
+
+    a, a:visited, a:active, a.active {
+     color: {{link.color}};
+    }
+    a:hover {
+        color: {{link.hover.color}};
+    }
+    
+{% endif %}
+</style>
+

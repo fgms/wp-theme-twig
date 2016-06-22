@@ -34,7 +34,7 @@
 
 			}
 			else {
-				$retr .=  '<script>console.error("Error Resource not whitelisted in allowed attr  for postid'. $postid .'"';
+				$retr .=  '<script>console.error("Error Resource not whitelisted in allowed attr  for postid '. $postid .'")</script>';
 				
 			}
 

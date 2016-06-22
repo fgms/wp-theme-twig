@@ -10,25 +10,29 @@ add_action( 'after_setup_theme', function(){
 	
 	// don't want this annoying p tag wrap and br tag.
 	remove_filter( 'the_content', 'wpautop' );
-    register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'blankslate' ) ) );	
+    register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'blankslate' ) ) );
+
+    // removes admin bar if user is signed out, which is a false bar because a user at once was signed in
+    $current_user = wp_get_current_user();
+    if ( 0 == $current_user->ID){      
+        show_admin_bar(false);
+    }	
 });
 
-add_action( 'wp_enqueue_style', function(){   
-   wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
-   wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
 
-   
-   
-},20);
 
 add_action( 'wp_enqueue_scripts', function(){
-   wp_enqueue_script( 'jquery' );
-   wp_enqueue_script('modernizr', get_template_directory_uri() .'/assets/js/modernizr.js');
-   wp_enqueue_script('bootstrap', get_template_directory_uri() .'/assets/js/bootstrap.min.js');
-   wp_enqueue_script('theme-master-script', get_template_directory_uri() .'/assets/js/script.js');
-   wp_enqueue_script('google-api','http://www.google.com/jsapi');   
+	
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script('modernizr', get_template_directory_uri() .'/assets/js/modernizr.js');
+	wp_enqueue_script('bootstrap', get_template_directory_uri() .'/assets/js/bootstrap.min.js');
+	wp_enqueue_script('theme-master-script', get_template_directory_uri() .'/assets/js/script.js');
+	wp_enqueue_script('google-api','http://www.google.com/jsapi');
    
-},25);
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
+	wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
+   
+},20);
 
 
 add_filter( 'the_title', function($title){
@@ -113,14 +117,6 @@ add_filter('widget_text', function($text) {
 
 
 
-/* remove admin bar for development */
-
-add_action('after_setup_theme', 'remove_admin_bar');
-function remove_admin_bar() {    
-    show_admin_bar(true);
-}
-
-
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
 function fgms_meta_boxes ($bs) {	
 	$prefix='fgms_';	
@@ -179,6 +175,7 @@ $get_config=call_user_func(function() {
 		$theme = get_option('theme_directory','default');
 		$config_file = get_stylesheet_directory().'/config/settings.yml';
 		if (!file_exists ( $config_file ) ) {
+			echo 'Error Config file not found';
 			return;
 		}
 		$filetime = filemtime($config_file);
