@@ -1,20 +1,10 @@
-
-<style>
-{% if body is defined %}
-body {
-    color: {{body.color | default('#666')}}    
-}
-
-{% endif %}
-{% if link is defined %}
-
-    a, a:visited, a:active, a.active {
-     color: {{link.color}};
+<style type="text/css">
+{%- for style in css -%}
+    {{style.selector}} {        
+        {%- for declaration in style.declarations  -%}
+            {{-declaration-}};
+        {%- endfor -%}        
     }
-    a:hover {
-        color: {{link.hover.color}};
-    }
-    
-{% endif %}
+{%- endfor -%}
 </style>
 

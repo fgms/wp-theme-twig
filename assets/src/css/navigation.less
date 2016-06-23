@@ -1,0 +1,261 @@
+ 
+/*
+ * Navbar logic
+ * 1. Top - has classes .script-fixed-header-with-scroll .nav-in-hero .show
+ *
+ * 2. Scroll Down in hero - has classes .script-fixed-header-with-scroll .navbar-static-top
+ * 
+ * 3. Scroll Down out of hero - has classes .script-fixed-header-with-scroll .navbar-static-top
+ *
+ * 4. Scroll Up not in hero - has classes .script-fixed-header-with-scroll  .show
+ *
+ * 5. Scroll Up in hero - has classes .script-fixed-header-with-scroll  .show .nav-in-hero
+ * 
+ **/
+
+/*Down Arrow Nav for modules */
+@moduleNav-content: '\f107';
+@moduleNav-font-size: 34px;
+@moduleNav-color: #fff;
+
+/*Up Arrow Nav for modules */
+@moduleNavStart-content: '\f0aa';
+@moduleNavStart-font-size: 34px;
+@moduleNavStart-color: #fff;
+
+/*navigation*/
+
+
+@nav-text-shadow: none;
+@nav-text-transform: uppercase;
+@nav-letter-spacing: 2px;
+@nav-font-size: 1.5;
+@nav-line-height: 1.2em;
+
+
+
+
+
+/*** HEADER ***/
+@header-border-bottom: none;;
+
+
+
+
+/****** DO NOT EDIT BELOW THIS LINE ******/
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
+	
+	position: relative;	
+	@media screen and (min-width: @screen-md-max){
+		.flex-center-xy();
+	}
+	
+}
+
+.navbar-toggle .icon-bar {	
+	width: 30px;
+	height: 4px;
+	cursor: pointer;
+}
+
+
+.navbar {
+	
+	.radius(0);
+	font-weight: 500;
+	z-index: 888;		
+	height: auto;
+	margin-bottom: 0;
+	.navbar-brand {
+		position: absolute;
+		height: auto;
+		font-size: 0.9em;
+		text-align: center;		
+		img {
+			width: auto;
+			margin: 0 auto 12px;;
+			text-align: center;			
+		}
+	}
+	
+	.navbar-toggle {
+		float: none;
+		line-height: 1em;
+		position: relative;
+		text-transform: uppercase;
+		top: 2px;
+		font-size: 1em;		
+	}
+	.nav {
+		// position center
+		position: relative;
+		left: 0;
+		&.navbar-center{
+			
+								
+		}
+		// navbar right
+		&.navbar-right{
+			float: right;
+		}
+		// navbar left
+		&.navbar-left {
+			float: left;
+		}
+		>li{		
+
+		   
+	   
+			ul {
+				.box-shadow();
+				
+				> li {
+					
+					
+					
+				}
+			}
+		}
+		
+
+	}
+	// fixed header with scroll css
+	
+	&.script-fixed-header-with-scroll{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		.opacity(0.98);
+		
+		&:hover { .opacity(1);}						
+		&.navbar-static-top {				
+			top: -5em;				
+		}		
+		&.show {			
+			.navbar-brand {				
+				img {
+					overflow: hidden;
+										
+				}
+			}
+			&.nav-in-hero {
+							
+			}
+			.nav>li>a {
+				
+			}				
+			top: 0;
+			position: fixed;
+					
+		}		
+	}	
+	
+}
+
+/** navigation **/
+.navigation-top {
+	display: block;
+	text-align: center;
+	margin: 24px auto;
+	background: #f8f8ff8;
+	
+}
+
+/** FOOTER NAVIGATION **/
+.horizontal-nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;	
+	&.footer-nav{
+		
+	}
+	
+}
+
+/** MODULAR NAVIGATION **/
+.modular{ 
+    .modular-next-nav {        
+        position: absolute;                  
+        width: 100%;
+        bottom: 0;
+        height: 48px;        
+        z-index: 2;
+        text-decoration: none !important;
+        text-align: center;
+        a {
+            position: relative;
+            top: 0;
+            .opacity(0.3);
+            font-family: FontAwesome;
+            .transition(0.1s);
+            &:before {
+                content: @moduleNav-content;
+                font-size: @moduleNav-font-size;
+                color: @moduleNav-color;
+                text-decoration: none !important;           
+                
+            }
+            &:hover, &:visited &:active, &:focus{
+                text-decoration: none;
+                .transition-opacity(0.8s);
+                .opacity(0.9);               
+                .transition(0.2s);
+                top: 4px;                
+            }
+        }
+		&.nav-inverse{
+			
+		}
+		&.nav-btn-circle {
+			a:before {
+				
+				.radius(14px);
+				display: inline-block;
+				width:27px;
+				height: 26px;
+				margin: 0 auto;
+				padding-top: 2px;
+				position: relative;
+			}
+			
+		}
+    }
+    .modular-start-nav {		
+         a {			
+            font-family: FontAwesome;
+            text-decoration: none;
+            &:before {
+                content: @moduleNavStart-content;
+                font-size: @moduleNavStart-font-size;               
+            }
+            &:hover, &:visited {text-decoration: none;  }   
+        }       
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-header { float: none;  }
+    .navbar-left,.navbar-right { float: none !important; }
+    .navbar-toggle { display: block; }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+		margin-top: 7.5px;
+	}
+	.navbar-nav>li { float: none; }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{display:block !important;}
+}

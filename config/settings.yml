@@ -1,8 +1,186 @@
 css:
-    body:
-        color: '#555'
-    a:
-        color: '#67c5f1'
-        hover:
-            color: '#1e7495'
+    -
+        selector: 'body'
+        declarations:
+            - 'color: #666'
+    -
+        selector: 'a, a:visited,a:active a.active, a:focus'
+        declarations:
+            - 'color: #67c5f1'
+            - 'text-decoration: none'
+    -
+        selector: 'a:hover'
+        declarations:
+            - 'color: #1e7495'
+        
+    -
+        selector: '.navbar'
+        declarations:
+            - 'background-color: #eee'
+    -
+        selector: '.footer'
+        declarations:
+            - 'background-color: #999'
+            - 'color: #fff'
+    -
+        selector: '.footer a, .footer a:visited,.footer a:active .footer a.active,.footer a:focus'
+        declarations:
+            - 'color: #fff'          
+            
+    -
+        selector: 'article'
+        declarations:
+            - 'min-height: 400px;'
     
+
+social:        
+    facebook:
+        url: 'https://www.facebook.com/'
+        icon:
+            inner: fa-facebook-f
+            outer: fa-circle
+    twitter:
+        url: 'https://twitter.com/'
+        icon:
+            inner: fa-twitter
+            outer: fa-circle
+    googleplus:
+        url: 'https://plus.google.com/'
+        icon:
+            inner: fa-google-plus
+            outer: fa-circle
+    youtube:
+        url: 'https://www.youtube.com'
+        icon:
+            inner: fa-youtube
+            outer: fa-circle        
+    pinterest:
+        url: 'https://www.pinterest.com/'
+        icon:
+            inner: fa-pinterest-p
+            outer: fa-circle       
+   
+    blog:
+        url:
+            id: 4
+        icon:
+            inner: fa-rss
+            outer: fa-circle       
+
+                   
+        
+
+company:
+    name: Fifth Gear Marketing
+    address:
+        street: Dallas Road.
+        city: Victoria    
+        province: British Columbia
+       
+        country: Turks and Caicos, B.W.I.
+phone:
+    toll: 888.000.0000
+    phone: 250.000.0000  
+    
+    
+email:
+    info: webmaster@fifthgeardev.com
+    
+    
+settings:
+    slideshow:
+        home:
+            template: 'slideshow-home'
+        logo:
+            url: /assets/images/templates/logo-default.png
+            alt: Logo
+    page:
+        grid:
+            left:
+                class: col-sm-8
+            right:
+                class: col-sm-4
+           
+             
+    footer:
+        grid:
+            left:
+                class: col-lg-6 col-lg-push-6 
+            right:
+                class: col-lg-6 col-lg-pull-6
+        logo:
+            url: /assets/images/templates/logo-default-white.png
+            alt:
+        social:
+            enable: true
+
+            
+    copyright:
+        grid:
+            left:
+                class: col-lg-6 col-lg-push-6 
+            right:
+                class: col-lg-6 col-lg-pull-6
+        text: ', Fifth Gear Marketing'
+        year: 2016
+  
+        
+postid:
+    terms: 1
+    privacy: 1
+    contactmodal: 1
+        
+forms:
+    footer:
+        
+        
+        
+        
+slideshow:
+    home:
+        id : homepage-slideshow
+        controls : false
+        indicators : true
+        captions : false
+        titles : false
+        interval: 6000
+        outer_class : feature-carousel carousel-fade
+        items:
+            -
+                title:                
+                images: 
+                    xl : 
+                    md : 
+                    sm : 
+                    xxs :       
+                  
+gallery:
+    home:
+        directory : 
+            root : ''
+            thumbs : 'thumb/'
+            medium : 'medium'
+            large : 'large/' 
+        class : 'script-grid-gallery gallery-grid-20'
+        filter : 
+            enable : false       
+        filters :
+            -
+                title : 'Videos'
+                slug : 'video'
+            -
+                title : 'Test'
+                slug : 'test'
+        options : 
+            group : homepage
+            hover : true            
+            thumbsperrow : 5
+            thumbpadding : 0
+            random : false
+            enable:
+               
+        images : 
+            -
+                src : '01.jpg'
+                title: Title.           
+          

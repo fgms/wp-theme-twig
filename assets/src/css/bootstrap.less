@@ -1,0 +1,94 @@
+
+.panel-group .panel {
+	.radius(0);
+}
+.panel-default>.panel-heading {
+	background-color: rgb(245, 245, 245);
+	padding: 10px 15px;
+}
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+	border-top: 0;
+}
+.panel-default>.panel-heading h4 {
+    padding: 0;
+}
+.panel-default {
+    border-top:0;
+}
+.panel-title {
+	* {
+		.font-size(1.6);
+		text-transform: capitalize;
+	}
+}
+
+
+
+
+/*** MODAL DARK THEME ***/
+.modal-dialog {
+	.modal-title {
+		margin-bottom: 24px;
+	}
+	.modal-content {		
+		.radius(0);		
+		font-size: 0.9em;
+		line-height: 1.7em;
+	}
+	button.close {		
+		.opacity(1);
+		position: relative;
+		font-size: 2em;
+		top:5px;
+		right: 3px;
+		font-weight: normal;
+		text-shadow: none;	
+	}
+	.modal-header {			
+		h4 {
+            margin:0;
+            padding:0;
+        }	
+	}
+	.modal-body {
+		padding: 0 24px 24px;
+		max-height: 600px;
+		overflow-y: scroll;
+		
+	}
+	.modal-footer {
+		a:hover {text-decoration: none;}
+	}
+	.glyphicon-chevron-right:before {
+		content: "\f105";
+	}
+	.glyphicon-chevron-left:before{
+		content: "\f104";
+	}
+	@media screen and (max-width: @screen-md-max) {
+		.modal-body {padding: 0 8px 4px;}
+		.modal-fotter { padding: 0 4px 4px;}
+		max-width: none !important;;
+	}
+}
+
+
+
+
+ul.nav-tabs > li {
+	.font-size(1.4);
+	margin-left: 0;
+	margin-right: 2px;
+	padding-left: 0;
+	&.active {
+		font-weight: bold;
+	}
+	> a {
+		.radius(0);
+		border: 1px solid #ddd;
+	}
+	> a:hover {
+		background-color: #fcfcfc;
+		border-color: #ddd;
+	}
+}

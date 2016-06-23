@@ -31,6 +31,7 @@ add_action( 'wp_enqueue_scripts', function(){
    
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
 	wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
+	wp_enqueue_style('master-style',get_template_directory_uri() .'/assets/css/style.css');
    
 },20);
 

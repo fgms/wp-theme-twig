@@ -1,0 +1,70 @@
+
+.carousel-control{
+	//this removes shadding on nav
+	background-image: none !important;
+}
+
+.carousel {
+	.opacity(0);
+	min-height: 300px;
+	img {		
+		width: 100%;		
+	}	
+	.carousel-indicators {		
+		li {			
+			height: 14px;
+			width: 14px;
+		
+				
+		}
+		display: none;
+		visibility: hidden;
+
+	}
+	@media screen and (min-width: @screen-lg-max){
+		.carousel-indicators {
+			display: block;
+			visibility: visible;
+		}
+	}
+	
+}
+
+.carousel-fade {
+    .carousel-inner {
+        .item {
+            transition-property: opacity;
+        }
+        
+        .item,
+        .active.left,
+        .active.right {
+            .opacity(0);
+        }
+
+        .active,
+        .next.left,
+        .prev.right {
+            .opacity(1);
+        }
+
+        .next,
+        .prev,
+        .active.left,
+        .active.right {
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    .carousel-control {
+        z-index: 2;
+    }
+	
+}
+
+
+article .carousel {	
+	margin-left: auto;
+	margin-right: auto;	
+	
+}

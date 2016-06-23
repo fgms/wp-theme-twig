@@ -1,4 +1,4 @@
-node_modules
+assets/src/node_modules
 vendor/*
 composer.lock
 src/js/scripts.js
