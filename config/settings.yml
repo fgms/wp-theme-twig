@@ -31,6 +31,10 @@ css:
         selector: 'article'
         declarations:
             - 'min-height: 400px;'
+    -
+        selector: '.icon-inner:before'
+        declarations:
+            - 'color: #999'
     
 
 social:        
