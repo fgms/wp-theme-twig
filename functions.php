@@ -168,7 +168,12 @@ function fgms_meta_boxes ($bs) {
 $get_config=call_user_func(function() {	
 	return function() use (&$config) {
 		// lets see if we have a cached version
-		if (!is_null($config)) return $config;
+		if (!is_null($config)){
+			
+			return $config;
+		}
+		
+		
 		$cache = array('config_ts'=> get_transient('fg_config_timestamp'),
 					   'config'=>get_transient('fg_config')
 				);
@@ -213,21 +218,28 @@ $get_config=call_user_func(function() {
 		$dirnameTheme = get_template_directory(). '/twig-templates';
 		
 		
+		
 		Timber::$dirname=array('twig-templates');
 		
 		 //setting up timber twig file locations
 		 // it will look in theme first, if it doesn't find it it will look in master
-		Timber::$locations=array($dirnameChildTheme,
+		$timberLocationsArray = array($dirnameChildTheme,
 								 $dirnameChildTheme.'/wp',
 								 $dirnameChildTheme.'/partials',
 								 $dirnameChildTheme.'/email',
-								 $dirnameChildTheme.'/form',
-								 $dirnameTheme,
-								 $dirnameTheme.'/wp',
-								 $dirnameTheme.'/partials',
-								 $dirnameTheme.'/email',
-								 $dirnameTheme.'/form',
-								);	
+								 $dirnameChildTheme.'/form');
+		// only merge if seperate;
+		if ( $dirnameChildTheme !== $dirnameTheme ) {
+			$timberLocationsArray = array_merge($timberLocationsArray, array(	$dirnameTheme,
+																				$dirnameTheme.'/wp',
+																				$dirnameTheme.'/partials',
+																				$dirnameTheme.'/email',
+																				$dirnameTheme.'/form')
+												);
+		}
+		// adding filter to add twig locations
+		$timberLocationsArray = apply_filters('fg_theme_master_twig_locations', $timberLocationsArray);
+		Timber::$locations=	 $timberLocationsArray;
 		
 		return $config;
 	};

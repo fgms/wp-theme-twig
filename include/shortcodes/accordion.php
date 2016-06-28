@@ -11,43 +11,95 @@
 		//		title:
 		//	}
 		
-		add_shortcode('accordion',function ($atts, $content) use (&$panels, &$aid) {
+		add_shortcode('accordion',function($atts,$content)  {			
+			return do_shortcode('[collapse type="accordion"]' . $content.'[/collapse]');
+		});
+		
+		add_shortcode('collapse',function ($atts, $content) use (&$panels, &$aid) {
 			
 			$panels=array();
 			$retr ='';
 			
 			do_shortcode($content);
-			
+			$iconup = isset($atts['iconup']) ? $atts['iconup']: ' ';
+			$icondown = isset($atts['icondown']) ? $atts['icondown'] : ' ';
+			$fontfamily = isset($atts['fontfamily']) ? $atts['fontfamily']: 'FontAwesome';
 			$id='accordion'.(++$aid);
 			$retr.=sprintf(
-				'<div class="panel-group" id="%s" role="tablist">',
-				htmlspecialchars($id)
-			);
-			foreach ($panels as $p) {
+				'
+				<style>
+				#%1$s .collapse-trigger:before {
+					content: "\%3$s";
+					font-family: %4$s;
+					margin-right: 4px;
+				}
+				#%1$s .collapse-trigger:hover {
+					text-decoration: none;
+				}
 				
-				$retr.=sprintf(
-					'<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a class="%5$s" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
-									%3$s
-								</a>
-							</h4>
-						</div>
-						<div id="%2$s" class="panel-collapse %6$s ">
-							<div class="panel-body">
-								%4$s
+				#%1$s .collapse-trigger.collapsed:before {
+					content: "\%2$s";
+					font-family: %4$s;
+					margin-right: 4px;
+				}				
+				</style>
+				<div class="panel-group" id="%1$s" role="tablist">',
+				htmlspecialchars($id),
+				$iconup,
+				$icondown,
+				$fontfamily
+				
+			);
+			$type = isset($atts['type']) ? $atts['type'] : '';
+			foreach ($panels as $p) {
+				if ($type == 'accordion'){
+					$retr.=sprintf(
+						'<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="%5$s collapse-trigger" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
+										%3$s
+									</a>
+								</h4>
 							</div>
-						</div>
-					</div>',
-					$id,
-					$p->id,
-					$p->title,
-					$p->content,
-					$p->titleactive,
-					$p->panelactive,
-					$p->ariaexpanded
-				);
+							<div id="%2$s" class="panel-collapse %6$s ">
+								<div class="panel-body">
+									%4$s
+								</div>
+							</div>
+						</div>',
+						$id,
+						$p->id,
+						$p->title,
+						$p->content,
+						$p->titleactive,
+						$p->panelactive,
+						$p->ariaexpanded
+					);					
+				}
+				else {
+					$retr.=sprintf(
+						'<div>
+							<h4 class="collapse-title"><a class="collapse-trigger %5$s" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
+										%3$s
+							</a></h4>
+							<div class="collapse" id="%2$s">
+								<div class="">
+								  %4$s
+								</div>
+							</div>
+						</div>',
+						$id,
+						$p->id,
+						$p->title,
+						$p->content,
+						$p->titleactive,
+						$p->panelactive,
+						$p->ariaexpanded
+					);
+				}
+
+				
 				
 			}
 			$retr.='</div>';
