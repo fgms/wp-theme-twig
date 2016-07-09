@@ -1,6 +1,11 @@
 <?php
 $autoloader = require_once( str_replace('/wp-content/themes', '', get_theme_root()) .'/vendor/autoload.php');
 
+// Timber load fix which got broken in V1.1.0 of timber/timber
+if (!class_exists('Timber') {
+   new \Timber\Timber;
+}
+
 add_action( 'after_setup_theme', function(){
     load_theme_textdomain( 'blankslate', get_template_directory() . '/languages' );
 	add_post_type_support( 'page', 'excerpt' );

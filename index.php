@@ -4,8 +4,6 @@
  */
 
 	// set up page data 	
-    // as of v1.1.0 of Timber, I think they messed up composer. So this is required which initialized twig functions that make timber work.
-    new \Timber\Timber;
 	$template = false;
 	$start = TimberHelper::start_timer();
 	$data = Timber::get_context();
