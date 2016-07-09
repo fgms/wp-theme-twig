@@ -64,12 +64,20 @@ jQuery(function($) {
   }
 
   //adding hover code to bootstrap menus
-  $('ul.nav li.dropdown').on('hover',
-    function() {
-      $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-    }, function() {
+  if (window.innerWidth > 993)  {
+    $('ul.nav li.dropdown').on('mouseover',function(){
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+      });
+    $('ul.nav li.dropdown').on('mouseout',function(){
       $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-  });
+      });
+    $('.no-touch ul.nav li.dropdown .dropdown-toggle').on('click',function(e){ 
+        window.location = $(this).attr('href');
+      });    
+  }
+
+  
+  
 	/*removes data in generalmodal*/
 	$('#general-modal').on('hidden.bs.modal', function() {
 	    $(this).removeData('bs.modal');
@@ -312,8 +320,17 @@ function updateParallax($obj, minheight){
 	}
 	else {
 	  $obj.css({'background-position' : '0 0', 'background-size' : 'cover'});
-	}	
-	
-	
-	
+	}		
+}
+
+function randomizeChildren($children){
+    var allElems = $children.get(),
+		getRandom = function(max) {	return Math.floor(Math.random() * max);	},
+		shuffled = $.map(allElems, function(){
+			var random = getRandom(allElems.length),
+				randEl = $(allElems[random]).clone(true)[0];
+			allElems.splice(random, 1);
+			return randEl;
+	   });
+	$children.each(function(i){$(this).replaceWith($(shuffled[i])); });
 }

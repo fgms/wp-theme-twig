@@ -29,9 +29,20 @@
 				'
 				<style>
 				#%1$s .collapse-trigger:before {
-					content: "\%3$s";
+					content: "\%2$s";
 					font-family: %4$s;
 					margin-right: 4px;
+					transform: rotate(90deg);
+					-moz-transform:  rotate(90deg);
+					-webkit-transform: rotate(90deg);
+					-o-transform: rotate(90deg);
+					-ms-transform: rotate(90deg);					
+					transition: all 0.25s linear;
+					-moz-transition: all 0.25s linear;
+					-webkit-transition: all 0.25s linear;
+					-o-transition: all 0.25s linear;				
+					
+					display: inline-block;
 				}
 				#%1$s .collapse-trigger:hover {
 					text-decoration: none;
@@ -41,6 +52,11 @@
 					content: "\%2$s";
 					font-family: %4$s;
 					margin-right: 4px;
+					transform: rotate(0);
+					-moz-transform:  rotate(0);
+					-webkit-transform: rotate(0);
+					-o-transform: rotate(0);
+					-ms-transform: rotate(0);				
 				}				
 				</style>
 				<div class="panel-group" id="%1$s" role="tablist">',
