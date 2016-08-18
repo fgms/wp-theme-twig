@@ -1,17 +1,20 @@
 {% extends 'base-email.twig' %}
 {% block content %}
 {% for key, post in posted  %}
-    {% if key matches '/^[a-zA-Z]+/'  %}  
-    <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
-        <td class="panel four sub-columns grid-text" style="text-align: center; word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; min-width: 0px; width: 33%; color: {{body-color}}; font-family: {{heading_font_family}}; font-weight: normal; line-height: 16px; font-size: 11px; background:{{container_background_color}} ; margin: 0; padding: 10px; border: 1px solid #efefef;"     align="center" bgcolor="{{container_background_color}}" valign="top">
-                {{key|replace({'-':' ','_': ' '})| capitalize }}
-        </td>
-        <td class="panel eight sub-columns grid-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 66%; color: {{body-color}};  font-family: {{body_font_family}}; font-weight: normal; line-height: 16px; font-size: 11px; background: {{container_background_color}}; margin: 0;padding: 10px; border: 1px solid #efefef;" align="left" bgcolor="container_background_color" valign="top">
-            {{post}}
-        </td>
-      
-        <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: {{body-color}}; font-family: {{body_font_family}}; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;"   align="left" valign="top"></td>
-    </tr>    
+    {% if key matches '/^[a-zA-Z]+/'  %}
+        {% if key matches '/^hpot/' %}
+        {% else %}
+        <tr style="vertical-align: top; text-align: left; padding: 0;" align="left">
+            <td class="panel four sub-columns grid-text" style="text-align: center; word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; min-width: 0px; width: 33%; color: {{body-color}}; font-family: {{heading_font_family}}; font-weight: normal; line-height: 16px; font-size: 11px; background:{{container_background_color}} ; margin: 0; padding: 10px; border: 1px solid #efefef;"     align="center" bgcolor="{{container_background_color}}" valign="top">
+                    {{key|replace({'-':' ','_': ' '})| capitalize }}
+            </td>
+            <td class="panel eight sub-columns grid-text" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; min-width: 0px; width: 66%; color: {{body-color}};  font-family: {{body_font_family}}; font-weight: normal; line-height: 16px; font-size: 11px; background: {{container_background_color}}; margin: 0;padding: 10px; border: 1px solid #efefef;" align="left" bgcolor="container_background_color" valign="top">
+                {{post}}
+            </td>
+          
+            <td class="expander" style="word-break: break-word; -webkit-hyphens: none; -moz-hyphens: none; hyphens: none; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; color: {{body-color}}; font-family: {{body_font_family}}; font-weight: normal; line-height: 19px; font-size: 14px; margin: 0; padding: 0;"   align="left" valign="top"></td>
+        </tr>
+        {% endif %}
     {% endif %}
 {% endfor %}
 {% endblock %}
