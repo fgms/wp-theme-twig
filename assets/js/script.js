@@ -52,7 +52,7 @@ jQuery(function($) {
     $(this).find('.panel-title *[href="#' + $(event.target).attr('id') + '"]').addClass('active');
 
   });
-
+/*
   var imgs=$('#articleContent img');
   if ((imgs.length > 0) && imgs.smoothZoom) {
     imgs.smoothZoom({
@@ -61,7 +61,7 @@ jQuery(function($) {
 	  navigationClose: '<i class="fa fa-times-circle" aria-hidden="true"></i>'
     });
 
-  }
+  }*/
 
   //adding hover code to bootstrap menus
   if (window.innerWidth > 993)  {
@@ -92,7 +92,15 @@ jQuery(function($) {
 	  navigationRight: '<i class=\"fa fa-angle-right\"></i>',
 	  navigationLeft: '<i class=\"fa fa-angle-left\"></i>',
 	  navigationClose: '<i class="fa fa-times-circle" aria-hidden="true"></i>',
-	  zoomoutSpeed : 800
+	  zoomoutSpeed : 800,
+		onImageChange: function($element, group, index){			
+			var $bigImageThumb = $('[data-rel="'+$element.parent().attr('id')+'"]');			
+			$bigImageThumb.closest('ul').find('li').removeClass('active');
+			$bigImageThumb.closest('li').addClass('active');
+			if ($bigImageThumb.length > 0){				
+				$bigImageThumb.trigger('click');
+			}
+		}
 	});
   }
 
@@ -103,9 +111,28 @@ jQuery(function($) {
 	  imagesLoaded($element.find('img'), function(e,msg){
 		$grid.isotope('layout');		
 	  });
-
-
   }
+	
+	if ($('.script-load-feature').length > 0 ){
+		$('.script-load-feature').on('click',function(e){			
+			$(this).closest('ul').find('li').removeClass('active');
+			$(this).closest('li').addClass('active');
+			e.preventDefault();
+			var $closestGallery = $(this).closest('.script-grid-gallery');
+			var newImageId = $(this).attr('data-rel');			
+			if ((newImageId !== undefined) && ($closestGallery.find('#'+ newImageId).length > 0)){
+				$closestGallery.find('.script-feature-content').css({
+					'overflow': 'hidden',
+					'height' : $closestGallery.find('.script-feature-content > *').outerHeight() + 'px'
+				})
+				$closestGallery.find('.script-feature-content > .active').removeClass('active').stop(true,true).fadeOut(300,function(){
+					console.log('fading in')
+					$closestGallery.find('#'+ newImageId).addClass('active').stop(true,true).fadeIn();
+				});				
+			}
+
+		});
+	}
   
   //this is the code for stickycomponent
   if ( ($('.scipt-sidebar-sticky') ) && ( typeof $().fgStickyComponent === 'function') ) {

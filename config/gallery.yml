@@ -1,0 +1,22 @@
+infinity_pool:
+  options:
+    group : 'infinitypool'
+    thumbs_per_row : 3
+    thumb_padding : 4px
+    feature: true
+  images: 
+    - 
+        src: the-palms-turks-caicos-infinity-pool-01.jpg
+        title:
+    -
+        src: the-palms-turks-caicos-infinity-pool-02.jpg
+        title:
+    - 
+        src: the-palms-turks-caicos-infinity-pool-03.jpg
+        title:
+    -
+        src: the-palms-turks-caicos-infinity-pool-04.jpg
+        title:
+    -
+        src: the-palms-turks-caicos-infinity-pool-05.jpg
+        title:

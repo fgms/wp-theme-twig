@@ -1,4 +1,5 @@
 {% if function('function_exists','yoast_breadcrumb')  %}
-    {% set breadcrumbs = function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false) %}
+    {% set preContainer %}<div id="breadcrumbs" class="B_crumbBox" style="{{style}}">{% endset %}
+    {% set breadcrumbs = function('yoast_breadcrumb',preContainer,'</div>', false) %}
     {% if breadcrumbs|striptags != 'Home' %}{{breadcrumbs}}{% endif %}    
 {% endif %}  

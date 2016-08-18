@@ -82,6 +82,11 @@ company:
         province: British Columbia
        
         country: Turks and Caicos, B.W.I.
+    test: 
+      '@import': 'shawn.yml'   
+
+       
+
 phone:
     toll: 888.000.0000
     phone: 250.000.0000  
@@ -158,7 +163,9 @@ slideshow:
                     sm : 
                     xxs :       
                   
-gallery:
+gallery:    
+    inpage: 
+      '@import': 'gallery.yml'         
     home:
         directory : 
             root : ''
@@ -186,5 +193,6 @@ gallery:
         images : 
             -
                 src : '01.jpg'
-                title: Title.           
+                title: Title.      
+   
           
