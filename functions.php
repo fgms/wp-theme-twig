@@ -25,6 +25,11 @@ add_action( 'after_setup_theme', function(){
 });
 
 
+add_filter('wp_seo_get_bc_title',function($text){	
+	$text = str_replace('&nbsp;','',$text);
+	return $text;
+});
+
 
 add_action( 'wp_enqueue_scripts', function(){
 	
@@ -184,19 +189,25 @@ $get_config=call_user_func(function() {
 				);
 		$errors = array();
 		$theme = get_option('theme_directory','default');
+		
 		$config_file = get_stylesheet_directory().'/config/settings.yml';
 		if (!file_exists ( $config_file ) ) {
 			echo 'Error Config file not found';
 			return;
 		}
-		$filetime = filemtime($config_file);
-		
+		$filetime = hashDirectory(get_stylesheet_directory().'/config/');	
 		// checking if settings.yml has changed if so lets update, but only if is valid
 		if ($cache['config_ts'] != $filetime) {					
 			$config=@file_get_contents($config_file);
 			if ($config===false) die('Could not read '.$config_file);
+			// this compiles all context settings in config file
+			$config = Timber::compile_string($config, Timber::get_context());
+					
 			try {
 				$config=\Symfony\Component\Yaml\Yaml::parse($config);
+				//this loads any external yamls file		
+				updateExternalYaml($config);
+	
 			}
 			catch(\Symfony\Component\Yaml\Exception\ParseException $e){
 				$errors[] = 'ParseException in function.php Line '. __LINE__ . ' '. $e;
@@ -292,4 +303,96 @@ $get_slideshow=function () {
 if (is_admin()){
 	require_once(__DIR__.'/include/theme-settings.php');
 }
+
+function updateExternalYaml(Array &$config){
+	$results = array();
+	array_find_deep($config, '@import', $results);
+	if (count($results)){
+		foreach($results as $keys){
+			$ref = &$config;
+			$index = $keys[count($keys) -2];
+			$file = '';
+			$value = '';
+			while( count($keys) !== 0){
+				if ($keys[0] === $index){					
+					$value = &$ref[$keys[0]];
+					$ref = &$ref[$keys[0]];
+				}					
+				// transfverse
+				else {						
+					$ref = &$ref[$keys[0]];
+				}
+
+				array_shift($keys);
+			}
+			$file = $ref;			
+
+			$external = '-no info';
+			$external_data = false;		
+			$external_file = get_stylesheet_directory().'/config/'.$file;
+			if (!file_exists ( $external_file ) ) {
+				$external =  'Error Config file not found ' . $external_file;	
+			}	
+			else {
+				$external_data=@file_get_contents($external_file);
+				
+
+				if ($external_data===false) {
+					$external = 'Could not read '.$external_file;
+				}
+				else {
+					try {
+						$external_data = Timber::compile_string($external_data, Timber::get_context());
+						$external=\Symfony\Component\Yaml\Yaml::parse($external_data);							
+					}
+					catch(\Symfony\Component\Yaml\Exception\ParseException $e){
+						$external = 'ParseException in function.php Line '. __LINE__ . ' '. $e;
+					}							
+				}
+			}
+			$value = $external;
+			unset($value);
+		}
+	}
+}
+
+function array_find_deep( $array, $search, &$results, $keys=array() ){		
+	foreach($array as $key => $value) {
+		if (is_array($value)) {
+			$sub = array_find_deep($value, $search, $results, array_merge($keys, array($key) ));
+			if (count($sub)) {							
+					return $sub;
+			}
+		} 
+		elseif ($key === $search) {					
+			$results[] =  array_merge($keys, array($key));					
+			$keys = array();
+		}
+	} 
+	return array();
+}
+
+function hashDirectory($directory){
+    if (! is_dir($directory))
+    {
+        return false;
+    } 
+    $fileTimes = array();
+    $dir = dir($directory); 
+    while (false !== ($file = $dir->read()))   {
+        if ($file != '.' and $file != '..')  {
+            if (is_dir($directory . '/' . $file))  {
+                $fileTimes[] = hashDirectory($directory . '/' . $file);
+            }
+            else  {
+							
+                $fileTimes[] =  filemtime($directory . '/' . $file);
+            }
+        }
+    } 
+    $dir->close(); 
+    return md5(implode('', $fileTimes));
+}
+
+
 ?>
