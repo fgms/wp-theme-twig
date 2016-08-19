@@ -100,7 +100,7 @@
 										%3$s
 							</a></h4>
 							<div class="collapse" id="%2$s">
-								<div class="">
+								<div class="collapse-panel-body">
 								  %4$s
 								</div>
 							</div>
