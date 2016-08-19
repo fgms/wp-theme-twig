@@ -44,9 +44,9 @@
 							{# *** Checking if is feature image ***#}                
 							{% if gallery.options.feature %}                    
 							<div  class="__st_gallery_feature_wrapper script-feature ">                
-									<div class="__st_gallery_feature_content script-feature-content"  style="list-style: none;">
+									<div class="__st_gallery_feature_content script-feature-content"  >
 										{% for image in images |slice(0,limit) %}
-										<div id="{{gallery_name}}{{loop.index}}" class="{% if loop.first %}active{% endif %}" style="width: 100%; {% if loop.first %}{% else %}display: none;{% endif %}">
+										<div id="{{gallery_name}}{{loop.index}}" class="{% if loop.first %}active{% endif %}" style="width: 100%; {{gallery.style.feature | default('padding:0;margin: 0;')}}; {% if loop.first %}{% else %}display: none;{% endif %}">
 											<a {{gmacro.linkattributes(gallery, image)}} class="script-gallery-action"  data-smoothzoom="{{gallery_name}}" >                              
 												<img data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.medium}}{{image.src}}" data-loaded="false" style="width: 100%;"/>
 											</a>
@@ -66,7 +66,7 @@
 							{% for image in images  %}
 								{# *** Getting link attributes *** #}              
 								<li class="__st_gallery_thumb_item {% if loop.first %}active{% endif %}  {{image.filters| split(",") |join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
-									<a {% if gallery.options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
+									<a style="{{gallery.style.thumb | default('padding:0;margin: 0;')}}; position: relative;" {% if gallery.options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
 										<img  data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.thumbs}}{{image.src}}"  
 													alt="{{image.alt|default(image.title)}}" style="width:100%;"  data-loaded="false" />    
 
