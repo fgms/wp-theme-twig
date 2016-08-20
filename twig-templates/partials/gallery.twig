@@ -65,7 +65,7 @@
 							{# *** Loop through images *** #}
 							{% for image in images  %}
 								{# *** Getting link attributes *** #}              
-								<li class="__st_gallery_thumb_item {% if loop.first %}active{% endif %}  {{image.filters| split(",") |join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
+								<li class="__st_gallery_thumb_item {% if loop.first and gallery.options.feature %}active{% endif %}  {{image.filters| split(",") |join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
 									<a style="{{gallery.style.thumb | default('padding:0;margin: 0;')}}; position: relative;" {% if gallery.options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
 										<img  data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.thumbs}}{{image.src}}"  
 													alt="{{image.alt|default(image.title)}}" style="width:100%;"  data-loaded="false" />    
