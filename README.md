@@ -88,6 +88,7 @@ The **[panel]** shortcode accepts the following attributes:
 | --------- | ----------- |
 | id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
 | title     | A title for the panel |
+| active    | default false, opens accordion if true |
 
 The content of the [panel] shortcode shall be used as the content of the panel in the accordion.
 

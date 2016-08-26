@@ -1,28 +1,39 @@
-{% embed  "container-sidebar.twig" %}    
-{% block container %}
-	{% if function('function_exists','yoast_breadcrumb')  %}{{function('yoast_breadcrumb','<div id="breadcrumbs" class="B_crumbBox">','</div>', false)}}{% endif %}
-    <h1>{{archive_title}}</h1>
-<ul id="blog-articles">    
-    {% for article in posts %}  
-    <li>								
-        <article  itemscope itemtype="http://schema.org/Article"> 
-            <a href="{{ article.permalink }}" title="{{ article.title | escape }}" itemprop="url"><h2 itemprop="name">{{ article.title }}</h2></a>									
-            <meta itemprop="author" content="{{ article.author }}" />
-            <div  class="article-summary" itemprop="description">
-                <div class="row">
-                    {% if article.thumbnail %}<div class="col-sm-4 blog-index-image-full"><a href="{{ article.permalink }}"><img src="{{article.thumbnail.src|resize(150,150)}}" /></a> </div>{%endif%}
-                    <div class="{% if article.thumbnail %}col-sm-8{%else%}col-sm-12{%endif%}">
-                        <span class="articleDate" itemprop="datePublished"><b>{{ article.date | date("M d, Y") }}</b></span> - {{ article.content | striptags}} <a class="learn-more-link" href="{{ article.permalink }}">Full Story<i class="fa  fa-angle-double-right"></i></a></div>										 
-                    </div>									   
-                <div class="row" style="padding-top:12px;">
-                    <div class="col-sm-6">{% include 'blog-tags-cats.twig' %}  </div>
-                    <div class="col-sm-6 align-right-sm comment-link"> Comment	{{article.comments|length}}</div>
-                </div>
-            </div><!-- articleSummary -->								   
-           		   
-        </article><!-- articleWrapper -->
-    </li>
-    {% endfor %}							
-</ul>
-{% endblock%}
-{%endembed%}
+{% extends 'base.twig' %}
+{% block content %}	
+<div class="modular sidebar">
+	<div class="modular-row "  >
+		<div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+		<div class="container">
+				<div class="row">
+					<div class="{{config.settings.article.grid.left.class | default('col-sm-12')}}">
+						<div class="column-wrapper">
+						{% include 'breadcrumbs.twig' ignore missing only %}
+							<h1>{{archive_title}}</h1>
+							{% if archive_description | length > 0 %}
+							<div class="archive-description">{{archive_description}}</div>
+							{% endif %}
+
+							<ul id="blog-articles">   
+								{% for article in posts%}
+										<li>{% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-index-default" } only %}</li>
+								{% endfor %}
+							</ul>
+						</div>
+						
+					</div>
+					{% if config.settings.article.grid.right.class is defined%}
+					<div class="{{config.settings.article.grid.right.class}}" >
+						<div id="sidebar">
+							{% include 'blog-sidebar.twig' ignore missing %}
+							<ul class="widget-section">
+								{{widget_blog_sidebar}}
+							</ul> 							
+						</div>
+                         
+					</div>
+					{% endif %}
+			</div>
+		</div>
+	</div>
+</div>	
+{% endblock %}

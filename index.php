@@ -37,22 +37,28 @@
 		$template = 'index';
 			
 	elseif ( is_category() ) :
-		$data['archive_title'] = get_cat_name( get_query_var('cat') );
+		$data['archive_title'] = '<div class="pre-title pre-title-category"></div>'. get_cat_name( get_query_var('cat') );
 		$data['archive_description'] = term_description();
 		$template = 'archive';
 	
 	elseif ( is_tag() ) :
-		$data['archive_title'] = get_term_name( get_query_var('tag_id') );
+		$data['archive_title'] = '<div class="pre-title pre-title-tag"></div>'. get_cat_name( get_query_var('tag_id') );
 		$data['archive_description'] = term_description();
 		$template = 'archive';
 	
 	elseif ( is_author() ) :
 		$data['archive_title'] = get_the_author();		
-		$template = 'archive';		
-
+		$template = 'archive';	
+	
+	elseif (is_archive() ) :
+		$data['archive_title'] = '<div class="pre-title pre-title-archive"></div>'. $GLOBALS['wp_locale']->get_month(get_query_var('monthnum')) . ' ' . get_query_var('year') ;
+		$data['archive_description'] = term_description();
+		$template = 'archive';
 	endif;
    
-	
+	if (!is_page()) {
+		get_blog_sidebar($data);
+	}
    
 	// render using Twig template index.twig
     if ($template !== false ){
@@ -85,5 +91,18 @@
 		if (get_option('theme_twig_cache_performance', 'true') == 'true'){
 			//echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
 		}		
-	}    
+	}   
+function get_blog_sidebar(&$data){
+	$args = array('echo'=>false,
+							  'title_li'=>'');
+	$data['get_categories'] = '<ul>' . wp_list_categories($args) .'</ul>';
+	
+	$args = array( 'posts_per_page' => 10, 'order'=> 'DESC', 'orderby' => 'date' );	
+	$data['all_posts'] =Timber::get_posts($args);
+	
+	$data['get_tags'] = get_tags();
+	$args = array('echo'=>false);	
+	$data['get_archives'] = '<ul>' .wp_get_archives($args).'</ul>';
+	
+}
 ?>

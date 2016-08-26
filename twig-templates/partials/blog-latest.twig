@@ -1,0 +1,19 @@
+{% set blog_limit %}{%if limit %}{{limit}}{% else %}5{% endif %}{%endset%} 
+{% set compact = true %}
+{% if compact %}{% else %}<h2 class="sidebarTitle">Latest News</h2>{% endif %}
+<div id="latest-news" class="rssFeed {% if compact %} rssFeed-compact{% endif %}">
+	<div class="rssBody">
+		<ul data-limit="{{blog_limit}}" class="rss-feed-wrapper">
+			{% for article in all_posts | slice(0,5) %}
+      
+			<li class="rssRow article-row ">
+				{% if compact %}
+				<a  title="{{article.title}}" href="{{article.link}}">{{article.title}}</a>
+				{% else %} 				
+    
+				{% endif %}
+			</li>
+      {% endfor %}			
+		</ul>
+	</div>
+</div>

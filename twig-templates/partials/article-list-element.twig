@@ -4,6 +4,7 @@
 {% endif %}
 
 <li class="index-wrapper index-template-wrapper index-list-element row">
+	{% if article.get_thumbnail.src %}
 	<div class="index-image-wrapper col-xs-3">
         {% if link is defined %}		
 			<a href="{{link}}" ><img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" /> </a>	        
@@ -11,10 +12,12 @@
 			<img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" />
 	    {% endif %}
 	</div>
-	<div class="col-xs-8 index-content-wrapper">
+	{% endif %}
+	
+	<div class="{% if article.get_thumbnail.src %}col-xs-8{% else %}col-xs-12{% endif %} index-content-wrapper">
 		<h3 class="index-heading">{% if link is defined %}<a href="{{link}}" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</h3>	
 			
-		<div class="index-excerpt">{{article.post_excerpt}}</div>
+		<div class="index-excerpt">{% if article.post_excerpt | length > 50 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }}{% endif %}</div>
 		<div class="index-button">
 		    {% if link is defined %}<a href="{{link}}"  style="margin-right: 12px" class="btn btn-primary">More Details</a>{% endif %}		    
 		</div>

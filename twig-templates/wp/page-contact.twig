@@ -1,34 +1,90 @@
-{% extends 'base.twig' %}
-
+{% extends 'base.twig' %}	
 {% block content %}	
-    <div class="modular sidebar-left">
-        <div class="modular-row "  >
-            <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-            <div class="container">   
-            
-                <div class="row">
-                    <div class="{{config.settings.contact.grid.left.class | default('col-sm-12') }}>
-                        <div class="main-col-wrapper">
-                            {% include 'breadcrumbs.twig' ignore missing only %} 
-                            {% include "article.twig" with { "article" : post, "loop" : loop } %}                      
-                            
-                        </div>
-                    </div>
-                    {% if config.settings.contact.grid.right.class is defined %}
-                    <div class="{{config.settings.contact.grid.right.class}}">
-                        <div id="sidebar">
-                            <div id="sidebar-wrapper">
-                                <div class="sidebar nav hidden-xs" >
-                                    <ul class="widget-section">
-                                        {{widget_contact_sidebar}}
-                                    </ul>                                    
-                                </div>
-                            </div>                                    
-                        </div>                         
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>	
+{# include 'partials/hero-snippet.html.twig' with { 'thisPage' : page , 'thisIndex' : page.find('/blog')} #}	
+<div class="modular">
+	<div class="modular-row "  >
+		<div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
+		<div class="container">
+			<div class="column-wrapper">	
+				<div class="row">
+					<div class="{{config.settings.contact.grid.left.class | default('col-md-8')}}">						
+							{% include 'breadcrumbs.twig' ignore missing with {'style': 'text-align:left'} only %}
+              {% include "article.twig" with { "article" : post, "loop" : loop } %}    
+              {% include "bottom-pill-nav.twig" ignore missing %}             
+						
+					</div>	
+          <div class="{{config.settings.contact.grid.right.class | default('col-md-4')}}">
+						<div id="sidebar">
+							<div id="sidebar-wrapper">
+								<div class="sidebar nav hidden-xs" >
+								{% if widget_contact_sidebar %}
+									<ul class="widget-section">
+											{{widget_contact_sidebar}}
+
+									</ul>
+									{% else %}
+									<div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization"> 
+										<meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="Mission Inn Resort" /> 
+										<div style=" " class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+												<table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
+														<tbody >         
+														{% if config.company.name is defined %}
+														<tr>																
+															<td colspan="2" style="border-top: none;" itemprop="company"><span style="font-weight: 400">{{config.company.name}}</span></td>
+														</tr>															
+														{% endif %}
+														{% if config.phone.toll is defined %}
+														<tr>
+																<td style="width: 30%">TF.</td>
+																<td itemprop="telephone">{{config.phone.toll}}</td>
+														</tr>          
+														{% endif %}
+
+														{% if config.phone.office is defined %}
+														<tr>
+																<td>T.</td>
+																<td itemprop="telephone">{{config.phone.office}}</td>
+														</tr>        
+														{% endif %}
+
+														{% if config.phone.fax is defined %}
+														<tr>
+																<td>F.</td>
+																<td itemprop="telephone">{{config.phone.fax}}</td>
+														</tr>        
+														{% endif %}                                     
+
+														{% if config.email.info is defined %}
+														<tr>
+																<td>E.</td>
+																<td itemprop="email">{% filter shortcodes %}[email label="Send Email"]{{config.email.info}}[/email]{% endfilter %}</td>                                                    
+														</tr>
+														{% endif %} 
+														<tr>
+																<td colspan="2" style="font-size: 0.85em;">
+																		<div itemprop="streetAddress">{{config.company.address.street}}</div> 
+																		<div>
+																				<span  itemprop="addressLocality">{{config.company.address.city}}</span>
+																				<span itemprop="addressRegion">{{config.company.address.province}}</span>
+																				<span style="padding-left: 2px;" itemprop="postalCode">{{config.company.address.postal}}</span>
+																		</div>
+																		<div style="" itemprop="addressCountry">{{config.company.address.country}}</div>                                                                 
+																</td>
+														</tr>																	 
+
+														</tbody>
+												</table>
+										</div>
+									</div>
+								{% endif %}	
+								</div>
+							</div>                                    
+						</div>                         
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
 {% endblock %}
+

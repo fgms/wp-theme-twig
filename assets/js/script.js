@@ -109,7 +109,13 @@ jQuery(function($) {
 	  var $element = $('.script-grid-gallery');
 	  var $grid = $element.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
 	  imagesLoaded($element.find('img'), function(e,msg){
-		$grid.isotope('layout');		
+			$grid.isotope('layout');		
+			$('.gallery-filters').on('click','button',function(){
+					var filterValue = $(this).data('filter');
+					$grid.isotope({filter: filterValue}) ;
+					$('.gallery-filters button').removeClass('active');				
+					$(this).addClass('active');
+			}); 					
 	  });
   }
 	

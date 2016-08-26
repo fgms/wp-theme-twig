@@ -1,7 +1,18 @@
-<div class="sidebar">
-    <ul>
-        {% for child in post.get_children if not child.post_mime_type %}
-        <li><a href="{{child.link|e('html_attr')}}">{{child.title|e}}</a></li>
-        {% endfor %}
-    </ul>
+{% filter shortcodes %}
+[accordion]
+[panel title="Home"][/panel]
+[panel title="Blog"][/panel]
+[panel title="Latest Posts" active="true"]{% include 'blog-latest.twig' %}[/panel]
+[panel title="By Month"]{{ get_archives }}[/panel]
+[panel title="Categories"]{{get_categories}}[/panel]
+[panel title="Tag Cloud"]
+{% set tags = get_tags %}
+<div class="tags">
+  {% for tag in tags %}
+  <a class="btn  btn-tag" style="margin-right: 4px;" href="{{site.url}}/tag/{{tag.slug}}">{{ tag.name }}</a>
+  {% endfor %} 
 </div>
+
+[/panel]
+[/accordion]
+{% endfilter %}

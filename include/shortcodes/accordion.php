@@ -69,10 +69,11 @@
 			$type = isset($atts['type']) ? $atts['type'] : '';
 			foreach ($panels as $p) {
 				if ($type == 'accordion'){
+					if ($p->posturl === null ){
 					$retr.=sprintf(
 						'<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title">
+								<h4 class="panel-title" >
 									<a class="%5$s collapse-trigger" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
 										%3$s
 									</a>
@@ -91,7 +92,25 @@
 						$p->titleactive,
 						$p->panelactive,
 						$p->ariaexpanded
-					);					
+						
+					);								
+					}
+					else {
+						$retr.=sprintf(
+						'<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="collapse-trigger" role="button"  href="%2$s" aria-expanded="false" aria-controls="false">
+										%1$s
+									</a>
+								</h4>
+							</div>							
+						</div>',						
+						$p->title,						
+						$p->posturl
+					);							
+					}
+			
 				}
 				else {
 					$retr.=sprintf(
@@ -111,7 +130,8 @@
 						$p->content,
 						$p->titleactive,
 						$p->panelactive,
-						$p->ariaexpanded
+						$p->ariaexpanded,
+						$p->posturl
 					);
 				}
 
@@ -130,12 +150,13 @@
 			
 			if (is_null($panels)) return '';
 			
-			$atts=shortcode_atts(array('title' => '', 'id' => null,'active'=>null),$atts);
+			$atts=shortcode_atts(array('title' => '', 'id' => null,'active'=>null, 'posturl'=>null),$atts);
 			if (!isset($atts['id'])) $atts['id']='panel'.(++$id);
 			
 			$panels[]=(object)array(
 				'title' => $atts['title'],
 				'id' => $atts['id'],
+				'posturl' => $atts['posturl'],
 				'titleactive' => $atts['active'] == 'true' ? 'in active' : 'collapsed',
 				'panelactive' => $atts['active'] == 'true' ? 'in collapsed' : 'collapsed collapse',
 				'ariaexpanded' => $atts['active'] == 'true' ? 'true' : 'false',

@@ -1,6 +1,9 @@
 <?php
 $autoloader = require_once( str_replace('/wp-content/themes', '', get_theme_root()) .'/vendor/autoload.php');
-
+// turn off autop in wp7forms
+add_action('muplugins_loaded',function(){
+	define( 'WPCF7_AUTOP', false );
+});
 // Timber load fix which got broken in V1.1.0 of timber/timber
 if (!class_exists('Timber')) {
    new \Timber\Timber;
