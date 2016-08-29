@@ -7,10 +7,10 @@
     <div class="social-sharing">{% include 'social-sharing.twig' %}</div>
     
     {% endif %}
-    <h1 class="article-title" itemscope="name">{{ article.title }}</h1>
+    <h1 class="article-title " itemscope="name"><div class="pre-title pre-title-post"></div>{{ article.title }}</h1>
 {% else %}
     <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
-    {% set articleContent %}{% if article.post_excerpt|length > 10 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }} <a href="{{article.link}}">Full Story <i class="fa  fa-angle-double-right"></i></a>{% endif %}{% endset %}
+    {% set articleContent %}{% if article.post_excerpt|length > 10 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }} <a class="article-full-story-link"  href="{{article.link}}">Full Story</a>{% endif %}{% endset %}
     
 {% endif %}
 

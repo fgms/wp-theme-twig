@@ -1,15 +1,30 @@
 {% filter shortcodes %}
+{% set active_flag = 'active="true"'  %}
+
+{% if function('is_category') %}
+  {% set active_category = active_flag %}
+{% elseif function('is_tag') %}
+  {% set active_tag = active_flag %}  
+{% elseif function('is_archive') %}
+  {% set active_archive = active_flag %}  
+{% else %}
+  {% set active_latest = active_flag %}
+{% endif %}
+
+{% set pagefrontid = function('get_option','page_on_front') %}
+{% set blogid = function('get_option','page_for_posts') %}
 [accordion]
-[panel title="Home"][/panel]
-[panel title="Blog"][/panel]
-[panel title="Latest Posts" active="true"]{% include 'blog-latest.twig' %}[/panel]
-[panel title="By Month"]{{ get_archives }}[/panel]
-[panel title="Categories"]{{get_categories}}[/panel]
-[panel title="Tag Cloud"]
+[panel title="Home" posturl="{{function('get_permalink',pagefrontid)}}"][/panel]
+[panel title="Blog" posturl="{{function('get_permalink',blogid)}}" ][/panel]
+[panel title="Latest Posts" {{active_latest}} ]{% include 'blog-latest.twig' %}[/panel]
+[panel title="By Month" {{active_archive}}]{{ get_archives }}[/panel]
+[panel title="Categories" {{active_category}}]{{get_categories}}[/panel]
+[panel title="Tag Cloud" {{active_tag}}]
 {% set tags = get_tags %}
 <div class="tags">
   {% for tag in tags %}
-  <a class="btn  btn-tag" style="margin-right: 4px;" href="{{site.url}}/tag/{{tag.slug}}">{{ tag.name }}</a>
+  <a class="btn  btn-tag {% if false %}active{% endif %}" style="margin-right: 4px;" href="{{site.url}}/tag/{{tag.slug}}">{{ tag.name }}</a>
+  
   {% endfor %} 
 </div>
 

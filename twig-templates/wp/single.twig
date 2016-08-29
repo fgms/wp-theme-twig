@@ -16,9 +16,12 @@
                 </div>
                 {% if config.settings.article.grid.right.class is defined%}
                 <div class="{{config.settings.article.grid.right.class}}">                       
-                    <ul class="widget-section">
-						{{widget_blog_sidebar}}
-					</ul>                           
+									<div id="sidebar">
+										{% include 'blog-sidebar.twig' ignore missing %}
+										<ul class="widget-section">
+											{{widget_blog_sidebar}}
+										</ul>   
+									</div>                         
                 </div>
                 {% endif %}
             </div>
