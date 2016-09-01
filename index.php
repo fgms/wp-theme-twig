@@ -82,6 +82,12 @@
 										   'CACHE_SITE_TRANSIENT'=>TimberLoader::CACHE_SITE_TRANSIENT,
 										   'CACHE_USE_DEFAULT'=>TimberLoader::CACHE_USE_DEFAULT);
 		
+		// checking for custom post types
+		$template_post_type =  get_post_type();
+		if (($template_post_type !== 'post') AND ($template_post_type !== 'page')){
+			$template .= '-'.$template_post_type;	
+		}
+		
 		Timber::render( $template . '.twig',
 					   $data,
 					   get_option('theme_twig_cache_expire','0'),
