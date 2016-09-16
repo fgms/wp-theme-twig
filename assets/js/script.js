@@ -11,9 +11,7 @@ if (window.innerWidth <= 768)  { sizePostfix = 'xs'; }
 if (window.innerWidth <= 480)  { sizePostfix = 'xxs'; }
 
 jQuery(function($) {
-  /*** Email cloaking ***/
-  var lastWindowTopLocation = $(window).scrollTop();
-  
+  /*** Email cloaking ***/  
   emailCloak();
 
   /*** Updates all background images according to screen size; */
@@ -39,7 +37,7 @@ jQuery(function($) {
    
 
   });
-  $.each(document.getElementsByTagName("img"), function(index, value) {
+  $.each(document.getElementsByTagName("img"), function() {
     if (this.getAttribute('src') === null) {
       this.setAttribute('src', this.getAttribute('data-image'));
     }
@@ -68,11 +66,11 @@ jQuery(function($) {
     $('ul.nav li.dropdown').on('mouseover',function(){
 				var $dropdownMenu = $(this).find('.dropdown-menu');
 				var menuOffset = 20;
-				var menuWindowTop = $dropdownMenu.parent().offset().top - $(window).scrollTop()
+				var menuWindowTop = $dropdownMenu.parent().offset().top - $(window).scrollTop();
 				var menuFitBottom = $(window).innerHeight() >= menuWindowTop + $dropdownMenu.outerHeight()+ menuOffset;
 				var menuFitTop = ( menuWindowTop - $(window).scrollTop()) > 0 ;
 				if (menuFitBottom || !menuFitTop ){
-					$dropdownMenu.css('top','100%')
+					$dropdownMenu.css('top','100%');
 				}
 				else {
 					$dropdownMenu.css('top','-'+$dropdownMenu.outerHeight()+'px');
@@ -83,7 +81,7 @@ jQuery(function($) {
     $('ul.nav li.dropdown').on('mouseout',function(){
       $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
       });
-    $('.no-touch ul.nav li.dropdown .dropdown-toggle').on('click',function(e){ 
+    $('.no-touch ul.nav li.dropdown .dropdown-toggle').on('click',function(){ 
         window.location = $(this).attr('href');
       });    
   }
@@ -99,13 +97,14 @@ jQuery(function($) {
 	});
 	
 	
-  if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){	
+  if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){
+    console.log('smoothzoom');
 	$('.script-gallery-action img').smoothZoom({
 	  navigationRight: '<i class=\"fa fa-angle-right\"></i>',
 	  navigationLeft: '<i class=\"fa fa-angle-left\"></i>',
 	  navigationClose: '<i class="fa fa-times-circle" aria-hidden="true"></i>',
 	  zoomoutSpeed : 800,
-		onImageChange: function($element, group, index){			
+		onImageChange: function($element){			
 			var $bigImageThumb = $('[data-rel="'+$element.parent().attr('id')+'"]');			
 			$bigImageThumb.closest('ul').find('li').removeClass('active');
 			$bigImageThumb.closest('li').addClass('active');
@@ -123,7 +122,6 @@ jQuery(function($) {
 	  imagesLoaded($element.find('img'), function(e,msg){
 			$grid.isotope('layout');		
 			$('.gallery-filters').on('click','button',function(){
-
 					var filterValue = $(this).data('filter');
 					$grid.isotope({filter: filterValue}) ;
 					$('.gallery-filters button').removeClass('active');				
@@ -143,7 +141,7 @@ jQuery(function($) {
 				$closestGallery.find('.script-feature-content').css({
 					'overflow': 'hidden',
 					'height' : $closestGallery.find('.script-feature-content > *').outerHeight() + 'px'
-				})
+				});
 				$closestGallery.find('.script-feature-content > .active').removeClass('active').stop(true,true).fadeOut(300,function(){
 
 					$closestGallery.find('#'+ newImageId).addClass('active').stop(true,true).fadeIn();
@@ -163,18 +161,18 @@ jQuery(function($) {
 		stopselector : '.footer',
     });
 	
-	$('.script-sidebar-sticky').on('fg.stickycomponent.active', function(e, globals, wtop){
+	$('.script-sidebar-sticky').on('fg.stickycomponent.active', function(){
 		var left = $(this).parent().parent().position().left +15;				
 		$(this).css({'left': left+'px'});				
 	});
-	$('.script-sidebar-sticky').on('fg.stickycomponent.moving', function(e, globals, wtop){
+	$('.script-sidebar-sticky').on('fg.stickycomponent.moving', function(){
 		var left = $(this).parent().parent().position().left +15;				
 		$(this).css({'left': left+'px'});				
 	});
-	$('.script-sidebar-sticky').on('fg.stickycomponent.bottom', function(e, globals, wtop){		
+	$('.script-sidebar-sticky').on('fg.stickycomponent.bottom', function(){		
 		$(this).css({'left': 'inherit'});				
 	});
-	$('.script-sidebar-sticky').on('fg.stickycomponent.normal', function(e, globals, wtop){
+	$('.script-sidebar-sticky').on('fg.stickycomponent.normal', function(){
 		$(this).css({'left': 'inherit'});				
 	});
   }    
@@ -228,7 +226,7 @@ jQuery(function($) {
   // this animates to hash
   var hash = window.location.hash;
   if ((hash.length>1) && ($('a[href="' + hash + '"]').length > 0)) {
-		hash && $('a[href="' + hash + '"]').tab('show');		
+		(hash && $('a[href="' + hash + '"]').tab('show'));		
 		if ($('a[href="' + hash + '"]').length > 0) {
 			$('html, body').animate({ scrollTop: $('a[href="' + hash + '"]').offset().top - 150   }, 2000);
 		}	
@@ -239,11 +237,19 @@ jQuery(function($) {
 	e.click(e.toggleClass.bind(e,'active'));
   });
   
+  $('.script-clone').on('click',function(){
+    console.log($(this).closest('.script-clone-wrapper').find('.script-clone-trigger'));
+    $(this).closest('.script-clone-wrapper').find('.script-clone-trigger')[0].click();
+  });
+  
   // this is a fix to add placeholders to form-7 in footer
   $('.footer .form-group > label.sr-only ~ * > input[type="text"], .footer .form-group > label.sr-only ~ * > input[type="email"], .footer .form-group > label.sr-only ~ * > textarea').each(function (i, e) {
     var label=$(e.parentElement.parentElement).children('label.sr-only')[0];
     e.setAttribute('placeholder',label.innerHTML);
   });
+  
+  
+  
 
 });
 

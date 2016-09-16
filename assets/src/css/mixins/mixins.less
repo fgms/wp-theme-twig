@@ -116,8 +116,8 @@
 }
 
 .a(@color, @text-decoration:none, @color-hover, @text-decoration-hover:none) {
-	a {
-		 &, &:visited &:focus {
+	a:not(.btn){
+		 &, &:visited, &:focus {
 			color: @color;
 			text-decoration: @text-decoration;			
 			.transition(0.25s);
@@ -132,8 +132,8 @@
 		}
 	}
 }
-.a-border(@color,@color-border, @color-hover, @color-hover-border) {
-	a {
+.a-border(@color,@color-border, @color-hover, @color-hover-border, @preselector:'', @pseudo:'') {
+	@{preselector} a@{pseudo} {
 		 &, &:visited &:focus {
 			color: @color;
 			text-decoration: none;
@@ -148,6 +148,8 @@
 		}
 	}
 }
+
+
 
 .flex-center-xy() {
 	display: -webkit-flex !important;

@@ -1,0 +1,103 @@
+h1, h2, h3, h4, h5, p, ul, ol{
+	margin: 0;
+	padding: 0;	
+}
+
+h1, h2, h3, h4, h5,.h1,.h2,.h3,.h4,.h5 {
+    line-height: 1.4em;
+}
+
+@index-element-padding: 8px;
+ul{
+    list-style: none;    
+    margin:0;
+    &.fa-ul {
+      padding: 12px 0 18px;
+    }
+    &.index-container {
+        padding: 24px 0;
+		.index-heading {
+			padding-top: 0;
+			margin: -8px 0 @index-element-padding;
+		}
+		.index-excerpt {
+			line-height: 1.4em;
+			font-size: 0.9em;
+			margin-bottom: (@index-element-padding * 1.5);
+		}
+        li {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px dotted #ccc;
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom : 0;
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+p {
+	margin-bottom: 15px;	
+}
+
+b, strong {	
+	font-weight: 700;
+}
+
+*:focus,a:focus,.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{outline: none; text-decoration: none;}
+.align-right-lg, .align-right-md, .align-right-sm, .align-right-xs {text-align: right;}
+.align-center-lg, .align-center-md, .align-center-sm, .align-center-xs {text-align: center;}
+
+.align-block-center {
+	display:flex;
+	justify-content: center;
+	> * {
+		
+	}
+}
+
+.text-shadow-light {
+	text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.6);
+}
+.text-shadow-dark {
+	text-shadow: 2px 2px 2px rgba(40, 40, 40, 0.6);
+}
+
+
+
+*[data-background-lg], *[data-background-md], *[data-background-sm], .background-class {
+    background-repeat: repeat-y;
+    background-position: top left;
+    background-attachment: scroll;
+    background-size: cover;
+	height: 100%;
+}
+
+
+/*  Crumbnav */
+.B_crumbBox {
+    margin: 0 0 32px;
+    position: relative;
+    top: 0;
+    width: 100%;
+    * {
+        display: inline;
+        font-size: 12px;
+        font-size: 1.2rem;
+        list-style-type: none;
+        text-transform: none;
+    }
+}
+
+
+#sidebar {	
+	overflow: hidden;
+}
+
+.social-sharing {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+

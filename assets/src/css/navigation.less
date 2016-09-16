@@ -13,31 +13,8 @@
  * 
  **/
 
-/*Down Arrow Nav for modules */
-@moduleNav-content: '\f107';
-@moduleNav-font-size: 34px;
-@moduleNav-color: #fff;
-
-/*Up Arrow Nav for modules */
-@moduleNavStart-content: '\f0aa';
-@moduleNavStart-font-size: 34px;
-@moduleNavStart-color: #fff;
-
-/*navigation*/
 
 
-@nav-text-shadow: none;
-@nav-text-transform: uppercase;
-@nav-letter-spacing: 2px;
-@nav-font-size: 1.5;
-@nav-line-height: 1.2em;
-
-
-
-
-
-/*** HEADER ***/
-@header-border-bottom: none;;
 
 
 
@@ -189,9 +166,6 @@
             font-family: FontAwesome;
             .transition(0.1s);
             &:before {
-                content: @moduleNav-content;
-                font-size: @moduleNav-font-size;
-                color: @moduleNav-color;
                 text-decoration: none !important;           
                 
             }
@@ -225,8 +199,7 @@
             font-family: FontAwesome;
             text-decoration: none;
             &:before {
-                content: @moduleNavStart-content;
-                font-size: @moduleNavStart-font-size;               
+                            
             }
             &:hover, &:visited {text-decoration: none;  }   
         }       
