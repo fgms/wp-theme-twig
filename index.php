@@ -51,7 +51,14 @@
 		$template = 'archive';	
 	
 	elseif (is_archive() ) :
-		$data['archive_title'] = '<div class="pre-title pre-title-archive"></div>'. $GLOBALS['wp_locale']->get_month(get_query_var('monthnum')) . ' ' . get_query_var('year') ;
+	
+		if (is_post_type_archive('post')){
+			$data['archive_title'] = '<div class="pre-title pre-title-archive"></div>'. $GLOBALS['wp_locale']->get_month(get_query_var('monthnum')) . ' ' . get_query_var('year') ;
+		}
+		else {
+			$data['archive_title'] = get_post_type_object(get_post_type())->labels->name;
+		}
+		
 		$data['archive_description'] = term_description();
 		$template = 'archive';
 	endif;
@@ -85,10 +92,13 @@
 		// checking for custom post types
 		$template_post_type =  get_post_type();
 		if (($template_post_type !== 'post') AND ($template_post_type !== 'page')){
-			$template .= '-'.$template_post_type;	
+			$template = array($template . '-'.$template_post_type.'.twig', $template.'.twig');	
+		}
+		else {
+			$template = $template . '.twig';
 		}
 		
-		Timber::render( $template . '.twig',
+		Timber::render( $template,
 					   $data,
 					   get_option('theme_twig_cache_expire','0'),
 					   $cache_type_array[get_option('theme_twig_cache','CACHE_NONE')]                   
