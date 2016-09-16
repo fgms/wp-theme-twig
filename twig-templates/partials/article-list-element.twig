@@ -1,13 +1,14 @@
 {% set image = article.thumbnail.src %}
-{% if article.content | length > 0 %}
+{% if article.content | length > 0  or true %}
     {% set link = article.link %}
 {% endif %}
 
-<li class="index-wrapper index-template-wrapper index-list-element row">
+<li class="row index-wrapper script-clone-wrapper">
 	{% if article.get_thumbnail.src %}
+	
 	<div class="index-image-wrapper col-xs-3">
         {% if link is defined %}		
-			<a href="{{link}}" ><img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" /> </a>	        
+			<a href="javascript:void(0);" class="script-clone" ><img src="{{image}}" class="img-responsive"  alt="{{article.title}}" /> </a>	        
     	{% else %}
 			<img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" />
 	    {% endif %}
@@ -15,11 +16,11 @@
 	{% endif %}
 	
 	<div class="{% if article.get_thumbnail.src %}col-xs-8{% else %}col-xs-12{% endif %} index-content-wrapper">
-		<h3 class="index-heading">{% if link is defined %}<a href="{{link}}" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</h3>	
+		<h3 class="index-heading">{% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</h3>	
 			
 		<div class="index-excerpt">{% if article.post_excerpt | length > 50 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }}{% endif %}</div>
 		<div class="index-button">
-		    {% if link is defined %}<a href="{{link}}"  style="margin-right: 12px" class="btn btn-primary">More Details</a>{% endif %}		    
+		    {% if link is defined %}<a href="{{link}}" class="btn btn-primary script-clone-trigger">More Details</a>{% endif %}		    
 		</div>
 	</div> 
 	<div class="clearfix" style="clear: both"></div>

@@ -25,71 +25,68 @@
 {% set images  = images |slice(0,limit) %}
 
 <div class="modular-row modular-home-gallery" >
-   <div class="modular-anchor"  data-scroll></div>
-   <div class=""  >
-        <div class="section-container">   
-           
-            {# ----------- FILTERS -----------#}
-            {% if gallery.filter.enable and gallery.filters %}
-            <div class="gallery-filters">
-                <button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
-                {% for f in gallery.filters %}
-                <button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{f.slug}}">{{f.title}}</button>
-                {% endfor %}
-            </div>
-            {% endif %}        
-        
-            {# ---------- CREATING GALLERY ------- #}
-            <div class="__st_gallery {{gallery.class}} gallery-grid-{{gallery.options.thumbs_per_row | default('5')}}">
-							{# *** Checking if is feature image ***#}                
-							{% if gallery.options.feature %}                    
-							<div  class="__st_gallery_feature_wrapper script-feature ">                
-									<div class="__st_gallery_feature_content script-feature-content"  >
-										{% for image in images |slice(0,limit) %}
-										<div id="{{gallery_name}}{{loop.index}}" class="{% if loop.first %}active{% endif %}" style="width: 100%; {{gallery.style.feature | default('padding:0;margin: 0;')}}; {% if loop.first %}{% else %}display: none;{% endif %}">
-											<a {{gmacro.linkattributes(gallery, image)}} class="script-gallery-action"  data-smoothzoom="{{gallery_name}}" >                              
-												<img data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.medium}}{{image.src}}" data-loaded="false" style="width: 100%;"/>
-											</a>
-										</div>
-										{% endfor %}
-									</div>
-									<div class="__st_gallery_title_caption">
-											{% if image.title %}<div class="__st_gallery_title">{{image.title}}</div>{% endif %}
-											{% if image.caption %}<div class="__st_gallery_caption">{{image.caption}}</div>{% endif %}                        
-									</div>
-							</div>
-							{% endif %}
-							{# *** Creating Thumbs *** #}    
-							{% if images | length > 1 %}
-							<ul  class="__st_gallery_thumb_wrapper" style="position: relative;">							
-							{# *** Loop through images *** #}
-							{% for image in images  %}
-								{# *** Getting link attributes *** #}              
-								<li class="__st_gallery_thumb_item {% if loop.first and gallery.options.feature %}active{% endif %}  {{image.filters| split(",") |join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
-									<a style="{{gallery.style.thumb | default('padding:0;margin: 0;')}}; position: relative;" {% if gallery.options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
-										<img  data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.thumbs}}{{image.src}}"  
-													alt="{{image.alt|default(image.title)}}" style="width:100%;"  data-loaded="false" />    
+	 <div class="modular-anchor"  data-scroll></div>
+	 <div class=""  >
+     <div class="section-container">              
+				{# ----------- FILTERS -----------#}
+				{% if gallery.filter.enable and gallery.filters %}
+				<div class="gallery-filters">
+						<button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
+						{% for f in gallery.filters %}
+						<button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{f.slug}}">{{f.title}}</button>
+						{% endfor %}
+				</div>
+				{% endif %}        
 
-										{% if image.youtubeid %}<i class="fa fa-film gallery-video-notification"></i>{% endif %}
-										<div class="__st_gallery_overlay" style="position: absolute;top: 0;">
-												<div class="gallery-overlay-content">
-													<div class="gallery-expander"><i class="fa {% if image.youtubeid %}fa-youtube-play{% else %}fa-search{% endif %}"></i></div>
-													{% if gallery.options.enable.thumbtext %}
-														{% if image.title %}<div class="gallery-title">{{image.title}}</div>{% endif %}
-														{% if image.caption%}<div class="gallery-caption">{{image.caption}}</div>{% endif %}
-													{% endif %}
-												</div>
-										</div>                                                        
+				{# ---------- CREATING GALLERY ------- #}
+				<div class="__st_gallery {{gallery.class}} gallery-grid-{{gallery.options.thumbs_per_row | default('5')}}">
+					{# *** Checking if is feature image ***#}                
+					{% if gallery.options.feature %}                    
+					<div  class="__st_gallery_feature_wrapper script-feature ">                
+							<div class="__st_gallery_feature_content script-feature-content"  >
+								{% for image in images |slice(0,limit) %}
+								<div id="{{gallery_name}}{{loop.index}}" class="{% if loop.first %}active{% endif %}" style="width: 100%; {{gallery.style.feature | default('padding:0;margin: 0;')}}; {% if loop.first %}{% else %}display: none;{% endif %}">
+									<a {{gmacro.linkattributes(gallery, image)}} class="script-gallery-action"  data-smoothzoom="{{gallery_name}}" >                              
+										<img data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.medium}}{{image.src}}" data-loaded="false" style="width: 100%;" title="{{image.title|e('html_attr')}}" alt="{{image.alt|default(image.title)|e('html_attr')}}"/>
 									</a>
-								</li>
-                {% endfor %}
-                  
-                </ul>
-								{% endif %}
-            </div>        
-            
-        </div>    
-   </div>   
+								</div>
+								{% endfor %}
+							</div>
+							<div class="__st_gallery_title_caption">
+									{% if image.title %}<div class="__st_gallery_title">{{image.title}}</div>{% endif %}
+									{% if image.caption %}<div class="__st_gallery_caption">{{image.caption}}</div>{% endif %}                        
+							</div>
+					</div>
+					{% endif %}
+					{# *** Creating Thumbs *** #}    
+					{% if images | length > 1 %}
+					<ul  class="__st_gallery_thumb_wrapper" style="position: relative;">							
+					{# *** Loop through images *** #}
+					{% for image in images  %}
+						{# *** Getting link attributes *** #}              
+						<li class="__st_gallery_thumb_item {% if loop.first and gallery.options.feature %}active{% endif %}  {{image.filters| split(",") |join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
+							<a style="{{gallery.style.thumb | default('padding:0;margin: 0;')}}; position: relative;" {% if gallery.options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
+								<img  data-image="{{theme.link}}{{gallery.directory.root}}{{gallery.directory.thumbs}}{{image.src}}"  
+											 alt="{{image.alt|default(image.title)|e('html_attr')}}" title="{{image.title|e('html_attr')}}" style="width:100%;"  data-loaded="false" />    
+
+								{% if image.youtubeid %}<i class="fa fa-film gallery-video-notification"></i>{% endif %}
+								<div class="__st_gallery_overlay" style="position: absolute;top: 0;">
+										<div class="gallery-overlay-content">
+											<div class="gallery-expander"><i class="fa {% if image.youtubeid %}fa-youtube-play{% else %}fa-search{% endif %}"></i></div>
+											{% if gallery.options.enable.thumbtext %}
+												{% if image.title %}<div class="gallery-title">{{image.title}}</div>{% endif %}
+												{% if image.caption%}<div class="gallery-caption">{{image.caption}}</div>{% endif %}
+											{% endif %}
+										</div>
+								</div>                                                        
+							</a>
+						</li>
+					{% endfor %}
+						</ul>
+						{% endif %}
+				</div>
+			</div>    
+	 </div>   
 </div>
 
 

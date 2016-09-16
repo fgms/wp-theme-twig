@@ -1,34 +1,34 @@
 {% extends 'base.twig' %}
 {% block content %}	
-<div class="modular sidebar">
-    <div class="modular-row "  >
-        <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-        <div class="container">
-            <div class="row">
-                <div class="{{config.settings.article.grid.left.class | default('col-sm-12')}}">
-                    <div class="column-wrapper">
-                    {% include 'breadcrumbs.twig' ignore missing only %}
-					<h1>Blog</h1>
-					<ul id="blog-articles">   
-                    {% for article in posts%}
-                        <li>{% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-index-default" } only %}</li>
-                    {% endfor %}
-					</ul>
-                    
-                    </div>
-                </div>
-                {% if config.settings.article.grid.right.class is defined%}
-                <div class="{{config.settings.article.grid.right.class}}">  
-									<div id="sidebar">
-										{% include 'blog-sidebar.twig' ignore missing %}
-										<ul class="widget-section">
-											{{widget_blog_sidebar}}
-										</ul>   
-									</div>
-								</div>
-                {% endif %}
-            </div>
-        </div>
+<div class="{{config.settings.page.class |default('')}} {% if config.settings.article.grid.right.class is defined %}has-sidebar{% endif %}">
+	<div class="container">
+		<div class="row">
+			<div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
+				{% include 'breadcrumbs.twig' ignore missing only %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="{{config.settings.article.grid.left.class | default('col-sm-12')}}">
+				<div class="column-wrapper">					
+				
+				<h1>Blog</h1>
+				{% for article in posts%}
+					{% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-page-default" } only %}
+				{% endfor %}				
+				</div>
+			</div>
+			{% if config.settings.article.grid.right.class is defined %}
+			<div class="{{config.settings.article.grid.right.class}}">
+				<div id="sidebar">
+					<ul class="widget-section">
+						{% include 'blog-sidebar.twig' ignore missing %}
+						{{widget_page_sidebar}}
+					</ul>  					
+				</div>
+                            
+			</div>
+			{% endif %}
+		</div>   
     </div>
-</div>	
+</div>
 {% endblock %}

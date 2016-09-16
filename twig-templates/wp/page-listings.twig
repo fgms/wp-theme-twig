@@ -1,30 +1,30 @@
 {% extends 'base.twig' %}
 {% block content %}	
-    <div class="modular sidebar-left">
-        <div class="modular-row "  >
-            <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-            <div class="container">         
-            
-                <div class="row">
-                    <div class="col-md-9 col-md-push-3">
-                        <div class="main-col-wrapper">
-                        {% include 'breadcrumbs.twig' ignore missing only %}
-                       
-                        {% include "article.twig" with { "article" : post, "loop" : loop } %}
-                        {% if post.children is defined %}
-                        <ul style="list-style: none;" >
-                            {% for child in post.children %}
-                                {% include 'article-list-element.twig' with {'article' : child }   %}
-                            {% endfor %}                            
-                        </ul>
-                        {% endif %}                        
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-pull-9">                       
-                            {% include 'blog-sidebar.twig'  %}                            
+    <div class="{{config.settings.pagelist.class |default('')}} {% if config.settings.pagelist.grid.right.class is defined %}sidebar{% endif %}">
+        <div class="container">
+            <div class="row">
+                <div class="{{config.settings.pagelist.grid.left.class | default('col-sm-12')}}">
+                    <div class="column-wrapper">
+                    {% include 'breadcrumbs.twig' ignore missing only %}
+                    {% if post.children is defined %}
+                    <ul class="index-container" >
+                        {% for child in post.children %}
+                            {% include 'article-list-element.twig' with {'article' : child }   %}
+                        {% endfor %}                            
+                    </ul>
+                    {% endif %}     				
                     </div>
                 </div>
-            </div>
+                {% if config.settings.pagelist.grid.right.class is defined %}
+                <div class="{{config.settings.pagelist.grid.right.class}}">                       
+                    <ul class="widget-section">
+                        {{widget_page_sidebar}}
+                    </ul>                              
+                </div>
+                {% endif %}
+            </div>   
         </div>
     </div>	
+       
 {% endblock %}
+
