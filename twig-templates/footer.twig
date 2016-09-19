@@ -75,9 +75,9 @@
 			<div class="{{config.settings.copyright.grid.left.class | default('col-sm-6')}}">
 				<div class="footer-content-wrapper left">
 					<div class="footer-terms">
-						{% if config.postid.terms is defined %}<a href="/ajax/?postid={{config.postid.terms}}" data-toggle="modal" data-target="#general-modal" >Terms of Use</a>{% endif%}
+						{% if config.postid.terms is defined %}<a href="{{site.url}}/ajax/?postid={{config.postid.terms}}" data-toggle="modal" data-target="#general-modal" >Terms of Use</a>{% endif%}
 						{% if config.postid.terms is defined and config.postid.privacy %} | {% endif%}
-						{% if config.postid.privacy is defined %}<a href="/ajax/?postid={{config.postid.privacy}}" data-toggle="modal" data-target="#general-modal" >Privacy Statement</a>{% endif%}
+						{% if config.postid.privacy is defined %}<a href="{{site.url}}/ajax/?postid={{config.postid.privacy}}" data-toggle="modal" data-target="#general-modal" >Privacy Statement</a>{% endif%}
 						  
 					</div>
 				</div>
