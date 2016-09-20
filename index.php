@@ -70,7 +70,7 @@
 	// render using Twig template index.twig
     if ($template !== false ){
 		
-		require_once(__DIR__.'/include/shortcodes.php');
+		
 		require_once(__DIR__.'/include/twig-filter-functions.php');
 			
 		// adding footer widgets
