@@ -305,6 +305,7 @@ $get_slideshow=function () {
 
 if (is_admin()){
 	require_once(__DIR__.'/include/theme-settings.php');
+	require_once(__DIR__.'/include/html-title-metadata.php');
 }
 
 function updateExternalYaml(Array &$config){

@@ -1,31 +1,32 @@
 {% extends 'base.twig' %}
-{% if right|default(false) %}
-    {% set class="right" %}
-    {% set width=8 %}
-{% else %}
-    {% set class="left" %}
-    {% set width=9 %}
-{% endif %}
-
 {% block content %}	
-    <div class="modular sidebar-{{class}}">
-        <div class="modular-row "  >
-            <div class="modular-anchor" id="{{ page.slug() }}" data-scroll></div>
-            <div class="container">
-            {# if config.plugins.breadcrumbs.enabled %}{% include 'partials/breadcrumbs.html.twig' %}{% endif #}
-            
-                <div class="row">
-                    <div class="col-sm-{{width}}">
-                        <div class="column-wrapper">
-                            <h1>Page Not Found (404)</h1>
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-{{12-width}}">                       
-                            {% include 'contact-sidebar.twig'  %}                            
-                    </div>
-                </div>
-            </div>
+<div class="modular sidebar">
+  <div class="modular-row "  >
+    <div class="modular-anchor" data-scroll></div>
+    <div class="container">
+      <div class="row">
+        <div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
+          {% include 'breadcrumbs.twig' ignore missing only %}
         </div>
-    </div>	
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="column-wrapper">
+              <h1>Page Not Found (404)</h1>
+              <h2>WHOA! WE DIDN'T SEE THAT COMING!</h2>
+              <p>Unfortunately, the page you were attempting to access doesn't exist now (or maybe it never existed). Here's what we suggest:</p>
+              <ol>
+                <li>If you got here from an external link, please notify the administrator of the site that he/she is linking to a broken link.</li>
+                <li>If you got here from an external link, please notify the administrator of the site that he/she is linking to a broken link.</li>
+                <li>If you got here from a link on this web site, please notify our webmaster at webmaster@fifthgeardev.com.</li>
+                <li>If you got here some other way, the best solution is to return to the homepage and try navigating from there.</li>
+              </ol>
+              <p>If you got here some other way, the best solution is to return to the homepage and try navigating from there.<br/>Have a great day!</p>
+              <p>Tech Support</p>                            
+          </div>
+          </div>                    
+        </div>
+    </div>
+  </div>
+</div>	
 {% endblock %}

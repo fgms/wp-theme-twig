@@ -6,7 +6,8 @@
 <li class="row index-wrapper script-clone-wrapper">
 	{% if article.get_thumbnail.src %}
 	
-	<div class="index-image-wrapper col-xs-3">
+	<div class="index-image-wrapper col-sm-3">
+		<div class="index-heading h3 visible-block-xs hidden-sm hidden-md hidden-lg">{% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</div>
         {% if link is defined %}		
 			<a href="javascript:void(0);" class="script-clone" ><img src="{{image}}" class="img-responsive"  alt="{{article.title}}" /> </a>	        
     	{% else %}
@@ -15,8 +16,8 @@
 	</div>
 	{% endif %}
 	
-	<div class="{% if article.get_thumbnail.src %}col-xs-8{% else %}col-xs-12{% endif %} index-content-wrapper">
-		<h3 class="index-heading">{% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</h3>	
+	<div class="{% if article.get_thumbnail.src %}col-sm-8{% else %}col-sm-12{% endif %} index-content-wrapper">
+		<h3 class="index-heading hidden-xs">{% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</h3>	
 			
 		<div class="index-excerpt">{% if article.post_excerpt | length > 50 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }}{% endif %}</div>
 		<div class="index-button">
