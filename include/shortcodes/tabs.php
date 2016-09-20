@@ -39,7 +39,7 @@
 			});
 			
 			//	Generate tabs
-			$html='<ul class="nav nav-tabs" role="tablist">';
+			$html='<ul class="nav nav-tabs accordion" role="tablist">';
 			array_walk($tabs,function ($v, $k) use ($active, &$html) {
 				
 				$html.=sprintf(
@@ -53,13 +53,15 @@
 			$html.='</ul>';
 			
 			//	Generate panes
-			$html.='<div class="tab-content">';
+			$html.='<div class="tab-content accordion">';
 			array_walk($tabs,function ($v, $k) use ($active, &$html) {
 				
 				$html.=sprintf(
-					'<div role="tabpanel" class="tab-pane %1$s" id="%2$s">%3$s</div>',
+					
+					'<div class="tab-accordion-header %1$s"><a href="#%2$s" role="tab">%3$s</a></div><div role="tabpanel" class="tab-pane %1$s" id="%2$s">%4$s</div>',
 					$active===$k ? 'active' : '',
 					htmlspecialchars($v->id),
+					htmlspecialchars($v->title),
 					$v->content
 				);
 				
