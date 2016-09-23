@@ -77,19 +77,18 @@ social:
 company:
     name: Fifth Gear Marketing
     address:
-        street: Dallas Road.
+        street: Dallas Road
         city: Victoria    
-        province: British Columbia
-       
-        country: Turks and Caicos, B.W.I.
-    test: 
-      '@import': 'shawn.yml'   
-
-       
+        province: 'British Columbia'        
+        country: Canada
+        postal: A0A 0A0
+        
+        
 
 phone:
     toll: 888.000.0000
-    phone: 250.000.0000  
+    office: 250.000.0000
+    fax: 888.000.1111
     
     
 email:

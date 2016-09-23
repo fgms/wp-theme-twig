@@ -1,4 +1,5 @@
-<footer class="footer">	
+<footer class="footer" itemscope itemtype="http://schema.org/Organization">
+	<meta itemprop="name" content="{{config.company.name}}" />
 	<div class="container">		
 		<div class="row">
 			<div class="{{config.settings.footer.grid.left.class | default('col-sm-6')}}">
@@ -18,7 +19,7 @@
 					{% if config.settings.footer.logo is defined %}
 					<div class="footer-logo">					
 						<a href="{{site.url|e('html_attr')}}">
-							<img class="img-responsive" data-image="{{theme.link}}{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
+							<img itemprop="logo" class="img-responsive" data-image="{{theme.link}}{{config.settings.footer.logo.url|e('html_attr')}}" alt="{{config.settings.footer.logo.alt|e('html_attr')}}" />
 						</a>					
 					</div>
 					{% endif %}
@@ -26,33 +27,38 @@
 						{{widget_footer_sidebar_right}}
 					</ul>
 					<div class="footer-text-wrapper">
-						{% if config.phone.toll is defined %}			<div>{{__('Toll free', 'fgms' ) }}: <span>{{config.phone.toll|e}}</span></div>				{% endif %}
-						{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }}: <span>{{config.phone.reservations|e}}</span></div>	{% endif %}
-						{% if config.phone.reception is defined %}		<div>{{__('Reception', 'fgms' ) }}: <span>{{config.phone.reception|e}}</span></div>		{% endif %}	
-						{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }}: <span>{{config.phone.resort|e}}</span></div>				{% endif %}						
-						{% if config.phone.office is defined %}			<div>{{__('Office', 'fgms' ) }}: <span>{{config.phone.office|e}}</span></div>				{% endif %}
-						{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }}: <span>{{config.phone.fax|e}}</span></div>						{% endif %}			
+						{% if config.phone.toll is defined %}			<div>{{__('Toll free', 'fgms' ) }}: <span  itemprop="telephone"> {{config.phone.toll|e}}</span></div>				{% endif %}
+						{% if config.phone.reservations is defined %}	<div>{{__('Reservations', 'fgms' ) }}: <span itemprop="telephone">{{config.phone.reservations|e}}</span></div>	{% endif %}
+						{% if config.phone.reception is defined %}		<div>{{__('Reception', 'fgms' ) }}: <span  itemprop="telephone">{{config.phone.reception|e}}</span></div>		{% endif %}	
+						{% if config.phone.resort is defined %}			<div>{{__('Resort', 'fgms' ) }}: <span  itemprop="telephone">{{config.phone.resort|e}}</  itemprop="telephone"></div>				{% endif %}						
+						{% if config.phone.office is defined %}			<div>{{__('Office', 'fgms' ) }}: <span itemprop="telephone">{{config.phone.office|e}}</span></div>				{% endif %}
+						{% if config.phone.fax is defined %}			<div>{{__('Fax', 'fgms' ) }}: <span itemprop="faxNumber">{{config.phone.fax|e}}</span></div>						{% endif %}			
 						
-						{% if config.email.info is defined %}			<div><span>{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
+						{% if config.email.info is defined %}			<div><span itemprop="email">{{function('do_shortcode','[email]'~config.email.info~'[/email]')}}</span></div>	{% endif %}
 						
-						{# 
-						<div class="footer-address">						
-							{% if config.address is defined %}
-							{{config.address.street}}, {{config.address.city}}, {{config.address.province}}, {{config.address.country}} {{config.address.postal}}
+						
+						<div class="footer-address {% if config.company.address.hidden  %}hidden{% endif %}" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" >						
+							{% if config.company.address is defined %}
+							 {% if config.company.address.street is defined %}<span itemprop="streetAddress">{{config.company.address.street|e}}</span>,{% endif %}
+							 {% if config.company.address.city is defined %}<span itemprop="addressLocality">{{config.company.address.city|e}}</span>,{% endif %}
+							 {% if config.company.address.province is defined %}<span itemprop="addressRegion">{{config.company.address.province|e }}</span>,{% endif %}
+							 {% if config.company.address.country is defined %}<span itemprop="addressCountry">{{config.company.address.country|e}}</span>{% endif %}
+							 {% if config.company.address.postal is defined %}<span itemprop="postalCode">{{config.company.address.postal|e}}</span>{% endif %}
 							{% endif %}						
-							{% if config.privacy_policy is defined %} |	<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>{% endif %}						
+							{#{% if config.privacy_policy is defined %} |	<a href="{{config.privacy_policy.url|e('html_attr')}}" rel="nofollow">Privacy Policy</a>{% endif %}#}						
 						</div>
-						#}
+						
 						
 					</div>
 					
 					{# this is defined by settings.yaml file, and loops through all social #}
 					{% if config.social is defined  %}
 						{% if config.settings.footer.social.enable %}
-						<div class="social-icons">							
+						<div class="social-icons"  >
+								<link itemprop="url" href="{{site.url}}">
 								{% for social in config.social %}								
 									{% if social.url is defined and social.url %}								
-										<a href="{{social.url|e('html_attr')}}" target="_blank">
+										<a href="{{social.url|e('html_attr')}}" target="_blank" itemprop="sameAs">
 											{% if social.icon.outer is defined  %}
 											<span class="fa-stack fa-lg ">
 												<i class="fa {{social.icon.outer | default('fa-square-o')}} fa-stack-2x icon-outer"></i>

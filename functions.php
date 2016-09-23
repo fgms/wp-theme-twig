@@ -198,7 +198,7 @@ $get_config=call_user_func(function() {
 			echo 'Error Config file not found';
 			return;
 		}
-		$filetime = hashDirectory(get_stylesheet_directory().'/config/');	
+		$filetime = hashDirectory(get_stylesheet_directory().'/config/');
 		// checking if settings.yml has changed if so lets update, but only if is valid
 		if ($cache['config_ts'] != $filetime) {					
 			$config=@file_get_contents($config_file);
