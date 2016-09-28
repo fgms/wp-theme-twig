@@ -3,6 +3,7 @@
 <html {{site.language_attributes()}}>
     <head>
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" type="image/x-icon" href="{{theme.link}}/assets/images/favicon.ico">
         {{wp_head}}
         {% block head %}
             <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
@@ -11,8 +12,7 @@
 			{% if config.css is defined %}{% include 'style.twig' ignore missing with config  %}{% endif %}
 		{% endblock %}
     </head>
-    <body class="{{body_class}}">
-	
+    <body class="{{body_class}}" data-class="{{function('get_body_class')|join(' ')}}">
 	{% if slideshow is defined and not slideshow is null %}
 		{% include 'bootstrap-carousel.twig' with slideshow only %}
 	{% else %}

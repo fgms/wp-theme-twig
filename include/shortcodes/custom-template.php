@@ -4,7 +4,8 @@
 		
 		$data=null;
 		
-		add_shortcode('custom-template',function ($atts, $content) use (&$data,$config) {		
+		add_shortcode('custom-template',function ($atts, $content) use (&$data,$config) {
+			$config = array_merge(Timber::get_context(),$config);
 			$data=array();	
 			//	Content is ignored
 
@@ -40,6 +41,6 @@
 			
 		});
 		
-	},array_merge(Timber::get_context(),array('config'=>$get_config())) );
+	},array('config'=>$get_config()) );
 
 ?>

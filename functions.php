@@ -18,7 +18,7 @@ add_action( 'after_setup_theme', function(){
 	
 	// don't want this annoying p tag wrap and br tag.
 	remove_filter( 'the_content', 'wpautop' );
-    register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'blankslate' ) ) );
+    register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'fg-timber' ) ) );
 
     // removes admin bar if user is signed out, which is a false bar because a user at once was signed in
     $current_user = wp_get_current_user();
