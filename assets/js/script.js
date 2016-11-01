@@ -13,7 +13,9 @@ if (window.innerWidth <= 480)  { sizePostfix = 'xxs'; }
 jQuery(function($) {
   /*** Email cloaking ***/  
   emailCloak();
-
+  $('*[data-random="true"]').each(function(){
+    randomizeChildren($(this));
+  });
   /*** Updates all background images according to screen size; */
   $('*[data-background-' + sizePostfix + ']').each(function() {
     $(this).css({
@@ -202,7 +204,28 @@ jQuery(function($) {
 
     });
   });
-  
+  if ($('.multi-item-carousel').length > 0){    
+    $('.multi-item-carousel').carousel({
+      interval: 8000
+    });
+   
+   // for every slide in carousel, copy the next slide's item in the slide.
+   // Do the same for the next, next item.
+    $('.multi-item-carousel .item').each(function(){
+      var next = $(this).next();
+      if (!next.length) {
+        next = $(this).siblings(':first');
+      }
+      next.children(':first-child').clone().appendTo($(this));    
+      if (next.next().length>0) {
+        next.next().children(':first-child').clone().appendTo($(this));
+      } else {
+        $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+      }
+    });     
+    
+  }
+
   
 	/* script-parallax
   *  Adds parallaxing background 
@@ -247,7 +270,25 @@ jQuery(function($) {
     var label=$(e.parentElement.parentElement).children('label.sr-only')[0];
     e.setAttribute('placeholder',label.innerHTML);
   });
-  
+  if ($('.search-header button').length > 0){
+    $('.search-header button').on('click',function(e){				
+        // means it is closed
+        var $checkClass = $(this).closest('.input-group');
+        if ($checkClass.hasClass('searchbox-close') ){
+          $checkClass.removeClass('searchbox-close').addClass('searchbox-open');
+        }
+        else {
+          var $searchInput = $checkClass.find('input');
+          if ($searchInput.val() !== ''){
+            $(this).closest('form').submit();
+            return true;
+          }
+          $checkClass.removeClass('searchbox-open').addClass('searchbox-close');
+        }			
+        e.preventDefault();				
+        return false;			
+     });    
+  }
   
   
 
