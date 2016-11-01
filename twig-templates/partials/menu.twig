@@ -1,0 +1,25 @@
+<ul class="{{class |default('nav navbar-nav')}}">			
+    {% for item in  menu.get_items  %}
+        {% set marticle = function('Timber::get_post', item.ID)%}
+        {#
+        {% for mchild in marticle.children %}
+        <pre>{{mchild.ID}}{{mchild.title}}{{mchild.link}}</pre>
+        {% endfor%}
+        #}
+        {% if item.get_children %}
+            {% if childtype is defined and childtype == 'dropdown' %}
+            <li class="dropdown {{item.classes | join(' ')}}">
+                <a href="{{item.get_link|e('html_attr')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{item.title}} <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">                                                            
+                    {% for child in item.get_children %}                                   
+                        <li class="{{ current_child }} "><a href="{{ child.get_link }}">{{ child.title }}</a></li>
+                    {% endfor %}                    
+                </ul>
+            </li>
+            {% else %}
+            {% endif %}
+        {% else %}
+            <li {% if item.classes %}class="{{item.classes | join(' ')}}" {% endif %}><a data-menu-scroll href="{{ item.get_link }}">{{ item.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

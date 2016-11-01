@@ -1,9 +1,8 @@
 {% extends 'base.twig' %}
 {% block content %}	
-<div class="modular sidebar">
-  <div class="modular-row "  >
-    <div class="modular-anchor" data-scroll></div>
-    <div class="container">
+<div class="main-content sidebar">
+  <div class="container">
+    <div class="inner-container">
       <div class="row">
         <div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
           {% include 'breadcrumbs.twig' ignore missing only %}
@@ -25,7 +24,7 @@
               <p>Tech Support</p>                            
           </div>
           </div>                    
-        </div>
+        </div>        
     </div>
   </div>
 </div>	

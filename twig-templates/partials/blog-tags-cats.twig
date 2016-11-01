@@ -7,7 +7,7 @@
         {%set cats = cats|merge([alink])%}
     {% endfor %}
     {% if cats | length >= 1%}
-    <div class="category">Categories: {{cats|join('<span class="seperator"> | </span>')}}</div>
+    <div class="category">Categories: {{cats|join('<span class="seperator"> , </span>')}}</div>
     {% endif %}
 {% endif %}
 {% if article.terms('tags') %}

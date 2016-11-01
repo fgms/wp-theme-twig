@@ -49,7 +49,7 @@
     {# post meta data #}
     {% if article.post_type == 'post' %}
     <div  class="article-footer" style="margin-bottom: 12px;">									
-        <div class="posted-by">Posted by <span>{{article.author | default(site.title)}}</span></div>
+        <div class="posted-by">Posted by: <span>{{article.author | default(site.title)}}</span></div>
         
         {% include 'blog-tags-cats.twig' %}       
         <meta itemprop="author" content="{{article.author | default(site.title)}}" />

@@ -13,12 +13,16 @@
 
 {% set pagefrontid = function('get_option','page_on_front') %}
 {% set blogid = function('get_option','page_for_posts') %}
+<div class="sidebarbox">
+  
+
 [accordion]
 [panel title="Home" posturl="{{function('get_permalink',pagefrontid)}}"][/panel]
 [panel title="Blog" posturl="{{function('get_permalink',blogid)}}" ][/panel]
 [panel title="Latest Posts" {{active_latest}} ]{% include 'blog-latest.twig' %}[/panel]
 [panel title="By Month" {{active_archive}}]{{ get_archives }}[/panel]
 [panel title="Categories" {{active_category}}]{{get_categories}}[/panel]
+{% if get_tags | length > 0 %}
 [panel title="Tag Cloud" {{active_tag}}]
 {% set tags = get_tags %}
 <div class="tags">
@@ -29,5 +33,7 @@
 </div>
 
 [/panel]
+{% endif %}
 [/accordion]
 {% endfilter %}
+</div>

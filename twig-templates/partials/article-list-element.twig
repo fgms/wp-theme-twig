@@ -4,15 +4,14 @@
 {% endif %}
 
 <li class="row index-wrapper script-clone-wrapper">
-	{% if article.get_thumbnail.src %}
-	
-	<div class="index-image-wrapper col-sm-3">
+	{% if article.get_thumbnail.src %}	
+	<div class="index-image-wrapper col-sm-4">
 		<div class="index-heading h3 visible-block-xs hidden-sm hidden-md hidden-lg">{% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{article.title}}</a>{% else %}{{article.title}}{% endif %}</div>
-        {% if link is defined %}		
-			<a href="javascript:void(0);" class="script-clone" ><img src="{{image}}" class="img-responsive"  alt="{{article.title}}" /> </a>	        
-    	{% else %}
-			<img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" />
-	    {% endif %}
+        {% if link is defined %}<a href="javascript:void(0);" class="script-clone" >{% endif %}		
+			<img data-image="{{image}}" style="max-width: 90%" alt="{{article.title}}" />
+			<noscript><img src="{{image}}" class="img-responsive" style="" alt="{{article.title}}" /></noscript>
+		{% if link is defined %}</a>{% endif %}	    
+	    
 	</div>
 	{% endif %}
 	

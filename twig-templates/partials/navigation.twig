@@ -1,4 +1,4 @@
-<nav class="navbar  script-navigation" role="navigation">
+<nav class="navbar  script-navigation {{config.settings.navigation.class | default('')}}" role="navigation">
     <div class="navbar-header">			
         <a type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 			<div class="pull-left">Menu</div>
@@ -10,25 +10,15 @@
 			</div>
 			<div class="clearfix"></div>
         </a>
-		{% if config.settings.header.logo is defined %}<a href="{{site.url|e('html_attr')}}" class="navbar-brand"><img data-image="{{theme.link}}{{config.settings.header.logo.url}}"></a>{% endif %}		
+		{% if config.settings.header.logo is defined %}
+		<a href="{{site.url|e('html_attr')}}" class="navbar-brand">
+			<img data-image="{{theme.link}}{{config.settings.header.logo.url}}" alt="{{site.title}}">
+			<noscript><img src="{{theme.link}}{{config.settings.header.logo.url}}" alt="{{site.title}}"></noscript>
+		</a>
+		{% endif %}		
     </div>
-	<div class="navbar-collapse collapse ">			
-		<ul class="nav navbar-nav">
-			{% for item in  menu.get_items  %}                   
-				{% if item.get_children %}
-					<li class="dropdown {{item.classes | join(' ')}}">
-						<a href="{{item.get_link|e('html_attr')}}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{item.title}} <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">                                                            
-							{% for child in item.get_children %}                                   
-								<li class="{{ current_child }} "><a href="{{ child.get_link }}">{{ child.title }}</a></li>
-							{% endfor %}
-						</ul>
-					</li>
-				{% else %}
-					<li {% if item.classes %}class="{{item.classes | join(' ')}}" {% endif %}><a data-menu-scroll href="{{ item.get_link }}">{{ item.title }}</a></li>
-				{% endif %}
-			{% endfor %}
-		</ul>
+	<div class="navbar-collapse collapse ">		
+		{% include 'menu.twig' with {menu: menu ,  childtype: 'dropdown'} only %}
 	</div>
 </nav>    
 

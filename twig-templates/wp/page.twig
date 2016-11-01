@@ -1,28 +1,30 @@
 {% extends 'base.twig' %}
 {% block content %}
-<div class="{{post.class}} {{config.settings.page.class |default('')}} {% if config.settings.page.grid.right.class is defined %}has-sidebar{% endif %}">
+<div class="main-content {{post.class}} {{config.settings.page.class |default('')}} {% if config.settings.page.grid.right.class is defined %}has-sidebar{% endif %}">
 	<div class="container">
-		<div class="row">
-			<div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
-				{% include 'breadcrumbs.twig' ignore missing only %}
-			</div>
-		</div>			
-		<div class="row">
-			<div class="{{config.settings.page.grid.left.class | default('col-sm-12')}}">
-				<div class="column-wrapper">								
-				{% include "article.twig" with { "article" : post, "loop" : loop, "class" : "article-page-default" } only %}								
+		<div class="inner-container">
+			<div class="row">
+				<div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
+					{% include 'breadcrumbs.twig' ignore missing only %}
 				</div>
-			</div>
-			{% if config.settings.page.grid.right.class is defined %}
-			<div class="{{config.settings.page.grid.right.class}}">
-				<div id="sidebar">
-					<ul class="widget-section">
-						{{widget_page_sidebar}}
-					</ul>					
-				</div>                              
-			</div>
-			{% endif %}
-		</div>   
+			</div>			
+			<div class="row">
+				<div class="{{config.settings.page.grid.left.class | default('col-sm-12')}}">
+					<div class="column-wrapper">								
+					{% include "article.twig" with { "article" : post, "loop" : loop, "class" : "article-page-default" } only %}								
+					</div>
+				</div>
+				{% if config.settings.page.grid.right.class is defined %}
+				<div class="{{config.settings.page.grid.right.class}}">
+					<div id="sidebar">
+						<ul class="widget-section">
+							{{widget_page_sidebar}}
+						</ul>					
+					</div>                              
+				</div>
+				{% endif %}
+			</div>  			
+		</div> 
     </div>
 </div>
 {% endblock %}

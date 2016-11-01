@@ -1,0 +1,24 @@
+<div class="{{class}}">
+    <div class="zoom-overlay-wrapper">
+        {% if link != blank and title != blank %}<h3 class="align-center-xs"><a href="{{link}}">{{title}}</a></h3>{% else %}{% endif %}
+       
+        {% if image != blank%}
+        <div class="image-wrapper">         
+            <a href="{{link}}" {{attributes}}>
+                <img itemprop="image" style="width: 100%;" data-image="{{image }}" alt="{{title}}" />
+                <noscript>
+                    <img itemprop="image" class="img-responsive" src="{{image }}" alt="{{title}}" />
+                </noscript>
+                <div class="image-overlay">
+                    <div style="width: 100%;">{{content }}</div>
+                    {% if button != blank %}
+                    <div class="image-overlay-action" >                        
+                        <button href="{{link}}" class="btn-secondary btn ">{{button}}</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </a>            
+        </div>
+        {% endif %}        
+    </div>
+</div>
