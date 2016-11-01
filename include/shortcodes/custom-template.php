@@ -24,7 +24,7 @@
 					$retr=ob_get_contents();
 					ob_end_clean();				
 				} catch (Twig_Error_Loader $e){
-					$retr = '<script>console.error("Error Loading twig template '. $t .'")</script>';
+					$retr = '<script>console.error("Error Loading twig template '. $t . ' ' .str_replace('"',"'",$e->getMessage()) .'")</script>';
 				}				
 			}
 			return $retr;
