@@ -18,6 +18,7 @@
 	{% else %}
 		{% include 'custom-slideshow.twig' ignore missing  %}
 	{% endif %}
+	{% include 'pre-navigation.twig' ignore missing %}
 	{% include 'navigation.twig' %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
 	{% block footer%}
