@@ -8,7 +8,8 @@
 	$start = TimberHelper::start_timer();
 	$data = Timber::get_context();
 	
-		
+	$data['latest_news'] = get_fg_latest_posts();
+	
 	if ( is_singular() ) :		
 		$data['post'] = new TimberPost();       
 	
@@ -17,8 +18,10 @@
 		
 	endif;
 	
+	
+	
 	$data['config']=$get_config();
-    $data['menu'] = new TimberMenu();
+    $data['menu'] = new TimberMenu('main-menu');
 	if ( is_single() ) :
 		$template = 'single';
 		$data['slideshow']=$get_slideshow();
@@ -121,4 +124,11 @@ function get_blog_sidebar(&$data){
 	$data['get_archives'] = '<ul>' .wp_get_archives($args).'</ul>';
 	
 }
+
+function get_fg_latest_posts(){
+	$args = array('posts_per_page' => 10, 'order'=>'DESC', 'orderby'=> 'date','post_type'=>'post');
+	$posts =  Timber::get_posts($args);	
+	return $posts;
+}
+
 ?>
