@@ -27,6 +27,27 @@
 	div[id^="section-"] {border: 1px solid #000;}
 
 }
+.flex-center-xy() {
+	display: -webkit-flex !important;
+    display: flex !important;
+	display: -webkit-box !important;     
+	display: -moz-box !important;         
+	display: -ms-flexbox !important;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+    -webkit-box-pack: justify;
+	-moz-box-pack: justify;
+	-ms-flex-pack: justify;   
+   -webkit-align-items: center;
+   align-items: center;   
+   -webkit-justify-content: center;
+   justify-content: center;	
+	margin: 0 auto;
+
+	
+	
+	> * {margin: 0 auto;}
+}
 
 .opacity(@opacity: 0.5) {
 	-moz-opacity: @opacity;

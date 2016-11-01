@@ -22,12 +22,75 @@
 /****** DO NOT EDIT BELOW THIS LINE ******/
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
 	
-	position: relative;	
+	position: relative;
+	
 	@media screen and (min-width: @screen-md-max){
 		.flex-center-xy();
+		
 	}
 	
 }
+.nav-right {
+	@media screen and (min-width: @screen-md-max){
+		.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
+			-webkit-justify-content: flex-end;
+			justify-content: flex-end
+		}
+		
+		
+		
+	}
+	
+}
+
+
+.search-header {
+	float: left;
+	margin: 0;
+	button {
+		line-height: 14px;
+		
+		border: 1px solid #fff;
+		padding: 6px 8px;
+		.radius(4px) ;
+		margin-left: -4px !important;
+	}
+	.input-group {
+		.font-size(1.4);
+	}
+	input {
+		padding: 3px;
+		position: relative;	
+		line-height: 1.8em;
+		border: 1px solid #fff;
+		font-weight: 300;
+
+	}
+	.searchbox-close {			
+		input {
+			.transition(0.4s);
+			width: 0 !important;
+			padding: 4px 0;					
+		}
+
+	}
+	.searchbox-open  {
+		
+		button {
+			margin-left : 0px !important;				
+			.radius(0 4px 4px 0) ;
+		}
+		input {
+			.transition(0.7s);			
+			width: 200px !important;
+			
+		}
+		
+	}		
+}
+
+
+
 
 .navbar-toggle .icon-bar {	
 	width: 30px;
@@ -44,13 +107,13 @@
 	height: auto;
 	margin-bottom: 0;
 	.navbar-brand {
-		position: absolute;
-		height: auto;
+		float: none;
+		position: relative;
+		padding: 0;
 		font-size: 0.9em;
 		text-align: center;		
 		img {
-			width: auto;
-			margin: 0 auto 12px;;
+			width: auto;			
 			text-align: center;			
 		}
 	}
@@ -67,18 +130,8 @@
 		// position center
 		position: relative;
 		left: 0;
-		&.navbar-center{
-			
-								
-		}
-		// navbar right
-		&.navbar-right{
-			float: right;
-		}
-		// navbar left
-		&.navbar-left {
-			float: left;
-		}
+
+		
 		>li{		
 
 		   

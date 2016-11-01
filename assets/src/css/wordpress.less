@@ -1,3 +1,54 @@
+@article-border-bottom: 1px dotted solid #ccc;
+
+#blog-articles, .media-kit, .news-feed, .soundbites{
+    padding: 0;
+    margin: 0 0 24px;
+    list-style: none;
+	li {
+		margin-bottom: 30px;
+		padding-bottom: 30px;
+		border-bottom: 1px dotted #ccc;
+		&:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+		h2 {			
+            font-size: 1.6em;
+			margin-bottom: 24px;			
+			padding-top: 0;
+
+		}
+		.blog-index-image-full {					
+			img {
+				width: 100%;
+				max-width: 240px;	
+				margin-bottom: 8px;
+				.box-shadow(2px 2px 4px rgba(0,0,0,0.15));
+				padding: 10px;					
+			}
+		}
+		.article-date {
+			margin-bottom: 12px;;
+			padding-bottom: 12px;
+			border-bottom: @article-border-bottom;
+		}		
+	}
+	
+	
+}
+
+
+.article-blog-post-heading{
+	.font-size(1.8);		
+	line-height: 2em;
+	
+	
+}
+
+
+
 ul.widget-section {
     list-style: none;
     padding: 0;
@@ -6,21 +57,26 @@ ul.widget-section {
 
 
 
+
+
+
+
 article {
  
 	#commentsTitle {margin-top: -18px;}
 	
-	a, a:focus, a:visited, a:active, .panel-default > .panel-heading a, .panel-default > .panel-heading a:visited, .panel-default > .panel-heading a:active {		
+	.panel-default > .panel-heading a, .panel-default > .panel-heading a:visited, .panel-default > .panel-heading a:active {		
 		text-decoration: none;
 	}
-	a:hover, .panel-default > .panel-heading a {		
+	 .panel-default > .panel-heading a:hover {		
 		text-decoration: none;
 	}	
 	.subtitle {}
 	
 	.article-date{
-		font-size: 1.4em;
+		font-size: 1.2em;
 		margin-bottom: 12px;
+        display: block;
 	}
 	.article-summary {
 		font-style: italic;
@@ -29,14 +85,14 @@ article {
 
 	.article-footer {
 		.posted-by {
-			margin-bottom: 8px;
+			padding-top: 8px;
 		}
 		.tags {
-			padding-top: 18px;
+			padding-top: 8px;
 		}
         padding-top: 8px;      
 		line-height: 1.4em;
-		font-size: 1em;
+		font-size: 0.7em;
 		.btn {margin-bottom: 4px; margin-right: 4px; }
         .posted-by {
             span { font-style: italic;}         
@@ -55,5 +111,115 @@ article {
 	.comment-link {line-height:2.6em;}
     img {				
 		max-width: 100%;
+    }
+}
+
+
+.main-content {    
+    
+    .alignright {float:right; margin:0 0 1em 1em}
+    .alignleft {float:left; margin:0 1em 1em 0}
+    .aligncenter {display: block; margin-left: auto; margin-right: auto}
+    .alignnone {    display: block;}
+    img {        
+        margin: 12px 0 24px;
+    }
+
+    a {
+        img {
+            &.alignright {float:right; margin:0 0 1em 1em}
+            &.alignleft {float:left; margin:0 1em 1em 0}
+            &.aligncenter {display: block; margin-left: auto; margin-right: auto}
+            &.alignnone {  display:block;}
+        }
+    }
+    
+}
+
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%; /* Image does not overflow the content area */
+    padding: 5px 3px 10px;
+    text-align: center;
+}
+
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+.image-framed{
+    margin: 24px 0; 
+    &.center {margin: 24px auto ;}
+    max-width: 700px;
+    img {
+        background-color: #fff;
+        padding: 12px;
+        .box-shadow(2px 2px 4px rgba(0,0,0,0.15));
+        max-width: 700px;
+        width: 100%;			
+        border: 0;
+    }
+    
+    div {
+        padding: 12px 8px 0;
+        margin: 0 0 32px;	
+        text-align: left;
+        font-size: .85em;
+        font-style: italic;
     }
 }

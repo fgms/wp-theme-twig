@@ -34,6 +34,7 @@
     .carousel-inner {
         .item {
             transition-property: opacity;
+			-webkit-transition-property: opacity;			
         }
         
         .item,
@@ -54,6 +55,8 @@
         .active.right {
             left: 0;
             transform: translate3d(0, 0, 0);
+			-webkit-transform: translate3d(0, 0, 0);
+
         }
     }
     .carousel-control {
@@ -62,6 +65,53 @@
 	
 }
 
+
+.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        // use your favourite prefixer here
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carousel-control{
+	width: 5%;
+	top: 38%;
+    &.left, &.right{
+      background-image: none;
+	  font-size: 1.4em;
+	  font-weight: bold;
+    }
+	&.left {
+		left: 0;
+		text-align: left;
+	}
+	&.right {
+		right: 0;
+		text-align: right;
+	}
+  }  
+}
 
 article .carousel {	
 	margin-left: auto;
