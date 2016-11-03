@@ -15,7 +15,7 @@
 {% endif %}
 
     <meta itemprop="author" content="{{ article.author }}" />
-    {% if article.get_thumbnail.src %}
+    {% if article.get_thumbnail.src  and nofeature == false %}
       {% if function('is_single') %}
         {% set featureImage %}
         <div class="image-wrapper script-gallery-action" >

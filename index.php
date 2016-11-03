@@ -64,6 +64,10 @@
 		
 		$data['archive_description'] = term_description();
 		$template = 'archive';
+	elseif (is_search()) :
+		$data['archive_title'] = '<span class="pre-title pre-title-archive">Search results for</span> '. get_search_query();
+		$data['search_results'] = get_search_query();
+		$template = 'archive';
 	endif;
    
 	if (!is_page()) {
@@ -94,7 +98,7 @@
 		
 		// checking for custom post types
 		$template_post_type =  get_post_type();
-		if (($template_post_type !== 'post') AND ($template_post_type !== 'page')){
+		if (($template_post_type !== 'post') AND ($template_post_type !== 'page') and !is_search()){
 			$template = array($template . '-'.$template_post_type.'.twig', $template.'.twig');	
 		}
 		else {

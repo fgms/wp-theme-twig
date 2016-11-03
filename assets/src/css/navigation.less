@@ -22,13 +22,10 @@
 /****** DO NOT EDIT BELOW THIS LINE ******/
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
 	
-	position: relative;
-	
+	position: relative;	
 	@media screen and (min-width: @screen-md-max){
-		.flex-center-xy();
-		
-	}
-	
+		.flex-center-xy();		
+	}	
 }
 .nav-right {
 	@media screen and (min-width: @screen-md-max){
@@ -36,11 +33,7 @@
 			-webkit-justify-content: flex-end;
 			justify-content: flex-end
 		}
-		
-		
-		
-	}
-	
+	}	
 }
 
 
@@ -57,6 +50,7 @@
 	}
 	.input-group {
 		.font-size(1.4);
+		top: -1px;
 	}
 	input {
 		padding: 3px;
@@ -64,18 +58,19 @@
 		line-height: 1.8em;
 		border: 1px solid #fff;
 		font-weight: 300;
-
+		height: 2em;
 	}
-	.searchbox-close {			
+	.searchbox-close {
+		button {
+			.radius(4px ~'!important');
+		}
 		input {
 			.transition(0.4s);
 			width: 0 !important;
 			padding: 4px 0;					
 		}
-
 	}
-	.searchbox-open  {
-		
+	.searchbox-open  {		
 		button {
 			margin-left : 0px !important;				
 			.radius(0 4px 4px 0) ;
@@ -84,9 +79,8 @@
 			.transition(0.7s);			
 			width: 200px !important;
 			
-		}
-		
-	}		
+		}		
+	}
 }
 
 
