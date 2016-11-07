@@ -21,11 +21,10 @@
 		{% endfor %}
 		
 	</ol>
-	{% endif %}
-	
+	{% endif %}	
 	<div class="carousel-inner {{inner_class|e('html_attr')}}" role="listbox">
-		
 		{% for item in items %}
+		
 		<div class="item{% if loop.index0==0 %} active{% endif %}">			
 			{% if item.youtube.id is defined %}
 				{% set youtubeProp = 'autoPlay:true,startAt:0,mute:true' %}
@@ -36,12 +35,10 @@
 							{{overlay}}
 							<div class="youtube-hero-play" style=""><a class="script-youtube-hero-play" href="javascript:void(0)"><i class="fa fa-youtube-play fa-2x"></i></a></div>
 						</div>
-					</div>					
-					
+					</div>
 				</div>
-
-				
 			{% else %}
+			{% if item.link %}<a href="{{item.link}}">{% endif %}
 			<img
 				
 				{% if lazyload %}
@@ -54,24 +51,25 @@
 					src="{{root}}{{item.url|e('html_attr')}}"
 				{% endif%}
 				alt="{{item.alt|default(item.title)|e('html_attr')}}" />
+			
 			{% if captions or titles %}
 			<div class="container">
 				<div class="carousel-caption">
 					{% if titles %}
-					<h1>{{item.title|e}}</h1>
+					<div class="carousel-caption-title">{{item.title|e}}</div>
 					{% endif %}
 					{% if captions %}
-					{{item.caption|e|wpautop}}
+					<div class="carousel-caption-caption">{{item.caption|e}}</div>
 					{% endif %}
 				</div>
 			</div>
 			{% endif %}
+			{% if item.link %}</a>{% endif %}
 			{% endif %}
 		</div>
-		{% endfor %}
 		
-	</div>
-	
+		{% endfor %}		
+	</div>	
 	{% if controls %}
 	<a class="left carousel-control" href="#{{id|e('html_attr')}}" role="button" data-slide="prev">		
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>		
@@ -81,6 +79,5 @@
 		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>		
 		<span class="sr-only">Next</span>		
 	</a>
-	{% endif %}
-	
+	{% endif %}	
 </div>
