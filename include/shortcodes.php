@@ -6,4 +6,5 @@
 	require_once(__DIR__.'/shortcodes/email.php');
 	require_once(__DIR__.'/shortcodes/ajax.php');
 	require_once(__DIR__.'/shortcodes/twig.php');
+	require_once(__DIR__.'/shortcodes/feature-image.php');
 ?>
