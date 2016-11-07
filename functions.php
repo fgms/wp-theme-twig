@@ -16,8 +16,8 @@ add_action( 'after_setup_theme', function(){
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
 	
-	// don't want this annoying p tag wrap and br tag.
-	remove_filter( 'the_content', 'wpautop' );
+
+	
     register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'fg-timber' ) ) );
 
     // removes admin bar if user is signed out, which is a false bar because a user at once was signed in
@@ -25,6 +25,14 @@ add_action( 'after_setup_theme', function(){
     if ( 0 == $current_user->ID){      
         show_admin_bar(false);
     }	
+});
+
+add_filter('the_content',function($content){
+	// don't want this annoying p tag wrap and br tag. except for blog posts.
+	if (get_post_type() !== 'post'){		
+		remove_filter( 'the_content', 'wpautop' );
+	}
+	return $content;
 });
 
 
@@ -310,6 +318,8 @@ if (is_admin()){
 else {
 	require_once(__DIR__.'/include/shortcodes.php');
 }
+
+
 
 function updateExternalYaml(Array &$config){
 	$results = array();
