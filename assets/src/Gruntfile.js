@@ -41,8 +41,12 @@ module.exports = function(grunt) {
                 },
                 fonts: [
                     {
-                        family: 'Italianno',
-                        styles: [400]                 
+                        family: 'Lato',
+                        styles: [400,700]                 
+                    },
+                    {
+                      family: 'Open Sans',
+                      styles: [400,700]
                     }
 					
                 ]
