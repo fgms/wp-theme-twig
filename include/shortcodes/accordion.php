@@ -118,8 +118,8 @@
 							<h4 class="collapse-title"><a class="collapse-trigger %5$s" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
 										%3$s
 							</a></h4>
-							<div class="collapse" id="%2$s">
-								<div class="collapse-panel-body">
+							<div class="%6$s" id="%2$s">
+								<div class="collapse-panel-body  ">
 								  %4$s
 								</div>
 							</div>
