@@ -1,5 +1,6 @@
 {% extends 'base.twig' %}	
-{% block content %}	
+{% block content %}
+
 <div class="main-content "  >	
 	<div class="container">
 		<div class="inner-container">
@@ -13,7 +14,8 @@
 
 			<div class="{{config.settings.contact.grid.left.class | default('col-md-8')}}">
 				<div class="column-wrapper">						
-					{% include "article.twig" with { "article" : post, "loop" : loop } %}  
+					{% include "article.twig" with { "article" : post, "loop" : loop } %}
+					
 					{% include "bottom-pill-nav.twig" ignore missing %} 
 				</div>
 			</div>

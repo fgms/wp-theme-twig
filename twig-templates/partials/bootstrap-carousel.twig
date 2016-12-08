@@ -10,10 +10,18 @@
 {% if not titles is defined %}{% set titles=true %}{% endif %}
 {% if not lazyload is defined %}{% set lazyload = false %}{% endif %}
 
-<div id="{{id|e('html_attr')}}" class="carousel slide {{outer_class|e('html_attr')}}" data-ride="carousel" data-interval="{{interval|default('8000')}}" data-pause="none" data-background-lg="{{background}}">
+<div id="{{id|e('html_attr')}}"
+	 class="carousel slide {{outer_class|e('html_attr')}}"
+	 data-ride="carousel"
+	 data-interval="{{interval|default('8000')}}"
+	 data-pause="none"
+	 {% if background %}data-background-lg="{{background}}"{% endif %}
+	 >
+	{% if overlay %}
 	<div class="carousel-overlay">
 		{{overlay}}
 	</div>
+	{% endif %}
 	{% if indicators %}
 	<ol class="carousel-indicators">		
 		{% for i in 0..items|length-1 %}
@@ -39,6 +47,9 @@
 				</div>
 			{% else %}
 			{% if item.link %}<a href="{{item.link}}">{% endif %}
+			{% if  imageAsBackground %}
+				<div data-background="{{root}}{{item.url|e('html_attr')}}" style="background-position: center center"></div>
+			{% else %}
 			<img
 				
 				{% if lazyload %}
@@ -51,7 +62,7 @@
 					src="{{root}}{{item.url|e('html_attr')}}"
 				{% endif%}
 				alt="{{item.alt|default(item.title)|e('html_attr')}}" />
-			
+			{% endif %}
 			{% if captions or titles %}
 			<div class="container">
 				<div class="carousel-caption">
