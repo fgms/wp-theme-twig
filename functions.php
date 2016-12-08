@@ -30,7 +30,7 @@ add_action( 'after_setup_theme', function(){
 add_filter('the_content',function($content){
 	// don't want this annoying p tag wrap and br tag. except for blog posts.
 	if (get_post_type() !== 'post'){		
-		remove_filter( 'the_content', 'wpautop' );
+		//remove_filter( 'the_content', 'wpautop' );
 	}
 	return $content;
 });
