@@ -36,6 +36,22 @@
 		visibility: hidden;
 
 	}
+		
+	.glyphicon {
+		font-family: none;
+	}
+	.glyphicon-chevron-left{
+		&:before{
+			content: '\f053';
+			font-family: FontAwesome;
+		}
+	}
+	.glyphicon-chevron-right{
+		&:before{
+			content: '\f054';
+			font-family: FontAwesome;
+		}
+	}	
 	@media screen and (min-width: @screen-lg-max){
 		.carousel-indicators {
 			display: block;
