@@ -92,6 +92,32 @@ The **[panel]** shortcode accepts the following attributes:
 
 The content of the [panel] shortcode shall be used as the content of the panel in the accordion.
 
+
+### [collapse] & [panel]
+
+Creates [Bootstrap collapse](http://getbootstrap.com/javascript/#collapse).
+
+The [collapse] shortcode accepts these attributes.
+All content of an [collapse] shortcode which is not a [panel] shortcode (or content nested therein) is ignored.
+
+| Attribute | Description |
+| --------- | ----------- |
+| iconup        | the icon that is shown next to text to indicate up, the down arrow is same but rotated 90deg |
+| fontfamily     | for the icon default is FontAwsome |
+
+
+
+The **[panel]** shortcode accepts the following attributes:
+
+| Attribute | Description |
+| --------- | ----------- |
+| id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
+| title     | A title for the panel |
+| active    | default false, opens accordion if true |
+
+The content of the [panel] shortcode shall be used as the content of the panel in the accordion.
+
+
 ### [carousel] & [slide]
 
 Creates [Bootstrap carousels](http://getbootstrap.com/javascript/#carousel).
