@@ -1,5 +1,4 @@
- 
-/*
+ /*
  * Navbar logic
  * 1. Top - has classes .script-fixed-header-with-scroll .nav-in-hero .show
  *
@@ -14,14 +13,8 @@
  **/
 
 
-
-
-
-
-
 /****** DO NOT EDIT BELOW THIS LINE ******/
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
-	
 	position: relative;	
 	@media screen and (min-width: @screen-md-max){
 		.flex-center-xy();		
@@ -36,9 +29,8 @@
 	}	
 }
 
-
 .search-header {
-	float: left;
+	float: right;
 	margin: 0;
 	button {
 		line-height: 14px;
@@ -58,7 +50,7 @@
 		line-height: 1.8em;
 		border: 1px solid #fff;
 		font-weight: 300;
-		height: 2em;
+		height: 2.15em;
 	}
 	.searchbox-close {
 		button {
@@ -82,15 +74,11 @@
 	}
 }
 
-
-
-
 .navbar-toggle .icon-bar {	
 	width: 30px;
 	height: 4px;
 	cursor: pointer;
 }
-
 
 .navbar {
 	
@@ -122,25 +110,13 @@
 	.nav {
 		// position center
 		position: relative;
-		left: 0;
-
-		
-		>li{		
-
-		   
-	   
+		left: 0;		
+		>li{	
 			ul {
-				.box-shadow();
-				
-				> li {
-					
-					
-					
-				}
+				.box-shadow();				
+				> li {	}
 			}
 		}
-		
-
 	}
 	// fixed header with scroll css
 	
@@ -157,22 +133,13 @@
 		&.show {			
 			.navbar-brand {				
 				img {
-					overflow: hidden;
-										
+					overflow: hidden;										
 				}
 			}
-			&.nav-in-hero {
-							
-			}
-			.nav>li>a {
-				
-			}				
 			top: 0;
-			position: fixed;
-					
+			position: fixed;					
 		}		
-	}	
-	
+	}		
 }
 
 /** navigation **/
@@ -189,10 +156,6 @@
 	padding: 0;
 	margin: 0;
 	list-style: none;	
-	&.footer-nav{
-		
-	}
-	
 }
 
 /** MODULAR NAVIGATION **/
@@ -252,29 +215,77 @@
     }
 }
 
-@media (max-width: 992px) {
-    .navbar-header { float: none;  }
-    .navbar-left,.navbar-right { float: none !important; }
-    .navbar-toggle { display: block; }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-fixed-top {
-		top: 0;
-		border-width: 0 0 1px;
+
+.dropdown-menu {		
+	&.mega-menu-nav {
+		ul {
+			padding: 8px 20px;
+		}
+		a {
+			padding: 4px 0;
+		}
+		
 	}
-    .navbar-collapse.collapse {
-        display: none!important;
-    }
-    .navbar-nav {
-        float: none!important;
-		margin-top: 7.5px;
+	@media screen and (min-width: @screen-md-max){
+		&.mega-menu-nav {
+			
+			padding: 0;
+			//display: block !important;
+			width: 800px;
+			ul {
+				float: left;
+				display: inline;
+				width: 40%;
+			}
+			.mega-menu-content {
+				float: left;
+				display: inline;
+				width: 60%;
+				height: 100%;
+			}
+			
+			&.flipped {
+				ul {
+					float: right;
+				}
+				.mega-menu-content {
+					float: right;
+				}
+			}
+		
+		}
+		
 	}
-	.navbar-nav>li { float: none; }
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .collapse.in{display:block !important;}
+}
+
+.pagination {
+	margin-top: 12px;
+	.pagination-prev {
+		float: left;
+	}
+	.pagination-pages {
+		float: left;
+		list-style: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		li {
+			margin: 0 10px !important;
+			padding: 0 4px !important;
+			float: left;
+			border: 1px solid transparent;
+			&:hover {
+				border: 1px dotted #ccc;
+			}
+		}
+		
+	}	
+	.pagination-next {
+		float: left;
+	}
+	&:after {
+		content: ' ';
+		clear: both;
+		margin: 0;
+		display: table;
+	}
 }
