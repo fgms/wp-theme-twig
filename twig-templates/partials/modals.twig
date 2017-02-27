@@ -1,0 +1,20 @@
+<div id="general-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            {% include 'modal-inner.twig' with {title: '' , content : '' } %}
+        </div>
+    </div>
+</div>
+
+{# modal form #}
+{% if config.forms.modal.id is defined %}
+<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            {% set contactform %}{% filter shortcodes %}[contact-form-7 id="{{config.forms.modal.id}}" ]{% endfilter %}{% endset %}
+            {% set modaltitle = config.forms.modal.title | default('Contact Us') %}
+            {% include 'modal-inner.twig' with {title: modaltitle , content :  contactform } %}
+        </div>
+    </div>
+</div>
+{% endif %}

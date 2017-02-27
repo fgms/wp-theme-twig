@@ -11,12 +11,14 @@
 			<div class="row">
 				<div class="{{config.settings.article.grid.left.class | default('col-sm-12')}}">
 					<div class="column-wrapper">
-						<h1 class="archive-title">Blog</h1>
+						<h1 class="archive-title">Blog ss</h1>
 						<ul id="blog-articles">
 						{% for article in posts%}
 							<li>{% include "article.twig" with { "article" : article, "loop" : loop, "class" : "article-page-default" } only %}</li>
 						{% endfor %}
 						</ul>
+						
+						{% include 'pagination.twig' %}
 					</div>
 				</div>
 				{% if config.settings.article.grid.right.class is defined %}

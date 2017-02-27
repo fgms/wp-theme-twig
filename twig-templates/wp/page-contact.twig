@@ -27,55 +27,7 @@
 							{% if widget_contact_sidebar %}
 							<ul class="widget-section">{{widget_contact_sidebar}}</ul>
 							{% else %}
-							<div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization"> 
-								<meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="Mission Inn Resort" /> 
-								<div style=" " class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-									<table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
-										<tbody >         
-											{% if config.company.name is defined %}
-											<tr>																
-												<td colspan="2" style="border-top: none;" itemprop="company"><span style="font-weight: 400">{{config.company.name}}</span></td>
-											</tr>															
-											{% endif %}
-											{% if config.phone.toll is defined %}
-											<tr>
-													<td style="width: 30%">TF.</td>
-													<td itemprop="telephone">{{config.phone.toll}}</td>
-											</tr>          
-											{% endif %}
-											{% if config.phone.office is defined %}
-											<tr>
-													<td>T.</td>
-													<td itemprop="telephone">{{config.phone.office}}</td>
-											</tr>        
-											{% endif %}
-											{% if config.phone.fax is defined %}
-											<tr>
-													<td>F.</td>
-													<td itemprop="telephone">{{config.phone.fax}}</td>
-											</tr>        
-											{% endif %}
-											{% if config.email.info is defined %}
-											<tr>
-													<td>E.</td>
-													<td itemprop="email">{% filter shortcodes %}[email label="Send Email"]{{config.email.info}}[/email]{% endfilter %}</td>                                                    
-											</tr>
-											{% endif %} 
-											<tr>
-												<td colspan="2" style="font-size: 0.85em;">
-													<div itemprop="streetAddress">{{config.company.address.street}}</div> 																	
-													<div>
-														<span itemprop="addressLocality">{{config.company.address.city}}</span>
-														<span itemprop="addressRegion">{{config.company.address.province}}</span>																			
-													</div>
-													<div style="" itemprop="addressCountry">{{config.company.address.country}}</div>   
-													<div style="" itemprop="postalCode">{{config.company.address.postal}}</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
+								{% include 'widget-contact.twig' with config only %}
 							{% endif %}	
 						</div>
 					</div>                                    
