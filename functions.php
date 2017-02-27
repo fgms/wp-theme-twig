@@ -1,5 +1,6 @@
 <?php
 $autoloader = require_once( str_replace('/wp-content/themes', '', get_theme_root()) .'/vendor/autoload.php');
+
 // turn off autop in wp7forms
 add_action('muplugins_loaded',function(){
 	define( 'WPCF7_AUTOP', false );
@@ -29,11 +30,11 @@ add_action( 'after_setup_theme', function(){
 
 add_filter('the_content',function($content){
 	// don't want this annoying p tag wrap and br tag. except for blog posts.
-	if (get_post_type() !== 'post'){		
-		//remove_filter( 'the_content', 'wpautop' );
-	}
+	if ((get_post_type() === 'page') and ( in_array( get_the_ID(), array(2) )) ){		
+		remove_filter( 'the_content', 'wpautop' );
+	}	
 	return $content;
-});
+},1);
 
 
 add_filter('wp_seo_get_bc_title',function($text){	
@@ -412,4 +413,3 @@ function hashDirectory($directory){
 }
 
 
-?>
