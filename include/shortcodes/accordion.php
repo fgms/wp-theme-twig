@@ -23,7 +23,7 @@
 			do_shortcode($content);
 			$iconup = isset($atts['iconup']) ? $atts['iconup']: ' ';
 			$icondown = isset($atts['icondown']) ? $atts['icondown'] : ' ';
-			$fontfamily = isset($atts['fontfamily']) ? $atts['fontfamily']: 'FontAwesome';
+			$fontfamily = isset($atts['fontfamily']) ? $atts['fontfamily']: 'FontAwesome';			
 			$id='accordion'.(++$aid);
 			$retr.=sprintf(
 				'
