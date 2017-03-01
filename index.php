@@ -99,7 +99,6 @@
 		else {
 			$template = $template . '.twig';
 		}
-		
 		Timber::render( $template,
 					   $data,
 					   get_option('theme_twig_cache_expire','0'),

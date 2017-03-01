@@ -410,6 +410,13 @@ function hashDirectory($directory){
     $dir->close(); 
     return md5(implode('', $fileTimes));
 }
-
+function get_fg_post_type($post_type='post', $limit=3, $orderby='date') {
+	$args = array('post_type'			=>$post_type,
+					  'posts_per_page' 	=>$limit,
+					  'orderby' 			=>$orderby
+					  );
+	$posts =  Timber::get_posts($args);
+	return $posts;	
+}
 
 ?>

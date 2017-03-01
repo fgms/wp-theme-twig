@@ -13,48 +13,21 @@
 		{% endblock %}
     </head>
     <body class="{{body_class}}" data-class="{{function('get_body_class')|join(' ')}}">
-	{% if slideshow is defined and not slideshow is null %}
-		{% include 'bootstrap-carousel.twig' with slideshow only %}
-	{% else %}
+	{% if config.slideshow.location is not defined or config.slideshow.location ==  'beforenav' %}		
 		{% include 'custom-slideshow.twig' ignore missing  %}
 	{% endif %}
 	{% include 'pre-navigation.twig' ignore missing %}
 	{% include 'navigation.twig' %}
+	{% if config.slideshow.location is defined and config.slideshow.location ==  'afternav' %}
+		{% include 'custom-slideshow.twig' ignore missing  %}	
+	{% endif %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
 	{% block footer%}
 		
 	{% endblock %}	
 	{% include "footer.twig" %}
 	<!-- Modal -->
-	<div id="general-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				{% include 'modal-inner.twig' with {title: '' , content : '' } %}
-			</div>
-		</div>
-	</div>
-
-	<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="4" ]{% endfilter %}{% endset %}
-				
-				{% include 'modal-inner.twig' with {title: 'Contact Us' , content :  contactform } %}
-			</div>
-		</div>
-	</div>
-	
-	{# modal form #}
-	{% if config.forms.modal.id is defined %}
-	<div id="contact-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				{% set contactform %}{% filter shortcodes %}[contact-form-7 id="{{config.forms.modal.id}}" ]{% endfilter %}{% endset %}				
-				{% include 'modal-inner.twig' with {title: 'Contact Us' , content :  contactform } %}
-			</div>
-		</div>
-	</div>
-	{% endif %}
+	{% include 'modals.twig' ignore missing %}
 	
 	{% block scripts %}
 		<script type="text/javascript">
