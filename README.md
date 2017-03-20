@@ -23,7 +23,10 @@
 │   │   ├── custom-template.php
 │   │   ├── email.php
 │   │   ├── tabs.php
-│   │   └── twig.php
+│   │   ├── twig.php
+│   │   ├── gallery.php
+│   │   └── link.php
+|   |    
 │   ├── shortcodes.php
 │   └── theme-settings.php
 ├── index.php
@@ -70,9 +73,9 @@
         ├── page.twig
         └── single.twig
 
-                    
-```           
-            
+
+```
+
 
 ## Shortcodes
 
@@ -187,3 +190,34 @@ The **[ajax]** shortcode accepts the following attribute.
 | Attribute | Description |
 | --------- | ----------- |
 | template  | is used to load the twig template it is going to wrap the content around |
+
+
+### [fgallery]
+
+The **[fgallery]** shortcode accepts the following attribute.
+
+| Attribute | Default | Description |
+| --------- | ------- | ----------- |
+| width     |  100px  | width of thumb |
+| height    |  auto   | height of thumb |
+| class     |         | adds class attribute |
+| alt       |         | adds alt tag |
+| thumb     |         | uses a different image as the thumb |
+| group     |         | this adds group to gallery to link images to one group |
+
+[fgallery alt="this is the alttext" thumb="absolute/path/to/image" width="150px" height="100%" class="my-class" ]<imc src="path/to/image" />[/fgallery]
+
+
+### [link]
+
+The **[link]** shortcode accepts the following attribute.
+
+| Attribute | Description |
+| --------- | ----------- |
+| id        | The post id which will convert it to url (preferred method)|
+| href      | The complete url |
+| attr      | use any attribute ie class="myclass" target="_blank"
+
+[link id="2"]contact us[/link] --> <a href="http://example.com/contact-us">contact us</a>
+
+[link href="https://google.com" attr="target=_blank" ]Search Engine[/link]  --> <a href="https://google.com" target="_blank">Search Engine</a>
