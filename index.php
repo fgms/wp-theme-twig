@@ -7,6 +7,7 @@
 	$template = false;
 	$start = TimberHelper::start_timer();
 	$data = Timber::get_context();
+	$data['pagination'] = Timber::get_pagination();
 
 	$data['latest_news'] = get_fg_latest_posts();
 
@@ -53,7 +54,7 @@
 
 	elseif (is_archive() ) :
 
-		if (is_post_type_archive('post')){
+		if (is_post_type_archive('post') or is_month()){
 			$data['archive_title'] = '<div class="pre-title pre-title-archive"></div>'. $GLOBALS['wp_locale']->get_month(get_query_var('monthnum')) . ' ' . get_query_var('year') ;
 		}
 		else {

@@ -1,3 +1,7 @@
+body {
+	letter-spacing: 0.02em;
+}
+
 h1, h2, h3, h4, h5, p, ul, ol{
 	margin: 0;
 	padding: 0;	
@@ -6,6 +10,7 @@ h1, h2, h3, h4, h5, p, ul, ol{
 h1, h2, h3, h4, h5,.h1,.h2,.h3,.h4,.h5 {
     line-height: 1.4em;
 }
+@line-seperator : #9c9c9c;
 
 @index-element-padding: 8px;
 ul{
@@ -15,28 +20,77 @@ ul{
       padding: 12px 0 18px;
     }
     &.index-container {
-        padding: 24px 0;
+        padding: 0 0 24px;
 		.index-heading {
 			padding-top: 0;
 			margin: -8px 0 @index-element-padding;
+		}
+		.index-button {
+			margin-top: @base-margin *2;
 		}
 		.index-excerpt {
 			line-height: 1.4em;
 			font-size: 0.9em;
 			margin-bottom: (@index-element-padding * 1.5);
 		}
+		.index-image-wrapper {
+			position: relative;
+			height: 130px;
+			max-width: 400px;
+			background-color: #fff;
+			border: 1px solid #eee;;
+			.transition(0.2s);
+			.transform-scale(1, 1);	
+			img {
+				max-height: 100%;  
+				max-width: 100%; 
+				width: auto;
+				height: auto;
+				position: absolute;  
+				top: 0;  
+				bottom: 0;  
+				left: 0;  
+				right: 0;  
+				margin: auto;
+				padding: 4px;
+				
+
+			}
+			&:hover {
+				.box-shadow(1px 1px 18px 1px rgba(0,0,0,0.15));				
+				.transition(0.5s);
+				.transform-scale(1.05, 1.05);	
+				img {
+									
+				}
+				
+			}
+		}
         li {
             margin-bottom: 24px;
             padding-bottom: 24px;
-            border-bottom: 1px dotted #ccc;
+            border-bottom: 1px dotted @line-seperator;
             &:last-child {
-                margin-bottom: 0;
-                padding-bottom : 0;
+                margin-bottom: 0 !important;
+                padding-bottom : 0 !important;
                 border-bottom: 0;
             }
         }
     }
+	&.product-video-wrapper {
+		li {
+			margin-bottom: 30px;
+			padding-bottom: 30px;
+		}
+	}
+	@media screen and (min-width: @screen-md-max){
+		.index-image-wrapper {
+			margin-right: @base-margin;
+		}
+	}
 }
+
+
 
 p {
 	margin-bottom: 15px;	
@@ -44,6 +98,17 @@ p {
 
 b, strong {	
 	font-weight: 700;
+}
+
+.modular-news {
+	ul.index-container{
+		.index-image-wrapper {
+			height: 230px;
+			background-color: rgba(255,255,255,0.4);
+		}		
+	}
+
+	
 }
 
 *:focus,a:focus,.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{outline: none; text-decoration: none;}
@@ -100,4 +165,5 @@ b, strong {
     margin-bottom: 12px;
     font-size: 14px;
 }
+
 

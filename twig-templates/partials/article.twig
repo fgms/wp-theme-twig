@@ -16,7 +16,7 @@
 
     <meta itemprop="author" content="{{ article.author }}" />
     {% if article.get_thumbnail.src  and nofeature == false  %}
-      {% if function('is_single')  %}
+      {% if function('is_single') %}
         {# if there is a feature-image shortcode on page then replace this with shortcode #}
         {% if function('has_shortcode',article.post_content,'feature-image') == false %}     
             {% set featureImage %}

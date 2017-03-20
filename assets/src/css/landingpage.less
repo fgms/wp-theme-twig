@@ -1,0 +1,115 @@
+.lp-template-default {
+    ul.widget-section {
+        margin-bottom: 0;
+    }
+    h2.subtitle {
+        margin-top: -45px;
+        text-transform: none;
+    }
+    .inner-container {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    #sidebar {
+        padding: 0;
+        .box-shadow();
+    }
+    .single-feature-image {
+        height: 280px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .navbar, .footer {
+        min-height: 80px;
+        margin-left: -15px;
+        margin-right: -15px;
+        margin-top: 0;
+
+    }
+    .navbar {
+        padding: 24px 50px;
+        background-color: #000;
+        .navbar-brand {
+            top: 0;
+            left: 0;
+            img {
+                margin: 0;
+            }
+        }
+        .btn-primary {
+            margin-top: 8px;
+        }
+    }
+    
+    .main-content {
+        padding-bottom: 15px;
+        .container{
+            margin-top: 0;
+            
+        }   
+    }
+    .call-to-action {
+       
+        font-style: italic;
+        margin-top: 45px;
+        padding-top: 45px;
+        border-top: 1px dotted #ccc;
+    }
+    .padded-box {
+
+        color: #fff;
+        h2{
+            color: #fff;
+            padding-top: 0;
+            font-weight: 700;
+            margin-left: -15px;
+            margin-right: -15px;
+            text-align: center;
+            
+        }
+        .or-call-us {
+            margin: 30px -15px 0;
+            line-height: 1.5em;
+            div {
+                margin-top: -6px;
+                font-size: 2.4em;
+                line-height: 1.4em;
+            }
+            
+        }
+        padding: 30px 45px;
+        background-color: #000;
+    }
+     @media screen and (min-width: @screen-md-max){
+        .inner-container {
+            padding-top: 50px;
+            
+        }
+        .single-feature-image {
+            height: 400px;            
+        }
+        .main-column-wrapper {
+            padding-right: 35px
+        }
+        .navbar {
+                border-bottom: none;
+                text-align: right;
+            
+        }
+        .footer{
+            padding: 50px;
+            background-color: #000;
+            
+            .footer-logo {
+                text-align: left;
+                margin: 0;
+                max-width: none;
+                img {
+                    margin: 0;
+                }
+                
+                
+            }
+        } 
+     }
+}
