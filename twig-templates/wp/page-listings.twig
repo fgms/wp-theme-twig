@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 {% block content %}	
-<div class="{{config.settings.pagelist.class |default('')}} {% if config.settings.pagelist.grid.right.class is defined %}sidebar{% endif %}">
+<div class="main-content {{config.settings.pagelist.class |default('')}} {% if config.settings.pagelist.grid.right.class is defined %}sidebar{% endif %}">
     <div class="container">
         <div class="row">
             <div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
@@ -9,7 +9,9 @@
         </div>	            
         <div class="row">
             <div class="{{config.settings.pagelist.grid.left.class | default('col-sm-12')}}">
-                <div class="column-wrapper">                
+                <div class="column-wrapper">
+                    <h1>{{post.title}}</h1>
+                    {{post.content}}
                     {% if post.children is defined %}
                     <ul class="index-container" >
                         {% for child in post.children %}
@@ -21,9 +23,12 @@
             </div>
             {% if config.settings.pagelist.grid.right.class is defined %}
             <div class="{{config.settings.pagelist.grid.right.class}}">                       
-                <ul class="widget-section">
-                    {{widget_page_sidebar}}
-                </ul>                              
+                <div id="sidebar">
+                    {% include 'sidebar-default.twig' ignore missing %}
+                    <ul class="widget-section">
+                        {{widget_page_sidebar}}
+                    </ul>					
+                </div>                            
             </div>
             {% endif %}
         </div>   

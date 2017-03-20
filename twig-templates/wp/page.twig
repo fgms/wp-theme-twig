@@ -16,7 +16,8 @@
 				</div>
 				{% if config.settings.page.grid.right.class is defined %}
 				<div class="{{config.settings.page.grid.right.class}}">
-					<div id="sidebar">
+					<div id="sidebar">						
+						{% include 'sidebar-default.twig' %}					
 						<ul class="widget-section">
 							{{widget_page_sidebar}}
 						</ul>					

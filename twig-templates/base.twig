@@ -13,13 +13,21 @@
 		{% endblock %}
     </head>
     <body class="{{body_class}}" data-class="{{function('get_body_class')|join(' ')}}">
-	{% if config.slideshow.location is not defined or config.slideshow.location ==  'beforenav' %}		
-		{% include 'custom-slideshow.twig' ignore missing  %}
+	{% if config.slideshow.location is not defined or config.slideshow.location ==  'beforenav' %}
+		{% if function('post_type_exists','slideshow')%}
+			{% include 'post-type-slideshow.twig' %}	
+		{% else %}
+			{% include 'custom-slideshow.twig' ignore missing  %}
+		{% endif %}
 	{% endif %}
 	{% include 'pre-navigation.twig' ignore missing %}
 	{% include 'navigation.twig' %}
 	{% if config.slideshow.location is defined and config.slideshow.location ==  'afternav' %}
-		{% include 'custom-slideshow.twig' ignore missing  %}	
+		{% if function('post_type_exists','slideshow')%}
+			{% include 'post-type-slideshow.twig' %}	
+		{% else %}
+			{% include 'custom-slideshow.twig' ignore missing  %}
+		{% endif %}
 	{% endif %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
 	{% block footer%}

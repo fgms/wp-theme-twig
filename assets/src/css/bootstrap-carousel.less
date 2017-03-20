@@ -40,18 +40,33 @@
 		
 	.glyphicon {
 		font-family: none;
+		font-size: 4em;
+		.transform(translateY(-50%));
+		.transition(0.2s);
+		&:hover {
+			.transform(translateY(-50%) scaleY(.85));
+			.transition(0.6s);
+			&:before {
+
+				
+			}
+		}
+					
 	}
 	.glyphicon-chevron-left{
+		
 		&:before{
-			content: '\f053';
+			content: '\f104';
 			font-family: FontAwesome;
-		}
+			
+		}		
 	}
 	.glyphicon-chevron-right{
 		&:before{
-			content: '\f054';
+			content: '\f105';
 			font-family: FontAwesome;
-		}
+			
+		}	
 	}	
 	@media screen and (min-width: @screen-lg-max){
 		.carousel-indicators {
