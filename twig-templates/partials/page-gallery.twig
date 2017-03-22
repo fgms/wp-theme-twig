@@ -48,9 +48,13 @@
 				         <div id="{{gallery_name}}{{loop.index}}"class="{% if loop.first %}active{% endif %}"  >
 									<a  {{gmacro.linkattributes(gallery, image)}}
                       {% if image.title %}title="{{image.title|e('html_attr')}}"{% endif %}
+											data-background="{{image.medium}}"
                       class="script-gallery-action"
                       data-smoothzoom="{{gallery_name}}" >
-										<img data-image="{{image.thumb}}" data-loaded="false" style="width: 100%;" title="{{image.title|e('html_attr')}}" alt="{{image.alt|default(image.title)|e('html_attr')}}"/>
+										<img data-image="{{image.medium}}"
+												 data-loaded="false"
+												 title="{{image.title|e('html_attr')}}"
+												 alt="{{image.alt|default(image.title)|e('html_attr')}}"/>
 									</a>
 								</div>
 								{% endfor %}
@@ -67,7 +71,7 @@
 					{# *** Loop through images *** #}
 					{% for image in images  %}
 						{# *** Getting link attributes *** #}
-						<li class="__st_gallery_thumb_item {% if image.youtubeid %}fg-youtube-play{% else %}fg-search{% endif %} {% if loop.first and options.feature %}active{% endif %}  {{image.filters| join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
+						<li class="__st_gallery_thumb_item {% if image.youtubeid %}fg-youtube-play{% else %}fg-search{% endif %} {% if loop.first and options.feature %}active{% endif %}  {{image.filters| join(" ")}}"	style="">
 							<a data-background="{{image.thumb}}" {% if options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
 								<img  data-image="{{image.thumb}}"
                       alt="{{image.alt|default(image.title)|e('html_attr')}}"

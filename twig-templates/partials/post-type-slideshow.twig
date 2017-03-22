@@ -37,7 +37,7 @@
 {% endif %}
 
 
-{# ******* Her is where the logic starts either feature image or slideshow #}
+{# ******* Here is where the logic starts either feature image or slideshow #}
 
 {% if slideshow['slide-or-image-radio'] | first == 'slideshow' %}
     {% set slideshow_post = function('Timber::get_post',post_id) %}

@@ -10,6 +10,7 @@
 			if (is_array(get_post_meta($id,'randomize', false))){
 				$random = (get_post_meta($id,'randomize', false)[0] == 'yes');
 			}
+			$feature_enable = empty($atts['feature']) ? false : ($atts['feature'] == 'true');
 			$filter_enable = empty($atts['filters']) ? true : ($atts['filters'] == 'true');
       $images = [];
       $gallery = [
@@ -20,7 +21,8 @@
         'options' => [
           'limit' => 500,
           'random'=> $random,
-          'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5')
+          'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5'),
+					'feature' => $feature_enable
 
         ],
         'images' => &$images
@@ -37,17 +39,20 @@
               $thumb =  (! empty ($item['thumb'][0])) ?  wp_get_attachment_image_src($item['thumb'][0])[0] : null;
               $filter = [];
               foreach ($item['fg-filters'] as $f){
-                // this adds the filter to list
-                $slug = slugify($f);
-                $gallery['filters'][$slug] =$f;
-                $filter[] = $slug;
+								if (strlen(trim($f)) > 0){
+									// this adds the filter to list
+	                $slug = slugify($f);
+	                $gallery['filters'][$slug] =$f;
+	                $filter[] = $slug;
+								}
+
               }
               $images[] = [
                 'thumb' => empty($thumb) ? wp_get_attachment_image_src($item['image'][0],'medium')[0] : $thumb,
                 'medium'=> wp_get_attachment_image_src($item['image'][0], 'large')[0],
                 'large' => wp_get_attachment_image_src($item['image'][0], 'full')[0],
                 /*'caption' => (empty($item['caption'])) ? false : $item['caption'],*/
-                'title' => (empty($item['caption'])) ? false : $item['caption'],
+                'title' => get_the_title($item['image'][0]),
                 'filters'=> $filter,
                 'youtubeid' => (empty($item['youtubeid'])) ? false : $item['youtubeid']
               ];
