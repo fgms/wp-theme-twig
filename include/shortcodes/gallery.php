@@ -13,7 +13,7 @@
       preg_match('/< *img[^>]*src *= *["\']?([^"\']*)/i', $atts['content'] , $matches);
 			$group = empty($atts['group']) ? 'group' . rand(0, 50000) : $atts['group'];
 
-      $retr = $atts['content'];
+      $retr = '<div style="color:#ff0000">ERROR could not find img tag in shortcode</div>'.$atts['content'];
       if (count($matches) == 2){
           $thumb = empty($atts['thumb']) ? $matches[1] :trim($atts['thumb']);
           $post_id = url_to_postid($matches[1]);

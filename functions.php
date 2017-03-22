@@ -12,49 +12,49 @@ if (!class_exists('Timber')) {
 
 add_action( 'after_setup_theme', function(){
     load_theme_textdomain( 'blankslate', get_template_directory() . '/languages' );
-	add_post_type_support( 'page', 'excerpt' );
+		add_post_type_support( 'page', 'excerpt' );
     add_theme_support( 'title-tag' );
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'post-thumbnails' );
-	
 
-	
+
+
     register_nav_menus(array( 'main-menu' => __( 'Main Menu', 'fg-timber' ) ) );
 
     // removes admin bar if user is signed out, which is a false bar because a user at once was signed in
     $current_user = wp_get_current_user();
-    if ( 0 == $current_user->ID){      
+    if ( 0 == $current_user->ID){
         show_admin_bar(false);
-    }	
+    }
 });
 
 add_filter('the_content',function($content){
 	// don't want this annoying p tag wrap and br tag. except for blog posts.
-	if ((get_post_type() === 'page') and ( in_array( get_the_ID(), array(2) )) ){		
+	if ((get_post_type() === 'page') and ( in_array( get_the_ID(), array(2) )) ){
 		remove_filter( 'the_content', 'wpautop' );
-	}	
+	}
 	return $content;
 },1);
 
 
-add_filter('wp_seo_get_bc_title',function($text){	
+add_filter('wp_seo_get_bc_title',function($text){
 	$text = str_replace('&nbsp;','',$text);
 	return $text;
 });
 
 
 add_action( 'wp_enqueue_scripts', function(){
-	
+
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script('modernizr', get_template_directory_uri() .'/assets/js/modernizr.js');
 	wp_enqueue_script('bootstrap', get_template_directory_uri() .'/assets/js/bootstrap.min.js');
 	wp_enqueue_script('theme-master-script', get_template_directory_uri() .'/assets/js/script.js');
 	wp_enqueue_script('google-api','http://www.google.com/jsapi');
-   
+
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
 	wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
 	wp_enqueue_style('master-style',get_template_directory_uri() .'/assets/css/style.css');
-   
+
 },20);
 
 
@@ -64,7 +64,7 @@ add_filter( 'the_title', function($title){
 });
 
 
-add_action( 'widgets_init', function() {	
+add_action( 'widgets_init', function() {
 	register_sidebar(array(
 		'name' => 		'Footer - Left',
 		'id'=> 			'widget_footer_sidebar_left',
@@ -73,7 +73,7 @@ add_action( 'widgets_init', function() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'class' => 'widget_footer_sidebar_left',
-		
+
 	));
 	register_sidebar(array(
 		'name' => 		'Footer - Right',
@@ -92,8 +92,8 @@ add_action( 'widgets_init', function() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'class' => 'widget_home_sidebar',
-		
-	));		
+
+	));
 	register_sidebar(array(
 		'name' => 		'Sidebar (Page)',
 		'id'=> 			'widget_page_sidebar',
@@ -102,8 +102,8 @@ add_action( 'widgets_init', function() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'class' => 'widget_page_sidebar',
-		
-	));	
+
+	));
 	register_sidebar(array(
 		'name' => 		'Sidebar (Blog)',
 		'id'=> 			'widget_blog_sidebar',
@@ -112,7 +112,7 @@ add_action( 'widgets_init', function() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'class' => 'widget_blog_sidebar',
-		
+
 	));
 	register_sidebar(array(
 		'name' => 		'Sidebar (Contact)',
@@ -122,8 +122,8 @@ add_action( 'widgets_init', function() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'class' => 'widget_contact_sidebar ',
-		
-	));		
+
+	));
 });
 // adding config and context data into templates
 add_filter('wpcf7_fg_email_data','wpcf7_fg_email_data');
@@ -141,8 +141,8 @@ add_filter('widget_text', function($text) {
 
 
 add_filter('rwmb_meta_boxes','fgms_meta_boxes');
-function fgms_meta_boxes ($bs) {	
-	$prefix='fgms_';	
+function fgms_meta_boxes ($bs) {
+	$prefix='fgms_';
 	$bs[]=array(
 		'title' => 'Slideshow',
 		'post_types' => array('post','page'),
@@ -183,25 +183,25 @@ function fgms_meta_boxes ($bs) {
                 'type' => 'checkbox'
             )
 		)
-	);	
-	return $bs;	
+	);
+	return $bs;
 }
 
-$get_config=call_user_func(function() {	
+$get_config=call_user_func(function() {
 	return function() use (&$config) {
 		// lets see if we have a cached version
 		if (!is_null($config)){
-			
+
 			return $config;
 		}
-		
-		
+
+
 		$cache = array('config_ts'=> get_transient('fg_config_timestamp'),
 					   'config'=>get_transient('fg_config')
 				);
 		$errors = array();
 		$theme = get_option('theme_directory','default');
-		
+
 		$config_file = get_stylesheet_directory().'/config/settings.yml';
 		if (!file_exists ( $config_file ) ) {
 			echo 'Error Config file not found';
@@ -209,17 +209,17 @@ $get_config=call_user_func(function() {
 		}
 		$filetime = hashDirectory(get_stylesheet_directory().'/config/');
 		// checking if settings.yml has changed if so lets update, but only if is valid
-		if ($cache['config_ts'] != $filetime) {					
+		if ($cache['config_ts'] != $filetime) {
 			$config=@file_get_contents($config_file);
 			if ($config===false) die('Could not read '.$config_file);
 			// this compiles all context settings in config file
 			$config = Timber::compile_string($config, Timber::get_context());
-					
+
 			try {
 				$config=\Symfony\Component\Yaml\Yaml::parse($config);
-				//this loads any external yamls file		
+				//this loads any external yamls file
 				updateExternalYaml($config);
-	
+
 			}
 			catch(\Symfony\Component\Yaml\Exception\ParseException $e){
 				$errors[] = 'ParseException in function.php Line '. __LINE__ . ' '. $e;
@@ -227,28 +227,28 @@ $get_config=call_user_func(function() {
 			// have a good config, lets update tranient values
 			if (is_array($config) && (count($errors) === 0)){
 				set_transient('fg_config',$config,0);
-				set_transient('fg_config_timestamp',$filetime,0);			
+				set_transient('fg_config_timestamp',$filetime,0);
 			}
 			else {
-				//means an error in yaml settings. -- need a way to notify user it failed			
-				$config = $cache['config'];			
+				//means an error in yaml settings. -- need a way to notify user it failed
+				$config = $cache['config'];
 			}
 		}
 		// no changes, so load transients.
 		else {
 			$config = $cache['config'];
-			
+
 		}
 		//adding errors
 		$config['ERRORS'] = $errors;
-	 
+
 		$dirnameChildTheme = get_stylesheet_directory(). '/twig-templates';
 		$dirnameTheme = get_template_directory(). '/twig-templates';
-		
-		
-		
+
+
+
 		Timber::$dirname=array('twig-templates');
-		
+
 		 //setting up timber twig file locations
 		 // it will look in theme first, if it doesn't find it it will look in master
 		$timberLocationsArray = array($dirnameChildTheme,
@@ -268,28 +268,28 @@ $get_config=call_user_func(function() {
 		// adding filter to add twig locations
 		$timberLocationsArray = apply_filters('fg_theme_master_twig_locations', $timberLocationsArray);
 		Timber::$locations=	 $timberLocationsArray;
-		
+
 		return $config;
 	};
 });
 
-$get_slideshow=function () {	
+$get_slideshow=function () {
 	if (function_exists('rwmb_meta')){
 		$meta=rwmb_meta('fgms_slideshow_items');
 		if (!is_array($meta) || (count($meta)===0)) return null;
-		
+
 		$items=array();
 		foreach ($meta as $m) {
-			
+
 			$items[]=array(
 				'caption' => $m['caption'],
 				'url' => $m['full_url'],
 				'alt' => $m['alt'],
 				'title' => $m['title']
 			);
-			
+
 		}
-		
+
 		$filter=function ($str) {	return ($str==='') ? null : $str;	};
 		$id=$filter(rwmb_meta('fgms_slideshow_id'));
 		$outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
@@ -297,7 +297,7 @@ $get_slideshow=function () {
 		$captions=rwmb_meta('fgms_slideshow_hide_captions')!=='1';
 		$indicators=rwmb_meta('fgms_slideshow_hide_indicators')!=='1';
 		$navigation=rwmb_meta('fgms_slideshow_hide_navigation')!=='1';
-		
+
 		return array(
 			'items' => $items,
 			'id' => $id,
@@ -307,9 +307,9 @@ $get_slideshow=function () {
 			'titles' => $captions,
 			'indicators' => $indicators,
 			'controls' => $navigation
-		);		
+		);
 	}
-    
+
 };
 
 if (is_admin()){
@@ -332,28 +332,28 @@ function updateExternalYaml(Array &$config){
 			$file = '';
 			$value = '';
 			while( count($keys) !== 0){
-				if ($keys[0] === $index){					
+				if ($keys[0] === $index){
 					$value = &$ref[$keys[0]];
 					$ref = &$ref[$keys[0]];
-				}					
+				}
 				// transfverse
-				else {						
+				else {
 					$ref = &$ref[$keys[0]];
 				}
 
 				array_shift($keys);
 			}
-			$file = $ref;			
+			$file = $ref;
 
 			$external = '-no info';
-			$external_data = false;		
+			$external_data = false;
 			$external_file = get_stylesheet_directory().'/config/'.$file;
 			if (!file_exists ( $external_file ) ) {
-				$external =  'Error Config file not found ' . $external_file;	
-			}	
+				$external =  'Error Config file not found ' . $external_file;
+			}
 			else {
 				$external_data=@file_get_contents($external_file);
-				
+
 
 				if ($external_data===false) {
 					$external = 'Could not read '.$external_file;
@@ -361,11 +361,11 @@ function updateExternalYaml(Array &$config){
 				else {
 					try {
 						$external_data = Timber::compile_string($external_data, Timber::get_context());
-						$external=\Symfony\Component\Yaml\Yaml::parse($external_data);							
+						$external=\Symfony\Component\Yaml\Yaml::parse($external_data);
 					}
 					catch(\Symfony\Component\Yaml\Exception\ParseException $e){
 						$external = 'ParseException in function.php Line '. __LINE__ . ' '. $e;
-					}							
+					}
 				}
 			}
 			$value = $external;
@@ -374,19 +374,19 @@ function updateExternalYaml(Array &$config){
 	}
 }
 
-function array_find_deep( $array, $search, &$results, $keys=array() ){		
+function array_find_deep( $array, $search, &$results, $keys=array() ){
 	foreach($array as $key => $value) {
 		if (is_array($value)) {
 			$sub = array_find_deep($value, $search, $results, array_merge($keys, array($key) ));
-			if (count($sub)) {							
+			if (count($sub)) {
 					return $sub;
 			}
-		} 
-		elseif ($key === $search) {					
-			$results[] =  array_merge($keys, array($key));					
+		}
+		elseif ($key === $search) {
+			$results[] =  array_merge($keys, array($key));
 			$keys = array();
 		}
-	} 
+	}
 	return array();
 }
 
@@ -394,21 +394,21 @@ function hashDirectory($directory){
     if (! is_dir($directory))
     {
         return false;
-    } 
+    }
     $fileTimes = array();
-    $dir = dir($directory); 
+    $dir = dir($directory);
     while (false !== ($file = $dir->read()))   {
         if ($file != '.' and $file != '..')  {
             if (is_dir($directory . '/' . $file))  {
                 $fileTimes[] = hashDirectory($directory . '/' . $file);
             }
             else  {
-							
+
                 $fileTimes[] =  filemtime($directory . '/' . $file);
             }
         }
-    } 
-    $dir->close(); 
+    }
+    $dir->close();
     return md5(implode('', $fileTimes));
 }
 function get_fg_post_type($post_type='post', $limit=3, $orderby='date') {
@@ -417,6 +417,36 @@ function get_fg_post_type($post_type='post', $limit=3, $orderby='date') {
 					  'orderby' 			=>$orderby
 					  );
 	$posts =  Timber::get_posts($args);
-	return $posts;	
+	return $posts;
+}
+add_filter('piklist_admin_pages', 'piklist_theme_setting_pages');
+function piklist_theme_setting_pages($pages)
+{
+	$pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=slideshow'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'slideshow_settings'
+	 ,'setting' => 'slideshow_settings'
+	 ,'menu_icon' => plugins_url('piklist/parts/img/piklist-icon.png')
+	 ,'page_icon' => plugins_url('piklist/parts/img/piklist-page-icon-32.png')
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
+	$pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=gallery'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'gallery_settings'
+	 ,'setting' => 'gallery_settings'
+	 ,'menu_icon' => plugins_url('piklist/parts/img/piklist-icon.png')
+	 ,'page_icon' => plugins_url('piklist/parts/img/piklist-page-icon-32.png')
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
+  return $pages;
 }
 
+add_image_size( 'piklist', 50, 50, false );
