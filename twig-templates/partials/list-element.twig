@@ -1,0 +1,38 @@
+{% set class_thumb = (class_thumb is null ? 'col-sm-4' : class_thumb) %}
+{% set class_content = (class_content is null ? 'col-sm-8' : class_content) %}
+{% set class_heading = (class_heading is null ? ' h3' : class_heading) %}
+{% set button_title = (button_title is null ? 'More Details' : button_title) %}
+
+<li class="row index-wrapper script-clone-wrapper">
+	{% if image %}
+	<div class="index-image-wrapper  {{class_thumb}}">
+		<div class="index-heading  visible-block-xs hidden-sm hidden-md hidden-lg {{class_heading}}">
+        {% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{title}}</a>{% else %}{{title}}{% endif %}
+    </div>
+    {% if type == 'gallery' %}
+      {% filter shortcodes %}
+      <div class="script-gallery-action">
+        [fgallery class="script-clone-trigger" group="{{group}}" width="100%" thumb="{{image.thumb}}"]<img src="{{image.medium}}" />[/fgallery]
+      </div>
+      {% endfilter %}
+    {% else %}
+      {% if link is defined %}<a href="javascript:void(0);" class="script-clone" >{% endif %}
+  			<img data-image="{{image}}" alt="{{title}}"  />
+  			<noscript><img src="{{image}}" class="img-responsive" style="" alt="{{title}}" /></noscript>
+  		{% if link is defined %}</a>{% endif %}
+    {% endif %}
+	</div>
+	{% endif %}
+	<div class="index-content-wrapper {% if image %}{{class_content}}{% else %}col-sm-12{% endif %}">
+		<div class="index-heading hidden-xs {{class_heading}}">
+      {% if link is defined %}<a href="javascript:void(0)" class="script-clone" >{{title}}</a>{% else %}{{title}}{% endif %}</div>
+
+		<div class="index-excerpt">{{content}}</div>
+    {% if button %}
+		<div class="index-button">
+		    {% if link is defined %}<a href="{{link}}" class="btn btn-primary script-clone-trigger">{{button_title}}</a>{% endif %}
+		</div>
+    {% endif %}
+	</div>
+	<div class="clearfix" style="clear: both"></div>
+</li>

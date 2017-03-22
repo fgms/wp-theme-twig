@@ -1,0 +1,83 @@
+{% macro linkattributes(gallery, image)%}
+	{% set href %}
+		{% if image.youtubeid %}
+			http://www.youtube.com/watch?v={{image.youtubeid}}
+		{%else%}
+			{{image.large}}
+		{%endif%}
+	{% endset %}
+  href="{{href | trim}}" title="{{image.title}}" data-caption="{{image.caption}}"
+	{% if options.feature %}
+		{% if image.youtubeid %}
+				data-youtube="https://www.youtube.com/embed/{{image.youtubeid}}?autoplay=1&rel=0"
+		{% else %}
+				data-image="{{image.medium}}"
+		{% endif %}
+	{% endif %}
+{% endmacro %}
+{% import _self as gmacro %}
+
+{# *** Random *** #}
+{% if options.random %}{%set images = random(images) %}{% else %}{%set images = images %}{%endif%}
+{# *** Limit *** #}
+{% set limit = options.limit|default(500)%}
+{% set gallery_name = options.group | default('gallery__') %}
+{% set images  = images |slice(0,limit) %}
+
+<div class="modular-row modular-home-gallery" >
+	 <div class="modular-anchor"  data-scroll></div>
+	 <div class="" >
+     <div class="section-container">
+				{# ----------- FILTERS -----------#}
+				{% if filter.enable and filters %}
+				<div class="gallery-filters">
+						<button class="btn {% if filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
+						{% for fslug,ftitle in filters %}
+						<button class="btn {% if filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{fslug}}">{{ftitle}}</button>
+						{% endfor %}
+				</div>
+				{% endif %}
+
+				{# ---------- CREATING GALLERY ------- #}
+				<div class="__st_gallery {{class | default('script-grid-gallery')}} gallery-grid-{{options.thumbs_per_row | default('5')}}">
+					{# *** Checking if is feature image ***#}
+					{% if options.feature %}
+					<div  class="__st_gallery_feature_wrapper script-feature ">
+							<div class="__st_gallery_feature_content script-feature-content"  >
+								{% for image in images |slice(0,limit) %}
+				         <div id="{{gallery_name}}{{loop.index}}"class="{% if loop.first %}active{% endif %}"  >
+									<a  {{gmacro.linkattributes(gallery, image)}}
+                      {% if image.title %}title="{{image.title|e('html_attr')}}"{% endif %}
+                      class="script-gallery-action"
+                      data-smoothzoom="{{gallery_name}}" >
+										<img data-image="{{image.thumb}}" data-loaded="false" style="width: 100%;" title="{{image.title|e('html_attr')}}" alt="{{image.alt|default(image.title)|e('html_attr')}}"/>
+									</a>
+								</div>
+								{% endfor %}
+							</div>
+							<div class="__st_gallery_title_caption">
+									{% if image.title %}<div class="__st_gallery_title">{{image.title}}</div>{% endif %}
+									{% if image.caption %}<div class="__st_gallery_caption">{{image.caption}}</div>{% endif %}
+							</div>
+					</div>
+					{% endif %}
+					{# *** Creating Thumbs *** #}
+					{% if images | length > 1 %}
+					<ul  class="__st_gallery_thumb_wrapper" >
+					{# *** Loop through images *** #}
+					{% for image in images  %}
+						{# *** Getting link attributes *** #}
+						<li class="__st_gallery_thumb_item {% if image.youtubeid %}fg-youtube-play{% else %}fg-search{% endif %} {% if loop.first and options.feature %}active{% endif %}  {{image.filters| join(" ")}}"	style="position: relative; display: block; float: left; top: 0; left: 0; padding: 0; margin: 0;">
+							<a data-background="{{image.thumb}}" {% if options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
+								<img  data-image="{{image.thumb}}"
+                      alt="{{image.alt|default(image.title)|e('html_attr')}}"
+                      title="{{image.title|e('html_attr')}}"    />
+              </a>
+						</li>
+					{% endfor %}
+						</ul>
+						{% endif %}
+				</div>
+			</div>
+	 </div>
+</div>

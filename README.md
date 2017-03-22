@@ -25,7 +25,8 @@
 │   │   ├── tabs.php
 │   │   ├── twig.php
 │   │   ├── gallery.php
-│   │   └── link.php
+│   │   ├── link.php
+│   │   └── page-gallery.php
 |   |    
 │   ├── shortcodes.php
 │   └── theme-settings.php
@@ -221,3 +222,14 @@ The **[link]** shortcode accepts the following attribute.
 [link id="2"]contact us[/link] --> <a href="http://example.com/contact-us">contact us</a>
 
 [link href="https://google.com" attr="target=_blank" ]Search Engine[/link]  --> <a href="https://google.com" target="_blank">Search Engine</a>
+
+### [page_gallery]
+
+| Attribute | Description |
+| --------- | ----------- |
+| id        | The post id of the gallery post|
+
+[page_gallery id="344"]
+
+
+

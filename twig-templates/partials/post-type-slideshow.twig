@@ -15,12 +15,14 @@
 
 {% set slideshow = post.get_field('slideshow') %}
 {% set slideshow_options = function('get_option','slideshow_settings') %}
-{# ********* logic to select slideshows requires more elseif if add more options #}
-{% if slideshow %}
-{% elseif function('is_front_page') %}
-    {% set slideshow = slideshow_options.home %}
-{% else %}
-{% endif %}
+{# ********* logic to select slideshows requires more elseif if add more options
+        {% if slideshow %}
+
+        {% elseif function('is_front_page') %}
+            {% set slideshow = slideshow_options.home %}
+        {% else %}
+        {% endif %}
+#}
 
 {# ******* validates logic for fallbacks #}
 
@@ -44,16 +46,16 @@
     {% set slideitems = [] %}
     {% for slide in slides %}
         {% set image = TimberImage(slide['slide-image'] | first) %}
-        {% set link = slide['slide-urlorpageid'] %}
-        {% if slide['slide-urlorpageid'] matches '/(?:\d*\.)?\d+/'  %}
-            {% set link = slide['slide-urlorpageid']  %}
-        {% elseif  slide['slide-urlorpageid'] + 0 > 0 %}
-            {% set link = function('get_permalink',slide['slide-urlorpageid'])  %}
+        {% if slide['radio-external-internal'] | first == 'external'  %}
+            {% set link = slide['external']  %}
+        {% elseif  slide['radio-external-internal'] | first == 'internal' %}
+            {% set link = function('get_permalink',slide['internal'])  %}
         {% endif %}
 
         {% set slideitems = [{
             'link'  : link,
             'title' : image.caption,
+            'alt'   : image.alt,
             'url'   : image.src
         }] | merge(slideitems)%}
     {% endfor %}
@@ -67,7 +69,7 @@
         'interval' : slideshowpost.get_field('slidedelay'),
         'root' : '',
         'outer_class' : 'feature-carousel carousel-fade',
-        'items' : slideitems
+        'items' : slideitems | reverse
 
     }
     %}
