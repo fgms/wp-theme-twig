@@ -1,5 +1,9 @@
-{% if function('function_exists','yoast_breadcrumb')  %}
-    {% set preContainer %}<div id="breadcrumbs" class="B_crumbBox" style="{{style}}">{% endset %}
-    {% set breadcrumbs = function('yoast_breadcrumb',preContainer,'</div>', false) %}
-    {% if breadcrumbs|striptags != 'Home' %}{{breadcrumbs}}{% endif %}    
-{% endif %}  
+<div class="row">
+  <div class="col-sm-12">
+    {% if function('function_exists','yoast_breadcrumb')  %}
+        {% set preContainer %}<div id="breadcrumbs" class="B_crumbBox" style="{{style}}">{% endset %}
+        {% set breadcrumbs = function('yoast_breadcrumb',preContainer,'</div>', false) %}
+        {% if breadcrumbs|striptags != 'Home' %}{{breadcrumbs}}{% endif %}
+    {% endif %}
+  </div>
+</div>

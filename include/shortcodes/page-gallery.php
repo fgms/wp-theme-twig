@@ -6,11 +6,15 @@
 
 		add_shortcode('page_gallery',function ($atts, $content)  {
       $id = empty($atts['id']) ? 0: intval($atts['id']);
-      $random = get_post_meta($id,'randomize', false)[0];
+      $random = false;
+			if (is_array(get_post_meta($id,'randomize', false))){
+				$random = (get_post_meta($id,'randomize', false)[0] == 'yes');
+			}
+			$filter_enable = empty($atts['filters']) ? true : ($atts['filters'] == 'true');
       $images = [];
       $gallery = [
         'filter' =>  [
-          'enable' => true,
+          'enable' => $filter_enable,
         ],
         'filters' => [],
         'options' => [
@@ -39,7 +43,7 @@
                 $filter[] = $slug;
               }
               $images[] = [
-                'thumb' => empty($thumb) ? wp_get_attachment_image_src($item['image'][0])[0] : $thumb,
+                'thumb' => empty($thumb) ? wp_get_attachment_image_src($item['image'][0],'medium')[0] : $thumb,
                 'medium'=> wp_get_attachment_image_src($item['image'][0], 'large')[0],
                 'large' => wp_get_attachment_image_src($item['image'][0], 'full')[0],
                 /*'caption' => (empty($item['caption'])) ? false : $item['caption'],*/
@@ -58,11 +62,11 @@
           } catch (Twig_Error_Loader $e){
             $retr = '<script>console.error("Error Loading twig template '. $t . ' ' .str_replace('"',"'",$e->getMessage()) .'")</script>';
           }
-          /*
+
           $retr .= '<pre>';
           $retr .= print_r($gallery, true);
           $retr .= '</pre>';
-          */
+
         }
       }
 			return $retr ;

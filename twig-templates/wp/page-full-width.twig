@@ -1,21 +1,9 @@
-{% extends 'base.twig' %}	
-{% block content %}	
-<div class="main-content">
-	<div class="container">
-		<div class="inner-container">
-			<div class="row">
-				<div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
-					{% include 'breadcrumbs.twig' ignore missing only %}
-				</div>
-			</div>					
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="column-wrapper">													
-						{% include "article.twig" with { "article" : post, "loop" : loop } %}												
-					</div>
-				</div>						
-			</div>				
-		</div>
-	</div>
-</div>	
+{% extends 'base.twig' %}
+{% block content %}
+{% set content %}{% include "article.twig" with { "article" : post, "loop" : loop } %}{% endset %}
+{% include 'base-page.twig' with {
+	page_class_content : 'col-sm-12',
+	page_content : content
+	}
+%}
 {% endblock %}

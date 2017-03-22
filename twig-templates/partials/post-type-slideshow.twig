@@ -6,7 +6,7 @@
         {% endif %}
     {% else %}
         {% if slideshow['feature-image'] | first | length > 0 %}
-            {% set id = slideshow['feature-image'] | randomize | first %}
+            {% set id = slideshow['feature-image'] |  randomize | first %}
         {% endif %}
     {% endif %}
     {{id}}

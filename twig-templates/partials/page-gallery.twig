@@ -18,7 +18,7 @@
 {% import _self as gmacro %}
 
 {# *** Random *** #}
-{% if options.random %}{%set images = random(images) %}{% else %}{%set images = images %}{%endif%}
+{% if options.random %}{%set images = images | randomize %}{% else %}{%set images = images %}{%endif%}
 {# *** Limit *** #}
 {% set limit = options.limit|default(500)%}
 {% set gallery_name = options.group | default('gallery__') %}

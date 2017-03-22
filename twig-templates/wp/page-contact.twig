@@ -1,40 +1,11 @@
-{% extends 'base.twig' %}	
+{% extends 'base.twig' %}
 {% block content %}
-
-<div class="main-content "  >	
-	<div class="container">
-		<div class="inner-container">
-		<div class="row">
-			<div class="{{config.settings.breadcrumb.grid.class | default('col-sm-12')}}">
-				{% include 'breadcrumbs.twig' ignore missing only %}
-			</div>
-		</div>	
-		<div class="row">				
-		</div>
-
-			<div class="{{config.settings.contact.grid.left.class | default('col-md-8')}}">
-				<div class="column-wrapper">						
-					{% include "article.twig" with { "article" : post, "loop" : loop } %}
-					
-					{% include "bottom-pill-nav.twig" ignore missing %} 
-				</div>
-			</div>
-		
-			<div class="{{config.settings.contact.grid.right.class | default('col-md-4')}}">
-				<div id="sidebar">
-					<div id="sidebar-wrapper">
-						<div class="sidebar nav hidden-xs" >
-							{% if widget_contact_sidebar %}
-							<ul class="widget-section">{{widget_contact_sidebar}}</ul>
-							{% else %}
-								{% include 'widget-contact.twig' with config only %}
-							{% endif %}	
-						</div>
-					</div>                                    
-				</div>                         
-			</div>
-		</div>
-	</div>
-</div>
-
+{% set content %}{% include "article.twig" with { "article" : post, "loop" : loop, "class" : "article-page-default" } only %}{% endset %}
+{% include 'base-page.twig' with {
+	page_class_content : config.settings.page.grid.left.class,
+	page_class_sidebar : config.settings.page.grid.right.class,
+	page_widget_sidebar: widget_contact_sidebar,
+	page_content : content
+	}
+%}
 {% endblock %}
