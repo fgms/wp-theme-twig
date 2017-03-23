@@ -10,8 +10,7 @@
 				<div class="{{page_class_sidebar}}">
 					<div id="sidebar">
 						{% include 'sidebar-default.twig' ignore missing %}
-						{% if page_widget_sidebar %}<ul class="widget-section">{{widget_page_sidebar}}</ul>
-						{% endif %}
+						{% if page_widget_sidebar %}<ul class="widget-section">{{page_widget_sidebar}}</ul>{% endif %}
 					</div>
 				</div>
 				{% endif %}

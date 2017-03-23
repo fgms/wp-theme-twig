@@ -1,0 +1,24 @@
+{% if article.get_thumbnail.src  and nofeature == false  %}
+  {# if there is a feature-image shortcode on page then replace this with shortcode #}
+  {% if function('has_shortcode',article.post_content,'feature-image') == false %}
+    {% set featureImage %}
+    <div class="image-wrapper script-gallery-action" >
+      <a href="{{article.get_thumbnail.src}}" data-smoothzoom="articles" title="{{article.get_thumbnail.caption}}">
+        <img data-image="{{article.get_thumbnail.src|resize(600)}}" alt="{{article.get_thumbnail.caption}}" />
+      </a>
+    </div>
+    {% endset %}
+  {% endif %}
+{% else %}
+  {% set articleClass ="row" %}
+  {% set mainClass = mainClass | default("col-md-8") %}
+  {% set thumbSize = thumbSize | default(300)%}
+  {% set featureImage %}
+    <div class="{{imageClass | default('col-md-4')}}">
+      <a href="{{article.link}}">
+        <img data-image="{{article.get_thumbnail.src|resize(thumbSize)}}" alt="{{article.get_thumbnail.caption}}" style="max-width: 100%" />
+      </a>
+    </div>
+  {% endset %}
+{% endif %}
+{{featureImage}}

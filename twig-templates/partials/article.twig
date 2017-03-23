@@ -1,24 +1,25 @@
 <article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
+  <script type="text/javascript">console.warn('Template article.twig is depreciated, please use article/article-content.twig');</script>
 {% set articleContent = article.content %}
 {% if function('is_single') or function('is_page') %}
-    
+
     {% if article.post_type == 'post' %}
     <div><span class="article-date" itemprop="datePublished">{{article.post_date|date}}</span></div>
     <div class="social-sharing">{% include 'social-sharing.twig' %}</div>
-    
+
     {% endif %}
     <h1 class="article-title " itemscope="name"><div class="pre-title pre-title-post"></div>{% if article.get_field('_fgms_html_title_meta') %}{{article.get_field('_fgms_html_title_meta')}}{% else %}{{ article.title }}{% endif %}</h1>
 {% else %}
     <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
     {% set articleContent %}{% if article.post_excerpt|length > 10 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }} <a class="article-full-story-link"  href="{{article.link}}">Full Story</a>{% endif %}{% endset %}
-    
+
 {% endif %}
 
     <meta itemprop="author" content="{{ article.author }}" />
     {% if article.get_thumbnail.src  and nofeature == false  %}
       {% if function('is_single') %}
         {# if there is a feature-image shortcode on page then replace this with shortcode #}
-        {% if function('has_shortcode',article.post_content,'feature-image') == false %}     
+        {% if function('has_shortcode',article.post_content,'feature-image') == false %}
             {% set featureImage %}
             <div class="image-wrapper script-gallery-action" >
               <a href="{{article.get_thumbnail.src}}" data-smoothzoom="articles" title="{{article.get_thumbnail.caption}}">
@@ -40,7 +41,7 @@
         {% endset %}
       {% endif %}
     {% else %}
-    
+
     {% endif %}
     <div class="{{articleClass | default('row')}}">
       {{featureImage}}
@@ -48,12 +49,12 @@
         <div  itemprop="articleBody" class="article-body">{{articleContent}}</div><!-- articleContent -->
       </div>
     </div>
-    
-    
+
+
     {# post meta data #}
     {% if article.post_type == 'post' %}
-    
-    <div  class="article-footer" > 
+
+    <div  class="article-footer" >
         {% if article.get_author.avatar.abs_url and function('is_single') %}
             <div class="avatar-wrapper">
                 <div class="avatar-image">
@@ -62,28 +63,28 @@
                         {% set avatarimage = TimberImage(article.get_author.fgwp_user_avatar)%}
                     {% endif %}
                     <img src="{{avatarimage}}" alt="{{article.author | default(site.title)}}"/>
-                </div>                
+                </div>
                 <div class="avatar-data">
                     {% if article.get_author.display_name %}<div class="avatar-title">{{article.get_author.display_name}}</div>{% endif %}
                     {% if article.get_author.name %}<div class="avatar-description">{{article.get_author.description}}</div>{% endif %}
                 </div>
             </div>
-            
+
         {% else %}
             <div class="posted-by">Posted by: <span>{{article.author | default(site.title)}}</span></div>
         {% endif %}
-    
-        
-        {% include 'blog-tags-cats.twig' %}       
+
+
+        {% include 'blog-tags-cats.twig' %}
         <meta itemprop="author" content="{{article.author | default(site.title)}}" />
-    </div>            
+    </div>
     {% endif %}
-    
+
     {# comments #}
     {% if loop.length == 1%}
-        {% if article.comments is defined %}            
+        {% if article.comments is defined %}
         {% endif %}
-        
+
         {# using disqus #}
         {% if config.disqus is defined %}
         <section id="comments">
@@ -91,7 +92,7 @@
             <div id="disqus_thread"></div>
             <script type="text/javascript">
               var disqus_shortname = '{{ config.disqus.username }}';
-              var disqus_identifier = '{{ article.id }}';						  
+              var disqus_identifier = '{{ article.id }}';
               /* * * DON'T EDIT BELOW THIS LINE * * */
               (function() {
                 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

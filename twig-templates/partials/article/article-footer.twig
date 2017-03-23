@@ -1,0 +1,42 @@
+<div  class="article-footer" >
+  {% if article.get_author.avatar.abs_url and function('is_single') %}
+  <div class="avatar-wrapper">
+      <div class="avatar-image">
+          {% set avatarimage = article.get_author.avatar.abs_url %}
+          {% if article.get_author.fgwp_user_avatar %}
+              {% set avatarimage = TimberImage(article.get_author.fgwp_user_avatar)%}
+          {% endif %}
+          <img src="{{avatarimage}}" alt="{{article.author | default(site.title)}}"/>
+      </div>
+      <div class="avatar-data">
+          {% if article.get_author.display_name %}<div class="avatar-title">{{article.get_author.display_name}}</div>{% endif %}
+          {% if article.get_author.name %}<div class="avatar-description">{{article.get_author.description}}</div>{% endif %}
+      </div>
+  </div>
+  {% else %}
+  <div class="posted-by">Posted by: <span>{{article.author | default(site.title)}}</span></div>
+  {% endif %}
+  
+  {% include 'blog-tags-cats.twig' %}
+  <meta itemprop="author" content="{{article.author | default(site.title)}}" />
+</div>
+
+{% if article.comments is defined %}{% endif %}
+
+{# using disqus #}
+{% if config.disqus is defined %}
+<section id="comments">
+  <h3 id="commentsTitle">{{config.comments.title| default('Comments')}}</h3>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '{{ config.disqus.username }}';
+    var disqus_identifier = '{{ article.id }}';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+</section><!-- disqusWrapper -->
+{% endif %}

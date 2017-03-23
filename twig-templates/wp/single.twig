@@ -1,10 +1,19 @@
 {% extends 'base.twig' %}
 {% block content %}
-{% set content %}{% include "article.twig" with { "article" : post, "loop" : loop, "class" : "article-page-default" } only %}{% endset %}
+{% set header_article %}{% include 'article/article-header.twig' with { article : post} only %}{% endset %}
+{% set content %}
+	{% include "article/article-content.twig" with {
+		article : post,
+		header : header_article,
+		class : "article-page-default"
+		} only %}
+	{% include "article/article-footer.twig" with { article : post } only %}
+{% endset %}
+{% set sidebar %}{% include 'blog-sidebar.twig' %}{% endset %}
 {% include 'base-page.twig' with {
 	page_class_content : config.settings.article.grid.left.class,
 	page_class_sidebar : config.settings.article.grid.right.class,
-	page_widget_sidebar: widget_blog_sidebar,
+	page_widget_sidebar: sidebar,
 	page_content : content
 	}
 %}

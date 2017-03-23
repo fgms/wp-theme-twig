@@ -1,6 +1,9 @@
 {% extends 'base.twig' %}
 {% block content %}
-{% set content %}{% include "article.twig" with { "article" : post, "loop" : loop, "class" : "article-page-default" } only %}{% endset %}
+{% set content %}{% include "article/article-content.twig" with { 
+	article : post,
+	class : "article-page-default" } only %}
+{% endset %}
 {% include 'base-page.twig' with {
 	page_class_content : config.settings.page.grid.left.class,
 	page_class_sidebar : config.settings.page.grid.right.class,

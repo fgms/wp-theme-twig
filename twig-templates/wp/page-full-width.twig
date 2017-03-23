@@ -1,6 +1,6 @@
 {% extends 'base.twig' %}
 {% block content %}
-{% set content %}{% include "article.twig" with { "article" : post, "loop" : loop } %}{% endset %}
+{% set content %}{% include "article/article-content.twig" with { article : post } %}{% endset %}
 {% include 'base-page.twig' with {
 	page_class_content : 'col-sm-12',
 	page_content : content

@@ -67,11 +67,11 @@
           } catch (Twig_Error_Loader $e){
             $retr = '<script>console.error("Error Loading twig template '. $t . ' ' .str_replace('"',"'",$e->getMessage()) .'")</script>';
           }
-
+/*
           $retr .= '<pre>';
           $retr .= print_r($gallery, true);
           $retr .= '</pre>';
-
+*/
         }
       }
 			return $retr ;
