@@ -49,7 +49,7 @@
               }
               $images[] = [
                 'thumb' => empty($thumb) ? wp_get_attachment_image_src($item['image'][0],'medium')[0] : $thumb,
-                'medium'=> wp_get_attachment_image_src($item['image'][0], 'large')[0],
+                'medium'=> empty($thumb) ? wp_get_attachment_image_src($item['image'][0],'large')[0] : wp_get_attachment_image_src($item['thumb'][0], 'large')[0],
                 'large' => wp_get_attachment_image_src($item['image'][0], 'full')[0],
                 /*'caption' => (empty($item['caption'])) ? false : $item['caption'],*/
                 'title' => get_the_title($item['image'][0]),

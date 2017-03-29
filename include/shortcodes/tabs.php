@@ -20,7 +20,7 @@
 
 			//	Ignore the content: Any content that isn't
 			//	delivered through a [tab] shortcode is ignored
-			do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p>'));
+			do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p><h2><h3><h4><h5>'));
 
 			$c=count($tabs);
 

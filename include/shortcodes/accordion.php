@@ -10,7 +10,7 @@
 		//		id:
 		//		title:
 		//	}
-		
+
 		add_shortcode('accordion',function($atts,$content)  {
 			return do_shortcode('[collapse type="accordion"]' . $content.'[/collapse]');
 		});
@@ -21,7 +21,7 @@
 			do_shortcode($content);
 			$iconup = isset($atts['iconup']) ? $atts['iconup']: ' ';
 			$icondown = isset($atts['icondown']) ? $atts['icondown'] : ' ';
-			$fontfamily = isset($atts['fontfamily']) ? $atts['fontfamily']: 'FontAwesome';			
+			$fontfamily = isset($atts['fontfamily']) ? $atts['fontfamily']: 'FontAwesome';
 			$id='accordion'.(++$aid);
 			$retr.=sprintf(
 				'
@@ -29,7 +29,7 @@
 				#%1$s .collapse-trigger:before {
 					content: "\%2$s";
 					font-family: %4$s;
-					margin-right: 4px;
+					margin-right: 16px;
 					transform: rotate(90deg);
 					-moz-transform:  rotate(90deg);
 					-webkit-transform: rotate(90deg);
@@ -48,7 +48,7 @@
 				#%1$s .collapse-trigger.collapsed:before {
 					content: "\%2$s";
 					font-family: %4$s;
-					margin-right: 4px;
+					margin-right: 16px;
 					transform: rotate(0);
 					-moz-transform:  rotate(0);
 					-webkit-transform: rotate(0);
