@@ -1,12 +1,12 @@
 <article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
-  {% set articleContent = article.content %}
+  {% set articleContent = articleContent == null ? article.content: articleContent %}
   {{header}}
-
-  {% if function('is_single') or function('is_page') %}
-    <h1 class="article-title " itemscope="name">{% if article.get_field('_fgms_html_title_meta') %}{{article.get_field('_fgms_html_title_meta')}}{% else %}{{ article.title }}{% endif %}</h1>
-  {% else %}
-    <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
-    {% set articleContent %}{% if article.post_excerpt|length > 10 %}{{article.post_excerpt}}{% else %}{{article.content| striptags| truncate(35) }} <a class="article-full-story-link"  href="{{article.link}}">Full Story</a>{% endif %}{% endset %}
+  {% if title == false %}
+    {% if function('is_single') or function('is_page') %}
+      <h1 class="article-title " itemscope="name">{% if article.get_field('_fgms_html_title_meta') %}{{article.get_field('_fgms_html_title_meta')}}{% else %}{{ article.title }}{% endif %}</h1>
+    {% else %}
+      <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
+    {% endif %}
   {% endif %}
   
   <meta itemprop="author" content="{{ article.author }}" />
@@ -14,6 +14,7 @@
     {{content_pre}}
     {#{% include 'article/article-feature-image.twig' with article %} #}
     <div class="{{class_main}}">
+      {{title}}
       <div  itemprop="articleBody" class="article-body">{{articleContent}}</div><!-- articleContent -->
     </div>
   </div>

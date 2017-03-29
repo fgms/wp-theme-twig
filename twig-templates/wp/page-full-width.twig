@@ -1,6 +1,19 @@
 {% extends 'base.twig' %}
 {% block content %}
-{% set content %}{% include "article/article-content.twig" with { article : post } %}{% endset %}
+{% set content_pre %}
+{% if post.get_field('intro-text') %}
+	<div {% if hasgallery %}class="has-sidebar"{% endif %}>
+			<div class="intro-text ">{{post.get_field('intro-text')}}</div>
+	</div>
+{% endif %}
+{% endset %}
+
+{% set content %}
+{% include "article/article-content.twig" with {
+	article : post,
+	content_pre : content_pre
+	} %}
+{% endset %}
 {% include 'base-page.twig' with {
 	page_class_content : 'col-sm-12',
 	page_content : content
