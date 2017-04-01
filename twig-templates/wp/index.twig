@@ -12,19 +12,28 @@
 	{% set page_class_sidebar = config.settings.article.grid.right.class %}
 	{% set page_widget_sidebar %}{% include 'blog-sidebar.twig' %}{% endset %}
 	{% set article_object = {
-		class : "article-page-default"
+		class : "article-page-default article-blog"
 	} %}
 {% endif %}
 
 {% set content %}
-<h1 class="archive-title">{{archive_title | default('Blog')}}</h1>
+<h1 >{{archive_title | default('Blog')}}</h1>
 
 <ul id="blog-articles">
 {% for article in posts %}
-	{% set obj = {article : article}|merge(article_object) %}
-	<li>{% include "article/article-content.twig" with obj only %}
+	{% set articleContent %}
+		{% if article.excerpt | length > 0 %}
+			{{ article.excerpt | striptags}}
+		{% elseif article.content | length > 10 %}
+			{{article.content | striptags| truncate(35) }}
+		{% elseif article.get_field('fg-summary') %}		
+			{{article.get_field('fg-summary') | striptags | truncate(35) }}
+		{% endif %}
+		<a class="article-full-story-link"  href="{{article.link}}">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 		{% include "article/article-footer.twig" with { article : article } only %}
-	</li>
+	{% endset %}
+	{% set obj = {article : article, articleContent: articleContent}|merge(article_object) %}
+	<li>{% include "article/article-content.twig" with obj only %}</li>
 {% endfor %}
 </ul>
 {% include 'pagination.twig' %}

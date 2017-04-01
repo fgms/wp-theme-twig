@@ -1,11 +1,20 @@
 {% extends 'base.twig' %}
 {% block content %}
 {% set header_article %}{% include 'article/article-header.twig' with { article : post} only %}{% endset %}
+{% set articleContent %}
+	{% if post.content | length > 10 %}
+	{{post.content}}
+	{% elseif post.get_field('fg-summary') | length > 10 %}
+	{{post.get_field('fg-summary') | raw}}
+	{% endif %}
+	{% include "article/article-footer.twig" with { article : article } only %}
+{% endset %}
 {% set content %}
 	{% include "article/article-content.twig" with {
 		article : post,
+		articleContent : articleContent,
 		header : header_article,
-		class : "article-page-default"
+		class : "article-page-default article-blog"
 		} only %}
 	{% include "article/article-footer.twig" with { article : post } only %}
 {% endset %}
