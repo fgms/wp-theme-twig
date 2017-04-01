@@ -26,11 +26,13 @@ call_user_func(function ($data) {
 		$post = get_post($id);
 		// check if it is a gallery type post
     if ($post->post_type == 'gallery'){
-			$yamlflag = empty(get_post_meta($id,'database-or-yaml')) ? false : (get_post_meta($id,'database-or-yaml')[0] == 'yaml') ;
+			$isempty = get_post_meta($id,'database-or-yaml');
+			$yamlflag = empty($isempty) ? false : (get_post_meta($id,'database-or-yaml')[0] == 'yaml') ;
 
 			// code if it is yaml file.
 			if ($yamlflag){
-				$yaml_name = empty(get_post_meta($id,'yaml-location')) ? false : get_post_meta($id,'yaml-location')[0];
+				$isempty =get_post_meta($id,'yaml-location');
+				$yaml_name = empty($isempty) ? false : get_post_meta($id,'yaml-location')[0];
 				if (($yaml_name !== false) AND (strlen($yaml_name) > 2) ){
 					//setting up items
 					$items = (!empty($data['config']['gallery'][$yaml_name])) ? $data['config']['gallery'][$yaml_name] : [];
