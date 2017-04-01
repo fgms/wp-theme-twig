@@ -1,27 +1,12 @@
 <?php
-
-
 	call_user_func(function () {
-
 		$num=0;
 		$tabs=null;
-		//	Tabs are going to be an object:
-		//
-		//	{
-		//		title:
-		//		id:
-		//		active:
-		//		content:
-		//	}
-
 		add_shortcode('tabs',function ($atts, $content) use (&$tabs, &$num) {
-
 			$tabs=array();
-
 			//	Ignore the content: Any content that isn't
 			//	delivered through a [tab] shortcode is ignored
-			do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p><h2><h3><h4><h5>'));
-
+			$content = do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p><h1><h2><h3><h4><h5><table><thead><tbody><td><th><tr>'));
 			$c=count($tabs);
 
 			//	Preprocess tabs:
@@ -31,16 +16,13 @@
 			//		not set explicitly)
 			$active=0;
 			array_walk($tabs,function ($v, $k) use (&$active, &$num) {
-
 				if (!isset($v->id)) $v->id='t'.++$num;
 				if ($v->active) $active=$k;
-
 			});
 
 			//	Generate tabs
 			$html='<ul class="nav nav-tabs accordion" role="tablist">';
 			array_walk($tabs,function ($v, $k) use ($active, &$html) {
-
 				$html.=sprintf(
 					'<li role="presentation" class="%1$s"><a href="#%2$s" role="tab" data-toggle="tab" aria-controls="%2$s">%3$s</a></li>',
 					$active===$k ? 'active' : '',
@@ -54,9 +36,7 @@
 			//	Generate panes
 			$html.='<div class="tab-content accordion">';
 			array_walk($tabs,function ($v, $k) use ($active, &$html) {
-
 				$html.=sprintf(
-
 					'<div class="tab-accordion-header %1$s"><a href="#%2$s" role="tab">%3$s</a></div><div role="tabpanel" class="tab-pane %1$s" id="%2$s">%4$s</div>',
 					$active===$k ? 'active' : '',
 					htmlspecialchars($v->id),
@@ -66,10 +46,8 @@
 
 			});
 			$html.='</div>';
-
 			//	Clean state for next [tabs]
 			$tabs=null;
-
 			return $html;
 
 		});
@@ -81,10 +59,10 @@
 			if (is_null($tabs)) return '';
 
 			$atts=shortcode_atts(array('title' => '', 'id' => null, 'active' => null),$atts);
-
+			$content = do_shortcode($content);
 			$tabs[]=(object)array(
 				'title' => $atts['title'],
-				'content' => do_shortcode($content),
+				'content' => $content,
 				'id' => $atts['id'],
 				'active' => isset($atts['active']) && ($atts['active']==='true')
 			);
