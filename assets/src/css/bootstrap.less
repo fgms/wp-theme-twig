@@ -41,18 +41,28 @@
 }
 
 
+.nav.nav-tabs.accordion {
+	display: none;
+	visibility: hidden;
+	@media  screen and (min-width: @screen-md-max) {
+		display: block;
+		visibility: visible;
+	}
+}
+
+
 .tab-content.accordion {
 	.tab-accordion-header {
-		.font-size(1.5);
+		font-size : 1.2em;
 		padding: 4px 12px;
 		cursor:pointer;
-		background-color: rgba(255,255,255,0.65);;
-
+		background-color: #f8f8f8;;
+		border: 1px solid #ccc;
 	}
 
 	.tab-pane {
-		border-left: 1px solid rgba(255,255,255,0.65);
-		border-right: 1px solid rgba(255,255,255,0.65);
+		border-left: 1px solid #ccc;
+		border-right: 1px solid #ccc;
 		padding: 12px;
 	}
 
@@ -62,7 +72,7 @@
 		}
 		.tab-pane {
 			border: 0px;
-			padding: 0;
+			padding: 36px 0 0;
 		}
 	}
 }
