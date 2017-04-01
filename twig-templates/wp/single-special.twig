@@ -8,17 +8,17 @@
   {% set hasgallery = sidebar_gallery + 0 > 0  %}
 
     <div {% if hasgallery %}class="has-sidebar"{% endif %}>
-        {% if post.get_field('intro-text') %}<div class="intro-text ">{{post.get_field('intro-text')}}</div>{% endif %}        
+        {% if post.get_field('intro-text') %}<div class="intro-text ">{{post.get_field('intro-text')}}</div>{% endif %}
         <div style="margin: 15px 0;">
           <table class="table table-condensed">
             <tbody>
               <tr>
-                <td style="border-top: 0; width: 30%; padding-left:0;">Booking Window:</td>
-                <td style="border-top: 0;"><strong>{{post.get_field('fg-booking-start-date')}} - {{post.get_field('fg-booking-end-date')}}</strong></td>
+                <td style="border-top: 0; width: 30%; padding:6px 6px 6px 0;">Booking Window:</td>
+                <td style="border-top: 0;padding: 6px;"><strong>{{post.get_field('fg-booking-start-date')}} - {{post.get_field('fg-booking-end-date')}}</strong></td>
               </tr>
               <tr>
-                <td style="border-top: 0;padding-left:0;">Stay Window:</td>
-                <td style="border-top: 0;"><strong>{{post.get_field('fg-start-date')}} - {{post.get_field('fg-end-date')}}</strong></td>
+                <td style="border-top: 0; padding:6px 6px 6px 0;">Stay Window:</td>
+                <td style="border-top: 0;padding: 6px;"><strong>{{post.get_field('fg-start-date')}} - {{post.get_field('fg-end-date')}}</strong></td>
               </tr>
             </tbody>
           </table>
