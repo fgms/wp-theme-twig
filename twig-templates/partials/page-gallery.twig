@@ -11,7 +11,7 @@
 		{% if image.youtubeid %}
 				data-youtube="https://www.youtube.com/embed/{{image.youtubeid}}?autoplay=1&rel=0"
 		{% else %}
-				data-image="{{image.medium}}"
+				data-image="{{image.medium|default(image.large|resize(300))}}"
 		{% endif %}
 	{% endif %}
 {% endmacro %}
@@ -44,14 +44,14 @@
 					{% if options.feature %}
 					<div  class="__st_gallery_feature_wrapper script-feature ">
 							<div class="__st_gallery_feature_content script-feature-content"  >
-								{% for image in images |slice(0,limit) %}
+								{% for image in images |slice(0,limit) %}								
 				         <div id="{{gallery_name}}{{loop.index}}"class="{% if loop.first %}active{% endif %}"  >
 									<a  {{gmacro.linkattributes(gallery, image)}}
                       {% if image.title %}title="{{image.title|e('html_attr')}}"{% endif %}
-											data-background="{{image.medium}}"
+											data-background="{{image.medium|default(image.large|resize(300))}}"
                       class="script-gallery-action"
                       data-smoothzoom="{{gallery_name}}" >
-										<img data-image="{{image.medium}}"
+										<img data-image="{{image.medium|default(image.large|resize(300))}}"
 												 data-loaded="false"
 												 title="{{image.title|e('html_attr')}}"
 												 alt="{{image.alt|default(image.title)|e('html_attr')}}"/>
@@ -74,8 +74,8 @@
 					{% for image in images  %}
 						{# *** Getting link attributes *** #}
 						<li class="__st_gallery_thumb_item {% if image.youtubeid %}fg-youtube-play{% else %}fg-search{% endif %} {% if loop.first and options.feature %}active{% endif %}  {{image.filters| join(" ")}}"	style="">
-							<a data-background="{{image.thumb}}" {% if options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
-								<img  data-image="{{image.thumb}}"
+							<a data-background="{{image.thumb|default(image.large|resize(300))}}" {% if options.feature %}class="script-load-feature" data-rel="{{gallery_name}}{{loop.index}}" {% else %}{{gmacro.linkattributes(gallery, image)}} class="script-gallery-action photo"  data-smoothzoom="{{gallery_name}}" {%endif%}>
+								<img  data-image="{{image.thumb|default(image.large|resize(300))}}"
                       alt="{{image.alt|default(image.title)|e('html_attr')}}"
                       title="{{image.title|e('html_attr')}}"    />
               </a>

@@ -4,21 +4,25 @@
 {% if function('is_category') %}
   {% set active_category = active_flag %}
 {% elseif function('is_tag') %}
-  {% set active_tag = active_flag %}  
-{% elseif function('is_archive') %}
-  {% set active_archive = active_flag %}  
-{% else %}
+  {% set active_tag = active_flag %}
+{% elseif function('is_date')  %}
+  {% set active_archive = active_flag %}
+{% elseif not function('is_post_type_archive', ['media-clip', 'company-announcement','newsletter']) %}
   {% set active_latest = active_flag %}
 {% endif %}
 
 {% set pagefrontid = function('get_option','page_on_front') %}
 {% set blogid = function('get_option','page_for_posts') %}
 <div class="sidebarbox">
-  
+
 
 [accordion]
 [panel title="Home" posturl="{{function('get_permalink',pagefrontid)}}"][/panel]
-[panel title="Blog" posturl="{{function('get_permalink',blogid)}}" ][/panel]
+[panel title="Blog Index" posturl="{{function('get_permalink',blogid)}}" ][/panel]
+{% if function('post_type_exists', 'company-announcement') %}[panel title="Announcements" posturl="{{function('get_post_type_archive_link', 'company-announcement')}}"][/panel]{% endif %}
+{% if function('post_type_exists', 'media-clip') %}[panel title="Media Clippings" posturl="{{function('get_post_type_archive_link', 'media-clip')}}"][/panel]{% endif %}
+{% if function('post_type_exists', 'newsletter') %}[panel title="Newsletters" posturl="{{function('get_post_type_archive_link', 'newsletter')}}"][/panel]{% endif %}
+
 [panel title="Latest Posts" {{active_latest}} ]{% include 'blog-latest.twig' %}[/panel]
 [panel title="By Month" {{active_archive}}]{{ get_archives }}[/panel]
 [panel title="Categories" {{active_category}}]{{get_categories}}[/panel]
@@ -28,8 +32,8 @@
 <div class="tags">
   {% for tag in tags %}
   <a class="btn  btn-tag {% if false %}active{% endif %}" style="margin-right: 4px;" href="{{site.url}}/tag/{{tag.slug}}">{{ tag.name }}</a>
-  
-  {% endfor %} 
+
+  {% endfor %}
 </div>
 
 [/panel]

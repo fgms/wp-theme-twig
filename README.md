@@ -228,8 +228,7 @@ The **[link]** shortcode accepts the following attribute.
 | Attribute | Description |
 | --------- | ----------- |
 | id        | The post id of the gallery post|
+| feature   | This allows feature image or not default is false |
+| filter    | This adds filters default is true |
 
-[page_gallery id="344"]
-
-
-
+[page_gallery id="344" feature="true" filter="false" ]

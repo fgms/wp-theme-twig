@@ -1,4 +1,8 @@
+{% set tags %}{% include 'blog-tags-cats.twig' %}{% endset %}
+{% set tags = tags | trim %}
+{% if tags | length > 4 %}
 <div  class="article-footer" >
+  {#
   {% if article.get_author.avatar.abs_url and function('is_single') %}
   <div class="avatar-wrapper">
       <div class="avatar-image">
@@ -16,10 +20,12 @@
   {% else %}
   <div class="posted-by">Posted by: <span>{{article.author | default(site.title)}}</span></div>
   {% endif %}
-  
-  {% include 'blog-tags-cats.twig' %}
+
   <meta itemprop="author" content="{{article.author | default(site.title)}}" />
+  #}
+{{tags}}
 </div>
+{% endif %}
 
 {% if article.comments is defined %}{% endif %}
 

@@ -1,0 +1,9 @@
+{% set gpost = TimberPost(id) %}
+{% if gpost %}
+  {% set gallery = gpost.get_field('cp_gallery') %}
+  {% set thumb_id =  gallery|first['thumb']|first + 0 %}
+  {% set image_id =  gallery|first['image']|first + 0 %}
+  {% set image_id = thumb_id > 0 ? thumb_id : image_id %}
+  {% set fimg = TimberImage(image_id) %}
+{% endif %}
+<a href="{{link}}"><img style="margin-top: 0;" src="{{fimg.src|resize(400)}}" alt="{{fimg.caption}}" /></a>
