@@ -138,55 +138,6 @@ add_filter('widget_text', function($text) {
 	return $text;
 });
 
-
-
-add_filter('rwmb_meta_boxes','fgms_meta_boxes');
-function fgms_meta_boxes ($bs) {
-	$prefix='fgms_';
-	$bs[]=array(
-		'title' => 'Slideshow',
-		'post_types' => array('post','page'),
-		'fields' => array(
-			array(
-				'id' => $prefix.'slideshow_items',
-				'name' => __('Slides','fgms'),
-				'type' => 'image_advanced'
-			),
-			array(
-				'id' => $prefix.'slideshow_id',
-				'name' => __('Slideshow ID','fgms'),
-				'type' => 'text'
-			),
-			array(
-				'id' => $prefix.'slideshow_outerclass',
-				'name' => __('Slideshow Outer Class','fgms'),
-				'type' => 'text'
-			),
-			array(
-				'id' => $prefix.'slideshow_innerclass',
-				'name' => __('Slideshow Inner Class','fgms'),
-				'type' => 'text'
-			),
-            array(
-                'id' => $prefix.'slideshow_hide_captions',
-                'name' => __('Hide Captions'),
-                'type' => 'checkbox'
-            ),
-            array(
-                'id' => $prefix.'slideshow_hide_navigation',
-                'name' => __('Hide Navigation'),
-                'type' => 'checkbox'
-            ),
-            array(
-                'id' => $prefix.'slideshow_hide_indicators',
-                'name' => __('Hide Indicators'),
-                'type' => 'checkbox'
-            )
-		)
-	);
-	return $bs;
-}
-
 $get_config=call_user_func(function() {
 	return function() use (&$config) {
 		// lets see if we have a cached version
@@ -273,45 +224,6 @@ $get_config=call_user_func(function() {
 	};
 });
 
-$get_slideshow=function () {
-	if (function_exists('rwmb_meta')){
-		$meta=rwmb_meta('fgms_slideshow_items');
-		if (!is_array($meta) || (count($meta)===0)) return null;
-
-		$items=array();
-		foreach ($meta as $m) {
-
-			$items[]=array(
-				'caption' => $m['caption'],
-				'url' => $m['full_url'],
-				'alt' => $m['alt'],
-				'title' => $m['title']
-			);
-
-		}
-
-		$filter=function ($str) {	return ($str==='') ? null : $str;	};
-		$id=$filter(rwmb_meta('fgms_slideshow_id'));
-		$outer_class=$filter(rwmb_meta('fgms_slideshow_outerclass'));
-		$inner_class=$filter(rwmb_meta('fgms_slideshow_innerclass'));
-		$captions=rwmb_meta('fgms_slideshow_hide_captions')!=='1';
-		$indicators=rwmb_meta('fgms_slideshow_hide_indicators')!=='1';
-		$navigation=rwmb_meta('fgms_slideshow_hide_navigation')!=='1';
-
-		return array(
-			'items' => $items,
-			'id' => $id,
-			'outer_class' => $outer_class,
-			'inner_class' => $inner_class,
-			'captions' => $captions,
-			'titles' => $captions,
-			'indicators' => $indicators,
-			'controls' => $navigation
-		);
-	}
-
-};
-
 if (is_admin()){
 	require_once(__DIR__.'/include/theme-settings.php');
 	require_once(__DIR__.'/include/html-title-metadata.php');
@@ -319,8 +231,6 @@ if (is_admin()){
 else {
 	require_once(__DIR__.'/include/shortcodes.php');
 }
-
-
 
 function updateExternalYaml(Array &$config){
 	$results = array();
@@ -450,3 +360,7 @@ function piklist_theme_setting_pages($pages)
 }
 
 add_image_size( 'piklist', 50, 50, false );
+
+function get_timber_menu($menu='main'){
+	return new TimberMenu($menu);
+}
