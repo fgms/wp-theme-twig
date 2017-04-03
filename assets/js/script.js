@@ -159,7 +159,6 @@ jQuery(function($) {
 
 
   if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){
-    console.log('smoothzoom');
 	$('.script-gallery-action img').smoothZoom({
 	  navigationRight: '<i class=\"fa fa-angle-right\"></i>',
 	  navigationLeft: '<i class=\"fa fa-angle-left\"></i>',
@@ -289,8 +288,12 @@ jQuery(function($) {
 
 
   if ($('.multi-item-carousel').length > 0){
+    var interval = ($('.multi-item-carousel').attr('data-interval') !==  undefined) ? $('.multi-item-carousel').attr('data-interval') : 8000;
+    if (interval === 'false'){
+      interval = false;
+    }
     $('.multi-item-carousel').carousel({
-      interval: 8000
+      interval: interval
     });
 
    // for every slide in carousel, copy the next slide's item in the slide.
@@ -402,7 +405,6 @@ jQuery(function($) {
   });
 
   $('.script-clone').on('click',function(){
-    console.log($(this).closest('.script-clone-wrapper').find('.script-clone-trigger'));
     $(this).closest('.script-clone-wrapper').find('.script-clone-trigger')[0].click();
   });
 
@@ -532,8 +534,6 @@ function updateParallax($obj, minheight){
 					  $obj.data('imageUrl',image_url);
 					  var backgroundPos = parseInt($obj.css('background-position-y'),10);
 					  var checkImageFit = this.naturalHeight + backgroundPos;
-					  //console.log('first --self', $self.outerHeight(),'img ',this.naturalHeight, 'bckpos ',backgroundPos, 'check', checkImageFit );
-
 				  });
 				  image.src = image_url;
 			  }

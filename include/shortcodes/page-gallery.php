@@ -52,7 +52,9 @@ call_user_func(function ($data) {
 					$large= wp_get_attachment_image_src($item['id'],'large')[0];
 					$full= wp_get_attachment_image_src($item['id'],'full')[0];
 					if (!empty($item['thumb_id'])){
-							$medium_override = (get_post_meta($id,'gallery_type')[0] != 'media-kit') ?wp_get_attachment_image_src($item['thumb_id'], 'full')[0] : $large;
+							$isempty = get_post_meta($id,'gallery_type');
+							$type = $isempty ?  get_post_meta($id,'gallery_type')[0] : '';
+							$medium_override = ($type != 'media-kit') ?wp_get_attachment_image_src($item['thumb_id'], 'full')[0] : $large;
 					}
 					$youtube=(empty($item['youtubeid'])) ? false : $item['youtubeid'];;
 					$title=get_the_title($item['id']);
@@ -98,7 +100,9 @@ call_user_func(function ($data) {
         ];
       }
 			$template = 'page-gallery.twig';
-			if (get_post_meta($id,'gallery_type')[0] == 'media-kit'){
+			$isempty = get_post_meta($id,'gallery_type');
+			$type = $isempty ?  get_post_meta($id,'gallery_type')[0] :'';
+			if ($type == 'media-kit'){
 				$template = 'media-kit-gallery.twig';
 			}
 

@@ -3,22 +3,22 @@
  * 1. Top - has classes .script-fixed-header-with-scroll .nav-in-hero .show
  *
  * 2. Scroll Down in hero - has classes .script-fixed-header-with-scroll .navbar-static-top
- * 
+ *
  * 3. Scroll Down out of hero - has classes .script-fixed-header-with-scroll .navbar-static-top
  *
  * 4. Scroll Up not in hero - has classes .script-fixed-header-with-scroll  .show
  *
  * 5. Scroll Up in hero - has classes .script-fixed-header-with-scroll  .show .nav-in-hero
- * 
+ *
  **/
 
 
 /****** DO NOT EDIT BELOW THIS LINE ******/
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header, .navbar-collapse.collapse {
-	position: relative;	
+	position: relative;
 	@media screen and (min-width: @screen-md-max){
-		.flex-center-xy();		
-	}	
+		.flex-center-xy();
+	}
 }
 .nav-right {
 	@media screen and (min-width: @screen-md-max){
@@ -26,7 +26,7 @@
 			-webkit-justify-content: flex-end;
 			justify-content: flex-end
 		}
-	}	
+	}
 }
 
 .search-header {
@@ -34,7 +34,7 @@
 	margin: 0;
 	button {
 		line-height: 14px;
-		
+
 		border: 1px solid #fff;
 		padding: 6px 8px;
 		.radius(4px) ;
@@ -46,7 +46,7 @@
 	}
 	input {
 		padding: 3px;
-		position: relative;	
+		position: relative;
 		line-height: 1.8em;
 		border: 1px solid #fff;
 		font-weight: 300;
@@ -59,32 +59,32 @@
 		input {
 			.transition(0.4s);
 			width: 0 !important;
-			padding: 4px 0;					
+			padding: 4px 0;
 		}
 	}
-	.searchbox-open  {		
+	.searchbox-open  {
 		button {
-			margin-left : 0px !important;				
+			margin-left : 0px !important;
 			.radius(0 4px 4px 0) ;
 		}
 		input {
-			.transition(0.7s);			
-			width: 200px !important;			
-		}		
+			.transition(0.7s);
+			width: 200px !important;
+		}
 	}
 }
 
-.navbar-toggle .icon-bar {	
+.navbar-toggle .icon-bar {
 	width: 30px;
 	height: 4px;
 	cursor: pointer;
 }
 
 .navbar {
-	
+
 	.radius(0);
 	font-weight: 500;
-	z-index: 888;		
+	z-index: 888;
 	height: auto;
 	margin-bottom: 0;
 	.navbar-brand {
@@ -92,54 +92,54 @@
 		position: relative;
 		padding: 0;
 		font-size: 0.9em;
-		text-align: center;		
+		text-align: center;
 		img {
-			width: auto;			
-			text-align: center;			
+			width: auto;
+			text-align: center;
 		}
 	}
-	
+
 	.navbar-toggle {
 		float: none;
 		line-height: 1em;
 		position: relative;
 		text-transform: uppercase;
 		top: 2px;
-		font-size: 1em;		
+		font-size: 1em;
 	}
 	.nav {
 		// position center
 		position: relative;
-		left: 0;		
-		>li{	
+		left: 0;
+		>li{
 			ul {
-				.box-shadow();				
+				.box-shadow();
 				> li {	}
 			}
 		}
 	}
 	// fixed header with scroll css
-	
+
 	&.script-fixed-header-with-scroll{
 		position: absolute;
 		top: 0;
 		width: 100%;
 		.opacity(0.98);
-		
-		&:hover { .opacity(1);}						
-		&.navbar-static-top {				
-			top: -5em;				
-		}		
-		&.show {			
-			.navbar-brand {				
+
+		&:hover { .opacity(1);}
+		&.navbar-static-top {
+			top: -5em;
+		}
+		&.show {
+			.navbar-brand {
 				img {
-					overflow: hidden;										
+					overflow: hidden;
 				}
 			}
 			top: 0;
-			position: fixed;					
-		}		
-	}		
+			position: fixed;
+		}
+	}
 }
 
 /** navigation **/
@@ -148,23 +148,23 @@
 	text-align: center;
 	margin: 24px auto;
 	background: #f8f8ff8;
-	
+
 }
 
 /** FOOTER NAVIGATION **/
 .horizontal-nav {
 	padding: 0;
 	margin: 0;
-	list-style: none;	
+	list-style: none;
 }
 
 /** MODULAR NAVIGATION **/
-.modular{ 
-    .modular-next-nav {        
-        position: absolute;                  
+.modular{
+    .modular-next-nav {
+        position: absolute;
         width: 100%;
         bottom: 0;
-        height: 48px;        
+        height: 48px;
         z-index: 2;
         text-decoration: none !important;
         text-align: center;
@@ -175,23 +175,23 @@
             font-family: FontAwesome;
             .transition(0.1s);
             &:before {
-                text-decoration: none !important;           
-                
+                text-decoration: none !important;
+
             }
             &:hover, &:visited &:active, &:focus{
                 text-decoration: none;
                 .transition-opacity(0.8s);
-                .opacity(0.9);               
+                .opacity(0.9);
                 .transition(0.2s);
-                top: 4px;                
+                top: 4px;
             }
         }
 		&.nav-inverse{
-			
+
 		}
 		&.nav-btn-circle {
 			a:before {
-				
+
 				.radius(14px);
 				display: inline-block;
 				width:27px;
@@ -200,23 +200,23 @@
 				padding-top: 2px;
 				position: relative;
 			}
-			
+
 		}
     }
-    .modular-start-nav {		
-         a {			
+    .modular-start-nav {
+         a {
             font-family: FontAwesome;
             text-decoration: none;
             &:before {
-                            
+
             }
-            &:hover, &:visited {text-decoration: none;  }   
-        }       
+            &:hover, &:visited {text-decoration: none;  }
+        }
     }
 }
 
 
-.dropdown-menu {		
+.dropdown-menu {
 	&.mega-menu-nav {
 		ul {
 			padding: 8px 20px;
@@ -224,11 +224,11 @@
 		a {
 			padding: 4px 0;
 		}
-		
+
 	}
 	@media screen and (min-width: @screen-md-max){
 		&.mega-menu-nav {
-			
+
 			padding: 0;
 			//display: block !important;
 			width: 800px;
@@ -243,7 +243,7 @@
 				width: 60%;
 				height: 100%;
 			}
-			
+
 			&.flipped {
 				ul {
 					float: right;
@@ -252,9 +252,9 @@
 					float: right;
 				}
 			}
-		
+
 		}
-		
+
 	}
 }
 
@@ -277,8 +277,7 @@
 				border: 1px dotted #ccc;
 			}
 		}
-		
-	}	
+	}
 	.pagination-next {
 		float: left;
 	}
@@ -287,5 +286,56 @@
 		clear: both;
 		margin: 0;
 		display: table;
+	}
+}
+
+.animiated-control-arrow {
+	span {
+		display: block;
+		position: absolute;
+		width: 20px;
+		height: 40px;
+		top: 50%;
+		.transition(0.3s);
+		.transform(translateY(-50%));
+		&:before, &:after {
+			display: block;
+			position: absolute;
+			width: 28px;
+			top: 20px;
+			.transition(0.3s);
+			.radius(0 10px 10px 0);
+			content: '';
+			background-color: rgba(35,167,176,1);
+		}
+		&:before {
+
+		}
+
+		&:after {
+
+		}
+	}
+	&.control-arrow-prev {
+		span {
+			left: 24px;
+			&:before {
+				.transform(rotate(-45deg));
+
+			}
+			&:after {
+
+			}
+		}
+	}
+	&.control-arrow-next {
+		span {
+			&:before {
+
+			}
+			&:after {
+
+			}
+		}
 	}
 }

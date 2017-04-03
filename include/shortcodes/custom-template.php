@@ -5,7 +5,7 @@
 			$config = array_merge(Timber::get_context(),$config);
 			$data=array();
 			//	Content is ignored
-		  $atts['content'] = do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p>'));
+		  $atts['content'] = do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p><h1><blockquote><h2><h3>'));
 			$retr = '<script>console.error("[custom-template] shortcode Template was not defined");</script>';
 			if (isset($atts['template'])) {
 				$t=$atts['template'];
