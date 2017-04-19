@@ -8,7 +8,5 @@
 	require_once(__DIR__.'/shortcodes/ajax.php');
 	require_once(__DIR__.'/shortcodes/twig.php');
 	require_once(__DIR__.'/shortcodes/feature-image.php');
-	require_once(__DIR__.'/shortcodes/gallery.php');
 	require_once(__DIR__.'/shortcodes/link.php');
-	require_once(__DIR__.'/shortcodes/page-gallery.php');
 ?>

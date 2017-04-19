@@ -11,14 +11,14 @@
 
 	$data['latest_news'] = get_fg_latest_posts();
 
-	if ( is_singular() ) :		
-		$data['post'] = new TimberPost();       
+	if ( is_singular() ) :
+		$data['post'] = new TimberPost();
 
-	else : 
+	else :
 		$data['posts'] = Timber::get_posts();
-		
+
 	endif;
-	
+
 	$data['config']=$get_config();
     $data['menu'] = new TimberMenu('main-menu');
 	if ( is_single() ) :
@@ -33,7 +33,7 @@
         if ($returnValue){
             $template = 'page-' . $matches[1];
         }
-		$data['slideshow']=$get_slideshow();
+		$data['slideshow']=null;
 
 	elseif ( is_home() ) :
 		$template = 'index';
@@ -42,15 +42,15 @@
 		$data['archive_title'] = '<div class="pre-title pre-title-category"></div>'. get_cat_name( get_query_var('cat') );
 		$data['archive_description'] = term_description();
 		$template = 'archive';
-	
+
 	elseif ( is_tag() ) :
 		$data['archive_title'] = '<div class="pre-title pre-title-tag"></div>'. get_cat_name( get_query_var('tag_id') );
 		$data['archive_description'] = term_description();
 		$template = 'archive';
 
 	elseif ( is_author() ) :
-		$data['archive_title'] = get_the_author();		
-		$template = 'archive';	
+		$data['archive_title'] = get_the_author();
+		$template = 'archive';
 
 	elseif (is_archive() ) :
 
@@ -108,7 +108,7 @@
 
 		if (get_option('theme_twig_cache_performance', 'true') == 'true'){
 			//echo '<script type="text/javascript">console.log("Cache Type:' . get_option('theme_twig_cache','CACHE_NONE') .'","Time:' . TimberHelper::stop_timer($start) . '");</script>';
-		}		
+		}
 	}
 
 	function get_blog_sidebar(&$data){

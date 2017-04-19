@@ -142,11 +142,8 @@ $get_config=call_user_func(function() {
 	return function() use (&$config) {
 		// lets see if we have a cached version
 		if (!is_null($config)){
-
 			return $config;
 		}
-
-
 		$cache = array('config_ts'=> get_transient('fg_config_timestamp'),
 					   'config'=>get_transient('fg_config')
 				);
@@ -208,7 +205,8 @@ $get_config=call_user_func(function() {
 								 $dirnameChildTheme.'/email',
 								 $dirnameChildTheme.'/form');
 		// only merge if seperate;
-		if ( $dirnameChildTheme !== $dirnameTheme ) {
+		if (( $dirnameChildTheme !== $dirnameTheme ) ){
+
 			$timberLocationsArray = array_merge($timberLocationsArray, array(	$dirnameTheme,
 																				$dirnameTheme.'/wp',
 																				$dirnameTheme.'/partials',
@@ -219,7 +217,7 @@ $get_config=call_user_func(function() {
 		// adding filter to add twig locations
 		$timberLocationsArray = apply_filters('fg_theme_master_twig_locations', $timberLocationsArray);
 		Timber::$locations=	 $timberLocationsArray;
-
+		$config = apply_filters('fg_theme_master_config', $config);
 		return $config;
 	};
 });
