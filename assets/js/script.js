@@ -331,7 +331,9 @@ jQuery(function($) {
   			$(this).attr('style','');
   		})
   		$(tabSelector).addClass('active in');
-  		check_for_refresh(tabSelector);
+      if (typeof  check_for_refresh === 'function'){
+        check_for_refresh(tabSelector);
+      }
 
   	})
 

@@ -8,14 +8,14 @@
       <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
     {% endif %}
   {% endif %}
-  
+
   <meta itemprop="author" content="{{ article.author }}" />
   <div class="{{class_container}}" style="position:relative;" >
     {{content_pre}}
     {#{% include 'article/article-feature-image.twig' with article %} #}
     <div class="{{class_main}}">
       {{title}}
-      <div  itemprop="articleBody" class="article-body">{{articleContent}}</div><!-- articleContent -->
+      <div  itemprop="articleBody" class="article-body">{% filter shortcodes %}{{articleContent}}{% endfilter %}</div><!-- articleContent -->
     </div>
   </div>
   {{content_post}}

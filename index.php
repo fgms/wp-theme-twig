@@ -23,7 +23,6 @@
     $data['menu'] = new TimberMenu('main-menu');
 	if ( is_single() ) :
 		$template = 'single';
-		$data['slideshow']=$get_slideshow();
 
 	elseif ( is_page() ) :
         $matches = null;
