@@ -31,9 +31,9 @@
 				{# ----------- FILTERS -----------#}
 				{% if gallery.filter.enable and gallery.filters %}
 				<div class="gallery-filters">
-						<button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
+						<button class="btn btn-default btn-sm" data-filter="*">All</button>
 						{% for f in gallery.filters %}
-						<button class="btn {% if gallery.filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{f.slug}}">{{f.title}}</button>
+						<button class="btn btn-default btn-sm" data-filter=".{{f.slug}}">{{f.title}}</button>
 						{% endfor %}
 				</div>
 				{% endif %}

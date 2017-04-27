@@ -1,4 +1,5 @@
 {# base.twig #}
+{% spaceless %}
 <!DOCTYPE html>
 <html {{site.language_attributes()}}>
     <head>
@@ -15,7 +16,7 @@
     <body class="{{body_class}}" data-class="{{function('get_body_class')|join(' ')}}">
 	{% if config.slideshow.location is not defined or config.slideshow.location ==  'beforenav' %}
 		{% if function('post_type_exists','slideshow')%}
-			{% include 'post-type-slideshow.twig' %}	
+			{% include 'post-type-slideshow.twig' %}
 		{% else %}
 			{% include 'custom-slideshow.twig' ignore missing  %}
 		{% endif %}
@@ -24,19 +25,19 @@
 	{% include 'navigation.twig' %}
 	{% if config.slideshow.location is defined and config.slideshow.location ==  'afternav' %}
 		{% if function('post_type_exists','slideshow')%}
-			{% include 'post-type-slideshow.twig' %}	
+			{% include 'post-type-slideshow.twig' %}
 		{% else %}
 			{% include 'custom-slideshow.twig' ignore missing  %}
 		{% endif %}
 	{% endif %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
 	{% block footer%}
-		
-	{% endblock %}	
+
+	{% endblock %}
 	{% include "footer.twig" %}
 	<!-- Modal -->
 	{% include 'modals.twig' ignore missing %}
-	
+
 	{% block scripts %}
 		<script type="text/javascript">
 			{# debug scripts #}
@@ -46,9 +47,10 @@
 				{% endfor %}
 			{% endif %}
 		</script>
-	
-	{% endblock %}	
+
+	{% endblock %}
 	{{wp_footer}}
-	
+
     </body>
 </html>
+{% endspaceless %}
