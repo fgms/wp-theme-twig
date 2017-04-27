@@ -11,7 +11,7 @@
 	text-align: center;
 	margin: 24px 0 36px;
 	.btn {
-		min-width: 190px;
+		min-width: 130px;
 	}
 }
 
@@ -290,6 +290,42 @@ article {
 					.transition(1s);
 				}
 			}
+		}
+	}
+}
+
+.media-kit-image-wrapper {
+
+	a {
+		position: relative;
+		display: inline-block;
+		.transition(0.25s);
+		.transform-scale(0.98, 0.98);
+		img {
+
+
+		}
+		&:after {
+			content: '\f08e';
+			font-family: FontAwesome;
+			position: absolute;
+			color: #fff;
+			text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+			font-size: 32px;
+			right:10px;
+			top:12px;
+			height: 100%;
+			.opacity(0.4);
+			.transition(0.2s);
+		}
+
+		&:hover {
+			&:after {
+				.opacity(1);
+				.transition(.5s);
+			}
+			.transition(0.25s);
+			.transform-scale(1, 1);
 		}
 	}
 }

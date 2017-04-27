@@ -313,29 +313,27 @@ jQuery(function($) {
 
   }
 
-
   	/* Nav tabs */
-  	$('.nav-tabs.accordion a[role="tab"]').click(function(e){
+  	$('.nav-tabs.accordion a[role="tab"]' ).on('click',function(e){
   		e.preventDefault();
-
   		var navtabs = $(this).closest('.nav-tabs.accordion');
   		$(navtabs).children('li').each(function(){
   			$(this).removeClass('active');
-
   		})
   		$(this).parent('li').addClass('active');
   		var tabSelector = $(this).attr('href');
 
   		$(navtabs).next('.tab-content.accordion').find('>.tab-pane').each(function(){
-  			$(this).removeClass('active in');
+  			$(this).removeClass('active in').fadeOut();
   			$(this).attr('style','');
   		})
   		$(tabSelector).addClass('active in');
       if (typeof  check_for_refresh === 'function'){
         check_for_refresh(tabSelector);
       }
-
   	})
+
+
 
   	/* Tab Accordions in responsive */
   	$('.tab-accordion-header a[role="tab"]').click(function(e){
@@ -355,7 +353,7 @@ jQuery(function($) {
   			var eachTabSelector = $(this).attr('href');
   			if (eachTabSelector == tabSelector){
   			   $(eachTabSelector).slideDown('300',function(){
-  			   		$(eachTabSelector).addClass('active in');
+  			   		$(eachTabSelector).addClass('active');
   					$(navtabs).find('[href="' + tabSelector + '"]').parent('li').addClass('active');
   					//check_for_refresh(tabSelector);
   			   });
@@ -435,6 +433,26 @@ jQuery(function($) {
      });
   }
 
+  if ( $('.page-sidebar-with-sidebar-gallery').length > 0) {
+    (function($){
+      var b_top = $('.page-with-sidebar-gallery').offset().top;
+      var b_height =  $('.page-with-sidebar-gallery').outerHeight();
+      var b_bottom  = (b_top+ b_height);
+      var g_top = $('.page-sidebar-with-sidebar-gallery').offset().top;
+      var g_height = $('.page-sidebar-with-sidebar-gallery').outerHeight();
+      var g_bottom = (g_height+ g_top);
+      var diff = g_bottom - b_bottom;
+      //console.log('b',b_top,b_height, b_bottom)
+      //console.log('g',g_top,g_height, g_bottom)
+
+      // this means that gallery is overflowing.
+      if ( diff > 0 ){
+        var style = "<style>@media screen and (min-width: 993px){.page-with-sidebar-gallery {padding-bottom:"+(diff * 0.5)+"px;}}</style>";
+        $('.article-body').append(style);
+      }
+    })(jQuery);
+
+  }
 
 
 });

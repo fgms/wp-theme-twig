@@ -1,10 +1,46 @@
 @article-border-bottom: 1px dotted solid #ccc;
+.newsletter-pdf {
+  li {
+    overflow: hidden;
+    position:relative;
+    width: 30% ;
+    margin: 12px 1%;
+    float: left;
+    height: 200px;
+    .box-shadow();
+    a {
+      display: block;
+      background-repeat: no-repeat;
+      background-size: cover;
+      .transition(0.25);
 
+
+      img {
+        heigh: 0px;
+        width: 0px;
+        visibility: hidden;
+
+      }
+    }
+    &:hover {
+      a {
+        .transition(0.25);
+        .transform-scale(1.05,1.05);
+      }
+    }
+  }
+  &:after {
+    display: table;
+    clear: both;
+    margin: 0;
+    content: ' ' ;
+  }
+}
 #blog-articles, .media-kit, .news-feed, .soundbites{
     padding: 0;
     margin: 0 0 24px;
     list-style: none;
-	li {
+	>li {
 		margin-bottom: 30px;
 		padding-bottom: 30px;
 		border-bottom: 1px dotted #ccc;

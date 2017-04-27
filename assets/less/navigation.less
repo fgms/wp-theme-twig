@@ -289,52 +289,102 @@
 	}
 }
 
-.animiated-control-arrow {
-	span {
-		display: block;
+
+
+.animated-control-wrapper{
+
+	.animiated-control-arrow {
 		position: absolute;
-		width: 20px;
-		height: 40px;
-		top: 50%;
-		.transition(0.3s);
-		.transform(translateY(-50%));
-		&:before, &:after {
+		top: 0;
+		width: 100px;
+		height: 100%;
+		span {
 			display: block;
 			position: absolute;
-			width: 28px;
-			top: 20px;
+			width: 32px;
+			height: 40px;
+			top: 50%;
 			.transition(0.3s);
-			.radius(0 10px 10px 0);
-			content: '';
-			background-color: rgba(35,167,176,1);
+			.transform(translateY(-50%));
+			&:before, &:after {
+				display: block;
+				position: absolute;
+				width: 30px;
+				top: 20px;
+				height: 5px;
+				.transition(0.3s);
+				.radius(0 10px 10px 0);
+				.box-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+				content: ' ';
+				background-color: #fff;
+
+			}
+			&:hover {
+				.transform(translateY(-50%) scaleY(.85));
+				&:before , &:after {
+					.box-shadow(none);
+				}
+			}
 		}
-		&:before {
+		&.control-arrow-prev {
+			left: 0;
+			span {
+				left: 0;
+				content: ' ';
+				&:before {
+					.transform(rotate(-45deg));
+					.transform-origin(0 110%);
+					.radius(10px 10px 10px 0);
 
+
+				}
+				&:after {
+					.transform(rotate(45deg));
+					.transform-origin(0 -10%);
+					.radius(0 10px 10px 10px);
+
+				}
+			}
 		}
-
-		&:after {
-
+		&.control-arrow-next {
+			right: 0;
+			span {
+				right: 0;
+				&:before {
+					.transform(rotate(45deg));
+					.transform-origin(100% 110%);
+					.radius(10px 10px 0 10px );
+				}
+				&:after {
+					.transform(rotate(-45deg));
+					.transform-origin(100% -10%);
+					.radius(10px 0 10px 10px );
+				}
+			}
 		}
 	}
-	&.control-arrow-prev {
-		span {
-			left: 24px;
-			&:before {
-				.transform(rotate(-45deg));
+	&.animated-carousel-wrapper {
+		.animiated-control-arrow {
+			span {
+				width: 45px;
 
+				&:before, &:after {
+					width: 45px;
+					height: 8px;
+					background-color: #fff !important;
+					.opacity(0.85);
+				}
+				&:hover {
+					&:before, &:after {
+						.opacity(1);
+					}
+				}
 			}
-			&:after {
-
+			&.control-arrow-prev {
+				left: 60px;
 			}
-		}
-	}
-	&.control-arrow-next {
-		span {
-			&:before {
-
-			}
-			&:after {
-
+			&.control-arrow-next {
+				right: 60px;
 			}
 		}
 	}

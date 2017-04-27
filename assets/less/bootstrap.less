@@ -3,12 +3,10 @@
 		margin: 0;
 	}
 }
-
 .panel-group {
 	.collapse-panel-body   {
 		margin-left: 28px;
 		padding-bottom: 12px;
-
 	}
 	.panel {
 		.radius(4px);
@@ -16,16 +14,13 @@
 }
 .panel-default>.panel-heading {
 	padding: 10px 15px;
-
 }
+
 .panel-default>.panel-heading+.panel-collapse>.panel-body {
 	border-top: 0;
 }
 
-
-.panel-default>.panel-heading { }
 .panel-default>.panel-heading h4 {	padding: 0;	}
-.panel-default {}
 .panel-body {
 	ul {
 		padding: 0 0 0 12px;
@@ -40,7 +35,6 @@
 	}
 }
 
-
 .nav.nav-tabs.accordion {
 	display: none;
 	visibility: hidden;
@@ -49,8 +43,7 @@
 		visibility: visible;
 	}
 }
-
-
+/* this is for tab switch to accordion in responsive. */
 .tab-content.accordion {
 	.tab-accordion-header {
 		font-size : 1.2em;
@@ -64,6 +57,9 @@
 		border-left: 1px solid #ccc;
 		border-right: 1px solid #ccc;
 		padding: 12px;
+		&:last-of-type {
+			border-bottom: 1px solid #ccc;
+		}
 	}
 
 	@media  screen and (min-width: @screen-md-max) {
@@ -99,15 +95,14 @@
 	}
 	.modal-header {
 		h4 {
-            margin:0;
-            padding:0;
-        }
+	    margin:0;
+	    padding:0;
+    }
 	}
 	.modal-body {
 		padding: 0 24px 24px;
 		max-height: 600px;
 		overflow-y: scroll;
-
 	}
 	.modal-footer {
 		a:hover {text-decoration: none;}
@@ -124,9 +119,6 @@
 		max-width: none !important;;
 	}
 }
-
-
-
 
 @media (max-width: 992px) {
     .navbar-header { float: none;  }
@@ -164,9 +156,7 @@ ul.nav-tabs{
 		padding-left: 0;
 		text-transform: uppercase;
 		&.active {
-			> a {
-
-			}
+			> a {	}
 		}
 		> a {
 			.radius(4px 4px 0 0);
@@ -179,7 +169,7 @@ ul.nav-tabs{
 	}
 }
 .btn {
-	margin-bottom: 4px;
+	margin: 4px;
 }
 .fa-li {
 	top: 0.35em;
