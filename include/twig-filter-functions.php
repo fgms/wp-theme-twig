@@ -1,7 +1,6 @@
 <?php
-  
 add_filter('timber/twig', function($twig){
-    $twig->addFilter(new \Twig_SimpleFilter('randomize',function($original, $offset = 0){        
+    $twig->addFilter(new \Twig_SimpleFilter('randomize',function($original, $offset = 0){
         if (!is_array($original)) {
             return $original;
         }
@@ -19,9 +18,9 @@ add_filter('timber/twig', function($twig){
                 $sorted[] = array_shift($random);
             }
         }
-        return $sorted;        
+        return $sorted;
     }));
-    
+
     $twig->addFilter(new \Twig_SimpleFilter('sort_by_key',function(array $input, $filter, $direction = SORT_ASC){
         $output = array();
         if (!$input) {
@@ -31,21 +30,20 @@ add_filter('timber/twig', function($twig){
             $output[$key] = $row[$filter];
         }
         array_multisort($output, $direction, $input);
-        return $input;        
+        return $input;
     }));
-    
+
     $twig->addFilter(new \Twig_SimpleFilter('ksort',function($array){
         if (is_null($array)) {
             $array = array();
         }
         ksort($array);
-        return $array;       
+        return $array;
     }));
-    
+
     $twig->addFilter(new \Twig_SimpleFilter('regex_replace',function($subject, $pattern, $replace, $limit = -1){
         return preg_replace($pattern, $replace, $subject, $limit);
-    }));        
-    return $twig;   
-}); 
-
+    }));
+    return $twig;
+});
 ?>

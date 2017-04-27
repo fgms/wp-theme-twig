@@ -53,7 +53,7 @@ add_action( 'wp_enqueue_scripts', function(){
 
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() .'/assets/css/bootstrap.min.css' );
 	wp_enqueue_style('fontawesome',get_template_directory_uri() .'/assets/css/font-awesome.min.css');
-	if (is_plugin_active('wp-less/bootstrap.php')){
+	if (is_plugin_active('wp-less/bootstrap.php') ){
 		wp_enqueue_style('master-style-less',get_template_directory_uri() .'/assets/less/style.less');
 	}
 	else {

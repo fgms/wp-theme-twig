@@ -37,8 +37,8 @@
 			$html.='<div class="tab-content accordion">';
 			array_walk($tabs,function ($v, $k) use ($active, &$html) {
 				$html.=sprintf(
-					'<div class="tab-accordion-header %1$s"><a href="#%2$s" role="tab">%3$s</a></div><div role="tabpanel" class="tab-pane %1$s" id="%2$s">%4$s</div>',
-					$active===$k ? 'active' : '',
+					'<div class="tab-accordion-header %1$s"><a href="#%2$s" role="tab">%3$s</a></div><div role="tabpanel" class="tab-pane fade %1$s" id="%2$s">%4$s</div>',
+					$active===$k ? 'active in' : '',
 					htmlspecialchars($v->id),
 					htmlspecialchars($v->title),
 					$v->content
