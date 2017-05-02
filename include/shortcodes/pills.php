@@ -35,7 +35,7 @@
 			$html.='</ul>';
 
 			//	Generate panes
-			$html.='<div class="tab-content accordion">';
+			$html.='<div class="tab-content ">';
 			array_walk($pills,function ($v, $k) use ($active, &$html) {
 				$html.=sprintf(
 					'<div role="tabpanel" class="tab-pane %1$s" id="%2$s">%3$s</div>',
