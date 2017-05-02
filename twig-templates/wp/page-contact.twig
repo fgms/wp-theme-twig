@@ -4,7 +4,57 @@
 	article : post,
 	class : "article-page-default" } only %}
 {% endset %}
-{% set contact_sidebar %}{% include 'contact-sidebar.twig' %}{% endset %}
+{% set contact_sidebar %}
+<div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization">
+    <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="Mission Inn Resort" />
+    <div class="address table-responsive" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
+            <tbody >
+                {% if config.company.name is defined %}
+                <tr>
+                    <td colspan="2" style="border-top: none;" itemprop="company"><span style="font-weight: 400">{{config.company.name}}</span></td>
+                </tr>
+                {% endif %}
+                {% if config.phone.toll is defined %}
+                <tr>
+                        <td style="width: 30%">Toll-free</td>
+                        <td itemprop="telephone"><a href="tel:{{config.phone.toll}}">{{config.phone.toll}}</a></td>
+                </tr>
+                {% endif %}
+                {% if config.phone.office is defined %}
+                <tr>
+                        <td>Telephone</td>
+                        <td itemprop="telephone"><a href="tel:{{config.phone.office}}">{{config.phone.office}}</a></td>
+                </tr>
+                {% endif %}
+                {% if config.phone.fax is defined %}
+                <tr>
+                        <td>Fax</td>
+                        <td itemprop="telephone">{{config.phone.fax}}</td>
+                </tr>
+                {% endif %}
+                {% if email.info is defined %}
+                <tr>
+                        <td>E.</td>
+                        <td itemprop="email">{% filter shortcodes %}[email label="Send Email"]{{config.email.info}}[/email]{% endfilter %}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td colspan="2" style="font-size: 0.85em;">
+                        <div itemprop="streetAddress">{{config.company.address.street}}</div>
+                        <div>
+                            <span itemprop="addressLocality">{{config.company.address.city}}</span>
+                            <span itemprop="addressRegion">{{config.company.address.province}}</span>
+                        </div>
+                        <div temprop="addressCountry">{{config.company.address.country}}</div>
+                        <div itemprop="postalCode">{{config.company.address.postal}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endset %}
 {% include 'base-page.twig' with {
 	page_class_content : config.settings.page.grid.left.class,
 	page_class_sidebar : config.settings.page.grid.right.class,

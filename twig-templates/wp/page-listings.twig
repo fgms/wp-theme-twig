@@ -10,15 +10,17 @@
 <ul id="blog-articles" class="page-index-articles">
 {% for article in post.children %}
 {# **************** setting up variables #}
-	{% set title %}<a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title hidden-sm hidden-xs" itemscope="name">{{article.title}}</h2></a>{% endset %}
+	{% set title %}<a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title  hidden-xs" itemscope="name">{{article.title}}</h2></a>{% endset %}
 	{% set sidebar_gallery = article.get_field('sidebar-gallery') %}
 	{% set hasgallery = sidebar_gallery + 0 > 0  %}
 {# **************** if has gallery then lets get first image to use in index. #}
 	{% if hasgallery %}
 		{% set content_pre %}
-		<div class="col-md-3 col-md-push-9">
-			<a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title hidden-md hidden-lg" itemscope="name">{{article.title}}</h2></a>
-			{% include 'get-feature-from-gallery.twig' with { id: sidebar_gallery, link : article.link } only %}
+		<div class="col-md-3 col-md-push-9 col-sm-4 col-sm-push-8">
+			<a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title hidden-sm hidden-md hidden-lg" itemscope="name">{{article.title}}</h2></a>
+			<div style="margin: 0 0 15px; max-width:300px;">
+				{% include 'get-feature-from-gallery.twig' with { id: sidebar_gallery, link : article.link } only %}
+			</div>
 		</div>
 		{% endset %}
 	{% endif %}
@@ -36,7 +38,7 @@
 	articleContent : articleContent,
   class : "article-page-default",
   class_container: "row",
-  class_main: hasgallery ? "col-md-9 col-md-pull-3" : 'col-md-12',
+  class_main: hasgallery ? "col-md-9 col-md-pull-3 col-sm-8 col-sm-pull-4" : 'col-md-12',
   content_pre : content_pre
   } %}
 

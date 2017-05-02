@@ -32,7 +32,7 @@
 	{% endif %}
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
 	{% block footer%}
-
+    {% include function('get_post_type')~'-footer.twig' ignore missing %}{# this adds custom footer if defined, ie page-footer.twig #}
 	{% endblock %}
 	{% include "footer.twig" %}
 	<!-- Modal -->
