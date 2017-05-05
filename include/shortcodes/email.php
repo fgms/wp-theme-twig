@@ -5,7 +5,7 @@
 			$content = do_shortcode($content);
 			$returnValue = preg_match('/(\\w+)@(\\w+)\\.(\\w{2,5})/', $content, $match);
 			if (($returnValue) && count($match === 4) ) {
-				$label = isset($atts['label']) ? $atts['label'] : $match[0]; 
+				$label = isset($atts['label']) ? $atts['label'] : ''; 
 				return '<a href="" data-prefix="' . $match[1] .'" data-domain="'. $match[2] .'.'.$match[3] .'">' . $label .'</a>';
 			}
             return 'Email was invalid -- '. $content;
