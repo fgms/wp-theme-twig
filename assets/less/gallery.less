@@ -6,6 +6,60 @@
 @gallery-grid-social-color: #fff;
 @gallery-grid-social-color-hover: #fff;
 
+/** Temp ccss **/
+body:not(.home){
+    #homepage-slideshow {
+        height: 300px;
+        overflow: hidden;
+    }
+}
+
+
+#homepage-slideshow {
+  overflow: hidden;
+  backgroud-color: #fff;
+  *[data-background] { height: 400px;	}
+  @media screen and (min-width: @screen-md-max){
+	   *[data-background] { height: 700px;	}
+   }
+
+}
+
+.single-feature-image {
+	height: 250px;
+	position: relative;
+	text-align: center;
+	.background(none, transparent, center center, cover, no-repeat, scroll );
+	@media screen and (min-width: @screen-md-max){
+		height: 400px;
+	}
+}
+
+.single-feature-image-caption {
+	font-size: 1.1em;
+	line-height: 1.1em;
+	color: #fff;
+	top: 40%;
+	-webkit-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	position: absolute;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 12px;
+	text-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+	@media screen and (min-width: @screen-lg-max){
+		font-size: 1.6em;
+	}
+	@media screen and (min-width: @screen-lg-max){
+		font-size: 2.2em;
+		padding: 12px 300px;
+
+	}
+}
+
+
+
 
 .gallery-filters {
 	text-align: center;

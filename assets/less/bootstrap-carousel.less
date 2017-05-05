@@ -5,9 +5,10 @@
 }
 
 .carousel {
+	.carousel-inner { height: 100% ;}
 	.opacity(0);
 	min-height: 300px;
-	img {		
+	img {
 		width: 100%;
 		margin: 0 !important ;
 	}
@@ -19,25 +20,25 @@
 		.carousel-caption-title {
 			font-size: 1.4em;
 			text-transform: uppercase;
-			
+
 		}
 		.carousel-caption-caption {
 			font-size: 0.9em;
 			font-style: italic;
 		}
 	}
-	.carousel-indicators {		
-		li {			
+	.carousel-indicators {
+		li {
 			height: 14px;
 			width: 14px;
-		
-				
+
+
 		}
 		display: none;
 		visibility: hidden;
 
 	}
-		
+
 	.glyphicon {
 		font-family: none;
 		font-size: 4em;
@@ -48,42 +49,43 @@
 			.transition(0.6s);
 			&:before {
 
-				
+
 			}
 		}
-					
+
 	}
 	.glyphicon-chevron-left{
-		
+
 		&:before{
 			content: '\f104';
 			font-family: FontAwesome;
-			
-		}		
+
+		}
 	}
 	.glyphicon-chevron-right{
 		&:before{
 			content: '\f105';
 			font-family: FontAwesome;
-			
-		}	
-	}	
+
+		}
+	}
 	@media screen and (min-width: @screen-lg-max){
 		.carousel-indicators {
 			display: block;
 			visibility: visible;
 		}
 	}
-	
+
 }
 
 .carousel-fade {
     .carousel-inner {
         .item {
             transition-property: opacity;
-			-webkit-transition-property: opacity;			
+						-webkit-transition-property: opacity;
+						height: 100%;
         }
-        
+
         .item,
         .active.left,
         .active.right {
@@ -102,14 +104,14 @@
         .active.right {
             left: 0;
             transform: translate3d(0, 0, 0);
-			-webkit-transform: translate3d(0, 0, 0);
+						-webkit-transform: translate3d(0, 0, 0);
 
         }
     }
     .carousel-control {
         z-index: 2;
     }
-	
+
 }
 
 
@@ -157,11 +159,11 @@
 		right: 0;
 		text-align: right;
 	}
-  }  
+  }
 }
 
-article .carousel {	
+article .carousel {
 	margin-left: auto;
-	margin-right: auto;	
-	
+	margin-right: auto;
+
 }

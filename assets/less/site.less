@@ -19,6 +19,8 @@ ol {
 		padding-left: 15px;
 	}
 }
+
+
 ul{
     list-style: none;
     margin:0;
@@ -89,6 +91,22 @@ ul{
 			padding-bottom: 30px;
 		}
 	}
+	
+	&.custom-bullets, &.custombullets, &.customBullets, &custom, &.custom-bullet, &.customBullet {
+    padding: 12px 0 18px;
+    list-style: none;
+    margin-left: 50px;
+    li {
+        &:before {
+          content: '\f105';
+          font-family: fontawesome;
+          position: absolute;
+          left: 24px;
+        }
+        margin-bottom: 12px;
+    }
+
+  }
 	@media screen and (min-width: @screen-md-max){
 		.index-image-wrapper {
 			margin-right: @base-margin;
