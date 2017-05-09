@@ -12,9 +12,7 @@ if (window.innerWidth <= 480)  { sizePostfix = 'xxs'; }
 
 jQuery(function($) {
  /*** Email cloaking ***/
- fgms.init({
-   debug: true
- });
+
 
  $('*[data-random="true"]').each(function(){
    randomizeChildren($(this));
@@ -541,7 +539,10 @@ var fgms = (function($){
    }
  }
  var defaults = {
-   debug : false
+   debug : false,
+   specials : {
+     enable : true
+   }
  }
  var options = {};
  return {
@@ -557,13 +558,13 @@ var fgms = (function($){
 
    },
    add_special: function(specials){
-     if (options.debug === true){
-       set_cookie('cookie_modal','', 1);
+     if (options.specials.enable === true ){
+       if (options.debug === true){
+         set_cookie('cookie_modal','', 1);
+       }
+       var item = [Math.floor(Math.random()*specials.length)];
+       get_cookie_modal(specials[item]);
      }
-     var item = [Math.floor(Math.random()*specials.length)];
-     get_cookie_modal(specials[item]);
-
-
    }
  }
 })(jQuery);
