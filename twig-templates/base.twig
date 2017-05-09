@@ -37,7 +37,7 @@
 	{% include "footer.twig" %}
 	<!-- Modal -->
 	{% include 'modals.twig' ignore missing %}
-
+	{{wp_footer}}
 	{% block scripts %}
 		<script type="text/javascript">
 			{# debug scripts #}
@@ -47,10 +47,7 @@
 				{% endfor %}
 			{% endif %}
 		</script>
-
 	{% endblock %}
-	{{wp_footer}}
-
-    </body>
+  </body>
 </html>
 {% endspaceless %}

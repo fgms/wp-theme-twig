@@ -2,3 +2,7 @@
 {% block content %}
   {% for article in posts %}{{article.content}}{% endfor %}
 {% endblock %}
+{% block scripts %}
+  {{parent()}}
+  {% include 'specials-modal-script.twig' ignore missing %}
+{% endblock %}
