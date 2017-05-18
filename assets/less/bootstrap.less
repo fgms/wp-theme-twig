@@ -19,6 +19,7 @@
 		.radius(4px);
 	}
 }
+
 .panel-default>.panel-heading {
 	padding: 10px 15px;
 }
@@ -82,9 +83,7 @@
 
 /*** MODAL DARK THEME ***/
 .modal-dialog {
-	.modal-title {
-		margin-bottom: 24px;
-	}
+	.modal-title { margin-bottom: 24px;}
 	.modal-content {
 		.radius(0);
 		font-size: 0.9em;
@@ -120,10 +119,11 @@
 	.glyphicon-chevron-left:before{
 		content: "\f104";
 	}
-	@media screen and (max-width: @screen-md-max) {
+	@media screen and (min-width: @screen-md-max) {
 		.modal-body {padding: 0 8px 4px;}
-		.modal-fotter { padding: 0 4px 4px;}
+		.modal-footer { padding: 0 4px 4px;}
 		max-width: none !important;;
+		margin: 110px auto;
 	}
 }
 

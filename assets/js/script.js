@@ -417,6 +417,7 @@ function getImageSize($img) {
 // this will remove items from global namespace by adding an init function
 var fgms = (function($){
  function set_emailCloak(){
+   trace.push({function: 'set_emailCloak', arguments : arguments});
    $('.mailto, a[data-domain]').each(function() {
      $(this).attr('href', 'mailto:' + $(this).attr('data-prefix') + '@' + $(this).attr('data-domain'));
      if ($(this).text().length < 2) {
@@ -425,6 +426,7 @@ var fgms = (function($){
    });
  }
  function set_galleries(){
+   trace.push({function: 'set_galleries', arguments : arguments});
    if (($('.script-grid-gallery').length > 0) && $().isotope ) {
      var $element = $('.script-grid-gallery');
      imagesLoaded($element.find('img'), function(e,msg){
@@ -478,6 +480,7 @@ var fgms = (function($){
    }
  }
  function get_hash(){
+   trace.push({function: 'get_hash', arguments : arguments});
    var hash = window.location.hash;
    if ((hash.length>1) && ($('a[href="' + hash + '"]').length > 0)) {
      (hash && $('a[href="' + hash + '"]').tab('show'));
@@ -487,12 +490,14 @@ var fgms = (function($){
    }
  }
  function set_cookie(cname, cvalue, exdays){
+   trace.push({function: 'set_cookie', arguments : arguments});
    var d = new Date();
    d.setTime(d.getTime() + (exdays*24*60*60*1000));
    var expires = "expires="+ d.toUTCString();
    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
  }
  function get_cookie(cname){
+   trace.push({function: 'get_cookie', arguments : arguments });
    var name = cname + "=";
    var decodedCookie = decodeURIComponent(document.cookie);
    var ca = decodedCookie.split(';');
@@ -507,27 +512,43 @@ var fgms = (function($){
    }
    return "";
  }
-
  function get_cookie_modal(obj) {
+   trace.push({function: 'get_cookie_modal', arguments : arguments});
    var modal;
    if ((get_cookie('cookie_modal') !== 'set') && ( $('#cookie_model').length === 0 ) ){
-     modal = '<div class="modal fade" id="cookie_modal" role="dialog">';
+     modal = '<div class="modal fade '+ (typeof(options.specials.class) === 'undefined' ? '': options.specials.class)  +'" id="cookie_modal" role="dialog">';
      modal += '<div class="modal-dialog" ><div class="modal-content" style="background-image: url('+ obj.img +');background-position: center; background-size: cover;background-attachment:scroll;">';
-     modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button></div>';
-     modal += '<div class="modal-body" style="background-color: rgba(255,255,255,0.8);"><h3>'+obj.title+'</h3>';
+     modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle "></i></button></div>';
+     modal += '<div class="modal-body" style="padding:0;" ><div class="modal-content-background" style="padding: 15px; margin: 24px; background-color: rgba(255,255,255,0.9);"><h3>'+obj.title+'</h3>';
      if ((obj.subtitle !== undefined ) && (obj.subtitle.length > 3)){
-       modal += '<div style="padding-bottom: 15px;"><strong>'+obj.subtitle+'</strong></div>';
+       modal += '<div class="modal-subtitle" style="padding-bottom: 15px;"><strong>'+obj.subtitle+'</strong></div>';
      }
-     modal += obj.content + '</div>'
+     modal += '<div class="modal-content-data">' +obj.content + '</div></div></div>'
      modal += '</div></div></div>';
      $('body').append(modal);
 
+
      $(window).scroll(function(){
-       if ( (get_cookie('cookie_modal') !== 'set') && ($(window).scrollTop() > 250) ){
+       if ( (get_cookie('cookie_modal') !== 'set') && ($(window).scrollTop() > (options.specials.scrolltop || 250) ) ){
          $('#cookie_modal').modal();
          set_cookie('cookie_modal','set', 1);
        }
      });
+
+   }
+
+   var embedid = '#'+ get_value(options, 'specials.embed.id','fgms-specials-embed');
+   if ( ( get_value(options,'specials.embed.enable') ) && ($(embedid).length > 0) && (get_value(options,'specials.data').length > 0 )){
+    var embed = '<ul style="margin: 0 0 12px;padding:0;list-style:none;">';
+    $.each(get_value(options,'specials.data'), function(i,v){
+      embed += '<li>';
+      embed += '<h4 style="margin-top:0;padding-bottom: 8px;">'+ v.title+'</h4>';
+      embed += '<div class="embed-specials-subtitle" style="font-weight:bold;">' +v.subtitle + '</div>';
+      embed += '<div class="embed-specials-content">' + v.content + '</div>';
+      embed += '</li>';
+    });
+    embed += '</ul>'
+    $(embedid).html(embed);
 
    }
    $('body').append('<style>body.modal-open>*:not(.modal){-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);}</style>')
@@ -538,33 +559,91 @@ var fgms = (function($){
      console[type](msg);
    }
  }
+
+ function get_value(obj,_string,_default){
+   if (typeof(obj) !== 'object') return _default || false
+   var parts = _string.split('.');
+   var newObj = obj[parts[0]];
+   if(parts[1]){
+       parts.splice(0,1);
+       var newString = parts.join('.');
+       return get_value(newObj,newString,_default);
+   }
+   return newObj || _default || false;
+ }
+
+
+ function get_init(opts){
+  trace.push({function: 'get_init', arguments : arguments});
+  opts = opts || {};
+  if ((typeof(options.debug) === 'undefined') || !$.isEmptyObject(opts)){   options = $.extend(defaults, opts);  }
+ }
  var defaults = {
    debug : false,
    specials : {
-     enable : true
+     enable : true,
+     scrolltop : 250,
+     class : 'fgms-specials-modal',
+     embed : {
+       enable: true,
+       id : 'fgms-specials-embed'
+     },
+     data : []
+
    }
  }
  var options = {};
+ var trace = [];
  return {
    init: function(opts){
-     options = $.extend(defaults, opts);
-     set_emailCloak();
-     set_galleries();
-     get_hash();
+     get_init(opts);
      if (options.debug === true ){
        log('error','Fgms System is in Debug mode.')
      }
      log ('warn',[1,'overflow of gallery logic needs tweaking']);
-
+     return this;
    },
-   add_special: function(specials){
-     if (options.specials.enable === true ){
+   setup: function(){
+     set_emailCloak();
+     set_galleries();
+     get_hash();
+     return this;
+   },
+
+   get_specials: function(specials){
+     trace.push({function: 'get_specials', arguments : arguments});
+     get_init();
+     options.specials.data = specials;
+     if (options.specials.enable === true){
+        trace.push('Specials are enabled');
        if (options.debug === true){
          set_cookie('cookie_modal','', 1);
        }
        var item = [Math.floor(Math.random()*specials.length)];
        get_cookie_modal(specials[item]);
      }
+     else {
+       trace.push('Specials are disable');
+     }
+     return this;
+   },
+   dump: function() {
+     console.log('******** OPTIONS ************');
+     console.log(options);
+     console.log('******** TRACE ************');
+     $.each(trace, function(index,value){
+      // console.log(typeof(value), value);
+       if (typeof(value) === 'string'){
+         console.log(value);
+       }
+       else if ( typeof(this.function) !== 'undefined' ) {
+         console.log(this.function, this.arguments);
+       }
+       else {
+         console.log(value);
+       }
+     });
+     return this;
    }
  }
 })(jQuery);
