@@ -6,6 +6,7 @@
       <h1 class="article-title " itemscope="name">{% if article.get_field('_fgms_html_title_meta') %}{{article.get_field('_fgms_html_title_meta')}}{% else %}{{ article.title }}{% endif %}</h1>
     {% else %}
       <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
+      {% include 'article/article-header.twig'  %}
     {% endif %}
   {% endif %}
 
