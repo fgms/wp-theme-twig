@@ -5,13 +5,15 @@
     <head>
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="shortcut icon" type="image/x-icon" href="{{theme.link}}/assets/images/favicon.ico">
-        {{wp_head}}
-        {% block head %}
-            <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
-        {% endblock %}
+
+    {{wp_head}}
+    {% block head %}
+        <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
+    {% endblock %}
 		{% block styles %}
 			{% if config.css is defined %}{% include 'style.twig' ignore missing with config  %}{% endif %}
 		{% endblock %}
+    {% include 'base-header.twig' ignore missing %}
     </head>
     <body class="{{body_class}}" data-class="{{function('get_body_class')|join(' ')}}">
 	{% if config.slideshow.location is not defined or config.slideshow.location ==  'beforenav' %}
@@ -48,6 +50,7 @@
 			{% endif %}
 		</script>
 	{% endblock %}
+  {% include 'base-footer.twig' ignore missing %}
   </body>
 </html>
 {% endspaceless %}
