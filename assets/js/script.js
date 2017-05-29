@@ -167,12 +167,17 @@ jQuery(function($) {
  $(window).on('resize', function(){
    if ($('.script-grid-gallery').length > 0) {
      var $element = $('.script-grid-gallery');
-     if ($element.find('.script-feature-content a').length > 0){
-       var height_feature = $element.find('.script-feature-content a').outerWidth() * 0.66 +'px';
-       $element.find('.script-feature-content a').css({height: height_feature});
-       $element.find('.__st_gallery_feature_content').css({height: height_feature });
-     }
-     $element.find('li').css({height: ($element.find('li').outerWidth() * 0.66) +'px'});
+     $element.each(function(){
+       if ($(this).attr('data-loaded') === 'true' ){
+         if ($(this).find('.script-feature-content a').length > 0){
+           var height_feature = $(this).find('.script-feature-content a').outerWidth() * 0.66 +'px';
+           $(this).find('.script-feature-content a').css({height: height_feature});
+           $(this).find('.__st_gallery_feature_content').css({height: height_feature });
+         }
+         $(this).find('li').css({height: ($(this).find('li').outerWidth() * 0.66) +'px'});
+
+       }
+     })
    }
  });
 
@@ -245,6 +250,7 @@ jQuery(function($) {
      }
 
    });
+
    $('.script-parallax').each(function() {
      if (updateParallax($(this))) {}
 
@@ -402,28 +408,36 @@ var fgms = (function($){
  }
  function set_galleries(){
    trace.push({function: 'set_galleries', arguments : arguments});
-   var $grid;
-   if (($('.script-grid-gallery').length > 0) && $().isotope ) {
-     var $element = $('.script-grid-gallery');
-     imagesLoaded($element.find('img'), function(e,msg){
-       $element.each(function(){
-         if ($(this).find('.script-feature-content a').length > 0){
-           var height_feature = $(this).find('.script-feature-content a').outerWidth() * 0.66 +'px';
-           $(this).find('.script-feature-content a').css({height: height_feature});
-           $(this).find('.__st_gallery_feature_content').css({height: height_feature });
-         }
-         $(this).find('li').css({height: ($(this).find('li').outerWidth() * 0.66) +'px'});
-         $grid = $(this).find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
-         $grid.isotope('layout');
+
+    if (($('.script-grid-gallery').length > 0) && $().isotope ) {
+      var $element = $('.script-grid-gallery');
+      $element.each(function(){
+        var $self = $(this);
+        imagesLoaded($self.find('img'), function(e,msg, $this){
+
+          var $container = $self.closest('.modular-home-gallery');
+          if ($self.find('.script-feature-content a').length > 0){
+           var height_feature =$self.find('.script-feature-content a').outerWidth() * 0.66 +'px';
+           $self.find('.script-feature-content a').css({height: height_feature});
+           $self.find('.__st_gallery_feature_content').css({height: height_feature });
+          }
+
+          var $grid = $self.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
+          $this.closest('li').css({height: ($this.closest('li').outerWidth() * 0.66) +'px'});
+          $grid.isotope('layout');
+          $self.attr('data-loaded', 'true');
+          $container.find('.gallery-filters').on('click','button',function(){
+             var filterValue = $(this).data('filter');
+             $grid.isotope({filter: filterValue}) ;
+             $('.gallery-filters button').removeClass('active');
+             $(this).addClass('active');
+          });
        })
-       $('.gallery-filters').on('click','button',function(){
-           var filterValue = $(this).data('filter');
-           $grid.isotope({filter: filterValue}) ;
-           $('.gallery-filters button').removeClass('active');
-           $(this).addClass('active');
-       });
-       $('body').find('*[data-filter="*"]').trigger('click');
+
+
+
      });
+     $('body').find('*[data-filter="*"]').trigger('click');
    }
    if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){
      $('.script-gallery-action img').smoothZoom({
@@ -646,7 +660,7 @@ function imagesLoaded($, fn) {
    if (e.type === 'error') {
        msg.push('Error Loading.. ' + e.target.src);
    }
-   if (c === 0) { fn(e,msg); }
+   if (c === 0) { fn(e,msg,$); }
  }
 }
 
