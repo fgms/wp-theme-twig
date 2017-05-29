@@ -5,11 +5,12 @@
     {% if function('is_single') or function('is_page') %}
       <h1 class="article-title " itemscope="name">{% if article.get_field('_fgms_html_title_meta') %}{{article.get_field('_fgms_html_title_meta')}}{% else %}{{ article.title }}{% endif %}</h1>
     {% else %}
-      <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url"><h2 class="article-title" itemscope="name">{{article.title}}</h2></a>
-      {% include 'article/article-header.twig'  %}
+      {% if no_link != true %}<a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url">{% endif %}
+        <h2 class="article-title" itemscope="name">{{article.title}}</h2>
+      {% if no_link != true %}</a>{% endif %}
+      <div><span class="article-date" itemprop="datePublished">{% if post_date %}{{post_date}}{% else %}{{article.post_date|date}}{% endif %}</span></div>
     {% endif %}
   {% endif %}
-
   <meta itemprop="author" content="{{ article.author }}" />
   <div class="{{class_container}}" style="position:relative;" >
     {{content_pre}}

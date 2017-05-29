@@ -334,31 +334,6 @@ jQuery(function($) {
    });
 
 
- /* script-parallax
- *  Adds parallaxing background
- *  data-offset="0" data-ratio="2.5"
- */
- /*
- $('.script-parallax').each(function(){
-   var offset = parseInt($(this).data('offset'));
-   var backgroundX  = '50%';
-   if ($(this).hasClass('background-image-pull-right')) {
-     backgroundX = 'right';
-   }
-   if ($(this).hasClass('background-image-pull-left')) {
-     backgroundX = 'left';
-   }
-   $(this).css({
-     'background-transparent' : 'transparent',
-     'background-position' : backgroundX+ ' ' + offset	+'px',
-     'background-size': '100% auto'
-   });
- });
-*/
-
-
- // this animates to hash
-
 
  $('header ul li:first-child').each(function (i, e) {
  e=$(e);
@@ -427,6 +402,7 @@ var fgms = (function($){
  }
  function set_galleries(){
    trace.push({function: 'set_galleries', arguments : arguments});
+   var $grid;
    if (($('.script-grid-gallery').length > 0) && $().isotope ) {
      var $element = $('.script-grid-gallery');
      imagesLoaded($element.find('img'), function(e,msg){
@@ -437,7 +413,7 @@ var fgms = (function($){
            $(this).find('.__st_gallery_feature_content').css({height: height_feature });
          }
          $(this).find('li').css({height: ($(this).find('li').outerWidth() * 0.66) +'px'});
-         var $grid = $(this).find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
+         $grid = $(this).find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
          $grid.isotope('layout');
        })
        $('.gallery-filters').on('click','button',function(){
@@ -479,6 +455,7 @@ var fgms = (function($){
      }
    }
  }
+  // this animates to hash
  function get_hash(){
    trace.push({function: 'get_hash', arguments : arguments});
    var hash = window.location.hash;
@@ -517,9 +494,9 @@ var fgms = (function($){
    var modal;
    if ((get_cookie('cookie_modal') !== 'set') && ( $('#cookie_model').length === 0 ) ){
      modal = '<div class="modal fade '+ (typeof(options.specials.class) === 'undefined' ? '': options.specials.class)  +'" id="cookie_modal" role="dialog">';
-     modal += '<div class="modal-dialog" ><div class="modal-content" style="background-image: url('+ obj.img +');background-position: center; background-size: cover;background-attachment:scroll;">';
+     modal += '<div class="modal-dialog" ><div class="modal-content" style="background-position: center; background-size: auto;background-attachment:scroll;">';
      modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle "></i></button></div>';
-     modal += '<div class="modal-body" style="padding:0;" ><div class="modal-content-background" style="padding: 15px; margin: 24px; background-color: rgba(255,255,255,0.9);"><h3>'+obj.title+'</h3>';
+     modal += '<div class="modal-body"  ><div class="modal-content-background" ><h3>'+obj.title+'</h3>';
      if ((obj.subtitle !== undefined ) && (obj.subtitle.length > 3)){
        modal += '<div class="modal-subtitle" style="padding-bottom: 15px;"><strong>'+obj.subtitle+'</strong></div>';
      }
