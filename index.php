@@ -57,7 +57,16 @@
 			$data['archive_title'] = '<div class="pre-title pre-title-archive"></div>'. $GLOBALS['wp_locale']->get_month(get_query_var('monthnum')) . ' ' . get_query_var('year') ;
 		}
 		else {
-			$data['archive_title'] = get_post_type_object(get_post_type())->labels->name;
+			if (!empty(get_post_type())){			
+				$data['archive_title'] = get_post_type_object(get_post_type())->labels->name;
+			}
+			else {
+				// redirect 404
+				include( get_query_template( '404' ) );
+				header('HTTP/1.0 404 Not Found');
+				exit;
+			}
+
 		}
 
 		$data['archive_description'] = term_description();
