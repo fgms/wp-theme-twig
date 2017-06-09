@@ -14,15 +14,15 @@
 			bottom:0px;
 			border: green 1px solid;
 			position: absolute;
-			
+
 		}*/
 
 
-			
+
 	}
 	.column-wrapper {
 		border: 2px #000 solid !important;
-		
+
 	}
 	div[id^="section-"] {border: 1px solid #000;}
 
@@ -30,22 +30,22 @@
 .flex-center-xy() {
 	display: -webkit-flex !important;
     display: flex !important;
-	display: -webkit-box !important;     
-	display: -moz-box !important;         
+	display: -webkit-box !important;
+	display: -moz-box !important;
 	display: -ms-flexbox !important;
    -webkit-flex-direction: row;
    flex-direction: row;
     -webkit-box-pack: justify;
 	-moz-box-pack: justify;
-	-ms-flex-pack: justify;   
+	-ms-flex-pack: justify;
    -webkit-align-items: center;
-   align-items: center;   
+   align-items: center;
    -webkit-justify-content: center;
-   justify-content: center;	
+   justify-content: center;
 	margin: 0 auto;
 
-	
-	
+
+
 	> * {margin: 0 auto;}
 }
 
@@ -70,25 +70,25 @@
 	transition: opacity @duration @ease;
 }
 
-.font-size(@sizeValue, @percent: 1) { 
+.font-size(@sizeValue, @percent: 1) {
   @remValue: @sizeValue * @percent;
   @pxValue: (@sizeValue * 10 *@percent) ;
-  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{pxValue}px";
   font-size: ~"@{remValue}rem";
 }
 
 .resize-padding-top(@sizeValue, @percent: 1){
 	@pxValue: (@sizeValue * @percent) ;
-	padding-top: ~"@{pxValue}px";  
+	padding-top: ~"@{pxValue}px";
 }
 .resize-padding-bottom(@sizeValue, @percent: 1){
 	@pxValue: (@sizeValue * @percent) ;
-	padding-bottom: ~"@{pxValue}px";  
+	padding-bottom: ~"@{pxValue}px";
 }
 .font-size-resize(@sizeValue,@percent: 0.8) {
   @remValue: @sizeValue * @percent;
   @pxValue: (@sizeValue * 10 *@percent) ;
-  font-size: ~"@{pxValue}px"; 
+  font-size: ~"@{pxValue}px";
   font-size: ~"@{remValue}rem";
 }
 .transition(@duration:0.2s, @ease:ease-out) {
@@ -97,7 +97,7 @@
 	-o-transition: all @duration @ease;
 	transition: all @duration @ease;
 }
-.transform-scale(@scalex:1.1,@scaley:1.1){	
+.transform-scale(@scalex:1.1,@scaley:1.1){
 	transform: scale(@scalex, @scaley);
 	-webkit-transform: scale(@scalex, @scaley);
 	-moz-transform: scale(@scalex, @scaley);
@@ -110,7 +110,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26387f', endColorstr='#26387f', GradientType=0); filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   .radius(@radius);
   .box-shadow(@boxshadow);
-  
+
 }
 .btn-template-hover(@background, @color ){
     background-color: @background ;  *background-color: @background;  border-color: transparent; .transition-color(); text-decoration: none !important;
@@ -120,11 +120,11 @@
      border-radius: @radius; -moz-border-radius: @radius; border-radius: @radius;
 }
 .transition-color(@color-time: .3s, @color-easing: linear,@background-time: .3s, @background-easing: linear){
-	-o-transition: color @color-time @color-easing, background @background-time @background-easing;	
-	-webkit-transition: color @color-time @color-easing,background @background-time @background-easing; 
+	-o-transition: color @color-time @color-easing, background @background-time @background-easing;
+	-webkit-transition: color @color-time @color-easing,background @background-time @background-easing;
 	-moz-transition: color @color-time @color-easing, background @background-time @background-easing;
 	transition: color @color-time @color-easing, background @background-time @background-easing;
-    
+
 }
 
 .background(@image:none, @color:#ffffff, @position:center top, @size:auto, @repeat:no-repeat, @attachment: scroll ){
@@ -140,16 +140,16 @@
 	a:not(.btn){
 		 &, &:visited, &:focus {
 			color: @color;
-			text-decoration: @text-decoration;			
+			text-decoration: @text-decoration;
 			.transition(0.25s);
 			border-bottom: none;
 		}
 		&:hover, &:active {
 			color: @color-hover;
-			text-decoration: @text-decoration-hover;			
+			text-decoration: @text-decoration-hover;
 			.transition(0.75s);
 			border-bottom: none;
-			
+
 		}
 	}
 }
@@ -209,7 +209,7 @@
 
 @keyframes slideInLeft {
   from {
-    .transform(translate3d(-25%, 0, 0));    
+    .transform(translate3d(-25%, 0, 0));
     visibility: visible;
   }
   to { .transform(translate3d(0, 0, 0)); }
@@ -230,7 +230,7 @@
 
 @keyframes slideInRight {
   from {
-    .transform(translate3d(25%, 0, 0));    
+    .transform(translate3d(25%, 0, 0));
     visibility: visible;
   }
   to { .transform(translate3d(0, 0, 0)); }
@@ -243,7 +243,7 @@
 
 @-webkit-keyframes slideInUp {
   from {
-    .transform(translate3d(0, 50%, 0));   
+    .transform(translate3d(0, 50%, 0));
     visibility: visible;
   }
   to { .transform(translate3d(0, 0, 0)); }
@@ -251,7 +251,7 @@
 
 @keyframes slideInUp {
   from {
-    .transform(translate3d(0, 50%, 0));   
+    .transform(translate3d(0, 50%, 0));
     visibility: visible;
   }
   to { .transform(translate3d(0, 0, 0)); }
@@ -292,13 +292,15 @@
 }
 
 @-webkit-keyframes fadeIn {
-  from 	{.opacity(0.2); }
+  from 	{.opacity(0); }
+	10%   {.opacity(0);}
   90% 	{.opacity(0.8);}
   to 	{.opacity(1);  }
 }
 
 @keyframes fadeIn {
-  from 	{.opacity(0.2); }
+  from 	{.opacity(0); }
+	10%   {.opacity(0);}
   90% 	{.opacity(0.8);}
   to 	{.opacity(1);  }
 }
@@ -308,6 +310,22 @@
   animation-name: fadeIn;
 }
 
+@-webkit-keyframes fadeOut {
+  from 	{.opacity(1); }
+  90% 	{.opacity(0);}
+  to 	{.opacity(0);  }
+}
+
+@keyframes fadeOut {
+  from 	{.opacity(1); }
+  90% 	{.opacity(0);}
+  to 	{.opacity(0);  }
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
 
 @-webkit-keyframes offerPullOut {
   from { right: 0;}

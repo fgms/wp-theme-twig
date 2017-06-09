@@ -164,22 +164,7 @@ jQuery(function($) {
 
 
 
- $(window).on('resize', function(){
-   if ($('.script-grid-gallery').length > 0) {
-     var $element = $('.script-grid-gallery');
-     $element.each(function(){
-       if ($(this).attr('data-loaded') === 'true' ){
-         if ($(this).find('.script-feature-content a').length > 0){
-           var height_feature = $(this).find('.script-feature-content a').outerWidth() * 0.66 +'px';
-           $(this).find('.script-feature-content a').css({height: height_feature});
-           $(this).find('.__st_gallery_feature_content').css({height: height_feature });
-         }
-         $(this).find('li').css({height: ($(this).find('li').outerWidth() * 0.66) +'px'});
 
-       }
-     })
-   }
- });
 
  if ($('.script-load-feature').length > 0 ){
    $('.script-load-feature').on('click',function(e){
@@ -253,10 +238,14 @@ jQuery(function($) {
 
    $('.script-parallax').each(function() {
      if (updateParallax($(this))) {}
-
    });
  });
 
+ $(window).on('resize', function(){
+   $('.script-parallax').each(function() {
+     if (updateParallax($(this))) {}
+   });
+ });
 
  if ($('.multi-item-carousel').length > 0){
    var interval = ($('.multi-item-carousel').attr('data-interval') !==  undefined) ? $('.multi-item-carousel').attr('data-interval') : 8000;
@@ -409,36 +398,39 @@ var fgms = (function($){
  function set_galleries(){
    trace.push({function: 'set_galleries', arguments : arguments});
 
-    if (($('.script-grid-gallery').length > 0) && $().isotope ) {
-      var $element = $('.script-grid-gallery');
-      $element.each(function(){
-        var $self = $(this);
-        imagesLoaded($self.find('img'), function(e,msg, $this){
+  if (($('.script-grid-gallery').length > 0) && $().isotope ) {
+    var $element = $('.script-grid-gallery');
+    $element.each(function(){
+      var $self = $(this);
+      imagesLoaded($self.find('img'), function(e,msg, $this){
+        var $container = $self.closest('.modular-home-gallery');
+        var $grid = $self.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
+        update_galleries($self);
+        $grid.isotope('layout');
+        $self.attr('data-loaded', 'true');
+        $container.find('.gallery-filters').on('click','button',function(){
+           var filterValue = $(this).data('filter');
+           $grid.isotope({filter: filterValue}) ;
+           $('.gallery-filters button').removeClass('active');
+           $(this).addClass('active');
+        });
+     })
+   });
 
-          var $container = $self.closest('.modular-home-gallery');
-          if ($self.find('.script-feature-content a').length > 0){
-           var height_feature =$self.find('.script-feature-content a').outerWidth() * 0.66 +'px';
-           $self.find('.script-feature-content a').css({height: height_feature});
-           $self.find('.__st_gallery_feature_content').css({height: height_feature });
-          }
+   $('body').find('*[data-filter="*"]').trigger('click');
+   $(window).on('resize', function(){
 
-          var $grid = $self.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
-          $this.closest('li').css({height: ($this.closest('li').outerWidth() * 0.66) +'px'});
-          $grid.isotope('layout');
-          $self.attr('data-loaded', 'true');
-          $container.find('.gallery-filters').on('click','button',function(){
-             var filterValue = $(this).data('filter');
-             $grid.isotope({filter: filterValue}) ;
-             $('.gallery-filters button').removeClass('active');
-             $(this).addClass('active');
-          });
+     if ($('.script-grid-gallery').length > 0) {
+       var $element = $('.script-grid-gallery');
+       $element.each(function(){
+         if ($(this).attr('data-loaded') === 'true' ){
+           update_galleries($(this));
+         }
        })
+     }
+   });
 
-
-
-     });
-     $('body').find('*[data-filter="*"]').trigger('click');
-   }
+  }
    if ( (typeof $().smoothZoom  === 'function') && ( $('.script-gallery-action img').length > 0) ){
      $('.script-gallery-action img').smoothZoom({
        navigationRight: '<i class=\"fa fa-angle-right \"></i>',
@@ -453,22 +445,42 @@ var fgms = (function($){
        }
      });
    }
-   // checks if on page gallery overflowing
+ }
+
+// checks if on page gallery overflowing
+ function resize_page_to_fit_gallery(gallery_height){
    if ( $('.page-sidebar-with-sidebar-gallery').length > 0) {
-     var b_top = $('.page-with-sidebar-gallery').offset().top;
-     var b_height =  $('.page-with-sidebar-gallery').outerHeight();
-     var b_bottom  = (b_top+ b_height);
      var g_top = $('.page-sidebar-with-sidebar-gallery').offset().top;
      var g_height = $('.page-sidebar-with-sidebar-gallery').outerHeight();
-     var g_bottom = (g_height+ g_top);
-     var diff = g_bottom - b_bottom;
+     var g_bottom = (Math.max(g_height, gallery_height)+ g_top);
+
+     var m_top = $('.main-content').offset().top;
+     var m_height = $('.main-content').outerHeight();
+     var m_bottom = (m_top + m_height);
+     var diff =  m_bottom - g_bottom ;
+
      // this means that gallery is overflowing.
-     if ( diff > 0 ){
-       var style = "<style>@media screen and (min-width: 993px){.page-with-sidebar-gallery {padding-bottom:"+(diff)+"px;}}</style>";
+     if ( (diff < 15)  && ($('#page-sidebar-gallery-style').length == 0) ){
+       var padding = 40 + Math.abs(diff);
+       var style = '<style id="page-sidebar-gallery-style">@media screen and (min-width: 993px){.page-with-sidebar-gallery {padding-bottom:'+(padding)+"px;}}</style>";
        $('.article-body').append(style);
      }
    }
  }
+
+ /* This updates the thumb sizes to ratio 0.66 */
+ function update_galleries($gallery){
+   if ($gallery.find('.script-feature-content a').length > 0){
+     var height_feature = $gallery.find('.script-feature-content a').outerWidth() * 0.66 +'px';
+     $gallery.find('.script-feature-content a').css({height: height_feature});
+     $gallery.find('.__st_gallery_feature_content').css({height: height_feature });
+   }
+  $gallery.find('li').css({height: ($gallery.find('li').outerWidth() * 0.66) +'px'});
+  // this is the best way to use these two heights to determine height
+  resize_page_to_fit_gallery(($gallery.find('.script-feature-content a').outerWidth() * 0.66)+($gallery.find('li').outerWidth() * 0.66));
+ }
+
+
   // this animates to hash
  function get_hash(){
    trace.push({function: 'get_hash', arguments : arguments});
@@ -510,7 +522,7 @@ var fgms = (function($){
      modal = '<div class="modal fade '+ (typeof(options.specials.class) === 'undefined' ? '': options.specials.class)  +'" id="cookie_modal" role="dialog">';
      modal += '<div class="modal-dialog" ><div class="modal-content" style="background-position: center; background-size: auto;background-attachment:scroll;">';
      modal += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle "></i></button></div>';
-     modal += '<div class="modal-body"  ><div class="modal-content-background" ><h3>'+obj.title+'</h3>';
+     modal += '<div class="modal-body"  ><div class="modal-content-background" ><h2>'+obj.title+'</h2>';
      if ((obj.subtitle !== undefined ) && (obj.subtitle.length > 3)){
        modal += '<div class="modal-subtitle" style="padding-bottom: 15px;"><strong>'+obj.subtitle+'</strong></div>';
      }
@@ -525,7 +537,6 @@ var fgms = (function($){
          set_cookie('cookie_modal','set', 1);
        }
      });
-
    }
 
    var embedid = '#'+ get_value(options, 'specials.embed.id','fgms-specials-embed');
@@ -591,7 +602,7 @@ var fgms = (function($){
      if (options.debug === true ){
        log('error','Fgms System is in Debug mode.')
      }
-     log ('warn',[1,'overflow of gallery logic needs tweaking']);
+    // log ('warn',[1,'overflow of gallery logic needs tweaking']);
      return this;
    },
    setup: function(){
@@ -697,7 +708,6 @@ function updateParallax($obj, minheight){
 
      $obj.css('background-position',backgroundX+ ' ' + parallaxAdj +'px' );
 
-
      // THIS IS first time
      if ($obj.data('image') === undefined) {
        var image_url = $obj.css('background-image');
@@ -711,9 +721,11 @@ function updateParallax($obj, minheight){
          $(image).load(function () {
            $obj.data('image',this);
            $obj.data('imageHeight', this.naturalHeight);
+           $obj.data('imageWidth', this.naturalWidth);
            $obj.data('imageUrl',image_url);
            var backgroundPos = parseInt($obj.css('background-position-y'),10);
            var checkImageFit = this.naturalHeight + backgroundPos;
+           updateParallax($obj);
          });
          image.src = image_url;
        }
@@ -722,10 +734,25 @@ function updateParallax($obj, minheight){
      // this means i have already created image it is stored in data-image
      else {
        var imageHeight = ($obj.data('imageHeight') !== undefined) ? $obj.data('imageHeight'): 200;
+       var imageWidth = ($obj.data('imageWidth') !== undefined) ? $obj.data('imageWidth'): 200;
        var backgroundPos = $obj.data('imagePositionY');
        var checkImageFit = imageHeight + backgroundPos;
+       /* this is code that takes image ratio and finds out height for image in window
+          it also adds 5 px for good measures.
+          then it limits value so it should never go pass image height on parallax.
+       */
+       var img_ratio = imageHeight/imageWidth ;
+       var max_background_y = (img_ratio * $obj.outerWidth() - $obj.outerHeight()) - 5;
+       max_background_y *= -1;
+
+       var background_y = Math.max(parallaxAdj, max_background_y );
        $obj.data('imagePositionY',parallaxAdj);
-       $obj.css('background-position',backgroundX + parallaxAdj +'px' );
+       // this is required when the window height is bigger than image height;
+       if (background_y > 0 ){
+         background_y = 0;
+       }
+       $obj.css('background-position',backgroundX + background_y +'px' );
+       //console.log(img_ratio, 'image:', imageHeight,'x',imageWidth,'bP',background_y, 'MAX', max_background_y, 'container:', $obj.outerHeight(),'x', $obj.outerWidth(),(img_ratio * $obj.outerWidth()));
      }
      return true;
    }

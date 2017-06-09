@@ -74,9 +74,12 @@
 		.tab-accordion-header {
 			display:none;
 		}
-		.tab-pane {
+		>.tab-pane {
 			border: 0px;
 			padding: 0;
+			&:last-of-type {
+				border-bottom: none;
+			}
 		}
 	}
 }

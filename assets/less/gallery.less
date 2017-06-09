@@ -14,22 +14,24 @@ body:not(.home){
     }
 }
 
-
 #homepage-slideshow {
   overflow: hidden;
-  backgroud-color: #fff;
+  background-color: #fff;
   *[data-background] { height: 400px;	}
   @media screen and (min-width: @screen-md-max){
 	   *[data-background] { height: 700px;	}
    }
+}
 
+.carousel-wrapper {
+  background-color: #f8f8f8;
 }
 
 .single-feature-image {
 	height: 250px;
 	position: relative;
 	text-align: center;
-	.background(none, transparent, center center, cover, no-repeat, scroll );
+	.background(none, #fff, center center, cover, no-repeat, scroll );
 	@media screen and (min-width: @screen-md-max){
 		height: 400px;
 	}
