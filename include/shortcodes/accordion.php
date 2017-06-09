@@ -93,7 +93,7 @@
 					}
 					else {
 						$retr.=sprintf(
-						'<div class="panel panel-default">
+						'<div class="panel panel-default abc %3$s">
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a class="collapse-trigger" role="button"  href="%2$s" aria-expanded="false" aria-controls="false">
@@ -103,7 +103,8 @@
 							</div>
 						</div>',
 						$p->title,
-						$p->posturl
+						$p->posturl,
+						$p->titleactive
 					);
 					}
 				}
