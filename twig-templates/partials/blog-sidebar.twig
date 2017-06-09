@@ -19,9 +19,9 @@
 [accordion]
 [panel title="Home" posturl="{{function('get_permalink',pagefrontid)}}"][/panel]
 [panel title="Blog Index" posturl="{{function('get_permalink',blogid)}}" ][/panel]
-{% if function('post_type_exists', 'company-announcement') %}[panel title="Announcements" posturl="{{function('get_post_type_archive_link', 'company-announcement')}}"][/panel]{% endif %}
-{% if function('post_type_exists', 'media-clip') %}[panel title="Media Clippings" posturl="{{function('get_post_type_archive_link', 'media-clip')}}"][/panel]{% endif %}
-{% if function('post_type_exists', 'newsletter') %}[panel title="Newsletters" posturl="{{function('get_post_type_archive_link', 'newsletter')}}"][/panel]{% endif %}
+{% if function('post_type_exists', 'company-announcement') and ( function('get_fg_post_type','company-announcement', '1') | length == 1) %}[panel title="Announcements" posturl="{{function('get_post_type_archive_link', 'company-announcement')}}"][/panel]{% endif %}
+{% if function('post_type_exists', 'media-clip') and ( function('get_fg_post_type','media-clip', '1') | length == 1)  %}[panel  title="Media Clippings" posturl="{{function('get_post_type_archive_link', 'media-clip')}}"][/panel]{% endif %}
+{% if function('post_type_exists', 'newsletter') and ( function('get_fg_post_type','newsletter', '1') | length == 1) %}[panel title="Newsletters" posturl="{{function('get_post_type_archive_link', 'newsletter')}}"][/panel]{% endif %}
 
 [panel title="Latest Posts" {{active_latest}} ]{% include 'blog-latest.twig' %}[/panel]
 [panel title="By Month" {{active_archive}}]{{ get_archives }}[/panel]

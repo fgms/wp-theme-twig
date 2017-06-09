@@ -1,0 +1,23 @@
+{% extends 'base.twig' %}
+{% block content %}
+{% set content %}
+<h1>Internal Error (500)</h1>
+<h2>WHOA! WE DIDN'T SEE THAT COMING!</h2>
+<p>Unfortunately, the page you were attempting to access seemed to cause an error. Here's what we suggest:</p>
+<p>If you got here some other way, the best solution is to return to the homepage and try navigating from there.<br/>Have a great day!</p>
+<p>Tech Support</p>
+{% endset %}
+{% if widget_page_sidebar | trim | length > 5 %}
+  {% set left_class = config.settings.page.grid.left.class  %}
+  {% set right_class = config.settings.page.grid.right.class %}
+{% else %}
+  {% set left_class = 'col-md-12' %}
+{% endif %}
+{% include 'base-page.twig' with {
+	page_class_content : left_class,
+	page_class_sidebar : right_class,
+	page_widget_sidebar: widget_page_sidebar,
+	page_content : content
+	}
+%}
+{% endblock %}

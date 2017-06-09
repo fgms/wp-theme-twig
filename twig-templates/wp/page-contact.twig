@@ -5,14 +5,14 @@
 	class : "article-page-default" } only %}
 {% endset %}
 {% set contact_sidebar %}
-<div class="reachUsDirectInfo" itemscope itemtype="http://schema.org/Organization">
+<div class="reachUsDirectInfo " itemscope itemtype="http://schema.org/Organization">
     <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="{{config.company.name}}" />
     <div class="address table-responsive" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
         <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
             <tbody >
                 {% if config.company.name is defined %}
                 <tr>
-                    <td colspan="2" style="border-top: none;" itemprop="company"><span style="font-weight: 400">{{config.company.name}}</span></td>
+                    <td colspan="2" style="border-top: none;" itemprop="company"><span class="company-title">{{config.company.name}}</span></td>
                 </tr>
                 {% endif %}
                 {% if config.phone.toll is defined %}
@@ -40,7 +40,7 @@
                 </tr>
                 {% endif %}
                 <tr>
-                    <td colspan="2" style="font-size: 0.85em;">
+                    <td colspan="2" class="company-address">
                         <div itemprop="streetAddress">{{config.company.address.street}}</div>
                         <div>
                             <span itemprop="addressLocality">{{config.company.address.city}}</span>
@@ -56,7 +56,7 @@
 </div>
 {% endset %}
 {% include 'base-page.twig' with {
-	page_class_content : config.settings.page.grid.left.class,
+	page_class_content : config.settings.page.grid.left.class~' content-has-sidebar',
 	page_class_sidebar : config.settings.page.grid.right.class,
 	page_widget_sidebar: widget_contact_sidebar~contact_sidebar,
 	page_content : content
