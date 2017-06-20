@@ -24,12 +24,12 @@
 		</div>
 		{% endset %}
 	{% else %}
-		{% set content_pre = null %}		
+		{% set content_pre = null %}
 	{% endif %}
 
 {# **************** setting article content with summary #}
 	{% set articleContent %}
-		{{article.content|striptags| truncate(35) }} <a class="article-full-story-link"  href="{{article.link}}">More</a>
+		{{article.content|striptags| truncate(35) }} {#<a class="article-full-story-link"  href="{{article.link}}">More</a>#}
 		<div style="padding-top: 12px;"><a href="{{article.link}}" class="btn btn-primary" >Full Details</a></div>
 	{% endset %}
 
