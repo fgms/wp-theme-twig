@@ -288,7 +288,6 @@
 
 
 .animated-control-wrapper{
-
 	.animiated-control-arrow {
 		position: absolute;
 		top: 0;
@@ -362,10 +361,10 @@
 	&.animated-carousel-wrapper {
 		.animiated-control-arrow {
 			span {
-				width: 45px;
+				width: 24px;
 
 				&:before, &:after {
-					width: 45px;
+					width: 24px;
 					height: 3px;
 					background-color: #fff !important;
 
@@ -377,11 +376,40 @@
 				}
 			}
 			&.control-arrow-prev {
-				left: 60px;
+				left: 24px;
 			}
 			&.control-arrow-next {
-				right: 60px;
+				right: 24px;
 			}
 		}
 	}
+	@media screen and (min-width: @screen-sm-max){
+		&.animated-carousel-wrapper{
+			.animiated-control-arrow {
+				span {
+					width: 45px;
+					&:before, &:after {
+						width: 45px;
+						height: 3px;
+						background-color: #fff !important;
+
+					}
+				}
+				&.control-arrow-prev {
+					left: 60px;
+				}
+				&.control-arrow-next {
+					right: 60px;
+				}
+			}
+		}
+	}
+}
+
+.hide-above-mobile{
+
+		@media screen and (min-width: @screen-md-max){
+			display: none !important;
+			visibility: hidden !important;
+		}
 }

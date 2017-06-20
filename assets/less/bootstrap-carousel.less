@@ -86,23 +86,18 @@
 						height: 100%;
         }
 
-        .item:not(.active),
+        .item,
         .active.left,
         .active.right {
 					.opacity(0);
-					.transition(0.1s);
+
         }
 
-        .item.active,
+        .active,
         .next.left,
         .prev.right {
-					.opacity(0);
-					.animation-name(fadeIn);
-					.animation-duration(1.5s);
-					.animation-timing-function(linear);
-					.animation-iteration-count(initial);
-					.animation-direction(normal);
-					.animation-fill-mode(forwards);
+					.opacity(1);
+
 
         }
 
@@ -113,7 +108,7 @@
             left: 0;
             transform: translate3d(0, 0, 0);
 						-webkit-transform: translate3d(0, 0, 0);
-						.transition(1s);
+						
 
         }
     }
@@ -126,7 +121,7 @@
         .active.left,
         .active.right {
 					.opacity(0);
-					.transition(0.1s);
+					.transition(0.3s);
         }
 
         .item.active,
@@ -134,8 +129,8 @@
         .prev.right {
 					.opacity(0);
 					.animation-name(fadeIn);
-					.animation-duration(1.5s);
-					.animation-timing-function(linear);
+					.animation-duration(2s);
+					.animation-timing-function(ease-in);
 					.animation-iteration-count(initial);
 					.animation-direction(normal);
 					.animation-delay(1s);
@@ -150,7 +145,7 @@
 .multi-item-carousel{
   .carousel-inner{
     > .item{
-      transition: 200ms ease-in-out left;
+      transition: 300ms ease-in-out left;
 
     }
     .active{
@@ -170,7 +165,7 @@
     @media all and (transform-3d), (-webkit-transform-3d) {
       > .item{
         // use your favourite prefixer here
-        transition: 200ms linear all;
+        transition: 300ms linear all;
         backface-visibility: visible;
         transform: none!important;
       }
