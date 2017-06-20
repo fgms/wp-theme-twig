@@ -331,13 +331,37 @@ function hashDirectory($directory){
 function get_fg_menu($id=2){
 	return new TimberMenu($id);
 }
-function get_fg_post_type($post_type='post', $limit=3, $orderby='date',$order='DESC', $metakey=false) {
+function get_fg_media_category($cat=0){
 	$args = [
-		'post_type'				=> $post_type,
-		'posts_per_page' 	=> $limit,
-		'order'						=> $order,
-		'orderby' 				=> $orderby
+		'post_type' => 'attachment',
+		'post_status' => 'inherit',
+		'posts_per_page' => 500
 	];
+	if ($cat > 0){
+
+		$args['tax_query'] = [
+			[
+				'taxonomy' 	=> 'media_category',
+				'field' 		=> 'id',
+				'terms' 		=> $cat
+			]
+		];
+
+	}
+	//return $args;
+	//return new WP_Query( $args );
+	return Timber::get_posts($args);
+}
+
+function get_fg_post_type($post_type='post', $limit=null, $orderby=null,$order='DESC', $metakey=false) {
+	$args = [
+		'post_type'				=> $post_type
+	];
+	if (intval($limit) > 0){ $args['posts_per_page'] = $limit; }
+	if (!empty($order)){ $args['order'] = $order; }
+	if (!empty($orderby)){ $args['orderby'] = $orderby; }
+
+
 	if ($metakey !== false ){
 		$args['meta_key'] = $metakey;
 	}
