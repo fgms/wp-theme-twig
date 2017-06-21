@@ -1,13 +1,52 @@
 {% extends 'base.twig' %}
+
 {% block content %}
-{% set content %}{% include "article/article-content.twig" with { 
-	article : post,
-	class : "article-page-default" } only %}{% endset %}
+{#**************  Setting Gallery #}
+{% set sidebar_override = post.get_field('sidebar-override') == 'yes' %}
+{#  only set content_pre if no sidebar override #}
+{% set content_pre %}
+	{% set sidebar_gallery = post.get_field('sidebar-gallery') %}
+	{% set hasgallery = sidebar_gallery + 0 > 0  %}
+	{# Intro text #}
+	{% if post.get_field('intro-text') %}
+		<div {% if hasgallery %}class="has-sidebar"{% endif %}>
+				<div class="intro-text ">{{post.get_field('intro-text')}}</div>
+		</div>
+	{% endif %}
+
+	{# gallery #}
+	{% if hasgallery %}
+		<div class="{% if sidebar_override == false %}page-sidebar-with-sidebar-gallery{% endif %}">
+			{% filter shortcodes %}[page_gallery id="{{sidebar_gallery}}" filters="false" feature="true" ]{% endfilter %}
+		</div>
+
+		{% if sidebar_override == false %}
+		{% set class_main = 'page-main-with-sidebar-gallery' %}
+		{% set class = 'page-with-sidebar-gallery' %}
+		{% endif %}
+	{% endif %}
+{% endset %}
+
+{#**************  Setting Content #}
+{% set content %}
+	{% include "article/article-content.twig" with {
+		article : post,
+		content_pre : content_pre,
+		class_main : class_main,
+		class : class
+		} only %}
+{% endset %}
+
+{#**************  Calling base-page #}
 {% include 'base-page.twig' with {
-	page_class_content : config.settings.page.grid.left.class,
-	page_class_sidebar : config.settings.page.grid.right.class,
-	page_widget_sidebar: widget_page_sidebar,
-	page_content : content
+	page_class_content : sidebar_override ? config.settings.page.grid.left.class ~' content-has-sidebar' : 'col-sm-12',
+	page_class_sidebar : sidebar_override ? config.settings.page.grid.right.class : false,
+	page_content : content,
 	}
 %}
+{% endblock %}
+
+{% block scripts %}
+  {{parent()}}
+  {% include 'specials-modal-script.twig' ignore missing %}
 {% endblock %}
