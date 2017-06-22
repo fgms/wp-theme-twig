@@ -1,0 +1,95 @@
+{% macro hasActiveChild(obj)%}
+    {% set hasActive = 'false' %}
+    {% for child in obj.get_children %}
+        {%if child.current %}{%set hasActive = 'true' %}{% endif %}
+        {% if child.get_children | length > 0 and hasActive == 'false' %}
+            {% set hasActive = _self.hasActiveChild(child) | trim  %}
+        {% endif %}
+    {% endfor %}
+    {{hasActive | trim }}
+{% endmacro %}
+
+{% macro getTopParent(obj)%}
+{% endmacro %}
+
+{% macro getChildrenMenu(children, level)%}
+<ul class="menu sbar sbar-level-{{level}}" >
+   {% for child in children %}
+       {% set childsActive = menumacro.hasActiveChild(child) | trim %}
+       {% if child.current or childsActive %}{% set panel_active = 'true' %}{% endif %}
+       <li data-has-children="{{child.get_children | length}}" data-child-parent="{{child.menu_item_parent}}">{% if child.current or childsActive %}{{child.title}}{% else %}<a  href="{{child.get_link|e('html_attr')}}">{{child.title}}</a>{% endif %}</li>
+       {% if child.get_children | length > 0 %}{{_self.getChildrenMenu(child.get_children,level+1)}}{% endif %}
+   {% endfor %}
+</ul>
+{% endmacro %}
+{% import _self as menumacro %}
+{% set panel_active = 'false' %}
+{% set before = before ? before : post.get_field('sidebar-before-menu-editor') %}
+{% set after  = after ? after : post.get_field('sidebar-after-menu-editor') %}
+{% set s_menu = s_menu ? s_menu : post.get_field('sidebar-override-menu') %}
+{% set sidebar_override = sidebar_override ? sidebar_override :  post.get_field('sidebar-override')  == 'yes' %}
+{# conditional for before nav content #}
+{% if before | length > 0 %}
+    <div class="sidebar-before-menu-content {%if hasbefore %}sidebar-section{% endif %}" >
+        {{before}}
+    </div>
+    {% set hasbefore = true %}
+{% endif %}
+
+{# conditional for default or custom menu #}
+{% if sidebar_override %}
+  {# only create if actual menu otherwise this is a way to remove menu #}
+  {% if  s_menu | length > 0 %}
+    <div {%if hasbefore %}class="sidebar-section"{% endif %}>
+      {% filter shortcodes %}
+      [accordion]
+      {% set nottriggered = true %}
+      {% set hashome = false %}
+      {% set menu = function('get_fg_menu',s_menu) %}
+      {% for item in menu.get_items  %}
+        {% set tt = menumacro.hasActiveChild(item) | trim %}
+        {% if  item.get_children | length > 0  %}
+          {% set panel_active = 'false' %}
+          {% set panel_content %}
+            {% set nottriggered = false %}
+            {{menumacro.getChildrenMenu(item.get_children,1)}}
+          {% endset %}
+
+          [panel title="{{item.title}} " active="{{menumacro.hasActiveChild(item)|trim}}" ]{{panel_content}}[/panel]
+        {% else %}
+          {% if item.title  == 'Home' %}
+            {% if hashome == false %}
+              [panel title="{{item.title }}" posturl="{{item.link}}" ][/panel]
+              {% set hashome = true %}
+            {% endif %}
+          {% else %}
+          [panel title="{{item.title | trim}}" posturl="{{item.link}}" active="true"][/panel]
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      [/accordion]
+      {% endfilter %}
+    </div>
+    {% set hasbefore = true %}
+  {% endif %}
+{% else %}
+    <div {%if hasbefore %}class="sidebar-section"{% endif %}>
+    {% include 'widget-sidebarnav.twig' ignore missing %}
+    </div>
+    {% set hasbefore = true %}
+{% endif %}
+
+{# conditional for after nav content #}
+{% if after | length > 0 %}
+    <div class="sidebar-after-menu-content {%if hasbefore %}sidebar-section{% endif %}">
+        {{after}}
+    </div>
+    {% set hasbefore = true %}
+{% endif %}
+{# conditional for testimonials widget #}
+{% if post.get_field('sidebar-testimonials') == 'true' %}
+    <div {%if hasbefore %}class="sidebar-section"{% endif %}>
+    {% include 'widget-testimonial.twig' ignore missing %}
+    </div>
+    {% set hasbefore = true %}
+{% endif %}

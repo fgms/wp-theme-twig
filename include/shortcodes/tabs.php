@@ -6,7 +6,7 @@
 			$tabs=array();
 			//	Ignore the content: Any content that isn't
 			//	delivered through a [tab] shortcode is ignored
-			$content = do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><img><p><h1><h2><h3><h4><h5><table><thead><tbody><td><th><tr><input><button><form><label>'));
+			$content = do_shortcode(strip_tags($content,'<div><a><em><bold><strong><i><li><ul><ol><img><p><h1><h2><h3><h4><h5><table><thead><tbody><td><th><tr><input><button><form><label>'));
 			$c=count($tabs);
 
 			//	Preprocess tabs:
