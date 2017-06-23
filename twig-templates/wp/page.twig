@@ -16,13 +16,13 @@
 
 	{# gallery #}
 	{% if hasgallery %}
-		<div class="{% if sidebar_override == false %}page-sidebar-with-sidebar-gallery{% endif %}">
+		<div {% if sidebar_override == false %}class="page-sidebar-with-sidebar-gallery"{% else %}class="page-sidebar-menu-and-gallery"{% endif %}>
 			{% filter shortcodes %}[page_gallery id="{{sidebar_gallery}}" filters="false" feature="true" ]{% endfilter %}
 		</div>
 
 		{% if sidebar_override == false %}
-		{% set class_main = 'page-main-with-sidebar-gallery' %}
-		{% set class = 'page-with-sidebar-gallery' %}
+			{% set class_main = 'page-main-with-sidebar-gallery' %}
+			{% set class = 'page-with-sidebar-gallery' %}
 		{% endif %}
 	{% endif %}
 {% endset %}
