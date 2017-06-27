@@ -181,6 +181,21 @@ The **[tab]** shortcode accepts the following attirbutes:
 
 The content of the [tab] shortcode shall be used as the content of the tab.
 
+### [pills] & [pill]
+
+Creates [Bootstrap pills].
+
+The [pills] shortcode does not accept any attributes.  All content of a [pills] shortcode which is not a [pil] shortcode (or content nested therein) is ignored.
+
+The **[pill]** shortcode accepts the following attirbutes:
+
+| Attribute | Description |
+| --------- | ----------- |
+| active    | If "true" then the tab-in-question shall be the default active tab, if no tab is marked as active the first tab shall be active by default |
+| id        | An HTML ID which shall be used for the panel (one will be automatically generated if this is not supplied) |
+| title     |A title for the tab |
+
+The content of the [tab] shortcode shall be used as the content of the tab.
 
 ### [ajax]
 
@@ -191,22 +206,6 @@ The **[ajax]** shortcode accepts the following attribute.
 | Attribute | Description |
 | --------- | ----------- |
 | template  | is used to load the twig template it is going to wrap the content around |
-
-
-### [fgallery]
-
-The **[fgallery]** shortcode accepts the following attribute.
-
-| Attribute | Default | Description |
-| --------- | ------- | ----------- |
-| width     |  100px  | width of thumb |
-| height    |  auto   | height of thumb |
-| class     |         | adds class attribute |
-| alt       |         | adds alt tag |
-| thumb     |         | uses a different image as the thumb |
-| group     |         | this adds group to gallery to link images to one group |
-
-[fgallery alt="this is the alttext" thumb="absolute/path/to/image" width="150px" height="100%" class="my-class" ]<imc src="path/to/image" />[/fgallery]
 
 
 ### [link]
@@ -221,14 +220,19 @@ The **[link]** shortcode accepts the following attribute.
 
 [link id="2"]contact us[/link] --> <a href="http://example.com/contact-us">contact us</a>
 
+```
 [link href="https://google.com" attr="target=_blank" ]Search Engine[/link]  --> <a href="https://google.com" target="_blank">Search Engine</a>
+```
 
-### [page_gallery]
-
+### [email]
 | Attribute | Description |
 | --------- | ----------- |
-| id        | The post id of the gallery post|
-| feature   | This allows feature image or not default is false |
-| filter    | This adds filters default is true |
+| label        | If you require the label to be something different |
 
-[page_gallery id="344" feature="true" filter="false" ]
+[email label="email"]webmaster@example.com[/email]
+
+### [twig]
+
+Allows you to add twig functions, as well as obtain global twig variables.
+
+[twig]{{config.company.booking.url}}[/twig]

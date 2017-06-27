@@ -402,12 +402,20 @@ var fgms = (function($){
     var $element = $('.script-grid-gallery');
     $element.each(function(){
       var $self = $(this);
+      $self.find('img').each(function(){
+        $(this).parent().css({'opacity':0})
+      })
+      $self.prepend('<div class="gallery-loading-indicator"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>');
       imagesLoaded($self.find('img'), function(e,msg, $this){
         var $container = $self.closest('.modular-home-gallery');
         var $grid = $self.find('ul').isotope({itemSelector: 'li', layoutMode: 'fitRows'});
         update_galleries($self);
         $grid.isotope('layout');
         $self.attr('data-loaded', 'true');
+        $self.find('img').each(function(){
+          $(this).parent().css({'opacity':1})
+        })
+        $self.find('.gallery-loading-indicator').remove();
         $container.find('.gallery-filters').on('click','button',function(){
            var filterValue = $(this).data('filter');
            $grid.isotope({filter: filterValue}) ;
@@ -517,6 +525,9 @@ var fgms = (function($){
  }
  function get_cookie_modal(obj) {
    trace.push({function: 'get_cookie_modal', arguments : arguments});
+   if (obj === undefined || obj === null){
+     return;
+   }
    var modal;
    if ((get_cookie('cookie_modal') !== 'set') && ( $('#cookie_model').length === 0 ) ){
      modal = '<div class="modal fade '+ (typeof(options.specials.class) === 'undefined' ? '': options.specials.class)  +'" id="cookie_modal" role="dialog">';
