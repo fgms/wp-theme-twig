@@ -72,6 +72,13 @@ add_filter( 'the_title', function($title){
 	else 				{  return $title;   }
 });
 
+add_action('save_post', function($post_id){
+	// clear cache if post save.
+	$loader = new TimberLoader();
+	$loader->clear_cache_timber();
+	$loader->clear_cache_twig();
+
+});
 
 add_action( 'widgets_init', function() {
 	register_sidebar(array(
