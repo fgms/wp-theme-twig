@@ -5,7 +5,13 @@
 }
 
 .carousel {
+	position: relative;
 	.carousel-inner { height: 100% ;}
+	.carousel-overlay {
+		position: absolute;
+		z-index:99;
+
+	}
 	.opacity(0);
 	min-height: 300px;
 	img {
@@ -108,7 +114,7 @@
             left: 0;
             transform: translate3d(0, 0, 0);
 						-webkit-transform: translate3d(0, 0, 0);
-						
+
 
         }
     }
