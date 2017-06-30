@@ -29,7 +29,8 @@
 				#%1$s .collapse-trigger:before {
 					content: "\%2$s";
 					font-family: %4$s;
-					margin-right: 16px;
+					left: -16px
+					position: absolute;
 					transform: rotate(90deg);
 					-moz-transform:  rotate(90deg);
 					-webkit-transform: rotate(90deg);
@@ -48,12 +49,14 @@
 				#%1$s .collapse-trigger.collapsed:before {
 					content: "\%2$s";
 					font-family: %4$s;
-					margin-right: 16px;
 					transform: rotate(0);
 					-moz-transform:  rotate(0);
 					-webkit-transform: rotate(0);
 					-o-transform: rotate(0);
 					-ms-transform: rotate(0);
+				}
+				#%1$s .collapse-title {
+					margin-left: 16px;
 				}
 				</style>
 				<div class="panel-group" id="%1$s" role="tablist">',
