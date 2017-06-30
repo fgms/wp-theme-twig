@@ -29,7 +29,7 @@
 				#%1$s .collapse-trigger:before {
 					content: "\%2$s";
 					font-family: %4$s;
-					left: -16px
+					left: -16px;
 					position: absolute;
 					transform: rotate(90deg);
 					-moz-transform:  rotate(90deg);
