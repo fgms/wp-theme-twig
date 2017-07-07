@@ -54,8 +54,8 @@
             {% set nottriggered = false %}
             {{menumacro.getChildrenMenu(item.get_children,1)}}
           {% endset %}
-
-          [panel title="{{item.title}} " active="{{menumacro.hasActiveChild(item)|trim}}" ]{{panel_content}}[/panel]
+          {% set panel_active %}{% if menumacro.hasActiveChild(item)|trim == 'true' or item.current %}true{% endif %}{% endset %}
+          [panel title="{{item.title}} " active="{{panel_active}}" ]{{panel_content}}[/panel]
         {% else %}
           {% if item.title  == 'Home' %}
             {% if hashome == false %}

@@ -258,20 +258,71 @@ jQuery(function($) {
 
   // for every slide in carousel, copy the next slide's item in the slide.
   // Do the same for the next, next item.
-   $('.multi-item-carousel .item').each(function(){
-     var next = $(this).next();
-     if (!next.length) {
-       next = $(this).siblings(':first');
-     }
-     next.children(':first-child').clone().appendTo($(this));
-     if (next.next().length>0) {
-       next.next().children(':first-child').clone().appendTo($(this));
-     } else {
-       $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-     }
-   });
 
- }
+   $('.multi-item-carousel').each(function(){
+     var _self = this;
+     // adds the original inner to data attribute named inner
+     $(_self).data('inner',$(this).find('.item').clone());
+
+     // updates dom depending on number of columns.
+     function update_dom(columns){
+       //creat a copy and put in array .get()
+       var orig_children = $(_self).data('inner').clone().children().get();
+       var current_columns = $(_self).data('columns');
+       // means to do a reset.
+       if (current_columns === undefined || current_columns !== columns){
+         $(_self).find('.carousel-inner').text('');
+         $(_self).data('columns', columns);
+         var child_length = orig_children.length;
+         var groups = Math.ceil(child_length / columns);
+         var append_count = groups * columns;
+         // add the extra components to the end.
+         for (a = 0; append_count >= orig_children.length; ++a){
+           orig_children.push(orig_children[a]);
+         }
+         // after adding extras, need to reverse for the pop to work.
+         orig_children = orig_children.reverse();
+         var html = '';
+         // adding groups.
+         for ( i = 0; i < groups; ++i){
+           var active_class = i === 0 ? 'active' : '';
+           html += '<div class="item ' + active_class +'" >';
+           // adding elements.
+           for (j = 0; j < columns; ++j){
+             html += '<div class="col-xs-' + Math.ceil(12 /columns) +'">';
+             if (orig_children.length > 0){
+               html += $(orig_children.pop()).html();
+             }
+             html += '</div>';
+           }
+           html += '</div>';
+         }
+         //updating.
+         $(_self).find('.carousel-inner').html(html);
+       }
+     }
+     // gets the columns
+     function get_columns(){
+       var prop_obj = JSON.parse($(_self).attr('data-properties'))
+       var columns = 1;
+       if (typeof prop_obj === 'undefined'){
+         cosole.warn('Cant parse data-properties, please add field or insure proper format.',$(_self).attr('data-properties'))
+       }
+
+       $.each(prop_obj, function(index,value){
+         if (value.size === 'full'){
+           columns = value.columns;
+         }
+         if (parseInt(value.size) >= parseInt(window.innerWidth) ){
+           columns = value.columns;
+         }
+       });
+       update_dom(columns);
+     }
+     // binds window resize to get_columns
+     $(window).bind('resize',get_columns);
+   });
+  }
 
    /* Nav tabs */
    $('.nav-tabs.accordion a[role="tab"]' ).on('click',function(e){
