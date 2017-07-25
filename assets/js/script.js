@@ -136,19 +136,6 @@ jQuery(function($) {
    $(this).find('.panel-title *[href="#' + $(event.target).attr('id') + '"]').addClass('active');
 
  });
-/*
- var imgs=$('#articleContent img');
- if ((imgs.length > 0) && imgs.smoothZoom) {
-   imgs.smoothZoom({
-     navigationRight: '<i class=\"fa fa-angle-right\"></i>',
-     navigationLeft: '<i class=\"fa fa-angle-left\"></i>',
-   navigationClose: '<i class="fa fa-times-circle" aria-hidden="true"></i>'
-   });
-
- }*/
-
-
-
 
  /*removes data in generalmodal*/
  $('#general-modal').on('hidden.bs.modal', function() {
@@ -157,14 +144,6 @@ jQuery(function($) {
  $('#general-modal').on('loaded.bs.modal', function() {
    //emailCloak();
  });
-
-
-
-
-
-
-
-
 
  if ($('.script-load-feature').length > 0 ){
    $('.script-load-feature').on('click',function(e){
@@ -255,10 +234,8 @@ jQuery(function($) {
    $('.multi-item-carousel').carousel({
      interval: interval
    });
-
   // for every slide in carousel, copy the next slide's item in the slide.
   // Do the same for the next, next item.
-
    $('.multi-item-carousel').each(function(){
      var _self = this;
      // adds the original inner to data attribute named inner
@@ -674,6 +651,10 @@ var fgms = (function($){
      return this;
    },
 
+   update_galleries : function(){
+     set_galleries();
+   },
+
    get_specials: function(specials){
      trace.push({function: 'get_specials', arguments : arguments});
      get_init();
@@ -714,7 +695,9 @@ var fgms = (function($){
 
 
 function check_for_refresh(){
-
+  if (fgmsdata !== undefined && typeof fgmsdata.update_galleries === 'function'){
+    fgmsdata.update_galleries();
+  }  
 }
 function imagesLoaded($, fn) {
  var c = $.length;

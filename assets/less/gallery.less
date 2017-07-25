@@ -31,6 +31,10 @@ body:not(.home){
 	height: 250px;
 	position: relative;
 	text-align: center;
+  .feature-image-overlay {
+    position: absolute;
+    z-index: 99;
+  }
 	.background(none, #fff, center center, cover, no-repeat, scroll );
 	@media screen and (min-width: @screen-md-max){
 		height: 400px;
