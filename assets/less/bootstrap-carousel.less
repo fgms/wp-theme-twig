@@ -151,8 +151,7 @@
 .multi-item-carousel{
   .carousel-inner{
     > .item{
-      transition: 300ms ease-in-out left;
-
+			transition: 0.5s linear all;
     }
     .active{
       &.left{
@@ -171,9 +170,9 @@
     @media all and (transform-3d), (-webkit-transform-3d) {
       > .item{
         // use your favourite prefixer here
-        transition: 300ms linear all;
-        backface-visibility: visible;
-        transform: none!important;
+        transition: 1.2s linear all;
+        //backface-visibility: visible;
+        //transform: none!important;
       }
     }
   }
