@@ -1,6 +1,6 @@
 {
     "name" : "sturple/fg-theme-master",
-    "version" : "0.4.1",
+    "version" : "0.4.2",
     "description" : "Basic Twig template theme",
     "type" : "wordpress-theme",
     "keywords" : ["wordpress", "twig", "FGMS","theme"],
