@@ -1,23 +1,20 @@
 {
-    "name" : "sturple/fg-theme-master",
-    "version" : "0.4.2",
+    "name" : "fgms/wp-theme-twig",
+    "version" : "0.4.3",
     "description" : "Basic Twig template theme",
     "type" : "wordpress-theme",
     "keywords" : ["wordpress", "twig", "FGMS","theme"],
-    "homepage" : "https://github.com/sturple/fg-theme-master",
+    "homepage" : "https://github.com/fgms/wp-theme-twig",
     "license" : "GPL-3.0",   
     "minimum-stability" : "dev",
     "authors" : [
         {
             "name" : "Shawn Turple",
             "email" : "shawn@turple.ca",
-            "homepage" : "http://turple.ca",
+            "homepage" : "https://github.com/sturple",
             "role" : "Developer"            
         }
-
-    ],   
-    
-    
+    ],       
     "require": {
         "php" : ">=5.4",        
         "composer/installers": "~1.0"
