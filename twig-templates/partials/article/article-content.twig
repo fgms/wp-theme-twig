@@ -1,4 +1,10 @@
 <article class="article {{class}}" itemscope itemtype="http://schema.org/Article">
+  <meta itemprop="datePublished" content="{{article.post_date}}" />
+  <meta itemprop="dateModified" content="{{article.post_modified}}" />
+  <meta itemprop="headline" content="{{article.title}}" />
+  <span itemtype="http://schema.org/Organization"  itemscope itemprop="publisher">
+    <meta itemprop="name"  content="{{site.name}}" />
+  </span>  
   {% set articleContent = articleContent == null ? article.content: articleContent %}
   {{header}}
   {% if title == false %}
