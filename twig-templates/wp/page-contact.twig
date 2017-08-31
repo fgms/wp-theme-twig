@@ -1,18 +1,26 @@
 {% extends 'base.twig' %}
 {% block content %}
-{% set content %}{% include "article/article-content.twig" with {
-	article : post,
-	class : "article-page-default" } only %}
+<article class="article article-page-default" >
+	{% set articleContent = post.content %}
+	<h1 class="article-title " >{% if post.get_field('_fgms_html_title_meta') %}{{post.get_field('_fgms_html_title_meta')}}{% else %}{{ post.title }}{% endif %}</h1>
+	<div  style="position:relative;" >
+		<div >
+			<div  class="article-body">{% filter shortcodes %}{{articleContent}}{% endfilter %}</div>
+		</div>
+	</div>
+</article>
 {% endset %}
 {% set contact_sidebar %}
 <div class="reachUsDirectInfo " itemscope itemtype="http://schema.org/Organization">
-    <meta itemscope itemtype="http://schema.org/corporation" itemprop="name" content="{{config.company.name}}" />
+		<span itemscope itemtype="http://schema.org/corporation"  >
+			<meta itemprop="name" content="{{config.company.name}}" />
+		</span>
     <div class="address table-responsive" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
         <table class="table" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 0" >
             <tbody >
                 {% if config.company.name is defined %}
                 <tr>
-                    <td colspan="2" style="border-top: none;" itemprop="company"><span class="company-title">{{config.company.name}}</span></td>
+                    <td colspan="2" style="border-top: none;" itemprop="name"><span class="company-title">{{config.company.name}}</span></td>
                 </tr>
                 {% endif %}
                 {% if config.phone.toll is defined %}
