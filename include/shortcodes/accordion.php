@@ -73,8 +73,8 @@
 					$retr.=sprintf(
 						'<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" >
-									<a class="%5$s collapse-trigger" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s">
+								<h4 class="panel-title">
+									<a class="%5$s collapse-trigger" role="button" data-toggle="collapse" data-parent="#%1$s" href="#%2$s" aria-expanded="%7$s" aria-controls="%2$s" %8$s>
 										%3$s
 									</a>
 								</h4>
@@ -91,15 +91,17 @@
 						$p->content,
 						$p->titleactive,
 						$p->panelactive,
-						$p->ariaexpanded
+						$p->ariaexpanded,
+						$p->attributes
+						
 					);
 					}
 					else {
 						$retr.=sprintf(
 						'<div class="panel panel-default abc %3$s">
 							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapse-trigger" role="button"  href="%2$s" aria-expanded="false" aria-controls="false">
+								<h4 class="panel-title" %4$s>
+									<a class="collapse-trigger" role="button"  href="%2$s" aria-expanded="false" aria-controls="false" %4$s>
 										%1$s
 									</a>
 								</h4>
@@ -107,7 +109,8 @@
 						</div>',
 						$p->title,
 						$p->posturl,
-						$p->titleactive
+						$p->titleactive,
+						$p->attributes
 					);
 					}
 				}
@@ -141,8 +144,9 @@
 
 		add_shortcode('panel',function ($atts, $content) use (&$panels, &$id) {
 			if (is_null($panels)) return '';
-			$atts=shortcode_atts(array('title' => '', 'id' => null,'active'=>null, 'posturl'=>null),$atts);
-			if (!isset($atts['id'])) $atts['id']='panel'.(++$id);
+			
+			$atts = shortcode_atts(array('title' => '', 'id' => null,'active'=>null, 'posturl'=>null, 'attributes'=>null),$atts);
+			if ( !isset($atts['id']) ) $atts['id'] = 'panel'.(++$id);
 
 			$panels[]=(object)array(
 				'title' => $atts['title'],
@@ -151,6 +155,7 @@
 				'titleactive' => $atts['active'] == 'true' ? 'in active' : 'collapsed',
 				'panelactive' => $atts['active'] == 'true' ? 'in collapsed' : 'collapsed collapse',
 				'ariaexpanded' => $atts['active'] == 'true' ? 'true' : 'false',
+				'attributes' => $atts['attributes'],
 				'content' => do_shortcode($content)
 			);
 			return '';
